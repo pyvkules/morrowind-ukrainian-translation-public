@@ -99,7 +99,14 @@ def localconfigs():
     return found
 
 
-def launch_options(openmw_dir, profile_dir):
+def launch_options(openmw_dir, profile_dir, launcher=None):
+    """Що Steam підставить замість гри.
+
+    Якщо є наш лаунчер - запускаємо його: він перевірить оновлення й сам стартує
+    OpenMW зі збереженими шляхами. Без нього - напряму openmw.exe.
+    """
+    if launcher:
+        return '"%s" %%command%%' % launcher
     return ('"%s" --replace=config --config="%s" --user-data="%s" %%command%%'
             % (os.path.join(openmw_dir, 'openmw.exe'), profile_dir, profile_dir))
 

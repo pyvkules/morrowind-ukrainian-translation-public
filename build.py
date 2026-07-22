@@ -37,6 +37,22 @@ CHECKS = [
 ]
 
 
+def forms_are_stale():
+    """Harvesting takes ~100s and only depends on the translated corpus and the
+    topic names, so skip it unless one of those actually changed."""
+    out = os.path.join(HERE, 'tools', 'topics', 'harvested_forms.json')
+    if not os.path.isfile(out) or '--force-forms' in sys.argv:
+        return True
+    stamp = os.path.getmtime(out)
+    for sub in (os.path.join('tools', 'uk'), os.path.join('tools', 'topics')):
+        d = os.path.join(HERE, sub)
+        for name in os.listdir(d) if os.path.isdir(d) else []:
+            if name.endswith('.json') and name != 'harvested_forms.json':
+                if os.path.getmtime(os.path.join(d, name)) > stamp:
+                    return True
+    return False
+
+
 def run(script_args, cfg):
     cmd = [sys.executable, os.path.join(HERE, script_args[0].replace('/', os.sep))]
     cmd += script_args[1:]
@@ -58,8 +74,12 @@ def main():
         return 1
 
     steps = STEPS + (CHECKS if '--check' in sys.argv else [])
+    skip_forms = not forms_are_stale()
     failed = []
     for name, script_args, what in steps:
+        if name == 'forms' and skip_forms:
+            print('%-9s %-52s%s' % (name, what, 'skip (up to date)'))
+            continue
         t0 = time.time()
         sys.stdout.write('%-9s %-52s' % (name, what))
         sys.stdout.flush()

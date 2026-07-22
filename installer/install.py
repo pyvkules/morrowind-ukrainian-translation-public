@@ -74,8 +74,9 @@ class Plan(object):
         if not self.openmw:
             out.append('Не знайдено OpenMW. Завантажте його з openmw.org і встановіть.')
         if not self.mods:
-            out.append('Не знайдено колекції модів (%s). Установіть їх через '
-                       'momw-configurator з modding-openmw.com.'
+            out.append('Не знайдено колекції модів (%s). Відновіть їх із резервної '
+                       'копії (installer/backup.py --restore) або завантажте через '
+                       'umo (installer/mods.py --install).'
                        % ', '.join(self.collections))
         if not os.path.isfile(os.path.join(REPO, 'tools', 'base.esm')):
             out.append('Немає tools/base.esm - без нього переклад не збереться. '
@@ -124,7 +125,15 @@ def install(plan, set_steam, log):
 
     log('')
     log('== Крок 3/3: ярлик Steam ==')
-    opts = steam.launch_options(plan.openmw, plan.profile)
+    # лаунчер знає шляхи сам, тому оновлення не мусить чіпати налаштування Steam
+    with open(os.path.join(REPO, 'launcher.json'), 'w', encoding='utf-8') as f:
+        json.dump({'openmw': plan.openmw, 'profile': plan.profile},
+                  f, ensure_ascii=False, indent=1)
+    launcher = os.path.join(REPO, 'MorrowindUA.exe')
+    if not os.path.isfile(launcher):
+        launcher = None                       # запущено з початкових текстів, не з релізу
+        log('лаунчер не зібрано - Steam запускатиме OpenMW напряму, без оновлень')
+    opts = steam.launch_options(plan.openmw, plan.profile, launcher)
     if not set_steam:
         log('Пропущено. Параметри запуску, якщо схочете вписати вручну')
         log('(Steam -> Morrowind -> Властивості -> Параметри запуску):')
