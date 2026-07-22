@@ -1,0 +1,51 @@
+# Post-processing HUD
+
+Abovewater: "Над водою"
+ActiveShaders: "Активні шейдери"
+Author: "Автор"
+Description: "Опис"
+InactiveShaders: "Неактивні шейдери"
+InExteriors: "Назовні"
+InInteriors: "У приміщеннях"
+KeyboardControls: |
+    Керування з клавіатури:
+
+    Shift+Стрілка вправо > Увімкнути шейдер
+    Shift+Стрілка вліво > Вимкнути шейдер
+    Shift+Стрілка вгору > Пересунути шейдер вище
+    Shift+Стрілка вниз > Пересунути шейдер нижче
+PostProcessHUD: "HUD постобробки"
+ResetShader: "Скинути шейдер до типового стану"
+ShaderLocked: "Заблоковано"
+ShaderLockedDescription: "Неможливо перемкнути чи пересунути; керується зовнішнім Lua-скриптом"
+ShaderResetUniform: "r"
+Underwater: "Під водою"
+Version: "Версія"
+
+
+# Built-in post-processing shaders
+
+AdjustmentsDescription: "Корекція кольору."
+BloomDescription: "Шейдер світіння (bloom), що виконує обчислення в (приблизно) лінійному світлі."
+DebugDescription: "Налагоджувальний шейдер."
+DebugHeaderDepth: "Буфер глибини"
+DebugHeaderNormals: "Нормалі"
+DisplayDepthFactorName: "Коефіцієнт кольору глибини"
+DisplayDepthFactorDescription: "Визначає зв'язок між глибиною пікселя та його вихідним кольором. Більші значення дають яскравіше зображення."
+DisplayDepthName: "Візуалізувати буфер глибини"
+DisplayNormalsName: "Візуалізувати нормалі проходу"
+NormalsInWorldSpace: "Нормалі у світових координатах"
+ContrastLevelDescription: "Рівень контрасту."
+ContrastLevelName: "Контраст"
+GammaLevelDescription: "Рівень гамми."
+GammaLevelName: "Гамма"
+StrengthLevelName: "Сила"
+StrengthLevelDescription: "Сила ефекту."
+RadiusLevelName: "Радіус"
+RadiusLevelDescription: "Радіус ефекту."
+SkyFactorLevelName: "Коефіцієнт неба"
+SkyFactorLevelDescription: "Множник для світла, що надходить безпосередньо з неба."
+BloomClampLevelName: "Рівень обмеження"
+BloomClampLevelDescription: "Обмежувати пікселі світіння, яскравіші за це значення, при змішуванні світіння зі сценою."
+BloomThresholdLevelName: "Поріг"
+BloomThresholdLevelDescription: "Ігнорувати пікселі з яскравістю нижче цього значення при обчисленні розмиття. Не впливає на небо."

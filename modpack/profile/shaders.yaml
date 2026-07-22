@@ -1,0 +1,90 @@
+config:
+  ssao_hq:
+    blur_falloff: 0.0199999996
+    blur_radius: 8
+    max_ray_radius: 8
+    multiplier: 1.79999995
+    occlusion_falloff: 7
+    save_my_hands: true
+  clouds:
+    sampling_quality: 3.5
+    scattering_factor: 1
+    replace_skybox: false
+    better_sun: false
+    clouds_enabled: true
+    dynamic_clouds: false
+    cloud_coverage: 0.349999964
+    cloud_density: 1.20000005
+    cloud_alt: 75000
+    cloud_depth: 120000
+    cloud_detail: 3
+    cloud_light_factor: -0.150000006
+    mist_enabled: true
+    dynamic_mist: true
+    mist_density: 0.25
+    mist_alt: 0
+    mist_speed: 1
+    mist_swirling: true
+    point_glow_enabled: true
+    point_glow_intensity: 0.0500000007
+    point_glow_min_fade_dist: 100
+    point_glow_max_fade_dist: 120
+    point_glow_fade: 0.300000012
+    point_glow_diffusion: false
+    point_glow_min: 42
+    point_glow_falloff: 1.17499995
+    clamp_point_glow: true
+    dithering_enabled: true
+    temporal_dithering: true
+    dithering_strength: 256
+    interior_mist: 0
+    debug: false
+  godrays:
+    bluenoise: false
+    horizonclipping: true
+    N: 50
+    raysunradius: 0.25
+    raystrength: 1.70000005
+    rayfalloff: 1.10000002
+    rayfalloffconst: 0.125
+    raysunfalloff: 2.49999952
+    centervis: 0.200000018
+    sunrayocclude: 0.950000048
+    brightnessadd: 1.25
+    offscreenrange: 0.5
+    sundiscradius: 0.00999999978
+    sundiscbrightness: 1.60000002
+    sundiscdesaturate: 0.400000006
+    sundiscocclude: 0.75
+  bloomlinear:
+    uGamma: 2.20000005
+    uThreshold: 0.349999994
+    uClamp: 1
+    uSkyFactor: 0.5
+    uRadius: 0.5
+    uStrength: 0.25
+  hdr:
+    neutral_point: 0.25
+    sensitivity: 0.100000001
+    max_exposure: 1.60000002
+  FollowerAA:
+    uDepthNormalHack: true
+    uDoDiagonals: true
+    uGamma: 2.20000005
+    uLumaLikenessThreshold: 0.150000006
+    uMSAACompatibilityHack: 0
+    uNormalDotOffset: 0
+    uRange: 5
+    uSkipAll: false
+    uThreshold: 20
+  war_adjustments:
+    uBrightness: 0.5
+    uContrast: 0.5
+    uGamma: 1
+    uSaturation: 1.4000001
+    uColorTemp: 0.5
+    uColorTint: 0.5
+  HealthFatigueEffect:
+    uFatigueFactor: 0
+    uHealthFactor: 0
+    uMagickaFactor: 0

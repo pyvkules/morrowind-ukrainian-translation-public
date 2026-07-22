@@ -1,0 +1,7 @@
+Music: "Музика OpenMW"
+settingsPageDescription: "Налаштування музики OpenMW."
+
+musicSettings: "Налаштування музики"
+
+CombatMusicEnabled: "Грати бойову музику"
+CombatMusicEnabledDescription: "Якщо ввімкнено, гра перемикається на бойову музику, коли поруч хтось б'ється."

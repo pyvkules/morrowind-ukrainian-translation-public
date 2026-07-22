@@ -1,0 +1,130 @@
+ControlsPage: "Керування OpenMW"
+ControlsPageDescription: "Додаткові налаштування керування гравцем."
+
+MovementSettings: "Рух"
+
+alwaysRun: "Завжди бігти"
+alwaysRunDescription: |
+    Якщо ввімкнено, персонаж типово бігає, інакше — ходить.
+    Клавіша Shift тимчасово інвертує це налаштування, а Caps Lock інвертує його, поки натиснутий.
+
+toggleSneak: "Перемикання крадькості"
+toggleSneakDescription: |
+    Клавіша крадькості (типово Ctrl) перемикає режим замість того, щоб її утримувати.
+    Гравцям, які багато часу крадуться, з цією опцією може бути зручніше.
+
+smoothControllerMovement: "Плавний рух зі стіка"
+smoothControllerMovementDescription: |
+   Вмикає плавний рух стіком контролера. Перехід від ходьби до бігу стає менш різким.
+
+TogglePOV_name: "Перемкнути вид"
+TogglePOV_description: "Перемикання між видом від першої та третьої особи. Утримуйте для режиму огляду."
+
+Zoom3rdPerson_name: "Наблизити/віддалити"
+Zoom3rdPerson_description: "Наближає або віддаляє камеру у виді від третьої особи."
+
+MoveForward_name: "Рух вперед"
+MoveForward_description: "Взаємно скасовується з рухом назад."
+
+MoveBackward_name: "Рух назад"
+MoveBackward_description: "Взаємно скасовується з рухом вперед."
+
+MoveLeft_name: "Рух вліво"
+MoveLeft_description: "Взаємно скасовується з рухом вправо."
+
+MoveRight_name: "Рух вправо"
+MoveRight_description: "Взаємно скасовується з рухом вліво."
+
+Use_name: "Використати"
+Use_description: "Атака зброєю або чарування закляття залежно від поточної стійки."
+
+Run_name: "Біг"
+Run_description: "Утримуйте, щоб бігти або йти, залежно від налаштування \"Завжди бігти\"."
+
+AlwaysRun_name: "Завжди бігти"
+AlwaysRun_description: "Перемкнути налаштування \"Завжди бігти\"."
+
+Jump_name: "Стрибок"
+Jump_description: "Стрибайте, коли ви на землі."
+
+AutoMove_name: "Автобіг"
+AutoMove_description: "Перемкнути безперервний рух уперед."
+
+Sneak_name: "Крастися"
+Sneak_description: "Утримуйте, щоб крастися, якщо перемикання крадькості вимкнено."
+
+ToggleSneak_name: "Перемкнути крадькість"
+ToggleSneak_description: "Перемикає крадькість, якщо ввімкнено перемикання крадькості."
+
+ToggleWeapon_name: "Приготувати зброю"
+ToggleWeapon_description: "Увійти в бойову стійку або вийти з неї."
+
+ToggleSpell_name: "Приготувати магію"
+ToggleSpell_description: "Увійти в магічну стійку або вийти з неї."
+
+Inventory_name: "Інвентар"
+Inventory_description: "Відкрити інвентар."
+
+Journal_name: "Журнал"
+Journal_description: "Відкрити журнал."
+
+QuickKeysMenu_name: "Швидке меню"
+QuickKeysMenu_description: "Відкрити меню швидких клавіш."
+
+SmoothMoveForward_name: "Плавний рух вперед"
+SmoothMoveForward_description: "Рух уперед із плавними переходами між ходьбою та бігом."
+
+SmoothMoveBackward_name: "Плавний рух назад"
+SmoothMoveBackward_description: "Рух назад із плавними переходами між ходьбою та бігом."
+
+SmoothMoveLeft_name: "Плавний рух вліво"
+SmoothMoveLeft_description: "Рух вліво з плавними переходами між ходьбою та бігом."
+
+SmoothMoveRight_name: "Плавний рух вправо"
+SmoothMoveRight_description: "Рух вправо з плавними переходами між ходьбою та бігом."
+
+#  Non-dehardcoded actions
+Activate_name: "Activate"
+Activate_description: "Запасний рядок для input.ACTIONS.Activate; прив'язка поки що нічого не робить"
+Console_name: "Console"
+Console_description: "Запасний рядок для input.ACTIONS.Console; прив'язка поки що нічого не робить"
+CycleSpellLeft_name: "CycleSpellLeft"
+CycleSpellLeft_description: "Запасний рядок для input.ACTIONS.CycleSpellLeft; прив'язка поки що нічого не робить"
+CycleSpellRight_name: "CycleSpellRight"
+CycleSpellRight_description: "Запасний рядок для input.ACTIONS.CycleSpellRight; прив'язка поки що нічого не робить"
+CycleWeaponLeft_name: "CycleWeaponLeft"
+CycleWeaponLeft_description: "Запасний рядок для input.ACTIONS.CycleWeaponLeft; прив'язка поки що нічого не робить"
+CycleWeaponRight_name: "CycleWeaponRight"
+CycleWeaponRight_description: "Запасний рядок для input.ACTIONS.CycleWeaponRight; прив'язка поки що нічого не робить"
+GameMenu_name: "GameMenu"
+GameMenu_description: "Запасний рядок для input.ACTIONS.GameMenu; прив'язка поки що нічого не робить"
+QuickLoad_name: "QuickLoad"
+QuickLoad_description: "Запасний рядок для input.ACTIONS.QuickLoad; прив'язка поки що нічого не робить"
+QuickSave_name: "QuickSave"
+QuickSave_description: "Запасний рядок для input.ACTIONS.QuickSave; прив'язка поки що нічого не робить"
+Screenshot_name: "Screenshot"
+Screenshot_description: "Запасний рядок для input.ACTIONS.Screenshot; прив'язка поки що нічого не робить"
+ToggleDebug_name: "ToggleDebug"
+ToggleDebug_description: "Запасний рядок для input.ACTIONS.ToggleDebug; прив'язка поки що нічого не робить"
+ToggleHUD_name: "ToggleHUD"
+ToggleHUD_description: "Запасний рядок для input.ACTIONS.ToggleHUD; прив'язка поки що нічого не робить"
+TogglePostProcessorHUD_name: "TogglePostProcessorHUD"
+TogglePostProcessorHUD_description: "Запасний рядок для input.ACTIONS.TogglePostProcessorHUD; прив'язка поки що нічого не робить"
+QuickKey1_name: "QuickKey1"
+QuickKey1_description: "Запасний рядок для input.ACTIONS.QuickKey1; прив'язка поки що нічого не робить"
+QuickKey2_name: "QuickKey2"
+QuickKey2_description: "Запасний рядок для input.ACTIONS.QuickKey2; прив'язка поки що нічого не робить"
+QuickKey3_name: "QuickKey3"
+QuickKey3_description: "Запасний рядок для input.ACTIONS.QuickKey3; прив'язка поки що нічого не робить"
+QuickKey4_name: "QuickKey4"
+QuickKey4_description: "Запасний рядок для input.ACTIONS.QuickKey4; прив'язка поки що нічого не робить"
+QuickKey5_name: "QuickKey5"
+QuickKey5_description: "Запасний рядок для input.ACTIONS.QuickKey5; прив'язка поки що нічого не робить"
+QuickKey6_name: "QuickKey6"
+QuickKey6_description: "Запасний рядок для input.ACTIONS.QuickKey6; прив'язка поки що нічого не робить"
+QuickKey7_name: "QuickKey7"
+QuickKey7_description: "Запасний рядок для input.ACTIONS.QuickKey7; прив'язка поки що нічого не робить"
+QuickKey8_name: "QuickKey8"
+QuickKey8_description: "Запасний рядок для input.ACTIONS.QuickKey8; прив'язка поки що нічого не робить"
+QuickKey9_name: "QuickKey9"
+QuickKey9_description: "Запасний рядок для input.ACTIONS.QuickKey9; прив'язка поки що нічого не робить"

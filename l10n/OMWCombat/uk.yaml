@@ -1,0 +1,16 @@
+Combat: "Бій OpenMW"
+combatSettingsPageDescription: "Налаштування бою OpenMW"
+
+combatSettings: "Бій"
+
+unarmedCreatureAttacksDamageArmor: "Атаки беззбройних істот пошкоджують броню"
+unarmedCreatureAttacksDamageArmorDescription: |
+    Беззбройні істоти тепер також пошкоджують броню.
+
+redistributeShieldHitsWhenNotWearingShield: "Перерозподіляти влучання в щит, коли щита немає"
+redistributeShieldHitsWhenNotWearingShieldDescription: |
+    Еквівалент "Shield hit location fix" з Morrowind Code Patch. Перенаправляє влучання, що припали на слот щита, у лівий наплічник або кірасу, коли щит не вдягнено.
+
+spawnBloodEffectsOnPlayer: "Ефекти крові на гравцеві"
+spawnBloodEffectsOnPlayerDescription: |
+    Якщо ввімкнено, при влучаннях у бою на гравцеві з'являються ефекти крові, як на будь-якому іншому персонажі.

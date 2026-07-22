@@ -1,0 +1,227 @@
+# Console
+
+ConsoleWindow: "Консоль"
+
+# Debug window
+
+DebugWindow: "Налагодження"
+LogViewer: "Перегляд журналу"
+LuaProfiler: "Профайлер Lua"
+PhysicsProfiler: "Профайлер фізики"
+
+
+# Messages
+
+AskLoadLastSave: "Останнє збереження — '%s'. Завантажити його?"
+BuildingNavigationMesh: "Побудова навігаційної сітки"
+InitializingData: "Ініціалізація даних..."
+LoadingExterior: "Завантаження області"
+LoadingFailed: "Не вдалося завантажити збережену гру"
+LoadingInterior: "Завантаження області"
+LoadingInProgress: "Завантаження збереження"
+LoadingRequiresNewVersionError: |-
+    Це збереження створено новішою версією OpenMW, тому воно не підтримується.
+    Оновіться до найновішої версії OpenMW, щоб завантажити цей файл.
+LoadingRequiresOldVersionError: |-
+    Це збереження створено старішою версією OpenMW у форматі, який більше не підтримується.
+    Завантажте і збережіть цей файл у {version}, щоб оновити його.
+NewGameConfirmation: "Почати нову гру і втратити поточну?"
+QuitGameConfirmation: "Вийти з гри?"
+SaveGameDenied: "Зараз гру зберегти неможливо."
+SavingInProgress: "Збереження..."
+ScreenshotFailed: "Не вдалося зберегти знімок екрана"
+ScreenshotMade: "%s збережено"
+
+
+# Save game menu
+
+DeleteGame: "Видалити гру"
+DeleteGameConfirmation: "Ви справді хочете видалити цю збережену гру?"
+EmptySaveNameError: "Неможливо зберегти гру без назви!"
+Health: "Здоров'я"
+Level: "Рівень"
+LoadGameConfirmation: "Завантажити збережену гру і втратити поточну?"
+MissingContentFilesConfirmation: |-
+    Вибрані зараз файли вмісту не збігаються з тими, що використовувалися цим збереженням.
+    Під час завантаження або гри можливі помилки.
+    Продовжити?
+MissingContentFilesList: |-
+  {files, plural,
+    one{\n\nВідсутній файл: }
+    few{\n\nВідсутні {files} файли:\n}
+    many{\n\nВідсутні {files} файлів:\n}
+    other{\n\nВідсутні {files} файлу:\n}
+  }
+MissingContentFilesListCopy: |-
+  {files, plural,
+    one{\n\nНатисніть Копіювати, щоб помістити його назву в буфер обміну.}
+    few{\n\nНатисніть Копіювати, щоб помістити їхні назви в буфер обміну.}
+    many{\n\nНатисніть Копіювати, щоб помістити їхні назви в буфер обміну.}
+    other{\n\nНатисніть Копіювати, щоб помістити їхні назви в буфер обміну.}
+  }
+OverwriteGameConfirmation: "Ви справді хочете перезаписати цю збережену гру?"
+SelectCharacter: "Виберіть персонажа..."
+TimePlayed: "Час у грі"
+
+
+# Settings menu
+
+ActorsProcessingRange: "Дальність обробки персонажів"
+Anisotropy: "Анізотропія"
+Audio: "Звук"
+AudioEffects: "Ефекти"
+AudioFootsteps: "Кроки"
+AudioMaster: "Загальна"
+AudioMusic: "Музика"
+AudioVoice: "Голос"
+AutoSaveOnResting: "Автозбереження при відпочинку"
+BestAttack: "Завжди найкраща атака"
+CameraSensitivity: "Чутливість камери"
+CameraZoomIn: "Наблизити камеру"
+CameraZoomOut: "Віддалити камеру"
+ChangeRequiresRestart: "Ця зміна набуде чинності після перезапуску."
+ClassicFalloff: "Класичне згасання"
+ClassicFalloffTooltip: |-
+    Типово: вимкнено
+    Використовувати традиційну формулу згасання точкового світла, без раннього затемнення.
+
+    Вада традиційної формули в тому, що вплив світла ніколи не сягає нуля.
+    Це фізично точно, але може спричиняти шви освітлення, бо світло не впливає на всю сцену.
+    Раннє затемнення допомагає зменшити ці шви ціною затемнення сцени.
+
+    Morrowind використовує традиційну формулу, тож увімкніть це, якщо вам не подобаються відмінності яскравості.
+    Або спробуйте змінити мінімальну яскравість приміщень.
+ConfirmResetBindings: "Скинути все керування до типового?"
+ConfirmResolution: "Нова роздільна здатність буде застосована негайно. Продовжити?"
+Controller: "Контролер"
+Controls: "Керування"
+Crosshair: "Приціл"
+DelayLow: "Швидко"
+DelayHigh: "Повільно"
+DetailLevel: "Рівень деталізації"
+Difficulty: "Складність"
+DifficultyEasy: "Легко"
+DifficultyHard: "Важко"
+DistanceHigh: "Далеко"
+DistanceLow: "Близько"
+EnableController: "Увімкнути контролер"
+FieldOfView: "Кут огляду"
+FieldOfViewHigh: "Великий"
+FieldOfViewLow: "Малий"
+ForcePerPixelLighting: "Попіксельне освітлення"
+ForcePerPixelLightingTooltip: |-
+    Примусово використовувати попіксельне освітлення. Типово його використовують лише об'єкти з картами рельєфу та нормалей.
+
+    Стосується лише об'єктів, що малюються шейдерами.
+
+    Увімкнення дає візуальні відмінності від оригінального рушія MW, бо деякі джерела світла в Morrowind розраховані на повершинне освітлення.
+
+    Зауважте, що шейдери трави та ефекти частинок ігнорують це налаштування.
+FrameRateHint: "Підказка: натисніть F3,\nщоб побачити частоту кадрів."
+GammaCorrection: "Гамма-корекція"
+GammaDark: "Темніше"
+GammaLight: "Світліше"
+GmstOverridesL10n: "Рядки з файлів ESM мають пріоритет"
+InvertXAxis: "Інвертувати вісь X"
+InvertYAxis: "Інвертувати вісь Y"
+Language: "Мова"
+LanguageNote: "Примітка: ці налаштування не впливають на рядки з файлів ESM."
+LightingMethod: "Метод освітлення"
+LightingMethodLegacy: "Класичний"
+LightingMethodShaders: "Шейдери"
+LightingMethodShadersCompatibility: "Шейдери (сумісність)"
+LightingResetToDefaults: "Скинути до типових значень? Зміна методу освітлення потребує перезапуску."
+Lights: "Світло"
+LightsBoundingSphereMultiplier: "Множник обмежувальної сфери"
+LightsBoundingSphereMultiplierTooltip: "Типово: 1.65\nМножник обмежувальної сфери джерел світла.\nБільші значення дають плавніше згасання, але потребують збільшення максимальної кількості джерел світла.\n\nНе впливає на освітленість чи силу світла."
+LightsFadeStartMultiplier: "Множник початку згасання"
+LightsFadeStartMultiplierTooltip: "Типово: 0.85\nЧастка максимальної відстані, з якої світло починає згасати.\n\nМенші значення дають повільніші переходи, більші — швидші."
+LightsLightingMethodTooltip: "Задає внутрішню обробку джерел світла.\n\n
+    \"Класичний\" завжди використовує 8 джерел світла на об'єкт. Результат найбільш схожий на освітлення Morrowind.\n\n
+    \"Шейдери (сумісність)\" знімає обмеження у 8 джерел. Цей режим також вмикає освітлення трав'яного покриву. Рекомендовано для старішого обладнання з лімітом джерел світла близько 8.\n\n
+    \"Шейдери\" має всі переваги режиму \"Шейдери (сумісність)\", але використовує сучасний підхід, що дозволяє більше джерел світла майже без втрат продуктивності на сучасному обладнанні."
+LightsMaximumDistance: "Максимальна відстань світла"
+LightsMaximumDistanceTooltip: "Типово: 8192\nМаксимальна відстань, на якій видно джерела світла (в ігрових одиницях).\n\nВкажіть 0, щоб зняти обмеження."
+LightsMinimumInteriorBrightness: "Мін. яскравість приміщень"
+LightsMinimumInteriorBrightnessTooltip: "Типово: 0.08\nМінімальна фонова яскравість приміщень.\n\nЗбільште, якщо приміщення здаються надто темними.\n\nНе діє, коли використовується класичне згасання."
+MatchSunlightToSun: "Сонячне світло за сонцем"
+MatchSunlightToSunTooltip: |-
+    У Morrowind видиме положення сонця з загадкових причин не збігається з напрямком його світла.
+    Ми зберігаємо цю нереалістичну поведінку для сумісності.
+
+    Ця опція узгоджує положення джерела сонячного світла з положенням сонця.
+MaxLights: "Макс. джерел світла"
+MaxLightsTooltip: "Типово: 8\nМаксимальна кількість джерел світла на об'єкт.\n\nМале значення, близьке до типового, спричинятиме різку появу світла, як у класичному освітленні."
+MenuHelpDelay: "Затримка підказок меню"
+MenuTransparency: "Прозорість меню"
+MouseAndKeyboard: "Миша/клавіатура"
+PostProcessing: "Постобробка"
+PostProcessingIsNotEnabled: "Постобробку не ввімкнено"
+PostProcessingTooltip: "Налаштовується через HUD постобробки, див. прив'язки клавіш."
+Preferences: "Параметри"
+PrimaryLanguage: "Основна мова"
+PrimaryLanguageTooltip: "Файли локалізації цієї мови мають найвищий пріоритет."
+QualityHigh: "Висока"
+QualityLow: "Низька"
+QualityMedium: "Середня"
+RainRippleDetail: "Деталізація кіл на воді від дощу"
+RainRippleDetailDense: "Густі"
+RainRippleDetailSimple: "Прості"
+RainRippleDetailSparse: "Рідкі"
+RebindAction: "Натисніть клавішу або кнопку, щоб перепризначити це керування."
+ReflectionShaderDetail: "Деталізація відображень"
+ReflectionShaderDetailActors: "Персонажі"
+ReflectionShaderDetailGroundcover: "Трава"
+ReflectionShaderDetailObjects: "Об'єкти"
+ReflectionShaderDetailSky: "Небо"
+ReflectionShaderDetailTerrain: "Ландшафт"
+ReflectionShaderDetailWorld: "Світ"
+Refraction: "Заломлення"
+ResetControls: "Скинути керування"
+Screenshot: "Знімок екрана"
+Scripts: "Скрипти"
+ScriptsDisabled: "Завантажте гру, щоб отримати доступ до налаштувань скриптів."
+SecondaryLanguage: "Додаткова мова"
+SecondaryLanguageTooltip: "Файли локалізації цієї мови використовуються, якщо в основній мові бракує потрібних рядків."
+SensitivityHigh: "Висока"
+SensitivityLow: "Низька"
+SettingsWindow: "Налаштування"
+Subtitles: "Субтитри"
+SunlightScattering: "Розсіювання сонячного світла"
+TestingExteriorCells: "Перевірка зовнішніх комірок"
+TestingInteriorCells: "Перевірка внутрішніх комірок"
+TextureFiltering: "Фільтрація текстур"
+TextureFilteringBilinear: "Білінійна"
+TextureFilteringNearest: "Найближча"
+TextureFilteringDisabled: "Немає"
+TextureFilteringOther: "Інша"
+TextureFilteringTrilinear: "Трилінійна"
+ToggleHUD: "Перемкнути HUD"
+TogglePostProcessorHUD: "Перемкнути HUD постобробки"
+TransparencyFull: "Повна"
+TransparencyNone: "Немає"
+Video: "Відео"
+ViewDistance: "Дальність огляду"
+VSync: "Верт. синхронізація"
+VSyncAdaptive: "Адаптивна"
+Water: "Вода"
+WaterShader: "Шейдер води"
+WaterShaderTextureQuality: "Якість текстур"
+WindowBorder: "Рамка вікна"
+WindowMode: "Режим вікна"
+WindowModeFullscreen: "Повноекранний"
+WindowModeHint: "Підказка: режим Повноекранний у вікні\nзавжди використовує рідну роздільну здатність."
+WindowModeWindowed: "У вікні"
+WindowModeWindowedFullscreen: "Повноекранний у вікні"
+WobblyShores: "Хвилясті береги"
+
+
+# Controller button names
+
+EnchantType: "Тип чарування"
+InventorySelect: "Покласти"
+JournalQuests: "Завдання"
+JournalShowAll: "Показати всі"
+LoadingSelectCharacter: "Змінити персонажа"
+RechargeSelect: "Зарядити"
+RepairTool: "Інструмент"

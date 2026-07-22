@@ -1,0 +1,4 @@
+{
+ "_comment": "Copy to config.json and edit. Only needed if auto-detection picks the wrong profile - build.py finds the newest openmw.cfg on its own in the usual places.",
+ "openmw_cfg": "E:\\Morrowind\\OpenMW\\just-good-morrowind-plus\\openmw.cfg"
+}

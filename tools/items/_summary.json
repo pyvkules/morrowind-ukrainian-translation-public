@@ -1,0 +1,146 @@
+[
+ {
+  "category": "npc",
+  "todo": 3242,
+  "already_uk": 8,
+  "chars": 39935
+ },
+ {
+  "category": "armour",
+  "todo": 2113,
+  "already_uk": 0,
+  "chars": 47318
+ },
+ {
+  "category": "book_title",
+  "todo": 2074,
+  "already_uk": 0,
+  "chars": 45369
+ },
+ {
+  "category": "weapon",
+  "todo": 1900,
+  "already_uk": 0,
+  "chars": 32422
+ },
+ {
+  "category": "spell",
+  "todo": 1697,
+  "already_uk": 67,
+  "chars": 27799
+ },
+ {
+  "category": "cell",
+  "todo": 1646,
+  "already_uk": 5,
+  "chars": 39663
+ },
+ {
+  "category": "misc",
+  "todo": 1619,
+  "already_uk": 0,
+  "chars": 25509
+ },
+ {
+  "category": "activator",
+  "todo": 1296,
+  "already_uk": 1,
+  "chars": 18619
+ },
+ {
+  "category": "clothing",
+  "todo": 904,
+  "already_uk": 1,
+  "chars": 16931
+ },
+ {
+  "category": "creature",
+  "todo": 774,
+  "already_uk": 0,
+  "chars": 10694
+ },
+ {
+  "category": "container",
+  "todo": 742,
+  "already_uk": 0,
+  "chars": 10033
+ },
+ {
+  "category": "ingredient",
+  "todo": 712,
+  "already_uk": 0,
+  "chars": 9089
+ },
+ {
+  "category": "potion",
+  "todo": 538,
+  "already_uk": 0,
+  "chars": 11820
+ },
+ {
+  "category": "door",
+  "todo": 155,
+  "already_uk": 3,
+  "chars": 1968
+ },
+ {
+  "category": "region",
+  "todo": 87,
+  "already_uk": 9,
+  "chars": 1726
+ },
+ {
+  "category": "faction",
+  "todo": 80,
+  "already_uk": 22,
+  "chars": 1233
+ },
+ {
+  "category": "class",
+  "todo": 61,
+  "already_uk": 58,
+  "chars": 515
+ },
+ {
+  "category": "light",
+  "todo": 55,
+  "already_uk": 0,
+  "chars": 863
+ },
+ {
+  "category": "apparatus",
+  "todo": 41,
+  "already_uk": 0,
+  "chars": 802
+ },
+ {
+  "category": "repair",
+  "todo": 21,
+  "already_uk": 0,
+  "chars": 414
+ },
+ {
+  "category": "race",
+  "todo": 19,
+  "already_uk": 10,
+  "chars": 142
+ },
+ {
+  "category": "lockpick",
+  "todo": 9,
+  "already_uk": 0,
+  "chars": 172
+ },
+ {
+  "category": "probe",
+  "todo": 7,
+  "already_uk": 0,
+  "chars": 119
+ },
+ {
+  "category": "birthsign",
+  "todo": 0,
+  "already_uk": 13,
+  "chars": 0
+ }
+]

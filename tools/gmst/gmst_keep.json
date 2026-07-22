@@ -1,0 +1,12 @@
+{
+ "_comment": "GMSTs deliberately left in Latin script, with the technical reason. Regex keys match the setting id. Anything not matched here and not translated is a gap, not a decision.",
+ "^sKeyName_": "labels of physical keyboard keys - they must match what is printed on the key",
+ "^sMagic.*ID$": "record ids the engine looks up to spawn summons and bound items - translating breaks the spell",
+ "^sQuick[0-9]Xbox$": "unused Xbox stubs whose value is literally their own setting id",
+ "^sBackspace$": "keyboard key label",
+ "^sShift$": "keyboard key label",
+ "^sSpace$": "keyboard key label",
+ "^sXTimes$": "the multiplier symbol x, not a word",
+ "^sLevelUpMenu3$": "the multiplier x2, not a word",
+ "^sLevelUpMenu4$": "the multiplier x3, not a word"
+}

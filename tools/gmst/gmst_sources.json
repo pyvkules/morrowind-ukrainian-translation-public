@@ -1,0 +1,3320 @@
+{
+ "s3dAudio": [
+  "Morrowind.esm"
+ ],
+ "s3dHardware": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "s3dSoftware": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sAIDistance": [
+  "Morrowind.esm"
+ ],
+ "sAbsorb": [
+  "Morrowind.esm"
+ ],
+ "sAcrobat": [
+  "Morrowind.esm"
+ ],
+ "sActivate": [
+  "Morrowind.esm"
+ ],
+ "sActivateXbox": [
+  "Morrowind.esm"
+ ],
+ "sActorInCombat": [
+  "Morrowind.esm"
+ ],
+ "sAdmire": [
+  "Morrowind.esm"
+ ],
+ "sAdmireFail": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sAdmireSuccess": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sAgent": [
+  "Morrowind.esm"
+ ],
+ "sAgiDesc": [
+  "Morrowind.esm"
+ ],
+ "sAlembic": [
+  "Morrowind.esm"
+ ],
+ "sAllTab": [
+  "Morrowind.esm"
+ ],
+ "sAlways": [
+  "Morrowind.esm"
+ ],
+ "sAlways_Run": [
+  "Morrowind.esm"
+ ],
+ "sApparatus": [
+  "Morrowind.esm"
+ ],
+ "sApparelTab": [
+  "Morrowind.esm"
+ ],
+ "sArcher": [
+  "Morrowind.esm"
+ ],
+ "sArea": [
+  "Morrowind.esm"
+ ],
+ "sAreaDes": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sArmor": [
+  "Morrowind.esm"
+ ],
+ "sArmorRating": [
+  "Morrowind.esm"
+ ],
+ "sAsk": [
+  "Morrowind.esm"
+ ],
+ "sAssassin": [
+  "Morrowind.esm"
+ ],
+ "sAt": [
+  "Morrowind.esm"
+ ],
+ "sAttack": [
+  "Morrowind.esm"
+ ],
+ "sAttributeAgility": [
+  "Morrowind.esm"
+ ],
+ "sAttributeEndurance": [
+  "Morrowind.esm"
+ ],
+ "sAttributeIntelligence": [
+  "Morrowind.esm"
+ ],
+ "sAttributeListTitle": [
+  "Morrowind.esm"
+ ],
+ "sAttributeLuck": [
+  "Morrowind.esm"
+ ],
+ "sAttributePersonality": [
+  "Morrowind.esm"
+ ],
+ "sAttributeSpeed": [
+  "Morrowind.esm"
+ ],
+ "sAttributeStrength": [
+  "Morrowind.esm"
+ ],
+ "sAttributeWillpower": [
+  "Morrowind.esm"
+ ],
+ "sAttributesMenu1": [
+  "Morrowind.esm"
+ ],
+ "sAudio": [
+  "Morrowind.esm"
+ ],
+ "sAuto_Run": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sBack": [
+  "Morrowind.esm"
+ ],
+ "sBackXbox": [
+  "Morrowind.esm"
+ ],
+ "sBackspace": [
+  "Morrowind.esm"
+ ],
+ "sBarbarian": [
+  "Morrowind.esm"
+ ],
+ "sBard": [
+  "Morrowind.esm"
+ ],
+ "sBarter": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog1": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog10": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog11": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog12": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog2": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog3": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sBarterDialog4": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog5": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sBarterDialog6": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sBarterDialog7": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog8": [
+  "Morrowind.esm"
+ ],
+ "sBarterDialog9": [
+  "Morrowind.esm"
+ ],
+ "sBattlemage": [
+  "Morrowind.esm"
+ ],
+ "sBestAttack": [
+  "Morrowind.esm"
+ ],
+ "sBirthSign": [
+  "Morrowind.esm"
+ ],
+ "sBirthsignmenu1": [
+  "Morrowind.esm"
+ ],
+ "sBirthsignmenu2": [
+  "Morrowind.esm"
+ ],
+ "sBlocks": [
+  "Morrowind.esm"
+ ],
+ "sBonusSkillTitle": [
+  "Morrowind.esm"
+ ],
+ "sBookPageOne": [
+  "Morrowind.esm"
+ ],
+ "sBookPageTwo": [
+  "Morrowind.esm"
+ ],
+ "sBookSkillMessage": [
+  "Morrowind.esm"
+ ],
+ "sBounty": [
+  "Morrowind.esm"
+ ],
+ "sBreath": [
+  "Morrowind.esm"
+ ],
+ "sBribe 10 Gold": [
+  "Morrowind.esm"
+ ],
+ "sBribe 100 Gold": [
+  "Morrowind.esm"
+ ],
+ "sBribe 1000 Gold": [
+  "Morrowind.esm"
+ ],
+ "sBribeFail": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sBribeSuccess": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sBuy": [
+  "Morrowind.esm"
+ ],
+ "sBye": [
+  "Morrowind.esm"
+ ],
+ "sCalcinator": [
+  "Morrowind.esm"
+ ],
+ "sCancel": [
+  "Morrowind.esm"
+ ],
+ "sCantEquipWeapWarning": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sCastCost": [
+  "Morrowind.esm"
+ ],
+ "sCaughtStealingMessage": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sCenter": [
+  "Morrowind.esm"
+ ],
+ "sChangedMastersMsg": [
+  "Morrowind.esm"
+ ],
+ "sCharges": [
+  "Morrowind.esm"
+ ],
+ "sChooseClassMenu1": [
+  "Morrowind.esm"
+ ],
+ "sChooseClassMenu2": [
+  "Morrowind.esm"
+ ],
+ "sChooseClassMenu3": [
+  "Morrowind.esm"
+ ],
+ "sChooseClassMenu4": [
+  "Morrowind.esm"
+ ],
+ "sChop": [
+  "Morrowind.esm"
+ ],
+ "sClass": [
+  "Morrowind.esm"
+ ],
+ "sClassChoiceMenu1": [
+  "Morrowind.esm"
+ ],
+ "sClassChoiceMenu2": [
+  "Morrowind.esm"
+ ],
+ "sClassChoiceMenu3": [
+  "Morrowind.esm"
+ ],
+ "sClose": [
+  "Morrowind.esm"
+ ],
+ "sCompanionShare": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sCompanionWarningButtonOne": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sCompanionWarningButtonTwo": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sCompanionWarningMessage": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sCondition": [
+  "Morrowind.esm"
+ ],
+ "sConsoleTitle": [
+  "Morrowind.esm"
+ ],
+ "sContainer": [
+  "Morrowind.esm"
+ ],
+ "sContentsMessage1": [
+  "Morrowind.esm"
+ ],
+ "sContentsMessage2": [
+  "Morrowind.esm"
+ ],
+ "sContentsMessage3": [
+  "Morrowind.esm"
+ ],
+ "sControlerVibration": [
+  "Morrowind.esm"
+ ],
+ "sControls": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu1": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu2": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu3": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu4": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu5": [
+  "Morrowind.esm"
+ ],
+ "sControlsMenu6": [
+  "Morrowind.esm"
+ ],
+ "sCostChance": [
+  "Morrowind.esm"
+ ],
+ "sCostCharge": [
+  "Morrowind.esm"
+ ],
+ "sCreate": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenu1": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenu2": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenu3": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenuHelp1": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenuHelp2": [
+  "Morrowind.esm"
+ ],
+ "sCreateClassMenuWarning": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sCreatedEffects": [
+  "Morrowind.esm"
+ ],
+ "sCrimeHelp": [
+  "Morrowind.esm"
+ ],
+ "sCrimeMessage": [
+  "Morrowind.esm"
+ ],
+ "sCrouchXbox": [
+  "Morrowind.esm"
+ ],
+ "sCrouch_Sneak": [
+  "Morrowind.esm"
+ ],
+ "sCrusader": [
+  "Morrowind.esm"
+ ],
+ "sCursorOff": [
+  "Morrowind.esm"
+ ],
+ "sCustom": [
+  "Morrowind.esm"
+ ],
+ "sCustomClassName": [
+  "Morrowind.esm"
+ ],
+ "sDamage": [
+  "Morrowind.esm"
+ ],
+ "sDark_Gamma": [
+  "Morrowind.esm"
+ ],
+ "sDay": [
+  "Morrowind.esm"
+ ],
+ "sDefaultCellname": [
+  "Morrowind.esm"
+ ],
+ "sDelete": [
+  "Morrowind.esm"
+ ],
+ "sDeleteGame": [
+  "Morrowind.esm"
+ ],
+ "sDeleteNote": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sDeleteSpell": [
+  "Morrowind.esm"
+ ],
+ "sDeleteSpellError": [
+  "Morrowind.esm"
+ ],
+ "sDetail_Level": [
+  "Morrowind.esm"
+ ],
+ "sDialogMenu1": [
+  "Morrowind.esm"
+ ],
+ "sDialogText1Xbox": [
+  "Morrowind.esm"
+ ],
+ "sDialogText2Xbox": [
+  "Morrowind.esm"
+ ],
+ "sDialogText3Xbox": [
+  "Morrowind.esm"
+ ],
+ "sDifficulty": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sDisposeCorpseFail": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sDisposeofCorpse": [
+  "Morrowind.esm"
+ ],
+ "sDoYouWantTo": [
+  "Morrowind.esm"
+ ],
+ "sDone": [
+  "Morrowind.esm"
+ ],
+ "sDrain": [
+  "Morrowind.esm"
+ ],
+ "sDrop": [
+  "Morrowind.esm"
+ ],
+ "sDuration": [
+  "Morrowind.esm"
+ ],
+ "sDurationDes": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sEasy": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEditNote": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEffectAbsorbAttribute": [
+  "Morrowind.esm"
+ ],
+ "sEffectAbsorbFatigue": [
+  "Morrowind.esm"
+ ],
+ "sEffectAbsorbHealth": [
+  "Morrowind.esm"
+ ],
+ "sEffectAbsorbSkill": [
+  "Morrowind.esm"
+ ],
+ "sEffectAbsorbSpellPoints": [
+  "Morrowind.esm"
+ ],
+ "sEffectAlmsiviIntervention": [
+  "Morrowind.esm"
+ ],
+ "sEffectBlind": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundBattleAxe": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundBoots": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundCuirass": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundDagger": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundGloves": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundHelm": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundLongbow": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundLongsword": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundMace": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundShield": [
+  "Morrowind.esm"
+ ],
+ "sEffectBoundSpear": [
+  "Morrowind.esm"
+ ],
+ "sEffectBurden": [
+  "Morrowind.esm"
+ ],
+ "sEffectCalmCreature": [
+  "Morrowind.esm"
+ ],
+ "sEffectCalmHumanoid": [
+  "Morrowind.esm"
+ ],
+ "sEffectChameleon": [
+  "Morrowind.esm"
+ ],
+ "sEffectCharm": [
+  "Morrowind.esm"
+ ],
+ "sEffectCommandCreatures": [
+  "Morrowind.esm"
+ ],
+ "sEffectCommandHumanoids": [
+  "Morrowind.esm"
+ ],
+ "sEffectCorpus": [
+  "Morrowind.esm"
+ ],
+ "sEffectCureBlightDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectCureCommonDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectCureCorprusDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectCureParalyzation": [
+  "Morrowind.esm"
+ ],
+ "sEffectCurePoison": [
+  "Morrowind.esm"
+ ],
+ "sEffectDamageAttribute": [
+  "Morrowind.esm"
+ ],
+ "sEffectDamageFatigue": [
+  "Morrowind.esm"
+ ],
+ "sEffectDamageHealth": [
+  "Morrowind.esm"
+ ],
+ "sEffectDamageMagicka": [
+  "Morrowind.esm"
+ ],
+ "sEffectDamageSkill": [
+  "Morrowind.esm"
+ ],
+ "sEffectDemoralizeCreature": [
+  "Morrowind.esm"
+ ],
+ "sEffectDemoralizeHumanoid": [
+  "Morrowind.esm"
+ ],
+ "sEffectDetectAnimal": [
+  "Morrowind.esm"
+ ],
+ "sEffectDetectEnchantment": [
+  "Morrowind.esm"
+ ],
+ "sEffectDetectKey": [
+  "Morrowind.esm"
+ ],
+ "sEffectDisintegrateArmor": [
+  "Morrowind.esm"
+ ],
+ "sEffectDisintegrateWeapon": [
+  "Morrowind.esm"
+ ],
+ "sEffectDispel": [
+  "Morrowind.esm"
+ ],
+ "sEffectDivineIntervention": [
+  "Morrowind.esm"
+ ],
+ "sEffectDrainAttribute": [
+  "Morrowind.esm"
+ ],
+ "sEffectDrainFatigue": [
+  "Morrowind.esm"
+ ],
+ "sEffectDrainHealth": [
+  "Morrowind.esm"
+ ],
+ "sEffectDrainSkill": [
+  "Morrowind.esm"
+ ],
+ "sEffectDrainSpellpoints": [
+  "Morrowind.esm"
+ ],
+ "sEffectExtraSpell": [
+  "Morrowind.esm"
+ ],
+ "sEffectFeather": [
+  "Morrowind.esm"
+ ],
+ "sEffectFireDamage": [
+  "Morrowind.esm"
+ ],
+ "sEffectFireShield": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifyAttackBonus": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifyAttribute": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifyFatigue": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifyHealth": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifyMagickaMultiplier": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifySkill": [
+  "Morrowind.esm"
+ ],
+ "sEffectFortifySpellpoints": [
+  "Morrowind.esm"
+ ],
+ "sEffectFrenzyCreature": [
+  "Morrowind.esm"
+ ],
+ "sEffectFrenzyHumanoid": [
+  "Morrowind.esm"
+ ],
+ "sEffectFrostDamage": [
+  "Morrowind.esm"
+ ],
+ "sEffectFrostShield": [
+  "Morrowind.esm"
+ ],
+ "sEffectInvisibility": [
+  "Morrowind.esm"
+ ],
+ "sEffectJump": [
+  "Morrowind.esm"
+ ],
+ "sEffectLevitate": [
+  "Morrowind.esm"
+ ],
+ "sEffectLight": [
+  "Morrowind.esm"
+ ],
+ "sEffectLightningShield": [
+  "Morrowind.esm"
+ ],
+ "sEffectLock": [
+  "Morrowind.esm"
+ ],
+ "sEffectMark": [
+  "Morrowind.esm"
+ ],
+ "sEffectNightEye": [
+  "Morrowind.esm"
+ ],
+ "sEffectOpen": [
+  "Morrowind.esm"
+ ],
+ "sEffectParalyze": [
+  "Morrowind.esm"
+ ],
+ "sEffectPoison": [
+  "Morrowind.esm"
+ ],
+ "sEffectRallyCreature": [
+  "Morrowind.esm"
+ ],
+ "sEffectRallyHumanoid": [
+  "Morrowind.esm"
+ ],
+ "sEffectRecall": [
+  "Morrowind.esm"
+ ],
+ "sEffectReflect": [
+  "Morrowind.esm"
+ ],
+ "sEffectRemoveCurse": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistBlightDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistCommonDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistCorprusDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistFire": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistFrost": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistMagicka": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistNormalWeapons": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistParalysis": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistPoison": [
+  "Morrowind.esm"
+ ],
+ "sEffectResistShock": [
+  "Morrowind.esm"
+ ],
+ "sEffectRestoreAttribute": [
+  "Morrowind.esm"
+ ],
+ "sEffectRestoreFatigue": [
+  "Morrowind.esm"
+ ],
+ "sEffectRestoreHealth": [
+  "Morrowind.esm"
+ ],
+ "sEffectRestoreSkill": [
+  "Morrowind.esm"
+ ],
+ "sEffectRestoreSpellPoints": [
+  "Morrowind.esm"
+ ],
+ "sEffectSanctuary": [
+  "Morrowind.esm"
+ ],
+ "sEffectShield": [
+  "Morrowind.esm"
+ ],
+ "sEffectShockDamage": [
+  "Morrowind.esm"
+ ],
+ "sEffectSilence": [
+  "Morrowind.esm"
+ ],
+ "sEffectSlowFall": [
+  "Morrowind.esm"
+ ],
+ "sEffectSoultrap": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sEffectSound": [
+  "Morrowind.esm"
+ ],
+ "sEffectSpellAbsorption": [
+  "Morrowind.esm"
+ ],
+ "sEffectStuntedMagicka": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonAncestralGhost": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonBonelord": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonCenturionSphere": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonClannfear": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonCreature01": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEffectSummonCreature02": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEffectSummonCreature03": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEffectSummonCreature04": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm",
+  "LuaMultiMark.omwaddon"
+ ],
+ "sEffectSummonCreature05": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm",
+  "LuaMultiMark.omwaddon"
+ ],
+ "sEffectSummonDaedroth": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonDremora": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonFabricant": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sEffectSummonFlameAtronach": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonFrostAtronach": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonGoldensaint": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonGreaterBonewalker": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonHunger": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonLeastBonewalker": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonScamp": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonSkeletalMinion": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonStormAtronach": [
+  "Morrowind.esm"
+ ],
+ "sEffectSummonWingedTwilight": [
+  "Morrowind.esm"
+ ],
+ "sEffectSunDamage": [
+  "Morrowind.esm"
+ ],
+ "sEffectSwiftSwim": [
+  "Morrowind.esm"
+ ],
+ "sEffectTelekinesis": [
+  "Morrowind.esm"
+ ],
+ "sEffectTurnUndead": [
+  "Morrowind.esm"
+ ],
+ "sEffectVampirism": [
+  "Morrowind.esm"
+ ],
+ "sEffectWaterBreathing": [
+  "Morrowind.esm"
+ ],
+ "sEffectWaterWalking": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToBlightDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToCommonDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToCorprusDisease": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToFire": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToFrost": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToMagicka": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToNormalWeapons": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToPoison": [
+  "Morrowind.esm"
+ ],
+ "sEffectWeaknessToShock": [
+  "Morrowind.esm"
+ ],
+ "sEffects": [
+  "Morrowind.esm"
+ ],
+ "sEnableJoystick": [
+  "Morrowind.esm"
+ ],
+ "sEnchantItems": [
+  "Morrowind.esm"
+ ],
+ "sEnchanting": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp1": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp10": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp2": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp3": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp4": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp5": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp6": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp7": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp8": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentHelp9": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu1": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu10": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sEnchantmentMenu11": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sEnchantmentMenu12": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sEnchantmentMenu2": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu3": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu4": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu5": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu6": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu7": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu8": [
+  "Morrowind.esm"
+ ],
+ "sEnchantmentMenu9": [
+  "Morrowind.esm"
+ ],
+ "sEncumbrance": [
+  "Morrowind.esm"
+ ],
+ "sEndDesc": [
+  "Morrowind.esm",
+  "ncg.omwaddon"
+ ],
+ "sEquip": [
+  "Morrowind.esm"
+ ],
+ "sExitGame": [
+  "Morrowind.esm"
+ ],
+ "sExpelled": [
+  "Morrowind.esm"
+ ],
+ "sExpelledMessage": [
+  "Morrowind.esm"
+ ],
+ "sFace": [
+  "Morrowind.esm"
+ ],
+ "sFaction": [
+  "Morrowind.esm"
+ ],
+ "sFar": [
+  "Morrowind.esm"
+ ],
+ "sFast": [
+  "Morrowind.esm"
+ ],
+ "sFatDesc": [
+  "Morrowind.esm"
+ ],
+ "sFatigue": [
+  "Morrowind.esm"
+ ],
+ "sFavoriteSkills": [
+  "Morrowind.esm"
+ ],
+ "sFileSize": [
+  "Morrowind.esm"
+ ],
+ "sFootsteps": [
+  "Morrowind.esm"
+ ],
+ "sFortify": [
+  "Morrowind.esm"
+ ],
+ "sForward": [
+  "Morrowind.esm"
+ ],
+ "sForwardXbox": [
+  "Morrowind.esm"
+ ],
+ "sFull": [
+  "Morrowind.esm"
+ ],
+ "sGame": [
+  "Morrowind.esm"
+ ],
+ "sGameWithoutLauncherXbox": [
+  "Morrowind.esm"
+ ],
+ "sGamma_Correction": [
+  "Morrowind.esm"
+ ],
+ "sGeneralMastPlugMismatchMsg": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sGold": [
+  "Morrowind.esm"
+ ],
+ "sGoodbye": [
+  "Morrowind.esm"
+ ],
+ "sGoverningAttribute": [
+  "Morrowind.esm"
+ ],
+ "sHair": [
+  "Morrowind.esm"
+ ],
+ "sHard": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sHeal": [
+  "Morrowind.esm"
+ ],
+ "sHealer": [
+  "Morrowind.esm"
+ ],
+ "sHealth": [
+  "Morrowind.esm"
+ ],
+ "sHealthDesc": [
+  "Morrowind.esm",
+  "ncg.omwaddon"
+ ],
+ "sHealthPerHourOfRest": [
+  "Morrowind.esm"
+ ],
+ "sHealthPerLevel": [
+  "Morrowind.esm"
+ ],
+ "sHeavy": [
+  "Morrowind.esm"
+ ],
+ "sHigh": [
+  "Morrowind.esm"
+ ],
+ "sInPrisonTitle": [
+  "Morrowind.esm"
+ ],
+ "sInfo": [
+  "Morrowind.esm"
+ ],
+ "sInfoRefusal": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sIngredients": [
+  "Morrowind.esm"
+ ],
+ "sInputMenu1": [
+  "Morrowind.esm"
+ ],
+ "sIntDesc": [
+  "Morrowind.esm"
+ ],
+ "sIntimidate": [
+  "Morrowind.esm"
+ ],
+ "sIntimidateFail": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sIntimidateSuccess": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sInvalidSaveGameMsg": [
+  "Morrowind.esm"
+ ],
+ "sInvalidSaveGameMsgXBOX": [
+  "Morrowind.esm"
+ ],
+ "sInventory": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMenu1": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMessage1": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMessage2": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMessage3": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMessage4": [
+  "Morrowind.esm"
+ ],
+ "sInventoryMessage5": [
+  "Morrowind.esm"
+ ],
+ "sInventorySelectNoIngredients": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sInventorySelectNoItems": [
+  "Morrowind.esm"
+ ],
+ "sInventorySelectNoSoul": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sItem": [
+  "Morrowind.esm"
+ ],
+ "sItemCastConstant": [
+  "Morrowind.esm"
+ ],
+ "sItemCastOnce": [
+  "Morrowind.esm"
+ ],
+ "sItemCastWhenStrikes": [
+  "Morrowind.esm"
+ ],
+ "sItemCastWhenUsed": [
+  "Morrowind.esm"
+ ],
+ "sItemName": [
+  "Morrowind.esm"
+ ],
+ "sJournal": [
+  "Morrowind.esm"
+ ],
+ "sJournalCmd": [
+  "Morrowind.esm"
+ ],
+ "sJournalEntry": [
+  "Morrowind.esm"
+ ],
+ "sJournalXbox": [
+  "Morrowind.esm"
+ ],
+ "sJoystickHatShort": [
+  "Morrowind.esm"
+ ],
+ "sJoystickNotFound": [
+  "Morrowind.esm"
+ ],
+ "sJoystickShort": [
+  "Morrowind.esm"
+ ],
+ "sJump": [
+  "Morrowind.esm"
+ ],
+ "sJumpXbox": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_01": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_02": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_03": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_04": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_05": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_06": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_07": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_08": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_09": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0A": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_0F": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_10": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_11": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_12": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_13": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_14": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_15": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_16": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_17": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_18": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_19": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1A": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_1F": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_20": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_21": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_22": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_23": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_24": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_25": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_26": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_27": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_28": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_29": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2A": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_2F": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_30": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_31": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_32": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_33": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_34": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_35": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_36": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_37": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_38": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_39": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3A": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_3F": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_40": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_41": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_42": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_43": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_44": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_45": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_46": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_47": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_48": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_49": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4A": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_4F": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_50": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_51": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_52": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_53": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_56": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_57": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_58": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_64": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_65": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_66": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_70": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_73": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_79": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_7B": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_7D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_7E": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_8D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_90": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_91": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_92": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_93": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_94": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_95": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_96": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_97": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_99": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_9C": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_9D": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_A0": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_A1": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_A2": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_A4": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_AE": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B0": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B2": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B3": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B5": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B7": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_B8": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_C5": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_C7": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_C8": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_C9": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_CB": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_CD": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_CF": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_D0": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_D1": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_D2": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_D3": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_DB": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_DC": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_DD": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_DE": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_DF": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E3": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E5": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E6": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E7": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E8": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_E9": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_EA": [
+  "Morrowind.esm"
+ ],
+ "sKeyName_EB": [
+  "Morrowind.esm"
+ ],
+ "sKeyUsed": [
+  "Morrowind.esm"
+ ],
+ "sKilledEssential": [
+  "Morrowind.esm"
+ ],
+ "sKnight": [
+  "Morrowind.esm"
+ ],
+ "sLeft": [
+  "Morrowind.esm"
+ ],
+ "sLess": [
+  "Morrowind.esm"
+ ],
+ "sLevel": [
+  "Morrowind.esm"
+ ],
+ "sLevelProgress": [
+  "Morrowind.esm"
+ ],
+ "sLevelUp": [
+  "Morrowind.esm"
+ ],
+ "sLevelUpMenu1": [
+  "Morrowind.esm"
+ ],
+ "sLevelUpMenu2": [
+  "Morrowind.esm"
+ ],
+ "sLevelUpMenu3": [
+  "Morrowind.esm"
+ ],
+ "sLevelUpMenu4": [
+  "Morrowind.esm"
+ ],
+ "sLevelUpMsg": [
+  "Morrowind.esm"
+ ],
+ "sLevels": [
+  "Morrowind.esm"
+ ],
+ "sLevitateDisabled": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sLight": [
+  "Morrowind.esm"
+ ],
+ "sLight_Gamma": [
+  "Morrowind.esm"
+ ],
+ "sLoadFailedMessage": [
+  "Morrowind.esm"
+ ],
+ "sLoadGame": [
+  "Morrowind.esm"
+ ],
+ "sLoadLastSaveMsg": [
+  "Morrowind.esm"
+ ],
+ "sLoadingErrorsMsg": [
+  "Morrowind.esm"
+ ],
+ "sLoadingMessage1": [
+  "Morrowind.esm"
+ ],
+ "sLoadingMessage14": [
+  "Morrowind.esm"
+ ],
+ "sLoadingMessage15": [
+  "Morrowind.esm"
+ ],
+ "sLoadingMessage2": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sLoadingMessage3": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sLoadingMessage4": [
+  "Morrowind.esm"
+ ],
+ "sLoadingMessage5": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sLoadingMessage9": [
+  "Morrowind.esm"
+ ],
+ "sLocal": [
+  "Morrowind.esm"
+ ],
+ "sLockFail": [
+  "Morrowind.esm"
+ ],
+ "sLockImpossible": [
+  "Morrowind.esm"
+ ],
+ "sLockLevel": [
+  "Morrowind.esm"
+ ],
+ "sLockSuccess": [
+  "Morrowind.esm"
+ ],
+ "sLookDownXbox": [
+  "Morrowind.esm"
+ ],
+ "sLookUpXbox": [
+  "Morrowind.esm"
+ ],
+ "sLow": [
+  "Morrowind.esm"
+ ],
+ "sLucDesc": [
+  "Morrowind.esm"
+ ],
+ "sMagDesc": [
+  "Morrowind.esm"
+ ],
+ "sMage": [
+  "Morrowind.esm"
+ ],
+ "sMagic": [
+  "Morrowind.esm"
+ ],
+ "sMagicAncestralGhostID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBonelordID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundBattleAxeID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundBootsID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundCuirassID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundDaggerID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundHelmID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundLeftGauntletID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundLongbowID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundLongswordID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundMaceID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundRightGauntletID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundShieldID": [
+  "Morrowind.esm"
+ ],
+ "sMagicBoundSpearID": [
+  "Morrowind.esm"
+ ],
+ "sMagicCannotRecast": [
+  "Morrowind.esm"
+ ],
+ "sMagicCenturionSphereID": [
+  "Morrowind.esm"
+ ],
+ "sMagicClannfearID": [
+  "Morrowind.esm"
+ ],
+ "sMagicContractDisease": [
+  "Morrowind.esm"
+ ],
+ "sMagicCorprusWorsens": [
+  "Morrowind.esm"
+ ],
+ "sMagicCreature01ID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMagicCreature02ID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMagicCreature03ID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMagicCreature04ID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm",
+  "LuaMultiMark.omwaddon"
+ ],
+ "sMagicCreature05ID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm",
+  "LuaMultiMark.omwaddon"
+ ],
+ "sMagicDaedrothID": [
+  "Morrowind.esm"
+ ],
+ "sMagicDremoraID": [
+  "Morrowind.esm"
+ ],
+ "sMagicEffects": [
+  "Morrowind.esm"
+ ],
+ "sMagicFabricantID": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMagicFlameAtronachID": [
+  "Morrowind.esm"
+ ],
+ "sMagicFrostAtronachID": [
+  "Morrowind.esm"
+ ],
+ "sMagicGoldenSaintID": [
+  "Morrowind.esm"
+ ],
+ "sMagicGreaterBonewalkerID": [
+  "Morrowind.esm"
+ ],
+ "sMagicHungerID": [
+  "Morrowind.esm"
+ ],
+ "sMagicInsufficientCharge": [
+  "Morrowind.esm"
+ ],
+ "sMagicInsufficientSP": [
+  "Morrowind.esm"
+ ],
+ "sMagicInvalidEffect": [
+  "Morrowind.esm"
+ ],
+ "sMagicInvalidTarget": [
+  "Morrowind.esm"
+ ],
+ "sMagicItem": [
+  "Morrowind.esm"
+ ],
+ "sMagicLeastBonewalkerID": [
+  "Morrowind.esm"
+ ],
+ "sMagicLockSuccess": [
+  "Morrowind.esm"
+ ],
+ "sMagicMenu": [
+  "Morrowind.esm"
+ ],
+ "sMagicOpenSuccess": [
+  "Morrowind.esm"
+ ],
+ "sMagicPCResisted": [
+  "Morrowind.esm"
+ ],
+ "sMagicScampID": [
+  "Morrowind.esm"
+ ],
+ "sMagicSelectTitle": [
+  "Morrowind.esm"
+ ],
+ "sMagicSkeletalMinionID": [
+  "Morrowind.esm"
+ ],
+ "sMagicSkillFail": [
+  "Morrowind.esm"
+ ],
+ "sMagicStormAtronachID": [
+  "Morrowind.esm"
+ ],
+ "sMagicTab": [
+  "Morrowind.esm"
+ ],
+ "sMagicTargetResisted": [
+  "Morrowind.esm"
+ ],
+ "sMagicTargetResistsWeapons": [
+  "Morrowind.esm"
+ ],
+ "sMagicWingedTwilightID": [
+  "Morrowind.esm"
+ ],
+ "sMagnitude": [
+  "Morrowind.esm"
+ ],
+ "sMagnitudeDes": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sMake Enchantment": [
+  "Morrowind.esm"
+ ],
+ "sMap": [
+  "Morrowind.esm"
+ ],
+ "sMastPlugMismatchMsg": [
+  "Morrowind.esm"
+ ],
+ "sMaster": [
+  "Morrowind.esm"
+ ],
+ "sMaxSale": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMaximumSaveGameMessage": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sMedium": [
+  "Morrowind.esm"
+ ],
+ "sMenuModeXbox": [
+  "Morrowind.esm"
+ ],
+ "sMenuNextXbox": [
+  "Morrowind.esm"
+ ],
+ "sMenuPrevXbox": [
+  "Morrowind.esm"
+ ],
+ "sMenu_Help_Delay": [
+  "Morrowind.esm"
+ ],
+ "sMenu_Mode": [
+  "Morrowind.esm"
+ ],
+ "sMenus": [
+  "Morrowind.esm"
+ ],
+ "sMessage1": [
+  "Morrowind.esm"
+ ],
+ "sMessage2": [
+  "Morrowind.esm"
+ ],
+ "sMessage3": [
+  "Morrowind.esm"
+ ],
+ "sMessage4": [
+  "Morrowind.esm"
+ ],
+ "sMessage5": [
+  "Morrowind.esm"
+ ],
+ "sMessageQuestionAnswer1": [
+  "Morrowind.esm"
+ ],
+ "sMessageQuestionAnswer2": [
+  "Morrowind.esm"
+ ],
+ "sMessageQuestionAnswer3": [
+  "Morrowind.esm"
+ ],
+ "sMiscTab": [
+  "Morrowind.esm"
+ ],
+ "sMissingMastersMsg": [
+  "Morrowind.esm"
+ ],
+ "sMonk": [
+  "Morrowind.esm"
+ ],
+ "sMonthEveningstar": [
+  "Morrowind.esm"
+ ],
+ "sMonthFirstseed": [
+  "Morrowind.esm"
+ ],
+ "sMonthFrostfall": [
+  "Morrowind.esm"
+ ],
+ "sMonthHeartfire": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sMonthLastseed": [
+  "Morrowind.esm"
+ ],
+ "sMonthMidyear": [
+  "Morrowind.esm"
+ ],
+ "sMonthMorningstar": [
+  "Morrowind.esm"
+ ],
+ "sMonthRainshand": [
+  "Morrowind.esm"
+ ],
+ "sMonthSecondseed": [
+  "Morrowind.esm"
+ ],
+ "sMonthSunsdawn": [
+  "Morrowind.esm"
+ ],
+ "sMonthSunsdusk": [
+  "Morrowind.esm"
+ ],
+ "sMonthSunsheight": [
+  "Morrowind.esm"
+ ],
+ "sMore": [
+  "Morrowind.esm"
+ ],
+ "sMortar": [
+  "Morrowind.esm"
+ ],
+ "sMouse": [
+  "Morrowind.esm"
+ ],
+ "sMouseFlip": [
+  "Morrowind.esm"
+ ],
+ "sMouseWheelDownShort": [
+  "Morrowind.esm"
+ ],
+ "sMouseWheelUpShort": [
+  "Morrowind.esm"
+ ],
+ "sMove": [
+  "Morrowind.esm"
+ ],
+ "sMoveDownXbox": [
+  "Morrowind.esm"
+ ],
+ "sMoveUpXbox": [
+  "Morrowind.esm"
+ ],
+ "sMusic": [
+  "Morrowind.esm"
+ ],
+ "sName": [
+  "Morrowind.esm"
+ ],
+ "sNameTitle": [
+  "Morrowind.esm"
+ ],
+ "sNear": [
+  "Morrowind.esm"
+ ],
+ "sNeedOneSkill": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sNeedTwoSkills": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sNewGame": [
+  "Morrowind.esm"
+ ],
+ "sNext": [
+  "Morrowind.esm"
+ ],
+ "sNextRank": [
+  "Morrowind.esm"
+ ],
+ "sNextSpell": [
+  "Morrowind.esm"
+ ],
+ "sNextSpellXbox": [
+  "Morrowind.esm"
+ ],
+ "sNextWeapon": [
+  "Morrowind.esm"
+ ],
+ "sNextWeaponXbox": [
+  "Morrowind.esm"
+ ],
+ "sNightblade": [
+  "Morrowind.esm"
+ ],
+ "sNo": [
+  "Morrowind.esm"
+ ],
+ "sNoName": [
+  "Morrowind.esm"
+ ],
+ "sNone": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage1": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage10": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage11": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage12": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage13": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage14": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage15": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage16": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage16_a": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage17": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage18": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage19": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage2": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sNotifyMessage20": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage21": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage22": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage23": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage24": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage25": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage26": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage27": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage28": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage29": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sNotifyMessage3": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage30": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage31": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage32": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage33": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage34": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage35": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage36": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sNotifyMessage37": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage38": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage39": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage4": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage40": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage41": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage42": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage43": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage44": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage45": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage46": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sNotifyMessage47": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage48": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage49": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage4XBOX": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage5": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage50": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage51": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage52": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sNotifyMessage53": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage54": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage55": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage56": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage57": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage58": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage59": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage6": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage60": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage61": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage62": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage63": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage64": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage65": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage66": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage67": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage6a": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage7": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage8": [
+  "Morrowind.esm"
+ ],
+ "sNotifyMessage9": [
+  "Morrowind.esm"
+ ],
+ "sOK": [
+  "Morrowind.esm"
+ ],
+ "sOff": [
+  "Morrowind.esm"
+ ],
+ "sOffer": [
+  "Morrowind.esm"
+ ],
+ "sOfferMenuTitle": [
+  "Morrowind.esm"
+ ],
+ "sOn": [
+  "Morrowind.esm"
+ ],
+ "sOnce": [
+  "Morrowind.esm"
+ ],
+ "sOneHanded": [
+  "Morrowind.esm"
+ ],
+ "sOnetypeEffectMessage": [
+  "Morrowind.esm"
+ ],
+ "sOptions": [
+  "Morrowind.esm"
+ ],
+ "sOptionsMenuXbox": [
+  "Morrowind.esm"
+ ],
+ "sPerDesc": [
+  "Morrowind.esm"
+ ],
+ "sPersuasion": [
+  "Morrowind.esm"
+ ],
+ "sPersuasionMenuTitle": [
+  "Morrowind.esm"
+ ],
+ "sPickUp": [
+  "Morrowind.esm"
+ ],
+ "sPilgrim": [
+  "Morrowind.esm"
+ ],
+ "sPotionSuccess": [
+  "Morrowind.esm"
+ ],
+ "sPowerAlreadyUsed": [
+  "Morrowind.esm"
+ ],
+ "sPowers": [
+  "Morrowind.esm"
+ ],
+ "sPreferences": [
+  "Morrowind.esm"
+ ],
+ "sPrefs": [
+  "Morrowind.esm"
+ ],
+ "sPrev": [
+  "Morrowind.esm"
+ ],
+ "sPrevSpell": [
+  "Morrowind.esm"
+ ],
+ "sPrevSpellXbox": [
+  "Morrowind.esm"
+ ],
+ "sPrevWeapon": [
+  "Morrowind.esm"
+ ],
+ "sPrevWeaponXbox": [
+  "Morrowind.esm"
+ ],
+ "sProfitValue": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sQuality": [
+  "Morrowind.esm"
+ ],
+ "sQuanityMenuMessage01": [
+  "Morrowind.esm"
+ ],
+ "sQuanityMenuMessage02": [
+  "Morrowind.esm"
+ ],
+ "sQuestionDeleteSpell": [
+  "Morrowind.esm"
+ ],
+ "sQuestionMark": [
+  "Morrowind.esm"
+ ],
+ "sQuick0Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick10Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick1Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick2Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick3Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick4Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick4Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick5Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick5Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick6Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick6Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick7Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick7Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick8Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick8Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick9Cmd": [
+  "Morrowind.esm"
+ ],
+ "sQuick9Xbox": [
+  "Morrowind.esm"
+ ],
+ "sQuickLoadCmd": [
+  "Morrowind.esm"
+ ],
+ "sQuickLoadXbox": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu1": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu2": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu3": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu4": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu5": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenu6": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenuInstruc": [
+  "Morrowind.esm"
+ ],
+ "sQuickMenuTitle": [
+  "Morrowind.esm"
+ ],
+ "sQuickSaveCmd": [
+  "Morrowind.esm"
+ ],
+ "sQuickSaveXbox": [
+  "Morrowind.esm"
+ ],
+ "sQuick_Save": [
+  "Morrowind.esm"
+ ],
+ "sRace": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu1": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu2": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu3": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu4": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu5": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu6": [
+  "Morrowind.esm"
+ ],
+ "sRaceMenu7": [
+  "Morrowind.esm"
+ ],
+ "sRacialTraits": [
+  "Morrowind.esm"
+ ],
+ "sRange": [
+  "Morrowind.esm"
+ ],
+ "sRangeDes": [
+  "Morrowind.esm"
+ ],
+ "sRangeSelf": [
+  "Morrowind.esm"
+ ],
+ "sRangeTarget": [
+  "Morrowind.esm"
+ ],
+ "sRangeTouch": [
+  "Morrowind.esm"
+ ],
+ "sReadyItemXbox": [
+  "Morrowind.esm"
+ ],
+ "sReadyMagicXbox": [
+  "Morrowind.esm"
+ ],
+ "sReady_Magic": [
+  "Morrowind.esm"
+ ],
+ "sReady_Weapon": [
+  "Morrowind.esm"
+ ],
+ "sRechargeEnchantment": [
+  "Morrowind.esm"
+ ],
+ "sRender_Distance": [
+  "Morrowind.esm"
+ ],
+ "sRepair": [
+  "Morrowind.esm"
+ ],
+ "sRepairFailed": [
+  "Morrowind.esm"
+ ],
+ "sRepairServiceTitle": [
+  "Morrowind.esm"
+ ],
+ "sRepairSuccess": [
+  "Morrowind.esm"
+ ],
+ "sReputation": [
+  "Morrowind.esm"
+ ],
+ "sResChangeWarning": [
+  "Morrowind.esm"
+ ],
+ "sRest": [
+  "Morrowind.esm"
+ ],
+ "sRestIllegal": [
+  "Morrowind.esm"
+ ],
+ "sRestKey": [
+  "Morrowind.esm"
+ ],
+ "sRestMenu1": [
+  "Morrowind.esm"
+ ],
+ "sRestMenu2": [
+  "Morrowind.esm"
+ ],
+ "sRestMenu3": [
+  "Morrowind.esm"
+ ],
+ "sRestMenu4": [
+  "Morrowind.esm"
+ ],
+ "sRestMenuXbox": [
+  "Morrowind.esm"
+ ],
+ "sRestore": [
+  "Morrowind.esm"
+ ],
+ "sRetort": [
+  "Morrowind.esm"
+ ],
+ "sReturnToGame": [
+  "Morrowind.esm"
+ ],
+ "sRight": [
+  "Morrowind.esm"
+ ],
+ "sRogue": [
+  "Morrowind.esm"
+ ],
+ "sRun": [
+  "Morrowind.esm"
+ ],
+ "sRunXbox": [
+  "Morrowind.esm"
+ ],
+ "sSave": [
+  "Morrowind.esm"
+ ],
+ "sSaveGame": [
+  "Morrowind.esm"
+ ],
+ "sSaveGameDenied": [
+  "Morrowind.esm"
+ ],
+ "sSaveGameFailed": [
+  "Morrowind.esm"
+ ],
+ "sSaveGameNoMemory": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sSaveGameTooBig": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenu1": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp01": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp02": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp03": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp04": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp05": [
+  "Morrowind.esm"
+ ],
+ "sSaveMenuHelp06": [
+  "Morrowind.esm"
+ ],
+ "sSchool": [
+  "Morrowind.esm"
+ ],
+ "sSchoolAlteration": [
+  "Morrowind.esm"
+ ],
+ "sSchoolConjuration": [
+  "Morrowind.esm"
+ ],
+ "sSchoolDestruction": [
+  "Morrowind.esm"
+ ],
+ "sSchoolIllusion": [
+  "Morrowind.esm"
+ ],
+ "sSchoolMysticism": [
+  "Morrowind.esm"
+ ],
+ "sSchoolRestoration": [
+  "Morrowind.esm"
+ ],
+ "sScout": [
+  "Morrowind.esm"
+ ],
+ "sScrolldown": [
+  "Morrowind.esm"
+ ],
+ "sScrollup": [
+  "Morrowind.esm"
+ ],
+ "sSeldom": [
+  "Morrowind.esm"
+ ],
+ "sSelect": [
+  "Morrowind.esm"
+ ],
+ "sSell": [
+  "Morrowind.esm"
+ ],
+ "sSellerGold": [
+  "Morrowind.esm"
+ ],
+ "sService": [
+  "Morrowind.esm"
+ ],
+ "sServiceRefusal": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sServiceRepairTitle": [
+  "Morrowind.esm"
+ ],
+ "sServiceSpellsTitle": [
+  "Morrowind.esm"
+ ],
+ "sServiceTrainingTitle": [
+  "Morrowind.esm"
+ ],
+ "sServiceTrainingWords": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sServiceTravelTitle": [
+  "Morrowind.esm"
+ ],
+ "sSetValueMessage01": [
+  "Morrowind.esm"
+ ],
+ "sSex": [
+  "Morrowind.esm"
+ ],
+ "sShadowText": [
+  "Morrowind.esm"
+ ],
+ "sShadows": [
+  "Morrowind.esm"
+ ],
+ "sShift": [
+  "Morrowind.esm"
+ ],
+ "sSkill": [
+  "Morrowind.esm"
+ ],
+ "sSkillAcrobatics": [
+  "Morrowind.esm"
+ ],
+ "sSkillAlchemy": [
+  "Morrowind.esm"
+ ],
+ "sSkillAlteration": [
+  "Morrowind.esm"
+ ],
+ "sSkillArmorer": [
+  "Morrowind.esm"
+ ],
+ "sSkillAthletics": [
+  "Morrowind.esm"
+ ],
+ "sSkillAxe": [
+  "Morrowind.esm"
+ ],
+ "sSkillBlock": [
+  "Morrowind.esm"
+ ],
+ "sSkillBluntweapon": [
+  "Morrowind.esm"
+ ],
+ "sSkillClassMajor": [
+  "Morrowind.esm"
+ ],
+ "sSkillClassMinor": [
+  "Morrowind.esm"
+ ],
+ "sSkillClassMisc": [
+  "Morrowind.esm"
+ ],
+ "sSkillConjuration": [
+  "Morrowind.esm"
+ ],
+ "sSkillDestruction": [
+  "Morrowind.esm"
+ ],
+ "sSkillEnchant": [
+  "Morrowind.esm"
+ ],
+ "sSkillHandtohand": [
+  "Morrowind.esm"
+ ],
+ "sSkillHeavyarmor": [
+  "Morrowind.esm"
+ ],
+ "sSkillIllusion": [
+  "Morrowind.esm"
+ ],
+ "sSkillLightarmor": [
+  "Morrowind.esm"
+ ],
+ "sSkillLongblade": [
+  "Morrowind.esm"
+ ],
+ "sSkillMarksman": [
+  "Morrowind.esm"
+ ],
+ "sSkillMaxReached": [
+  "Morrowind.esm"
+ ],
+ "sSkillMediumarmor": [
+  "Morrowind.esm"
+ ],
+ "sSkillMercantile": [
+  "Morrowind.esm"
+ ],
+ "sSkillMysticism": [
+  "Morrowind.esm"
+ ],
+ "sSkillProgress": [
+  "Morrowind.esm"
+ ],
+ "sSkillRestoration": [
+  "Morrowind.esm"
+ ],
+ "sSkillSecurity": [
+  "Morrowind.esm"
+ ],
+ "sSkillShortblade": [
+  "Morrowind.esm"
+ ],
+ "sSkillSneak": [
+  "Morrowind.esm"
+ ],
+ "sSkillSpear": [
+  "Morrowind.esm"
+ ],
+ "sSkillSpeechcraft": [
+  "Morrowind.esm"
+ ],
+ "sSkillUnarmored": [
+  "Morrowind.esm"
+ ],
+ "sSkillsMenu1": [
+  "Morrowind.esm"
+ ],
+ "sSkillsMenuReputationHelp": [
+  "Morrowind.esm"
+ ],
+ "sSlash": [
+  "Morrowind.esm"
+ ],
+ "sSleepInterrupt": [
+  "Morrowind.esm"
+ ],
+ "sSlideLeftXbox": [
+  "Morrowind.esm"
+ ],
+ "sSlideRightXbox": [
+  "Morrowind.esm"
+ ],
+ "sSlow": [
+  "Morrowind.esm"
+ ],
+ "sSorceror": [
+  "Morrowind.esm"
+ ],
+ "sSoulGem": [
+  "Morrowind.esm"
+ ],
+ "sSoulGemsWithSouls": [
+  "Morrowind.esm"
+ ],
+ "sSoultrapSuccess": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sSpace": [
+  "Morrowind.esm"
+ ],
+ "sSpdDesc": [
+  "Morrowind.esm"
+ ],
+ "sSpecialization": [
+  "Morrowind.esm"
+ ],
+ "sSpecializationCombat": [
+  "Morrowind.esm"
+ ],
+ "sSpecializationMagic": [
+  "Morrowind.esm"
+ ],
+ "sSpecializationMenu1": [
+  "Morrowind.esm"
+ ],
+ "sSpecializationStealth": [
+  "Morrowind.esm"
+ ],
+ "sSpellServiceTitle": [
+  "Morrowind.esm"
+ ],
+ "sSpellmaking": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingHelp1": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingHelp2": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sSpellmakingHelp3": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingHelp4": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sSpellmakingHelp5": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingHelp6": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingMenu1": [
+  "Morrowind.esm"
+ ],
+ "sSpellmakingMenuTitle": [
+  "Morrowind.esm"
+ ],
+ "sSpells": [
+  "Morrowind.esm"
+ ],
+ "sSpellsword": [
+  "Morrowind.esm"
+ ],
+ "sStartCell": [
+  "Morrowind.esm"
+ ],
+ "sStartCellError": [
+  "Morrowind.esm"
+ ],
+ "sStartError": [
+  "Morrowind.esm"
+ ],
+ "sStats": [
+  "Morrowind.esm"
+ ],
+ "sStrDesc": [
+  "Morrowind.esm",
+  "ncg.omwaddon"
+ ],
+ "sStrafe": [
+  "Morrowind.esm"
+ ],
+ "sStrip": [
+  "Morrowind.esm"
+ ],
+ "sSubtitles": [
+  "Morrowind.esm"
+ ],
+ "sSystemMenuXbox": [
+  "Morrowind.esm"
+ ],
+ "sTake": [
+  "Morrowind.esm"
+ ],
+ "sTakeAll": [
+  "Morrowind.esm"
+ ],
+ "sTargetCriticalStrike": [
+  "Morrowind.esm"
+ ],
+ "sTaunt": [
+  "Morrowind.esm"
+ ],
+ "sTauntFail": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sTauntSuccess": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sTeleportDisabled": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sThief": [
+  "Morrowind.esm"
+ ],
+ "sThrust": [
+  "Morrowind.esm"
+ ],
+ "sTo": [
+  "Morrowind.esm"
+ ],
+ "sTogglePOVCmd": [
+  "Morrowind.esm"
+ ],
+ "sTogglePOVXbox": [
+  "Morrowind.esm"
+ ],
+ "sToggleRunXbox": [
+  "Morrowind.esm"
+ ],
+ "sTopics": [
+  "Morrowind.esm"
+ ],
+ "sTotalCost": [
+  "Morrowind.esm"
+ ],
+ "sTotalSold": [
+  "Morrowind.esm"
+ ],
+ "sTraining": [
+  "Morrowind.esm"
+ ],
+ "sTrainingServiceTitle": [
+  "Morrowind.esm"
+ ],
+ "sTraits": [
+  "Morrowind.esm"
+ ],
+ "sTransparency_Menu": [
+  "Morrowind.esm"
+ ],
+ "sTrapFail": [
+  "Morrowind.esm"
+ ],
+ "sTrapImpossible": [
+  "Morrowind.esm",
+  "Patch for Purists.esm"
+ ],
+ "sTrapSuccess": [
+  "Morrowind.esm"
+ ],
+ "sTrapped": [
+  "Morrowind.esm"
+ ],
+ "sTravel": [
+  "Morrowind.esm"
+ ],
+ "sTravelServiceTitle": [
+  "Morrowind.esm"
+ ],
+ "sTurn": [
+  "Morrowind.esm"
+ ],
+ "sTurnLeftXbox": [
+  "Morrowind.esm"
+ ],
+ "sTurnRightXbox": [
+  "Morrowind.esm"
+ ],
+ "sTwoHanded": [
+  "Morrowind.esm"
+ ],
+ "sType": [
+  "Morrowind.esm"
+ ],
+ "sTypeAbility": [
+  "Morrowind.esm"
+ ],
+ "sTypeBlightDisease": [
+  "Morrowind.esm"
+ ],
+ "sTypeCurse": [
+  "Morrowind.esm"
+ ],
+ "sTypeDisease": [
+  "Morrowind.esm"
+ ],
+ "sTypePower": [
+  "Morrowind.esm"
+ ],
+ "sTypeSpell": [
+  "Morrowind.esm"
+ ],
+ "sUnequip": [
+  "Morrowind.esm"
+ ],
+ "sUnlocked": [
+  "Morrowind.esm"
+ ],
+ "sUntilHealed": [
+  "Morrowind.esm"
+ ],
+ "sUse": [
+  "Morrowind.esm"
+ ],
+ "sUseXbox": [
+  "Morrowind.esm"
+ ],
+ "sUserDefinedClass": [
+  "Morrowind.esm"
+ ],
+ "sUses": [
+  "Morrowind.esm"
+ ],
+ "sValue": [
+  "Morrowind.esm"
+ ],
+ "sVideo": [
+  "Morrowind.esm"
+ ],
+ "sVideoWarning": [
+  "Morrowind.esm"
+ ],
+ "sVoice": [
+  "Morrowind.esm"
+ ],
+ "sWait": [
+  "Morrowind.esm"
+ ],
+ "sWarrior": [
+  "Morrowind.esm"
+ ],
+ "sWaterReflectUpdate": [
+  "Morrowind.esm"
+ ],
+ "sWaterTerrainReflect": [
+  "Morrowind.esm"
+ ],
+ "sWeaponTab": [
+  "Morrowind.esm"
+ ],
+ "sWeight": [
+  "Morrowind.esm"
+ ],
+ "sWerewolfAlarmMessage": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sWerewolfPopup": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sWerewolfRefusal": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sWerewolfRestMessage": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sWilDesc": [
+  "Morrowind.esm",
+  "ncg.omwaddon"
+ ],
+ "sWitchhunter": [
+  "Morrowind.esm"
+ ],
+ "sWorld": [
+  "Morrowind.esm"
+ ],
+ "sWornTab": [
+  "Morrowind.esm"
+ ],
+ "sXStrafe": [
+  "Morrowind.esm"
+ ],
+ "sXTimes": [
+  "Morrowind.esm"
+ ],
+ "sXTimesINT": [
+  "Morrowind.esm"
+ ],
+ "sYes": [
+  "Morrowind.esm"
+ ],
+ "sYourGold": [
+  "Morrowind.esm"
+ ],
+ "sand": [
+  "Morrowind.esm",
+  "Tribunal.esm",
+  "Bloodmoon.esm"
+ ],
+ "sfeet": [
+  "Morrowind.esm"
+ ],
+ "sfootarea": [
+  "Morrowind.esm"
+ ],
+ "sfor": [
+  "Morrowind.esm"
+ ],
+ "sgp": [
+  "Morrowind.esm"
+ ],
+ "sin": [
+  "Morrowind.esm"
+ ],
+ "sonword": [
+  "Morrowind.esm"
+ ],
+ "spercent": [
+  "Morrowind.esm"
+ ],
+ "spoint": [
+  "Morrowind.esm"
+ ],
+ "spoints": [
+  "Morrowind.esm"
+ ],
+ "ssecond": [
+  "Morrowind.esm"
+ ],
+ "sseconds": [
+  "Morrowind.esm"
+ ]
+}
