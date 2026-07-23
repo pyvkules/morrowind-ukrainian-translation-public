@@ -1,0 +1,24 @@
+name: check translation
+
+# Перекладач не має ігрових даних, тож ESM тут не збирається. Але тексти можна
+# перевірити самі по собі: розсинхрон зрізів, втрачені підстановки (%PCName),
+# дублі індексів, зіткнення назв тем. Ганяємо це на кожен пуш і в кожному PR,
+# щоб помилка не доїхала до чиєїсь гри.
+
+on:
+  push:
+    paths: ['uk/**', 'tools/**', 'src/**']
+  pull_request:
+    paths: ['uk/**', 'tools/**', 'src/**']
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Перевірка цілісності текстів
+        run: python tools/topics/check_sources.py
