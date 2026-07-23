@@ -90,9 +90,17 @@ def process(data, stats):
     return bytes(out)
 
 
-total = {'written': 0, 'warn': 0, 'ids': set()}
+# Тільки майстер-файли .esm несуть справжні UI-рядки. Дрібні моди (.esp/.omwaddon)
+# ПЕРЕВИЗНАЧАЮТЬ окремі GMST не заради тексту, а як власні дані чи сторожові
+# значення - напр. Daisy's Lua Multimark кладе в sEffectSummonCreature04 рядок
+# "Greater Mark" і сам звіряє його на точний збіг; якби ми переклали його в копії
+# мода, мод показав би помилку. Тому GMST правимо лише в .esm.
+total = {'written': 0, 'warn': 0, 'ids': set(), 'skipped_nonmaster': 0}
 touched = []
 for c in contents:
+    if not c.lower().endswith('.esm'):
+        total['skipped_nonmaster'] += 1
+        continue
     local = os.path.join(MODROOT, c)
     path = local if os.path.isfile(local) else resolved.get(c.lower())
     if not path or not os.path.isfile(path):
