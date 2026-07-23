@@ -29,7 +29,17 @@ APPLY = '--apply' in sys.argv
 
 uk = json.load(open(os.path.join(HERE, 'uk_gmst.json'), encoding='utf-8'))
 uk.pop('_comment', None)
-print('translated GMSTs: %d' % len(uk))
+ours = len(uk)
+
+# 821 налаштувань переклав ще давній ukrajinizator; absorb_base.py витяг їх із
+# base.esm сюди, щоб той 80-мегабайтний файл більше не був потрібен для збірки.
+legacy_path = os.path.join(HERE, '..', 'legacy', 'gmst.json')
+legacy = {}
+if os.path.isfile(legacy_path):
+    legacy = json.load(open(legacy_path, encoding='utf-8'))
+    for k, v in legacy.items():
+        uk.setdefault(k, v)          # наш власний переклад має пріоритет
+print('translated GMSTs: %d (%d наших + %d давніх)' % (len(uk), ours, len(uk) - ours))
 
 dirs, contents = paths.read_modlist()
 resolved = paths.resolve_plugins(dirs)

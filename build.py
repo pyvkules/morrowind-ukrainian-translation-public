@@ -27,6 +27,7 @@ STEPS = [
     ('font', ['tools/patch_font.py'], 'Ukrainian glyphs into the UI font'),
     ('esm', ['tools/rebuild_esm.py'], 'Morrowind.esm with translated dialogue'),
     ('plugins', ['tools/patch_plugins.py', '--apply'], 'carry the translation into every other plugin'),
+    ('names', ['tools/patch_names.py', '--apply'], 'translate item, NPC and creature names'),
     ('forms', ['tools/topics/harvest_forms.py'], 'mine inflected topic forms from the corpus'),
     ('topics', ['tools/topics/rename_topics.py', '--apply'], 'rename dialogue topics and fix AddTopic'),
     ('gmst', ['tools/gmst/patch_gmst.py', '--apply'], 'translated interface strings'),

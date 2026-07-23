@@ -14,8 +14,31 @@ import glob
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
-BASE = os.path.join(TOOLS, 'base.esm')
+sys.path.insert(0, TOOLS)
+import paths
+
 OUT = os.path.join(TOOLS, '..', 'Morrowind.esm')
+
+
+def find_base():
+    """Звідки брати вихідний Morrowind.esm.
+
+    Історично це був tools/base.esm - Morrowind.esm із давнім перекладом на 11%.
+    absorb_base.py переніс той переклад у tools/legacy/*.json, тож тепер вистачає
+    звичайного файлу зі Steam, і 80-мегабайтний base.esm у репозиторії не потрібен.
+    """
+    local = os.path.join(TOOLS, 'base.esm')
+    if os.path.isfile(local):
+        return local, 'tools/base.esm'
+    dirs, _ = paths.read_modlist()
+    for d in dirs:
+        p = os.path.join(d, 'Morrowind.esm')
+        if os.path.abspath(d) != paths.MOD_ROOT and os.path.isfile(p):
+            return p, 'модліст'
+    raise SystemExit('не знайдено вихідний Morrowind.esm ані в tools/, ані в модлисті')
+
+
+BASE, base_kind = find_base()
 
 # --- load translation memory: exact EN text -> UK text ---
 memory = {}
@@ -32,7 +55,17 @@ for src_path in glob.glob(os.path.join(TOOLS, 'src', '*.json')):
             idx = int(idx_str)
             if 0 <= idx < len(src) and translation and translation != src[idx]:
                 memory[src[idx]] = translation
-print('translation memory entries:', len(memory))
+ours = len(memory)
+
+# репліки, які переклав ще ukrajinizator - забрані з base.esm у tools/legacy/
+legacy_info = os.path.join(TOOLS, 'legacy', 'info.json')
+if os.path.isfile(legacy_info):
+    for en, uk_text in json.load(open(legacy_info, encoding='utf-8')).items():
+        memory.setdefault(en, uk_text)      # наш переклад має пріоритет
+
+print('base: %s (%s)' % (os.path.basename(BASE), base_kind))
+print('translation memory entries: %d (%d наших + %d давніх)'
+      % (len(memory), ours, len(memory) - ours))
 
 data = open(BASE, 'rb').read()
 out = bytearray()
