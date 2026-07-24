@@ -28,30 +28,15 @@ STEPS = [
     ('esm', ['tools/rebuild_esm.py'], 'Morrowind.esm with translated dialogue'),
     ('plugins', ['tools/patch_plugins.py', '--apply'], 'carry the translation into every other plugin'),
     ('names', ['tools/patch_names.py', '--apply'], 'translate item, NPC and creature names'),
-    ('forms', ['tools/topics/harvest_forms.py'], 'mine inflected topic forms from the corpus'),
     ('topics', ['tools/topics/rename_topics.py', '--apply'], 'rename dialogue topics and fix AddTopic'),
     ('gmst', ['tools/gmst/patch_gmst.py', '--apply'], 'translated interface strings'),
-    ('top', ['tools/build_top.py'], 'morrowind.top keyword table'),
+    # мусить іти ОСТАННІМ із тих, що переписують плагіни: дописує AddTopic у вже
+    # перекладені копії, тому будь-який пізніший крок стер би ці доповнення
+    ('links', ['tools/topics/link_topics.py', '--apply'], 'restore topics lost to inflection'),
 ]
 CHECKS = [
     ('validate', ['tools/topics/validate_topics.py'], 'topic integrity'),
 ]
-
-
-def forms_are_stale():
-    """Harvesting takes ~100s and only depends on the translated corpus and the
-    topic names, so skip it unless one of those actually changed."""
-    out = os.path.join(HERE, 'tools', 'topics', 'harvested_forms.json')
-    if not os.path.isfile(out) or '--force-forms' in sys.argv:
-        return True
-    stamp = os.path.getmtime(out)
-    for sub in (os.path.join('tools', 'uk'), os.path.join('tools', 'topics')):
-        d = os.path.join(HERE, sub)
-        for name in os.listdir(d) if os.path.isdir(d) else []:
-            if name.endswith('.json') and name != 'harvested_forms.json':
-                if os.path.getmtime(os.path.join(d, name)) > stamp:
-                    return True
-    return False
 
 
 def run(script_args, cfg):
@@ -75,12 +60,8 @@ def main():
         return 1
 
     steps = STEPS + (CHECKS if '--check' in sys.argv else [])
-    skip_forms = not forms_are_stale()
     failed = []
     for name, script_args, what in steps:
-        if name == 'forms' and skip_forms:
-            print('%-9s %-52s%s' % (name, what, 'skip (up to date)'))
-            continue
         t0 = time.time()
         sys.stdout.write('%-9s %-52s' % (name, what))
         sys.stdout.flush()
