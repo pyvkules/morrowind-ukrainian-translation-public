@@ -59,12 +59,61 @@ if os.path.isfile(legacy):
     for en, ukid in json.load(open(legacy, encoding='utf-8')).items():
         en2uk.setdefault(en.lower(), ukid)
 
-harvested = json.load(open(os.path.join(HERE, 'harvested_forms.json'), encoding='utf-8'))
-uk2forms = {}
+# Замість наперед зібраного списку форм шукаємо згадку теми в тексті за СТЕМОМ —
+# так ловимо будь-який відмінок (напр. орудний «Морровіндом»), а не лише ті форми,
+# що трапилися в корпусі. Ті самі запобіжники, що й у harvest_forms.py.
+MAX_SUF = 3
+WORD = re.compile('[' + CYR + ']+')
+BAD_SUF = re.compile('^(у[юєяії]|ув|яч|ськ|цьк)')
+VOWEL_END = set('аяоеєуюіи')
+
+
+def _stem(word):
+    """Відкинути лише ВЛАСНЕ закінчення, а не частину основи.
+
+    Приголосна в кінці (Морровінд, легіон) — основа = все слово, змінюється тільки
+    приросле закінчення (Морровінд+ом). Голосна (Балмора, Гільдія) чи -ий/-ій
+    (прикметник) — те закінчення відкидаємо, бо в непрямих відмінках воно інше.
+    """
+    low = word.lower()
+    n = len(word)
+    if n >= 6 and low[-2:] in ('ий', 'ій'):
+        return word[:-2]
+    if n >= 5 and (low[-1] in VOWEL_END or low[-1] == 'ь'):
+        return word[:-1]
+    return word
+
+
+def _pattern(name):
+    parts, last, stems = [], 0, []
+    for m in WORD.finditer(name):
+        parts.append(re.escape(name[last:m.start()]))
+        s = _stem(m.group(0))
+        stems.append(s)
+        parts.append(re.escape(s) + '[' + CYR + ']{0,%d}' % MAX_SUF)
+        last = m.end()
+    parts.append(re.escape(name[last:]))
+    body = ''.join(parts)
+    if not body.strip():
+        return None, []
+    return re.compile(r'(?<![' + CYR + r'])(' + body + r')(?![' + CYR + r'])'), stems
+
+
+def _suffix_ok(surface, stems):
+    words = WORD.findall(surface)
+    if len(words) != len(stems):
+        return False
+    for w, s in zip(words, stems):
+        if BAD_SUF.match(w[len(s):].lower()):
+            return False
+    return True
+
+
+TOPIC_PAT = {}
 for topic in set(en2uk.values()):
-    forms = list(harvested.get(topic, [])) + [topic]        # відмінкові форми + називний
-    # довші форми раніше, щоб «Гільдії магів» виграло в «магів»
-    uk2forms[topic] = sorted(set(forms), key=len, reverse=True)
+    rx, stems = _pattern(topic)
+    if rx is not None:
+        TOPIC_PAT[topic] = (rx, stems)
 
 
 def alt(words):
@@ -113,11 +162,16 @@ def records(raw):
 
 
 def find_form(text, topic):
-    """(start, end, surface) першої згадки будь-якої форми теми в тексті, або None."""
-    for form in uk2forms.get(topic, ()):
-        m = re.search(r'(?<![' + CYR + r'])(' + re.escape(form) + r')(?![' + CYR + r'])', text)
-        if m:
-            return m.start(), m.end(), m.group(1)
+    """(start, end, surface) першої згадки теми в тексті (за стемом), або None."""
+    pat = TOPIC_PAT.get(topic)
+    if not pat:
+        return None
+    rx, stems = pat
+    for m in rx.finditer(text):
+        surface = m.group(1)
+        # згадка має бути приблизно того ж розміру, що й тема (проти надто вільних збігів)
+        if abs(len(surface) - len(topic)) <= 4 and _suffix_ok(surface, stems):
+            return m.start(), m.end(), surface
     return None
 
 
