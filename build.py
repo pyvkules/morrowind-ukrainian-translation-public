@@ -30,9 +30,10 @@ STEPS = [
     ('names', ['tools/patch_names.py', '--apply'], 'translate item, NPC and creature names'),
     ('topics', ['tools/topics/rename_topics.py', '--apply'], 'rename dialogue topics and fix AddTopic'),
     ('gmst', ['tools/gmst/patch_gmst.py', '--apply'], 'translated interface strings'),
-    # мусить іти ОСТАННІМ із тих, що переписують плагіни: дописує AddTopic у вже
-    # перекладені копії, тому будь-який пізніший крок стер би ці доповнення
-    ('links', ['tools/topics/link_topics.py', '--apply'], 'restore topics lost to inflection'),
+    # ОСТАННІЙ із кроків, що переписують текст реплік: обгортає відмінкові згадки тем
+    # у @…# і пише Morrowind.top, щоб рушій робив їх клікабельними (як vanilla).
+    # Замінює давній обхід link_topics (той примусово додавав теми в список).
+    ('mark', ['tools/topics/mark_topics.py', '--apply'], 'inline topic links for inflected forms'),
 ]
 CHECKS = [
     ('validate', ['tools/topics/validate_topics.py'], 'topic integrity'),
