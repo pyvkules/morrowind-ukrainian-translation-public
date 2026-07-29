@@ -30,7 +30,7 @@ ADJ = LEX['adj']
 ADJ_FORMS = LEX['adj_forms']
 TYPES = LEX['types']
 GENDER_IDX = {'m': 0, 'f': 1, 'n': 2, 'pl': 3}
-CATEGORIES = ['weapon', 'armour', 'clothing', 'misc']
+CATEGORIES = ['weapon', 'armour', 'clothing', 'misc', 'container', 'door']
 
 
 def adj_form(word, gender):
