@@ -32,6 +32,11 @@ TYPES = LEX['types']
 GENDER_IDX = {'m': 0, 'f': 1, 'n': 2, 'pl': 3}
 CATEGORIES = ['weapon', 'armour', 'clothing', 'misc', 'container', 'door']
 
+# злиті елементні компаунди: Flameblade -> "Flame blade" (далі складе прикметник+тип)
+COMPOUND = re.compile(
+    r'^(Flame|Frost|Spark|Shard|Viper|Storm|Shadow)'
+    r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger)$', re.I)
+
 
 def adj_form(word, gender):
     """Прикметник у потрібному роді, або None якщо слово невідоме."""
@@ -62,6 +67,10 @@ def compose(name):
     clean = name.strip().strip('*').strip()
     if clean != name.strip() or '(' in clean or not clean:
         return None
+    # розбити злиті компаунди в кожному слові (Flameblade -> Flame Blade),
+    # суфікс з великої, щоб збігтися з ключами типів
+    clean = ' '.join(COMPOUND.sub(lambda mm: mm.group(1) + ' ' + mm.group(2).capitalize(), w)
+                     for w in clean.split())
     tokens = clean.split()
     m = match_type(tokens)
     if not m:
