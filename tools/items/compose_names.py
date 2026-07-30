@@ -85,9 +85,15 @@ def main():
     for cat in CATEGORIES:
         path = os.path.join(HERE, cat + '.json')
         names = list(json.load(open(path, encoding='utf-8')))
+        # ручні переклади решти (власні/описові назви) мають пріоритет над складанням
+        ov = {}
+        ovp = os.path.join(HERE, cat + '_overrides.json')
+        if os.path.isfile(ovp):
+            ov = json.load(open(ovp, encoding='utf-8'))
+            ov.pop('_comment', None)
         out, samples = {}, []
         for n in names:
-            uk = compose(n)
+            uk = ov.get(n) or compose(n)
             if uk:
                 out[n] = uk
                 if len(samples) < 6:
