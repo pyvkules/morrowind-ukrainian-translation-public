@@ -49,7 +49,7 @@ WORDS = {
 DIGRAPHS = [('tch', 'ч'), ('sch', 'ш'), ('sh', 'ш'), ('ch', 'ч'), ('th', 'т'),
             ('ph', 'ф'), ('ck', 'к'), ('kh', 'х'), ('gh', 'г'), ('zh', 'ж'),
             ('ll', 'лл'), ('oo', 'у'), ('ee', 'і'), ('ou', 'у'), ('ay', 'ей'),
-            ('ai', 'ай'), ('ei', 'ей'), ('ia', 'ія'), ('io', 'іо'),
+            ('ai', 'ай'), ('ei', 'ей'), ('oi', 'ой'), ('ia', 'ія'), ('io', 'іо'),
             ('qu', 'кв'), ('x', 'кс'), ('yu', 'ю'), ('ya', 'я'), ('yo', 'йо')]
 SINGLE = {'a': 'а', 'b': 'б', 'c': 'к', 'd': 'д', 'e': 'е', 'f': 'ф', 'g': 'ґ',
           'h': 'г', 'i': 'і', 'j': 'дж', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
@@ -62,6 +62,16 @@ def translit_word(w):
     скорочуємо. Єдиний контекстний випадок — м'яка c перед e/i/y (Lucius->Луціус,
     Cyrodiil->Сиродііл), інакше c->к (Vivec->Вівек, Caius->Кайус)."""
     s = w.lower()
+    # римська традиція для закінчення -ius (у грі -ius = імперські імена):
+    # -cius/-tius -> -цій (палаталізація: Lucius->Луцій, Gratius->Грацій),
+    # інше -ius -> -ій (Tullius->Туллій, Antonius->Антоній, Flavius->Флавій).
+    tail = ''
+    if len(s) > 4 and (s.endswith('cius') or s.endswith('tius')):
+        tail = 'цій'
+        s = s[:-4]
+    elif len(s) > 4 and s.endswith('ius'):
+        tail = 'ій'
+        s = s[:-3]
     out = []
     i = 0
     while i < len(s):
@@ -74,13 +84,23 @@ def translit_word(w):
             ch = s[i]
             if ch == 'c':
                 nxt = s[i + 1] if i + 1 < len(s) else ''
-                out.append('с' if nxt in ('e', 'i', 'y') else 'к')
+                # класична традиція: c перед e/i/y -> ц (Цезар, Цицерон, Луцій),
+                # інакше -> к (Vivec->Вівек, Caius->Кай, Cosades->Косадес)
+                out.append('ц' if nxt in ('e', 'i', 'y') else 'к')
+            elif ch == 'y':
+                out.append('і' if i == len(s) - 1 else 'и')   # кінцеве -y -> -і
             else:
                 out.append(SINGLE.get(ch, ch))
             i += 1
-    res = ''.join(out)
-    # велика перша літера кожної частини через дефіс (Тімсар-Дадісун)
-    return '-'.join(p[:1].upper() + p[1:] for p in res.split('-'))
+    res = ''.join(out) + tail
+    res = res[:1].upper() + res[1:]
+    res = re.sub(r"-(.)", lambda m: '-' + m.group(1).upper(), res)   # Тімсар-Дадісун
+    # велика літера після апострофа для префіксів (Дж'Кара, Дро'Сахар)...
+    res = re.sub(r"'(.)", lambda m: "'" + m.group(1).upper(), res)
+    # ...окрім присвійного 's у кінці слова (Андреті'с, не Андреті'С)
+    if res.endswith("'С"):
+        res = res[:-1] + 'с'
+    return res
 
 
 def convert(name):
