@@ -96,9 +96,14 @@ def compose(name):
 def main():
     apply = '--apply' in sys.argv
     names = list(json.load(open(os.path.join(HERE, 'creature.json'), encoding='utf-8')))
+    ov = {}
+    op = os.path.join(HERE, 'creature_overrides.json')
+    if os.path.isfile(op):
+        ov = json.load(open(op, encoding='utf-8'))
+        ov.pop('_comment', None)
     out = {}
     for n in names:
-        uk = compose(n)
+        uk = ov.get(n) or compose(n)      # ручний переклад має пріоритет
         if uk:
             out[n] = uk
     print('складено %d / %d (%.0f%%)' % (len(out), len(names), 100.0 * len(out) / len(names)))
