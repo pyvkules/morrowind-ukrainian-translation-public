@@ -86,7 +86,6 @@
    2  Hooded
    2  Hierophant
    2  Lavender
-   2  Purple
    2  Temple
    2  Falling
    2  Ghost
@@ -115,3 +114,4 @@
    1  Ayem
    1  Balm
    1  Barilzar's
+   1  Mazed
