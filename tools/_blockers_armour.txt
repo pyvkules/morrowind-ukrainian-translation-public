@@ -1,34 +1,13 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   4  Stone
-   3  Left
-   3  Right
    3  L
    3  R
    3  Paul
-   2  Gems
-   2  Moonstone
-   2  Pearl
-   2  Topaz
-   2  Diamond
-   2  Emerald
-   2  Ruby
-   2  Saphire
-   2  Diamonds
-   2  Emeralds
-   2  Rubies
-   2  Sapphires
    2  Apprehension
    2  L.
    2  R.
    2  Grace
    2  BeastBoots
-   1  Lens
-   1  Everguard
-   1  Patch
-   1  Crabmask
-   1  Fearstruck
-   1  Unmourned
-   1  Wall
+   2  Stone
    1  Legacy
    1  Burgonet
    1  Cuiras
@@ -47,6 +26,18 @@
    1  Pauldron.L
    1  Pauldron.R
    1  Shadowweave
+   1  Gems
+   1  Moonstone
+   1  Pearl
+   1  Topaz
+   1  Diamond
+   1  Emerald
+   1  Ruby
+   1  Saphire
+   1  Diamonds
+   1  Emeralds
+   1  Rubies
+   1  Sapphires
    1  Pearls
    1  Pelt
    1  Sight
@@ -61,13 +52,10 @@
    1  Wraithmail
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  10  Hand's
   10  Watchman's
   10  Gah'Kogo
   10  House
   10  Dome
-   9  Gah-Julan
-   9  Her
    9  Hlaryn-An
    9  Iuvan-Thir
    9  Mar-Revul
@@ -82,23 +70,19 @@
    8  Ulvra-Serad
    7  Watchman
    6  Armun-An
+   6  Gah-Julan
    6  Maradlai
    6  Neen'Enamor
    5  RETEX
+   4  Hand's
    4  Veloth's
    4  Sal-Amur
    4  The
+   3  Her
    3  Hist-Shaped
    3  and
    3  Duke's
    3  Umbra's
-   2  Enchanter's
-   2  Gondolier's
-   2  Gorluck's
-   2  Grey
-   2  Gruesome
-   2  Half
-   2  Moon
    2  Adept
    2  Holy
    2  Imp.
@@ -121,3 +105,10 @@
    2  Crusader
    2  Ram
    2  Wicker
+   2  Saber
+   2  Cat
+   2  Shulki's
+   2  Slave's
+   2  Strident
+   2  Temple
+   2  Tinted
