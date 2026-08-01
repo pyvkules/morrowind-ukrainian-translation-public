@@ -108,7 +108,7 @@ def esmcheck():
 def rebuild():
     print('== rebuild ==')
     ok = validate_cp1251()
-    ok = compose() and ok
+    ok = compose() and ok            # також пише tools/_remaining_<cat>.txt
     ok = build() and ok
     ok = esmcheck() and ok
     print('== %s ==' % ('ГОТОВО' if ok else 'Є ПРОБЛЕМИ'))

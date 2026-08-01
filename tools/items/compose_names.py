@@ -34,8 +34,9 @@ CATEGORIES = ['weapon', 'armour', 'clothing', 'misc', 'container', 'door']
 
 # злиті елементні компаунди: Flameblade -> "Flame blade" (далі складе прикметник+тип)
 COMPOUND = re.compile(
-    r'^(Flame|Frost|Spark|Shard|Viper|Storm|Shadow)'
-    r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger|bolt|cleaver)$', re.I)
+    r'^(Flame|Frost|Spark|Shard|Viper|Storm|Shadow|Fire|Poison|Shock)'
+    r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger|bolt|cleaver'
+    r'|lunger|mauler|scythe|slayer)$', re.I)
 
 
 def adj_form(word, gender):
@@ -116,6 +117,10 @@ def main():
         if apply:
             with open(os.path.join(HERE, 'uk_' + cat + '.json'), 'w', encoding='utf-8') as f:
                 json.dump({k: out[k] for k in sorted(out)}, f, ensure_ascii=False, indent=1)
+            # ще НЕ перекладені назви цієї категорії -> tools/_remaining_<cat>.txt
+            rem = [n for n in names if n not in out]
+            with open(os.path.join(HERE, '..', '_remaining_' + cat + '.txt'), 'w', encoding='utf-8') as f:
+                f.write('\n'.join(rem))
     print()
     print('РАЗОМ складено: %d / %d (%.0f%%)'
           % (grand_done, grand_total, 100.0 * grand_done / grand_total))

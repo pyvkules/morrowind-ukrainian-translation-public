@@ -35,3 +35,4 @@ __pycache__/
 .venv/
 venv/
 tools/_msg.txt
+tools/_remaining_*.txt
