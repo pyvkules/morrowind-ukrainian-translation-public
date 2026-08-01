@@ -39,6 +39,8 @@
   "Obsidian": "обсидіанов", "Nibenese": "нібенейськ", "Shock": "громов",
   "Poisoned": "отруєн", "Weathered": "обвітрен", "Toothed": "зубчаст",
   "Resin": "смолян", "Runic": "рунічн", "Rusted": "іржав", "Odd": "дивн",
+  "Huntsman": "мисливськ", "Patrol": "патрульн", "Scamp": "скампськ",
+  "Shellmold": "черепашков", "Shockbite": "громокус", "Sacrificial": "жертовн",
   "Celadon": "селадонов", "Silverware": "срібн", "Gilded": "позолочен",
   "Toadscale": "жаболускат", "Trollbone": "трольокіст", "Riekling": "ріклінгськ",
   "Maormer": "маормерськ", "Reman": "реманськ", "Nedic": "недійськ",
@@ -105,6 +107,9 @@
   "Harpoon": ["гарпун", "m"], "Crescent": ["півмісяць", "m"],
   "Claw": ["кіготь", "m"], "Weapon": ["зброя", "f"], "Lance": ["піка", "f"],
   "Axesword": ["сокиромеч", "m"], "Deathblade": ["смертоклинок", "m"],
+  "Longhammer": ["довгий молот", "m"], "Crook": ["ґирлиґа", "f"], "Hoe": ["сапа", "f"],
+  "Breaker": ["ламач", "m"], "Ruler": ["владар", "m"], "Macana": ["макана", "f"],
+  "Shovel": ["лопата", "f"],
 
   "Cuirass": ["кіраса", "f"], "Pauldron": ["наплічник", "m"],
   "Helm": ["шолом", "m"], "Helmet": ["шолом", "m"], "Boots": ["чоботи", "pl"],

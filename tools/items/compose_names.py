@@ -36,7 +36,7 @@ CATEGORIES = ['weapon', 'armour', 'clothing', 'misc', 'container', 'door']
 COMPOUND = re.compile(
     r'^(Flame|Frost|Spark|Shard|Viper|Storm|Shadow|Fire|Poison|Shock)'
     r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger|bolt|cleaver'
-    r'|lunger|mauler|scythe|slayer)$', re.I)
+    r'|lunger|mauler|scythe|slayer|saber|sabre|breaker|pick|ruler)$', re.I)
 
 
 def adj_form(word, gender):
