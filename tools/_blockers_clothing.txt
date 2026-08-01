@@ -71,7 +71,6 @@
    3  Despair
    3  Caius'
    3  Dirty
-   3  Shinathi
    3  First
    3  Second
    3  Feather
@@ -99,7 +98,6 @@
    2  Maran
    2  Stendarran
    2  Maurrie's
-   2  Necrom
    2  Necromancer's
    2  Necromancers
    2  Belted
@@ -115,3 +113,5 @@
    1  Arch-Mage's
    1  Arch-Necromancer's
    1  Arobar's
+   1  Augustus'
+   1  Ayem

@@ -85,6 +85,7 @@
    3  Peach
    3  Punavit
    3  Sixth
+   2  and
    2  Tea
    2  Empire
    2  Dagoth
@@ -92,7 +93,6 @@
    2  Redas
    2  Shell
    2  Tall
-   1  Argonian
    1  Aryon's
    1  Ascended
    1  Sleeper
@@ -104,7 +104,6 @@
    1  Bitter
    1  Painted
    1  Figure
-   1  and
    1  Bleeding
    1  Brown
    1  Chapel
@@ -121,3 +120,4 @@
    1  Fishing
    1  Gem
    1  Encrusted
+   1  Indulcet
