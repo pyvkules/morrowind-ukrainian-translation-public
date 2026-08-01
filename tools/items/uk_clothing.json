@@ -1,5 +1,6 @@
 {
  "Ashlander Amulet": "ешлендерський амулет",
+ "Ashlander Facemask": "ешлендерська маска",
  "Ayleid Amulet": "айлейдський амулет",
  "Ayleid Ring": "айлейдський перстень",
  "Black Left Glove": "чорна ліва рукавичка",
@@ -29,6 +30,7 @@
  "Common Telvanni Shoes": "звичайні телваннійські черевики",
  "Common Telvanni Skirt": "звичайна телваннійська спідниця",
  "Daedric Telvanni Robe": "даедрична телваннійська роба",
+ "Dres Warrior Skirt": "дреська воїнська спідниця",
  "Dwarven Robe": "двемерська роба",
  "Dwemer Amulet": "двемерський амулет",
  "Dwemer Robe": "двемерська роба",
@@ -84,6 +86,7 @@
  "Glass Ring": "скляний перстень",
  "Green Silk Scarf": "зелений шовковий шарф",
  "Green Veil": "зелена вуаль",
+ "Hlaalu Warrior Skirt": "хлаальська воїнська спідниця",
  "Imperial Belt": "імперський пояс",
  "Imperial Leather Skirt": "імперська шкіряна спідниця",
  "Imperial Skirt": "імперська спідниця",
@@ -91,6 +94,7 @@
  "Imperial Templar Skirt": "імперська тамплієрська спідниця",
  "Indoril Amulet": "індорільський амулет",
  "Indoril Belt": "індорільський пояс",
+ "Indoril Warrior Skirt": "індорільська воїнська спідниця",
  "Left Glove": "ліва рукавичка",
  "Left Leather Glove": "ліва шкіряна рукавичка",
  "Light Amulet": "легкий амулет",
@@ -106,6 +110,7 @@
  "Red Cloth Mask": "червона полотняна маска",
  "Red Silk Scarf": "червоний шовковий шарф",
  "Redoran Skirt": "редоранська спідниця",
+ "Redoran Warrior Skirt": "редоранська воїнська спідниця",
  "Right Glove": "права рукавичка",
  "Right Leather Glove": "права шкіряна рукавичка",
  "Silk Pants": "шовкові штани",
@@ -113,5 +118,6 @@
  "Stone Amulet": "кам'яний амулет",
  "Stone Talisman": "кам'яний талісман",
  "Storm Amulet": "штормовий амулет",
+ "Telvanni Warrior Skirt": "телваннійська воїнська спідниця",
  "Witch Charm": "відьмацький оберіг"
 }

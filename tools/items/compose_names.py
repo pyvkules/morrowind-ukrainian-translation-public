@@ -89,6 +89,37 @@ def compose(name):
     return ' '.join(adjs) + ' ' + noun
 
 
+def _write_blockers(cat, rem):
+    """Проаналізувати, який токен блокує складання, і записати частоти
+    у tools/_blockers_<cat>.txt — щоб знати, що додати в lexicon."""
+    import collections
+    unk_type = collections.Counter()   # хвіст невідомий (немає типу)
+    unk_adj = collections.Counter()    # тип відомий, але провідний токен невідомий
+    for n in rem:
+        if re.search(r'\bof\b', n) or any(ch in n for ch in '[]()'):
+            continue
+        clean = n.strip().strip('*').strip()
+        clean = ' '.join(COMPOUND.sub(lambda mm: mm.group(1) + ' ' + mm.group(2).capitalize(), w)
+                         for w in clean.split())
+        toks = clean.split()
+        if not toks:
+            continue
+        m = match_type(toks)
+        if not m:
+            unk_type[toks[-1]] += 1
+        else:
+            noun, gender, take = m
+            for w in toks[:len(toks) - take]:
+                if adj_form(w, gender) is None:
+                    unk_adj[w] += 1
+    lines = ['# НЕВІДОМІ ТИПИ (останній токен):']
+    lines += ['%4d  %s' % (c, t) for t, c in unk_type.most_common(60)]
+    lines += ['', '# НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):']
+    lines += ['%4d  %s' % (c, t) for t, c in unk_adj.most_common(60)]
+    with open(os.path.join(HERE, '..', '_blockers_' + cat + '.txt'), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+
+
 def main():
     apply = '--apply' in sys.argv
     grand_done = grand_total = 0
@@ -121,6 +152,7 @@ def main():
             rem = [n for n in names if n not in out]
             with open(os.path.join(HERE, '..', '_remaining_' + cat + '.txt'), 'w', encoding='utf-8') as f:
                 f.write('\n'.join(rem))
+            _write_blockers(cat, rem)
     print()
     print('РАЗОМ складено: %d / %d (%.0f%%)'
           % (grand_done, grand_total, 100.0 * grand_done / grand_total))
