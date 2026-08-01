@@ -64,6 +64,8 @@ def compose():
         for line in (r.stdout or '').splitlines():
             if any(w in line for w in ('складено', 'РАЗОМ', 'ЗАПИСАНО')):
                 print('  %s' % line)
+            elif '/' in line and '%' in line and '->' not in line:
+                print('  %s' % line.rstrip())
         if r.returncode != 0:
             print('  ПОМИЛКА у %s:\n%s' % (os.path.basename(s), r.stderr))
             return False
