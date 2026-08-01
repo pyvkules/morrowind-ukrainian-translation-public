@@ -1,22 +1,4 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   2  L
-   2  R
-   2  BeastBoots
-   2  Stone
-   1  Paul
-   1  Pauldr
-   1  Requiem
-   1  Pauldron.L
-   1  Pauldron.R
-   1  Shadowweave
-   1  Gems
-   1  Moonstone
-   1  Pearl
-   1  Topaz
-   1  Diamond
-   1  Emerald
-   1  Ruby
-   1  Saphire
    1  Diamonds
    1  Emeralds
    1  Rubies
@@ -27,6 +9,7 @@
    1  Shadow
    1  Icecap
    1  Vigor
+   1  BeastBoots
    1  Fixer
    1  Vanguard
    1  Ashmask
@@ -35,59 +18,29 @@
    1  Wraithmail
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  10  Dome
-   9  Watchman's
-   8  Lands
-   8  Shipal-Arai
    8  Sixth
    8  House
    8  Ulvra-Serad
-   7  Watchman
-   4  Veloth's
-   4  Sal-Amur
    4  The
    3  Duke's
    3  Umbra's
-   2  RETEX
-   2  Ram
-   2  Wicker
-   2  Saber
-   2  Cat
-   2  Shulki's
    2  Slave's
    2  and
    2  Strident
    2  Temple
    2  Tinted
    2  Twin
+   2  Veloth's
    2  Velothian
    2  Virith's
-   1  Crusader
-   1  short
-   1  Laced
-   1  Banner
-   1  Founder's
-   1  Reptilian
-   1  Horny
-   1  Fist
-   1  Round
-   1  Saint's
-   1  Sarano
-   1  Sarchali
-   1  Saxhleel
-   1  Hand's
-   1  Morag
-   1  Tong
-   1  Serpentkin
-   1  Shadowscale
-   1  Shalk
-   1  Sho-Hadad
    1  Half
    1  Moon
    1  Silverscale
    1  Gong
    1  Sackcloth
    1  Smith's
+   1  Saber
+   1  Cat
    1  Soscean's
    1  Spell
    1  Spellsword
@@ -95,3 +48,15 @@
    1  Hat
    1  Teal
    1  Adept
+   1  Molecrab
+   1  Ten
+   1  Pace
+   1  Chiding
+   1  Velothi's
+   1  Warlord
+   1  Waterdweller
+   1  White
+   1  Heater
+   1  Wrap
+   1  Yellow
+   1  Zuni's

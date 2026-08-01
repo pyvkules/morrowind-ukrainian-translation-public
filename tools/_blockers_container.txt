@@ -75,7 +75,6 @@
    2  Supply
    2  Vanilla
    2  Velothi
-   2  Wicker
    1  A
    1  Nobleman's
    1  Akaviri
@@ -121,3 +120,4 @@
    1  Brinne's
    1  Low
    1  Quality
+   1  Mages
