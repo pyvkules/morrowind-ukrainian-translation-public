@@ -1,21 +1,15 @@
 # НЕВІДОМІ ТИПИ (останній токен):
    3  Paul
-   2  Apprehension
-   2  L.
-   2  R.
    2  Grace
    2  L
    2  R
    2  BeastBoots
    2  Stone
-   1  Mail
-   1  Embrace
-   1  Lute
-   1  Spirit
    1  Boo
    1  Shemagh
    1  Preyseeker
    1  Quill
+   1  Apprehension
    1  Pauldr
    1  Requiem
    1  Pauldron.L
@@ -50,20 +44,14 @@
   10  Gah'Kogo
   10  House
   10  Dome
-   9  Mar-Revul
-   9  Morath-An
    9  Ouada-An
    9  Watchman's
-   8  Morag
-   8  Tong
    8  Lands
    8  Shipal-Arai
    8  Sixth
    8  Ulvra-Serad
    7  Watchman
-   6  Maradlai
    6  Neen'Enamor
-   5  Armun-An
    5  Gah-Julan
    5  RETEX
    4  Veloth's
@@ -72,13 +60,7 @@
    3  and
    3  Duke's
    3  Umbra's
-   2  Horny
-   2  Fist
-   2  Lord
-   2  Methats'
-   2  Massiquerra
-   2  Merisan
-   2  Morinth
+   2  Maradlai
    2  Necromancer's
    2  Nee'Enamor
    2  Professional
@@ -97,13 +79,25 @@
    2  Twin
    2  Velothian
    2  Virith's
-   1  Larich
-   1  Lavender
-   1  Legion's
-   1  Buglord
-   1  Marshdweller
-   1  Marshfiend
-   1  Mensis
-   1  Mhorla
-   1  Miner's
-   1  Mir-Moljuhn
+   1  Bal-Darum
+   1  Chev-Aram
+   1  Hlaryn-An
+   1  Iuvan-Thir
+   1  Kragen
+   1  Mar-Revul
+   1  Veteran
+   1  Morath-An
+   1  Sammas
+   1  Tongman
+   1  Speaker
+   1  Necromancers
+   1  Sancted
+   1  Stalker
+   1  Netchiman's
+   1  Nightblade
+   1  Man's
+   1  Olive
+   1  Orange
+   1  Parrying
+   1  Pink
+   1  Poisonbeak
