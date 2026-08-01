@@ -66,7 +66,6 @@
    4  Guild
    3  Egg
    3  Helvi's
-   2  Kwama
    2  Cinnabar
    2  Polypore
    2  Armor
@@ -121,3 +120,4 @@
    1  Lord
    1  Brinne's
    1  Low
+   1  Quality

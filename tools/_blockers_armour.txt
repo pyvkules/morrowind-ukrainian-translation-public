@@ -1,18 +1,13 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   3  L
-   3  R
    3  Paul
    2  Apprehension
    2  L.
    2  R.
    2  Grace
+   2  L
+   2  R
    2  BeastBoots
    2  Stone
-   1  Legacy
-   1  Burgonet
-   1  Cuiras
-   1  helmet
-   1  Kvisahjaelmur
    1  Mail
    1  Embrace
    1  Lute
@@ -52,16 +47,13 @@
    1  Wraithmail
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  10  Watchman's
   10  Gah'Kogo
   10  House
   10  Dome
-   9  Hlaryn-An
-   9  Iuvan-Thir
    9  Mar-Revul
    9  Morath-An
    9  Ouada-An
-   8  Kwama
+   9  Watchman's
    8  Morag
    8  Tong
    8  Lands
@@ -69,27 +61,17 @@
    8  Sixth
    8  Ulvra-Serad
    7  Watchman
-   6  Armun-An
-   6  Gah-Julan
    6  Maradlai
    6  Neen'Enamor
+   5  Armun-An
+   5  Gah-Julan
    5  RETEX
-   4  Hand's
    4  Veloth's
    4  Sal-Amur
    4  The
-   3  Her
-   3  Hist-Shaped
    3  and
    3  Duke's
    3  Umbra's
-   2  Adept
-   2  Holy
-   2  Imp.
-   2  Irfeid's
-   2  Khartag's
-   2  Khestis
-   2  Kreath
    2  Horny
    2  Fist
    2  Lord
@@ -112,3 +94,16 @@
    2  Strident
    2  Temple
    2  Tinted
+   2  Twin
+   2  Velothian
+   2  Virith's
+   1  Larich
+   1  Lavender
+   1  Legion's
+   1  Buglord
+   1  Marshdweller
+   1  Marshfiend
+   1  Mensis
+   1  Mhorla
+   1  Miner's
+   1  Mir-Moljuhn
