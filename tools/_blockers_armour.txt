@@ -18,7 +18,6 @@
    3  Paul
    2  Hand
    2  Profanity
-   2  Armor
    2  Pauldron-Fin
    2  Saphire
    2  Diamonds
@@ -59,12 +58,11 @@
    1  Patch
    1  Crabmask
    1  Fearstruck
+   1  Unmourned
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  28  Armor
   11  Brotherhood
   11  Duke's
-  11  Saint
   10  Hand's
   10  Watchman's
   10  Gah'Kogo
@@ -94,30 +92,32 @@
    6  Crown
    6  Maradlai
    6  Neen'Enamor
-   5  Mushroom
-   5  Direnni
-   5  Merchant
-   5  Battlemage
    5  RETEX
    4  Aundae
    4  Sentinel's
-   4  Brown
-   4  Goat
    4  Veloth's
    4  Sal-Amur
-   4  Straw
    4  The
-   3  Centurion
    3  Hat
-   3  Mining
    3  Hist-Shaped
-   3  Commander
-   3  Mabrigash
-   3  Rogue
    3  and
-   3  Scalekin
    3  Umbra's
-   2  Pioneer
-   2  Wraithbone
    2  Arch-Necromancer's
    2  Ashlands
+   2  Blood
+   2  Brena
+   2  Battle
+   2  L.
+   2  R.
+   2  &
+   2  Crimson
+   2  Warlord
+   2  Miner's
+   2  Enchanter's
+   2  Gondolier's
+   2  Gorluck's
+   2  Grey
+   2  Gruesome
+   2  Half
+   2  Moon
+   2  Adept

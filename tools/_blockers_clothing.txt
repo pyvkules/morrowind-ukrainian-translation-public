@@ -83,7 +83,6 @@
    2  Barenziah's
    2  Heeled
    2  Blind
-   2  Brown
    2  Hooded
    2  Crimson
    2  Hierophant
@@ -115,3 +114,4 @@
    1  Arobar's
    1  Augustus'
    1  Ayem
+   1  Balm
