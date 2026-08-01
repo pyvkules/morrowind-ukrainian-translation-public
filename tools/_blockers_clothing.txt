@@ -84,7 +84,6 @@
    2  Heeled
    2  Blind
    2  Hooded
-   2  Crimson
    2  Hierophant
    2  Lavender
    2  Purple
@@ -115,3 +114,4 @@
    1  Augustus'
    1  Ayem
    1  Balm
+   1  Barilzar's

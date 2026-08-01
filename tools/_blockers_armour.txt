@@ -1,10 +1,9 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   7  Left
-   7  Right
+   5  Left
+   5  Right
    4  L.
    4  R.
    4  Stone
-   3  Mail
    3  Ashmask
    3  Diamond
    3  Emerald
@@ -13,6 +12,7 @@
    3  R
    3  Paul
    2  Pauldron-Fin
+   2  Mail
    2  Gems
    2  Moonstone
    2  Pearl
@@ -25,19 +25,6 @@
    2  Apprehension
    2  Grace
    2  BeastBoots
-   1  Ears
-   1  shield
-   1  2
-   1  Gauntlt.L
-   1  Gauntlt.R
-   1  Pauldrn.L
-   1  Pauldrn.R
-   1  Sleeve.L
-   1  Sleeve.R
-   1  Profanity
-   1  boots
-   1  Cephalopod
-   1  Crab
    1  cuirass
    1  Sentinel
    1  Bane
@@ -59,17 +46,27 @@
    1  Kvisahjaelmur
    1  Embrace
    1  Lute
+   1  Spirit
+   1  Boo
+   1  Shemagh
+   1  Preyseeker
+   1  Quill
+   1  Pauldr
+   1  Requiem
+   1  Pauldron.L
+   1  Pauldron.R
+   1  Shadowweave
+   1  Pearls
+   1  Pelt
+   1  Sight
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  11  Brotherhood
   11  Duke's
   10  Hand's
   10  Watchman's
   10  Gah'Kogo
   10  House
   10  Dome
-   9  Chev-Aram
-   9  Domina
    9  Ebonweave
    9  Gah-Julan
    9  Her
@@ -78,7 +75,6 @@
    9  Mar-Revul
    9  Morath-An
    9  Ouada-An
-   8  Lord
    8  Kwama
    8  Morag
    8  Tong
@@ -87,20 +83,17 @@
    8  Sixth
    8  Ulvra-Serad
    7  Watchman
-   6  Crown
    6  Armun-An
    6  Maradlai
    6  Neen'Enamor
    5  RETEX
+   4  Domina
    4  Veloth's
    4  Sal-Amur
    4  The
-   3  Hat
    3  Hist-Shaped
    3  and
    3  Umbra's
-   2  &
-   2  Crimson
    2  Warlord
    2  Miner's
    2  Enchanter's
@@ -119,5 +112,12 @@
    2  Kreath
    2  Horny
    2  Fist
+   2  Lord
    2  Methats'
    2  Massiquerra
+   2  Merisan
+   2  Morinth
+   2  Necromancer's
+   2  Nee'Enamor
+   2  Professional
+   2  Purple
