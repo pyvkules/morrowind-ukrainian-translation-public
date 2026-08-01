@@ -35,7 +35,7 @@ CATEGORIES = ['weapon', 'armour', 'clothing', 'misc', 'container', 'door']
 # злиті елементні компаунди: Flameblade -> "Flame blade" (далі складе прикметник+тип)
 COMPOUND = re.compile(
     r'^(Flame|Frost|Spark|Shard|Viper|Storm|Shadow)'
-    r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger)$', re.I)
+    r'(blade|sword|axe|arrow|star|skewer|spear|mace|bow|dagger|bolt|cleaver)$', re.I)
 
 
 def adj_form(word, gender):
