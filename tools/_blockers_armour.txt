@@ -1,24 +1,22 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   8  Left
-   8  Right
-   6  Stone
-   4  L
-   4  R
+   7  Left
+   7  Right
    4  L.
    4  R.
-   3  Gems
-   3  Moonstone
-   3  Pearl
-   3  Topaz
+   4  Stone
    3  Mail
    3  Ashmask
    3  Diamond
    3  Emerald
    3  Ruby
+   3  L
+   3  R
    3  Paul
-   2  Hand
-   2  Profanity
    2  Pauldron-Fin
+   2  Gems
+   2  Moonstone
+   2  Pearl
+   2  Topaz
    2  Saphire
    2  Diamonds
    2  Emeralds
@@ -27,13 +25,6 @@
    2  Apprehension
    2  Grace
    2  BeastBoots
-   1  Lenses
-   1  P_L
-   1  P_R
-   1  Folly
-   1  Servant
-   1  Blindfold
-   1  Bound_Helm
    1  Ears
    1  shield
    1  2
@@ -43,6 +34,7 @@
    1  Pauldrn.R
    1  Sleeve.L
    1  Sleeve.R
+   1  Profanity
    1  boots
    1  Cephalopod
    1  Crab
@@ -59,6 +51,14 @@
    1  Crabmask
    1  Fearstruck
    1  Unmourned
+   1  Wall
+   1  Legacy
+   1  Burgonet
+   1  Cuiras
+   1  helmet
+   1  Kvisahjaelmur
+   1  Embrace
+   1  Lute
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
   11  Brotherhood
@@ -68,8 +68,6 @@
   10  Gah'Kogo
   10  House
   10  Dome
-   9  Armun-An
-   9  Bal-Darum
    9  Chev-Aram
    9  Domina
    9  Ebonweave
@@ -90,11 +88,10 @@
    8  Ulvra-Serad
    7  Watchman
    6  Crown
+   6  Armun-An
    6  Maradlai
    6  Neen'Enamor
    5  RETEX
-   4  Aundae
-   4  Sentinel's
    4  Veloth's
    4  Sal-Amur
    4  The
@@ -102,13 +99,6 @@
    3  Hist-Shaped
    3  and
    3  Umbra's
-   2  Arch-Necromancer's
-   2  Ashlands
-   2  Blood
-   2  Brena
-   2  Battle
-   2  L.
-   2  R.
    2  &
    2  Crimson
    2  Warlord
@@ -121,3 +111,13 @@
    2  Half
    2  Moon
    2  Adept
+   2  Holy
+   2  Imp.
+   2  Irfeid's
+   2  Khartag's
+   2  Khestis
+   2  Kreath
+   2  Horny
+   2  Fist
+   2  Methats'
+   2  Massiquerra
