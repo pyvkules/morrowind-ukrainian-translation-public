@@ -68,7 +68,11 @@
   "Battlemage": "бойовомагічн", "Crimson": "багрян", "Dragonbone": "драконокіст",
   "Ebonweave": "ебоноткан", "Grey": "сір", "Gray": "сір", "Holy": "священн",
   "Kwama": "квамов", "Purple": "фіолетов", "Professional": "професійн",
-  "Wicker": "плетен", "Banner": "прапорн", "Round": "кругл",
+  "Wicker": "плетен", "Banner": "прапорн", "Round": "кругл", "Brocade": "парчев",
+  "Velvet": "оксамитов", "Wool": "вовнян", "Teal": "бірюзов", "Lavender": "лавандов",
+  "Torn": "подерт", "Dirty": "брудн", "Blood": "кровав", "Feather": "пір'ян",
+  "Pirate": "піратськ", "Belted": "оперезан", "Amber": "бурштинов", "Altmeri": "алтмерськ",
+  "Velvety": "оксамитов",
   "Celadon": "селадонов", "Silverware": "срібн", "Gilded": "позолочен",
   "Toadscale": "жаболускат", "Trollbone": "трольокіст", "Riekling": "ріклінгськ",
   "Maormer": "маормерськ", "Reman": "реманськ", "Nedic": "недійськ",
@@ -186,6 +190,10 @@
   "Skirt": ["спідниця", "f"], "Shirt": ["сорочка", "f"], "Pants": ["штани", "pl"],
   "Shoes": ["черевики", "pl"], "Dress": ["сукня", "f"], "Gown": ["сукня", "f"],
   "Vest": ["жилет", "m"], "Talisman": ["талісман", "m"], "Charm": ["оберіг", "m"],
-  "Locket": ["медальйон", "m"]
+  "Locket": ["медальйон", "m"],
+  "Tunic": ["туніка", "f"], "Loincloth": ["настегнова пов'язка", "f"],
+  "Blouse": ["блузка", "f"], "Waistcoat": ["жилет", "m"], "Frock": ["сукня", "f"],
+  "Trousers": ["штани", "pl"], "Bodice": ["корсаж", "m"], "Collar": ["комір", "m"],
+  "Puttees": ["обмотки", "pl"], "Bandage": ["бинт", "m"], "Breastplate": ["нагрудник", "m"]
  }
 }

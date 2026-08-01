@@ -2,7 +2,6 @@
    4  Piratess
    3  Jinx
    2  Hand
-   2  Puttees
    2  Twin
    2  Fire
    2  Wiles
@@ -12,24 +11,18 @@
    1  Gift
    1  Stone
    1  Cannon
-   1  Bodice
    1  Deceit
    1  Dragontorc
    1  Blindfold
    1  belt
-   1  Tunic
    1  Outfit
-   1  Bandage
    1  Firestone
    1  Foe-Grinder
    1  Foe-Quern
    1  Gambolpuddy
    1  Heartstone
-   1  Collar
    1  glove
    1  Lifestone
-   1  Loincloth
-   1  Blouse
    1  Moon-and-Star
    1  Shroud
    1  Dice
@@ -37,7 +30,6 @@
    1  Common
    1  Black
    1  Brown
-   1  Waistcoat
    1  Lassy
    1  vest
    1  Jewel
@@ -46,35 +38,26 @@
    1  Starfrost
    1  Beads
    1  Surefeet
-   1  Trousers
    1  amulet
    1  Thunderfall
    1  Treachery
    1  Whitewalker
-   1  Frock
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
   25  Sigil
-  23  RETEX
+  13  RETEX
   12  Bolt
   10  Barrier
    5  Signet
    5  Family
    4  Bal
    4  Molagmer
-   4  Brocade
-   4  Teal
-   4  Torn
    3  and
-   3  Blood
    3  Despair
    3  Caius'
-   3  Dirty
    3  First
    3  Second
-   3  Feather
-   3  Pirate
    3  Travel-stained
    2  House
    2  Adusamsi's
@@ -84,29 +67,28 @@
    2  Heeled
    2  Blind
    2  Hooded
+   2  Dancer's
+   2  Beaded
+   2  Eye
    2  Hierophant
-   2  Lavender
    2  Temple
    2  Falling
    2  Ghost
+   2  Helseth's
    2  Life
    2  Linus
    2  Iulus'
    2  Maran
    2  Stendarran
+   2  Mara's
    2  Maurrie's
    2  Necromancer's
    2  Necromancers
-   2  Belted
-   2  Velvet
    2  Gentleman's
    2  Third
-   2  Wool
    1  6th
    1  Aesliip's
    1  Akatosh's
-   1  Altmeri
-   1  Amber
    1  Arch-Mage's
    1  Arch-Necromancer's
    1  Arobar's
@@ -115,3 +97,11 @@
    1  Balm
    1  Barilzar's
    1  Mazed
+   1  Bedt
+   1  Berne
+   1  Kite's
+   1  Blacksmith
+   1  Apron
+   1  Stalker
+   1  Bonebiter
+   1  Brallion's

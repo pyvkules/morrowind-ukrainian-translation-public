@@ -73,10 +73,10 @@ def compose(name):
     clean = ' '.join(COMPOUND.sub(lambda mm: mm.group(1) + ' ' + mm.group(2).capitalize(), w)
                      for w in clean.split())
     tokens = clean.split()
-    # "Armor/Armour" усередині назви - слово-заповнювач: "Ice Armor Cuirass" =
-    # крижана кіраса. Викидаємо його, коли воно не останній токен (не тип).
+    # слова-заповнювачі усередині назви ("Ice Armor Cuirass" = крижана кіраса,
+    # "RETEX Common Shirt" = звичайна сорочка). Викидаємо, коли не останній токен.
     tokens = [t for i, t in enumerate(tokens)
-              if not (t in ('Armor', 'Armour') and i < len(tokens) - 1)]
+              if not (t in ('Armor', 'Armour', 'RETEX') and i < len(tokens) - 1)]
     m = match_type(tokens)
     if not m:
         return None
