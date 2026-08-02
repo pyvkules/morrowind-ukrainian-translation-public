@@ -6,106 +6,98 @@
   32  chest
   20  key
   12  Stone
-  10  Scales
-   7  Gem
-   6  Jar
-   6  Pipe
    6  Glass
-   6  Candlestick
    6  Schematics
-   6  Drum
-   5  Ingot
    5  Landscape
-   5  Tool
-   5  Tray
-   5  Lute
-   5  Seal
    5  Head
    4  Plans
-   4  Flute
    4  Lantern
-   4  Inkwell
    4  Arm
    4  Leg
-   4  Bell
    3  Coherer
-   3  Statue
    3  Hlaalu
-   3  Hook
-   3  Case
-   3  Candle
-   3  Tile
-   3  Weight
    3  Torso
    3  Brush
-   3  Chisel
-   3  Chopstick
-   3  Pan
-   3  Ball
-   3  Stand
-   3  Shears
-   3  Horn
    3  Foot
-   3  Dish
-   3  Keyring
    3  Hand
-   3  Pin
    2  Hide
-   2  Beaker
    2  Bone
-   2  Paddle
    2  Piece
    2  Book
    2  Cloth
-   2  Compass
-   2  Wire
+   2  Paper
+   2  Board
+   2  Slaughterfish
+   2  Dice
+   2  Die
+   2  Tube
+   2  Coil
+   2  Pack
+   2  Hides
+   2  Egg
+   2  Hourglass
+   2  Shackles
+   2  "Venim"
+   2  Hut
+   2  door
+   2  Catacombs
+   2  Shin
+   2  Wrist
+   2  Painting
+   2  Sieve
+   2  Pen
+   2  Cloudrest
+   2  Saw
+   2  Guar
+   2  Mat
+   1  Trees
+   1  Fountain
+   1  Driftwood
+   1  Beach
+   1  Heart
+   1  Abacus
+   1  Fuse
+   1  Adun
+   1  Bureaucrat
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
   39  Key
   38  to
   25  Tomb
    9  Paint
-   9  Boneware
-   9  Ebonware
-   9  Palmwood
-   9  Shellware
-   8  Limeware
-   8  Frosted
-   7  Blueware
-   6  Nacre
-   6  Yellow
-   5  Corded
-   5  Crystal
-   5  House
-   4  Decorative
-   4  Redware
-   3  Coconut
-   3  Carved
-   3  Peach
-   3  Punavit
-   3  Sixth
-   2  Ash
+   7  Soul
+   7  House
+   6  Ash
+   5  Sixth
+   4  Punavit
+   3  Scroll
+   3  Drinking
+   3  Vault
    2  and
+   2  Bread
    2  Tea
    2  Puzzle
+   2  First
    2  Empire
    2  Dagoth
    2  Arano
+   2  Nine-holes
    2  Redas
+   2  Second
    2  Shell
-   2  Tall
+   1  Alchemical
    1  Aryon's
    1  Ascended
    1  Sleeper
    1  Ghoul
    1  Auger
    1  Azura's
+   1  Bamboo
    1  Barenziah's
    1  Jewelry
    1  Beer
    1  Beluelle's
    1  Bitter
-   1  Painted
    1  Figure
    1  Bleeding
    1  Chapel
@@ -113,11 +105,19 @@
    1  Cliff
    1  Racer
    1  Coal
+   1  Cob
    1  Cockle
+   1  Cold
    1  Commemorative
    1  Conch
+   1  Potting
    1  Corprus
+   1  Ball
+   1  Deerskin
+   1  Flask
    1  Draw
+   1  Clamp
+   1  Crank
+   1  Fork
+   1  Globe
    1  Mudan
-   1  Egroamaro's
-   1  Potion

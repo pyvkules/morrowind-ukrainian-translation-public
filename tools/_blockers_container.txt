@@ -17,7 +17,6 @@
    2  Garlic
    2  Cabbage
    2  Cod
-   2  Bell
    2  Biscuit
    2  Sweetbarrel
    2  Mistletoe
@@ -59,17 +58,17 @@
    1  Yam
    1  Ashdew
    1  Tea
+   1  Asteria
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
    7  Fashions
-   3  Egg
+   4  Egg
    3  Helvi's
    2  Antonius
    2  Nuncius'
    2  Pomegranate
    2  Cinnabar
    2  Polypore
-   2  Yellow
    2  Clothing
    2  Equipment
    2  White
@@ -110,14 +109,15 @@
    1  Coal
    1  Cockle
    1  Conch
+   1  Cow
    1  Books
    1  Ingredients
    1  Misc
    1  Weapons
+   1  Death
    1  Desert
    1  Desiccated
    1  Diel's
    1  Dignified
    1  Diradeni
    1  Farano's
-   1  Aspyr
