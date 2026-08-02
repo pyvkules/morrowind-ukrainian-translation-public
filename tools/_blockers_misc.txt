@@ -1,51 +1,16 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-  85  Key
-  12  Index
-   6  key
-   5  Head
-   3  Leg
-   3  Tomb
+  55  Key
+   9  Index
+   5  key
+   3  Head
    3  Stone
-   2  Arm
-   2  Hand
-   2  Saw
-   2  Glass
    2  Schematics
    2  Torso
    2  Guar
    2  Lantern
+   2  Leg
    2  Mat
-   1  Foot
-   1  Shin
-   1  Wrist
-   1  Ringlet
-   1  Rope
-   1  Coil
-   1  Book
-   1  Spellbook
-   1  Handle-Key
-   1  Cog
-   1  River
-   1  Dahuul
-   1  Dibella
-   1  Naharine
-   1  Nille
-   1  Sieve
-   1  Andas
-   1  Tholer
-   1  Saucepan
-   1  Wood
-   1  Egg
-   1  Stamp
-   1  Wax
-   1  Space
-   1  Skin
-   1  Sextant
-   1  Shackles
-   1  fender
-   1  Shiratar
-   1  Mirror
-   1  Cigar
+   1  Hand
    1  Ski
    1  Slaughterfish
    1  Explosive
@@ -59,23 +24,43 @@
    1  Tooth
    1  Life
    1  Exploration
+   1  Bust
+   1  Figurine
+   1  Seeds
+   1  Sudahk
+   1  Tail
+   1  Takuratum
+   1  Infuser
+   1  Wizard
+   1  Alchemist
+   1  Adept
+   1  Magister
+   1  Enchanter
+   1  Guard
+   1  Scourge
+   1  Hive
+   1  City
+   1  Journey
+   1  Payment
+   1  Morning
+   1  Mothship
+   1  Pilgrim
+   1  Proconsul
+   1  Work
+   1  West
+   1  Wheel
+   1  Sunset
+   1  Tongs
+   1  Towel
+   1  Cloudrest
+   1  Tub
+   1  Tubing
+   1  Pie
+   1  Artifact
+   1  Card
+   1  Elval's
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   5  Sixth
-   5  House
-   2  Second
-   2  Vault
-   2  Shell
-   1  Rolling
-   1  Sanctified
-   1  Sanguine
-   1  Satin
-   1  Scroll
-   1  Empire
-   1  Servant's
-   1  Shulk
-   1  Egg
-   1  Mine
    1  Ski
    1  Skull
    1  Snail
@@ -87,6 +72,7 @@
    1  Testing
    1  Thin
    1  Third
+   1  Vault
    1  Tribunal
    1  Trident
    1  and
