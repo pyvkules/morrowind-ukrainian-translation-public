@@ -1,56 +1,14 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-  55  Key
-   9  Index
-   5  key
-   3  Head
-   3  Stone
-   2  Schematics
-   2  Torso
+  31  Key
+   7  Index
    2  Guar
    2  Lantern
    2  Leg
+   2  Stone
    2  Mat
-   1  Hand
-   1  Ski
-   1  Slaughterfish
-   1  Explosive
-   1  Eyes
-   1  Soap
-   1  Spawner
-   1  Spindie
-   1  Sponge
-   1  Spool
-   1  Spyglass
-   1  Tooth
-   1  Life
-   1  Exploration
-   1  Bust
-   1  Figurine
-   1  Seeds
-   1  Sudahk
-   1  Tail
-   1  Takuratum
-   1  Infuser
-   1  Wizard
-   1  Alchemist
-   1  Adept
-   1  Magister
-   1  Enchanter
-   1  Guard
-   1  Scourge
-   1  Hive
-   1  City
-   1  Journey
-   1  Payment
-   1  Morning
-   1  Mothship
-   1  Pilgrim
-   1  Proconsul
-   1  Work
-   1  West
-   1  Wheel
    1  Sunset
    1  Tongs
+   1  Torso
    1  Towel
    1  Cloudrest
    1  Tub
@@ -59,17 +17,22 @@
    1  Artifact
    1  Card
    1  Elval's
+   1  Guar's
+   1  Neryon's
+   1  Ashmask
+   1  Waterskin
+   1  Bundle
+   1  Flour
+   1  Clamp
+   1  Saw
+   1  Kagouti
+   1  Scrib
+   1  Workboard
+   1  Glass
+   1  Brush
+   1  Rihad
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   1  Ski
-   1  Skull
-   1  Snail
-   1  Square
-   1  Strange
-   1  Suspicious
-   1  Ash
-   1  Tea
-   1  Testing
    1  Thin
    1  Third
    1  Vault
