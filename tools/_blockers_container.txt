@@ -1,23 +1,11 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   5  Bundle
-   4  Kollop
    4  Polypore
-   3  Sage
-   3  Belladonna
+   4  Bundle
    3  Pack
    3  Russula
    3  chest
+   3  Kollop
    3  Lotus
-   2  Cod
-   2  Biscuit
-   2  Sweetbarrel
-   2  Kanet
-   2  Mistletoe
-   2  Persarine
-   2  Shadowfly
-   2  Kiss
-   2  Wolfsbane
-   2  Wormwood
    2  Folnos
    2  Fern
    2  Chanterelle
@@ -28,6 +16,7 @@
    2  Poppy
    2  Shrub
    2  Clutch
+   2  Belladonna
    2  Slaughterfish
    2  Blossom
    2  Keg
@@ -37,36 +26,44 @@
    2  Brinne"
    1  <Deprecated>
    1  <Depreciated>
-   1  Chicken
-   1  Chokeweed
-   1  Chrysophant
-   1  Funnel
-   1  Corn
-   1  Fragment
-   1  Coconut
-   1  Coconuts
-   1  Coffin
-   1  Corpinus
-   1  Comberries
-   1  Comberry
-   1  Ornada
-   1  Corkbulb
-   1  Cornflower
-   1  Culdem
-   1  Sigil
-   1  Adventurer
-   1  Drop
-   1  Mercenary
-   1  Mudcrab
-   1  Necromancer
+   1  Mound
+   1  Duskbell
+   1  Parrotfish
+   1  Dustcap
+   1  Mine
+   1  Embertip
+   1  Endtable
+   1  Forager
+   1  Goodness
+   1  Eyestar
+   1  Book
+   1  Fennel
+   1  Flax
+   1  Sweetbarrel
+   1  Amanita
+   1  Sac
+   1  Footlocker
+   1  Tromja
+   1  Foxglove
+   1  Leaper
+   1  Garlic
+   1  Laurel
+   1  Ginseng
+   1  Glasswort
+   1  Gloomtear
+   1  Glowbug
+   1  Kanet
+   1  Watcher
+   1  Goldenrod
+   1  Gorapples
+   1  Silo
+   1  desk
+   1  Grapevine
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   7  Fashions
+   6  Fashions
    3  Egg
    3  Helvi's
-   2  Cinnabar
-   2  Polypore
-   2  Clothing
    2  Equipment
    2  White
    2  Stain
@@ -77,29 +74,6 @@
    2  Socatra
    2  Trama
    2  Vanilla
-   1  Chokeberry
-   1  Cinderspark
-   1  Coal
-   1  Cockle
-   1  Conch
-   1  Cow
-   1  Books
-   1  Ingredients
-   1  Misc
-   1  Weapons
-   1  Death
-   1  Desert
-   1  Desiccated
-   1  Diel's
-   1  Dignified
-   1  Diradeni
-   1  Farano's
-   1  Display
-   1  Aspyr
-   1  Tea
-   1  Vicar
-   1  Herb
-   1  Drowned
    1  Drusus
    1  Gratus'
    1  Durata
@@ -121,3 +95,29 @@
    1  Kanet
    1  Gooseberry
    1  Goris'
+   1  Inquisitor's
+   1  Grass
+   1  Gull
+   1  Wing
+   1  Gustav's
+   1  Hackle-Lo
+   1  Hamum
+   1  Hanging
+   1  Harrada
+   1  Dweamer
+   1  Holly
+   1  Honey
+   1  Hoom
+   1  Horn
+   1  House
+   1  Ivulen
+   1  Irano's
+   1  Kwoom
+   1  Leather-Sealed
+   1  Lord
+   1  Brinne's
+   1  Low
+   1  Quality
+   1  Mages
+   1  Mages'
+   1  Mainland
