@@ -1,29 +1,24 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 204  Key
+ 183  Key
   45  Tomb
   37  tomb
-  33  Index
   32  chest
-  10  key
+  31  Index
+   9  key
    7  Stone
-   5  Glass
    5  Head
-   4  Schematics
-   4  Landscape
    4  Arm
    4  Leg
-   3  Foot
    3  Lantern
+   3  Landscape
    3  Hand
-   2  Hlaalu
-   2  Hides
-   2  Egg
    2  Hourglass
    2  Shackles
    2  "Venim"
    2  Hut
    2  door
    2  Catacombs
+   2  Foot
    2  Shin
    2  Wrist
    2  Painting
@@ -32,71 +27,62 @@
    2  Pen
    2  Cloudrest
    2  Saw
+   2  Glass
+   2  Schematics
    2  Torso
    2  Guar
    2  Mat
-   1  Mudan
-   1  box
-   1  Paper
-   1  Blood
-   1  Scissors
-   1  Vial
-   1  Token
-   1  Feed
-   1  Net
-   1  Flint
-   1  Steel
-   1  Foghorn
-   1  Cloth
-   1  Frame
-   1  Frypan
-   1  Pack
-   1  Symmachus
-   1  Whistle
-   1  Gold
-   1  Thread
-   1  Anvil
-   1  Grater
-   1  Grinder
-   1  Hairbrush
+   1  Merchant
+   1  Scrip
+   1  Highwayman
+   1  Courtesan
+   1  Councilman
+   1  Gladiator
+   1  Mercenary
+   1  Hookah
+   1  Horseshoe
+   1  cup
+   1  Canteen
+   1  Vessel
+   1  Judge
+   1  Velkherd
+   1  Ilvi
+   1  Gardener
+   1  Seneschal
+   1  Tollmer
+   1  Ordinator
+   1  Blank
+   1  Spike
+   1  Piece
+   1  Hleryn
+   1  Jaw
+   1  Tombs
+   1  Ashmelech
+   1  Asmelech
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
   37  Key
   37  to
   25  Tomb
    7  House
-   6  Paint
-   5  Soul
    5  Sixth
    4  Punavit
-   3  Vault
    3  Ash
-   2  Drinking
-   2  First
-   2  Empire
+   3  Paint
    2  Dagoth
    2  Arano
    2  Scroll
+   2  Soul
    2  Nine-holes
    2  Redas
    2  Second
+   2  Vault
    2  Shell
-   1  Egroamaro's
-   1  Potion
-   1  Ungorth
-   1  Extra-Comfy
-   1  Fake
-   1  Fat
-   1  Fishing
-   1  Gem
-   1  Encrusted
-   1  Greater
-   1  Guarskin
-   1  Hackle-Lo
    1  Hot
    1  Indulcet
    1  Cooking
    1  Ivory
+   1  Drinking
    1  Aleft
    1  Andalen
    1  Andrethi
@@ -121,3 +107,17 @@
    1  Nchuleftingth
    1  Nelas
    1  Nerano
+   1  Nobleman's
+   1  Norvayn
+   1  Omaren
+   1  Ravel
+   1  Rethandus
+   1  Salvel
+   1  Sarano
+   1  Saren
+   1  Sarys
+   1  Senim
+   1  Tharys
+   1  Thelas
+   1  Khajiit
+   1  King
