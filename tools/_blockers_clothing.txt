@@ -1,15 +1,9 @@
 # НЕВІДОМІ ТИПИ (останній токен):
    4  Piratess
-   2  Twin
    2  Jinx
    2  Fire
    2  Wiles
    2  Whispers
-   1  Heartstone
-   1  glove
-   1  Lifestone
-   1  Moon-and-Star
-   1  Shroud
    1  Dice
    1  Key
    1  Common
@@ -17,6 +11,7 @@
    1  Brown
    1  Lassy
    1  vest
+   1  Twin
    1  Jewel
    1  Safeguard
    1  Judgement
@@ -30,63 +25,63 @@
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  19  Sigil
   13  RETEX
-   5  Family
-   4  Signet
+  12  Sigil
+   4  Family
    4  Barrier
    3  Bolt
    3  Travel-stained
-   2  Helseth's
-   2  Bal
-   2  Molagmer
-   2  Life
-   2  Linus
-   2  Iulus'
-   2  Maran
-   2  Stendarran
-   2  Mara's
-   2  Maurrie's
    2  Necromancer's
    2  Necromancers
    2  Gentleman's
+   2  Signet
    2  Second
    2  Third
-   1  Gondolier
-   1  Graveward
-   1  Greenery
-   1  Gripes
-   1  Guardian
-   1  Hailstorm
-   1  Hawkshaw
-   1  Heart
-   1  Heartbite
-   1  Hearth
-   1  Hefhed
-   1  Hekhem
-   1  Hentus
-   1  Hentus'
-   1  Herder's
-   1  Hex
-   1  Hircine's
-   1  Hjergelmir's
-   1  Hlervu
-   1  Hoptoad
-   1  Horker
-   1  Horsehair
-   1  Hort-Ledd's
-   1  Hunter's
-   1  Ilmeni's
-   1  Iya
-   1  Jeb
-   1  Juicedaw
-   1  Julielle
-   1  Aumine's
-   1  Khan
-   1  Koht
-   1  Lord
-   1  Brinne's
-   1  Lyr
-   1  Mage
-   1  Magickeater
-   1  Magickguard
+   1  Temple
+   1  Neht
+   1  Nervion
+   1  Ancestor
+   1  Nightstalker
+   1  Nuccius'
+   1  Nuccius's
+   1  Oht
+   1  Olive
+   1  Ordinator
+   1  in
+   1  Mourning
+   1  Othril
+   1  Payem
+   1  Pearlseeker
+   1  Peculiar
+   1  Wax
+   1  Penitent's
+   1  Pilgrim's
+   1  Pink
+   1  Plower
+   1  Poisoneater
+   1  Poisonguard
+   1  Poisonmirror
+   1  Pop's
+   1  Priest's
+   1  Processus
+   1  Vitellius'
+   1  Procolsul's
+   1  Quam
+   1  Quarra
+   1  Buckled
+   1  Peasant
+   1  Crushed
+   1  Dreamer's
+   1  Priest
+   1  Void
+   1  and
+   1  Lilac
+   1  Konami
+   1  Shojou's
+   1  Lace
+   1  Loose
+   1  Shirt
+   1  With
+   1  MESH
+   1  for
+   1  skiBlack
