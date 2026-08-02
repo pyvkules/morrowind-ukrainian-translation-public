@@ -1,24 +1,17 @@
 # НЕВІДОМІ ТИПИ (останній токен):
    5  Bundle
-   4  chest
    4  Kollop
    4  Polypore
-   3  Kanet
-   3  Bolete
-   3  Thistle
    3  Sage
    3  Belladonna
    3  Pack
    3  Russula
+   3  chest
    3  Lotus
-   2  Sturgeon
-   2  Barrels
-   2  Bloodgrass
-   2  Garlic
-   2  Cabbage
    2  Cod
    2  Biscuit
    2  Sweetbarrel
+   2  Kanet
    2  Mistletoe
    2  Persarine
    2  Shadowfly
@@ -30,6 +23,8 @@
    2  Chanterelle
    2  Sedge
    2  Harrada
+   2  Bolete
+   2  Thistle
    2  Poppy
    2  Shrub
    2  Clutch
@@ -42,31 +37,33 @@
    2  Brinne"
    1  <Deprecated>
    1  <Depreciated>
-   1  Longfin
-   1  Globe
-   1  Alkanet
-   1  Articles
-   1  Vera
-   1  Amber
-   1  Out!
-   1  Twinstipe
-   1  Angelfish
-   1  Aquilegia
-   1  Arrowroot
-   1  Deeds
-   1  Ash
-   1  Yam
-   1  Ashdew
-   1  Tea
-   1  Asteria
+   1  Chicken
+   1  Chokeweed
+   1  Chrysophant
+   1  Funnel
+   1  Corn
+   1  Fragment
+   1  Coconut
+   1  Coconuts
+   1  Coffin
+   1  Corpinus
+   1  Comberries
+   1  Comberry
+   1  Ornada
+   1  Corkbulb
+   1  Cornflower
+   1  Culdem
+   1  Sigil
+   1  Adventurer
+   1  Drop
+   1  Mercenary
+   1  Mudcrab
+   1  Necromancer
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
    7  Fashions
-   4  Egg
+   3  Egg
    3  Helvi's
-   2  Antonius
-   2  Nuncius'
-   2  Pomegranate
    2  Cinnabar
    2  Polypore
    2  Clothing
@@ -80,30 +77,6 @@
    2  Socatra
    2  Trama
    2  Vanilla
-   1  A
-   1  Nobleman's
-   1  Akaviri
-   1  Aleri
-   1  Aren's
-   1  Alusannah's
-   1  Angria's
-   1  Apple
-   1  Auger
-   1  Barnacle-Encrusted
-   1  Bittergreen
-   1  Bjoulsae
-   1  Anther
-   1  Spore
-   1  Blackberry
-   1  Bonsai
-   1  Burnt
-   1  Canis
-   1  Card
-   1  Deck
-   1  Carrot
-   1  Cave
-   1  Charles
-   1  the
    1  Chokeberry
    1  Cinderspark
    1  Coal
@@ -121,3 +94,30 @@
    1  Dignified
    1  Diradeni
    1  Farano's
+   1  Display
+   1  Aspyr
+   1  Tea
+   1  Vicar
+   1  Herb
+   1  Drowned
+   1  Drusus
+   1  Gratus'
+   1  Durata
+   1  Durgok's
+   1  Elf
+   1  Ervis
+   1  Verano's
+   1  Fig
+   1  Fighters
+   1  Fighters'
+   1  File
+   1  Flayed
+   1  Funerary
+   1  Fungal
+   1  Galbedir's
+   1  Gatekeeper's
+   1  Golam
+   1  Darethi's
+   1  Kanet
+   1  Gooseberry
+   1  Goris'
