@@ -1,19 +1,11 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   4  Polypore
-   4  Bundle
-   3  Pack
-   3  Russula
-   3  chest
    3  Kollop
+   3  Bundle
    3  Lotus
-   2  Folnos
-   2  Fern
-   2  Chanterelle
-   2  Sedge
-   2  Harrada
    2  Bolete
    2  Thistle
    2  Poppy
+   2  Russula
    2  Shrub
    2  Clutch
    2  Belladonna
@@ -21,97 +13,67 @@
    2  Blossom
    2  Keg
    2  Deposit
+   2  Polypore
    2  Bugloss
    2  Morchella
    2  Brinne"
+   2  chest
    1  <Deprecated>
    1  <Depreciated>
-   1  Mound
-   1  Duskbell
-   1  Parrotfish
-   1  Dustcap
-   1  Mine
-   1  Embertip
-   1  Endtable
-   1  Forager
-   1  Goodness
-   1  Eyestar
-   1  Book
-   1  Fennel
-   1  Flax
-   1  Sweetbarrel
-   1  Amanita
-   1  Sac
-   1  Footlocker
-   1  Tromja
-   1  Foxglove
-   1  Leaper
-   1  Garlic
-   1  Laurel
-   1  Ginseng
-   1  Glasswort
-   1  Gloomtear
-   1  Glowbug
-   1  Kanet
-   1  Watcher
-   1  Goldenrod
-   1  Gorapples
-   1  Silo
-   1  desk
-   1  Grapevine
+   1  Wreath
+   1  Huhne-Ah
+   1  Hutch
+   1  Facia
+   1  Hyrke
+   1  Fungus
+   1  Inkwood
+   1  Ironrye
+   1  Hornfish
+   1  Jarmush
+   1  Scholar
+   1  Kreshweed
+   1  Sprout
+   1  Cocoon
+   1  Husk
+   1  Molt
+   1  Cyst
+   1  Mantle
+   1  Smock
+   1  Cauldron
+   1  Couldron
+   1  Lavender
+   1  Lazandrum
+   1  Lectern
+   1  Leek
+   1  Foot
+   1  Graverobber
+   1  Rafflesia
+   1  Lycovine
+   1  Maidenhair
+   1  Stuff
+   1  Mandrake
+   1  Beads
+   1  Marrow
+   1  Marshmerrow
+   1  Cluster
+   1  Rye
+   1  Honey
+   1  Mercycress
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   6  Fashions
-   3  Egg
-   3  Helvi's
-   2  Equipment
-   2  White
-   2  Stain
-   2  Hollowed-Out
-   2  Hollowed-out
+   5  Fashions
    2  Supply
    2  Man's
    2  Socatra
    2  Trama
    2  Vanilla
-   1  Drusus
-   1  Gratus'
-   1  Durata
-   1  Durgok's
-   1  Elf
-   1  Ervis
-   1  Verano's
-   1  Fig
-   1  Fighters
-   1  Fighters'
-   1  File
-   1  Flayed
-   1  Funerary
-   1  Fungal
-   1  Galbedir's
-   1  Gatekeeper's
-   1  Golam
-   1  Darethi's
-   1  Kanet
-   1  Gooseberry
-   1  Goris'
-   1  Inquisitor's
-   1  Grass
-   1  Gull
-   1  Wing
-   1  Gustav's
-   1  Hackle-Lo
-   1  Hamum
-   1  Hanging
-   1  Harrada
-   1  Dweamer
-   1  Holly
    1  Honey
    1  Hoom
    1  Horn
    1  House
    1  Ivulen
    1  Irano's
+   1  Egg
    1  Kwoom
    1  Leather-Sealed
    1  Lord
@@ -121,3 +83,41 @@
    1  Mages
    1  Mages'
    1  Mainland
+   1  Marsh
+   1  Milvela
+   1  Dralen's
+   1  Miner's
+   1  Mire
+   1  Monarda
+   1  Mummified
+   1  Murudius'
+   1  Nail
+   1  Nerium
+   1  Odral
+   1  Helvi's
+   1  Rotting
+   1  Orange
+   1  Ornamental
+   1  Overflow
+   1  Loot
+   1  Pirate's
+   1  Pomegranate
+   1  Pricklespice
+   1  Prison
+   1  Guard's
+   1  Provision
+   1  Redas
+   1  Ancestral
+   1  Rotten
+   1  Sack
+   1  Salt
+   1  Salyn
+   1  Sarethi's
+   1  Scathecraw
+   1  Settler's
+   1  Sheggo's
+   1  Shutag
+   1  Side
+   1  Sirilonwe's
+   1  Snail
+   1  Spoils
