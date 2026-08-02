@@ -1,90 +1,55 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   2  Lotus
-   2  Slaughterfish
-   2  Blossom
-   2  Keg
-   2  Deposit
-   2  Polypore
-   2  Bugloss
    2  Morchella
    2  Brinne"
    2  chest
    1  <Deprecated>
    1  <Depreciated>
-   1  Roobrush
-   1  Phyllostachydis
-   1  Camillea
-   1  Russula
-   1  Aloe
-   1  Sacks
-   1  Storage
-   1  Salmon
-   1  Crocus
-   1  Saltrice
-   1  Saltstrap
-   1  Leaf
-   1  Bundle
-   1  Cabbage
-   1  Mycena
-   1  Biscuit
-   1  Urchin
-   1  Shadowfly
-   1  Shed
-   1  Palm
-   1  Spade
-   1  Silverstalk
-   1  Siyat
-   1  Skeleton
-   1  Pupa
-   1  Fern
-   1  Kollop
-   1  Lockbox
-   1  sack
-   1  Algae
-   1  Cache
-   1  Berry
-   1  Widow
-   1  Somnalius
-   1  Spearmouth
-   1  Spellstone
-   1  Spiddal
-   1  Rice
-   1  Lloramor
-   1  Gillsieve
-   1  Wort
-   1  Stalhrim
-   1  Starfish
-   1  Entoloma
-   1  Stinkhorn
-   1  Stoneflower
-   1  Urns
-   1  Strawberry
+   1  Warden
+   1  Thorntail
+   1  Thungleweed
+   1  Tigara
+   1  Timsa-Come-By
+   1  flowers
+   1  Polypore
+   1  Tobacco
+   1  Shrub
+   1  Weed
+   1  Turnip
+   1  Belladonna
+   1  Bryant"
+   1  Lyngas"
+   1  corpse
+   1  Urnula
+   1  Worm
+   1  Ventworm
+   1  Ventworms
+   1  Herb
+   1  Chanterelle
+   1  Coprinus
+   1  Bugloss
+   1  Wasabi
+   1  Hyacinth
+   1  Lilly
+   1  Bloatroot
+   1  Wickwheat
+   1  Kiss
+   1  Mortar
+   1  Witherwheat
+   1  Wolfsbane
+   1  Ark
+   1  Barrels
+   1  Wheat
+   1  Wormwood
+   1  Grape
+   1  Orb
+   1  Yuin
+   1  Blossom
+   1  Zunibal
+   1  wardrobe
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   2  Socatra
-   2  Fashions
    2  Trama
    2  Vanilla
-   1  Rotten
-   1  Sack
-   1  Salt
-   1  Salyn
-   1  Sarethi's
-   1  Scathecraw
-   1  Settler's
-   1  Sheggo's
-   1  Shutag
-   1  Side
-   1  Sirilonwe's
-   1  Snail
-   1  Spoils
-   1  Sunken
-   1  Swamp
-   1  Tawny
-   1  Funnel
-   1  The
-   1  Greedy
-   1  Man's
    1  Thirrine
    1  Tiger
    1  Tomato
@@ -96,6 +61,7 @@
    1  Varner
    1  Hleras'
    1  Vvardenfell
+   1  Fashions
    1  Waterstrider
    1  Weeping
    1  White
@@ -105,3 +71,4 @@
    1  Wrapped
    1  Writing
    1  Young
+   1  Socatra
