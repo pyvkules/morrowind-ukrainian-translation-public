@@ -1,16 +1,13 @@
 # НЕВІДОМІ ТИПИ (останній токен):
    4  Piratess
-   3  Jinx
-   2  Hand
    2  Twin
+   2  Jinx
    2  Fire
    2  Wiles
    2  Whispers
-   1  Stone
-   1  Cannon
-   1  Deceit
    1  Dragontorc
    1  Blindfold
+   1  Hand
    1  belt
    1  Outfit
    1  Firestone
@@ -42,23 +39,15 @@
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  24  Sigil
+  22  Sigil
   13  RETEX
-  12  Bolt
   10  Barrier
+   8  Bolt
    5  Family
    4  Signet
-   3  and
-   3  Despair
-   3  Caius'
    3  First
    3  Second
    3  Travel-stained
-   2  Heeled
-   2  Blind
-   2  Hooded
-   2  Dancer's
-   2  Beaded
    2  Eye
    2  Hierophant
    2  Temple
@@ -78,27 +67,35 @@
    2  Necromancers
    2  Gentleman's
    2  Third
-   1  Bedt
-   1  Berne
-   1  Kite's
-   1  Blacksmith
-   1  Apron
-   1  Stalker
-   1  Bonebiter
-   1  Brallion's
-   1  Brawler
-   1  Brawler's
-   1  Bugharz's
-   1  Bulwark
-   1  Caliginy
-   1  Cess
-   1  Chameleon
-   1  Champion
-   1  Claws
-   1  Fangs
-   1  Clench
-   1  Key
-   1  Mesh
-   1  Conjurer's
-   1  Cover
-   1  Crusader's
+   1  Designer
+   1  Detect
+   1  Enchantment
+   1  Dibellan
+   1  Distraction
+   1  Doht
+   1  Donkey
+   1  Doze
+   1  Ekem
+   1  Elanande's
+   1  Embroidered
+   1  Erna
+   1  the
+   1  Quiet's
+   1  Evil
+   1  Hooded
+   1  Wizard
+   1  Black&Gold&Red
+   1  Black&Green
+   1  Black&Red
+   1  &
+   1  Green&Brown
+   1  Leather&Brocade
+   1  Vvardenfell
+   1  Agate
+   1  Emerald
+   1  Ruby
+   1  Sapphire
+   1  Topaz
+   1  Turquiose
+   1  Eye-Maze
+   1  Fathasa's
