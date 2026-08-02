@@ -1,28 +1,20 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 236  Key
+ 204  Key
   45  Tomb
   37  tomb
   33  Index
   32  chest
-  12  key
-  11  Stone
-   5  Schematics
+  10  key
+   7  Stone
    5  Glass
    5  Head
+   4  Schematics
    4  Landscape
    4  Arm
    4  Leg
-   3  Plans
    3  Foot
    3  Lantern
    3  Hand
-   2  Slaughterfish
-   2  Dice
-   2  Die
-   2  Tube
-   2  Coherer
-   2  Coil
-   2  Pack
    2  Hlaalu
    2  Hides
    2  Egg
@@ -43,36 +35,43 @@
    2  Torso
    2  Guar
    2  Mat
-   1  Sigilstone
-   1  Dals
-   1  Biscuit
-   1  Hide
-   1  Diceboard
-   1  Dram
-   1  Nomarch
-   1  Conjurer
-   1  Handler
-   1  Suzerain
-   1  Chap-thil
-   1  Overseer
-   1  Drill
-   1  Vaynth
-   1  Jandacia
-   1  Dren
+   1  Mudan
+   1  box
+   1  Paper
+   1  Blood
+   1  Scissors
+   1  Vial
+   1  Token
+   1  Feed
+   1  Net
+   1  Flint
+   1  Steel
+   1  Foghorn
+   1  Cloth
+   1  Frame
+   1  Frypan
+   1  Pack
+   1  Symmachus
+   1  Whistle
+   1  Gold
+   1  Thread
+   1  Anvil
+   1  Grater
+   1  Grinder
+   1  Hairbrush
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  38  Key
-  38  to
+  37  Key
+  37  to
   25  Tomb
    7  House
    6  Paint
    5  Soul
    5  Sixth
    4  Punavit
-   3  Drinking
    3  Vault
    3  Ash
-   2  Puzzle
+   2  Drinking
    2  First
    2  Empire
    2  Dagoth
@@ -82,14 +81,6 @@
    2  Redas
    2  Second
    2  Shell
-   1  Deerskin
-   1  Flask
-   1  Draw
-   1  Clamp
-   1  Crank
-   1  Fork
-   1  Globe
-   1  Mudan
    1  Egroamaro's
    1  Potion
    1  Ungorth
@@ -121,3 +112,12 @@
    1  Favel
    1  Gimothran
    1  Gustav's
+   1  Ienith
+   1  Lord
+   1  Brinne's
+   1  Mzahnch
+   1  Mzanchend
+   1  Nchardahrk
+   1  Nchuleftingth
+   1  Nelas
+   1  Nerano
