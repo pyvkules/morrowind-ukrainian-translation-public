@@ -1,7 +1,5 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   3  Lotus
-   2  Bundle
-   2  Belladonna
+   2  Lotus
    2  Slaughterfish
    2  Blossom
    2  Keg
@@ -13,77 +11,60 @@
    2  chest
    1  <Deprecated>
    1  <Depreciated>
-   1  Mustard
-   1  Nightshade
-   1  Nighttable
-   1  Nirnroot
-   1  Stalks
-   1  Sedge
-   1  Streakwort
-   1  Bookcase
-   1  Onion
-   1  Moss
-   1  Orcscrown
-   1  Clutch
-   1  Oyster
-   1  Oysters
-   1  Pack
-   1  Barracuda
-   1  Sage
-   1  Peony
-   1  Persarine
-   1  Pikeperch
-   1  Pillar
-   1  Plainwheat
-   1  Bloodgrass
-   1  Harrada
-   1  Bloom
-   1  Pomegranates
-   1  Gourd
-   1  Exidia
-   1  Potato
-   1  Primrose
-   1  Uracia
-   1  Radish
-   1  Folnos
-   1  Formosa
-   1  Adamantium
-   1  Amethyst
-   1  Bitterstone
-   1  Cobalt
-   1  Copper
-   1  Ebony
-   1  Vein
-   1  Emerald
-   1  Garnet
-   1  Glass
-   1  Gold
-   1  Iron
+   1  Roobrush
+   1  Phyllostachydis
+   1  Camillea
+   1  Russula
+   1  Aloe
+   1  Sacks
+   1  Storage
+   1  Salmon
+   1  Crocus
+   1  Saltrice
+   1  Saltstrap
+   1  Leaf
+   1  Bundle
+   1  Cabbage
+   1  Mycena
+   1  Biscuit
+   1  Urchin
+   1  Shadowfly
+   1  Shed
+   1  Palm
+   1  Spade
+   1  Silverstalk
+   1  Siyat
+   1  Skeleton
+   1  Pupa
+   1  Fern
+   1  Kollop
+   1  Lockbox
+   1  sack
+   1  Algae
+   1  Cache
+   1  Berry
+   1  Widow
+   1  Somnalius
+   1  Spearmouth
+   1  Spellstone
+   1  Spiddal
+   1  Rice
+   1  Lloramor
+   1  Gillsieve
+   1  Wort
+   1  Stalhrim
+   1  Starfish
+   1  Entoloma
+   1  Stinkhorn
+   1  Stoneflower
+   1  Urns
+   1  Strawberry
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   3  Fashions
-   2  Man's
    2  Socatra
+   2  Fashions
    2  Trama
    2  Vanilla
-   1  Murudius'
-   1  Nail
-   1  Nerium
-   1  Odral
-   1  Helvi's
-   1  Rotting
-   1  Orange
-   1  Ornamental
-   1  Overflow
-   1  Loot
-   1  Pirate's
-   1  Pomegranate
-   1  Pricklespice
-   1  Prison
-   1  Guard's
-   1  Provision
-   1  Redas
-   1  Ancestral
    1  Rotten
    1  Sack
    1  Salt
@@ -103,6 +84,7 @@
    1  Funnel
    1  The
    1  Greedy
+   1  Man's
    1  Thirrine
    1  Tiger
    1  Tomato
@@ -121,3 +103,5 @@
    1  Wisp
    1  Woad
    1  Wrapped
+   1  Writing
+   1  Young
