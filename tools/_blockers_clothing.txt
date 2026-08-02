@@ -6,9 +6,6 @@
    2  Fire
    2  Wiles
    2  Whispers
-   1  Dominator
-   1  Helper
-   1  Gift
    1  Stone
    1  Cannon
    1  Deceit
@@ -45,25 +42,18 @@
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  25  Sigil
+  24  Sigil
   13  RETEX
   12  Bolt
   10  Barrier
-   5  Signet
    5  Family
-   4  Bal
-   4  Molagmer
+   4  Signet
    3  and
    3  Despair
    3  Caius'
    3  First
    3  Second
    3  Travel-stained
-   2  House
-   2  Adusamsi's
-   2  Ancestor's
-   2  Aundae
-   2  Barenziah's
    2  Heeled
    2  Blind
    2  Hooded
@@ -75,6 +65,8 @@
    2  Falling
    2  Ghost
    2  Helseth's
+   2  Bal
+   2  Molagmer
    2  Life
    2  Linus
    2  Iulus'
@@ -86,17 +78,6 @@
    2  Necromancers
    2  Gentleman's
    2  Third
-   1  6th
-   1  Aesliip's
-   1  Akatosh's
-   1  Arch-Mage's
-   1  Arch-Necromancer's
-   1  Arobar's
-   1  Augustus'
-   1  Ayem
-   1  Balm
-   1  Barilzar's
-   1  Mazed
    1  Bedt
    1  Berne
    1  Kite's
@@ -105,3 +86,19 @@
    1  Stalker
    1  Bonebiter
    1  Brallion's
+   1  Brawler
+   1  Brawler's
+   1  Bugharz's
+   1  Bulwark
+   1  Caliginy
+   1  Cess
+   1  Chameleon
+   1  Champion
+   1  Claws
+   1  Fangs
+   1  Clench
+   1  Key
+   1  Mesh
+   1  Conjurer's
+   1  Cover
+   1  Crusader's
