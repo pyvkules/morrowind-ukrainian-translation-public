@@ -1,17 +1,15 @@
 # НЕВІДОМІ ТИПИ (останній токен):
  154  Key
-  44  Tomb
-  35  tomb
-  30  chest
+  25  Tomb
   23  Index
+  19  tomb
    9  key
+   8  chest
    6  Stone
    5  Head
    4  Arm
    4  Leg
    3  Hand
-   2  Hut
-   2  door
    2  Catacombs
    2  Foot
    2  Shin
@@ -29,23 +27,8 @@
    2  Guar
    2  Lantern
    2  Mat
-   1  Ashmelech
-   1  Asmelech
-   1  vault
-   1  Bthuand
-   1  Daeus
-   1  Room
-   1  Burial
-   1  burial
-   1  Gyldenhul
-   1  Jail
-   1  Arkngthand
-   1  Vault
-   1  Mzuleft
-   1  Nchardahrk
-   1  Nchuleftingth
-   1  Manor
    1  Odirniran
+   1  door
    1  Palace
    1  Naga
    1  Safe
@@ -59,17 +42,33 @@
    1  Lyre
    1  Mallet
    1  Map
+   1  File
+   1  Welkynd
+   1  Assassin
+   1  Nail
+   1  Nails
+   1  'A'
+   1  'S'
+   1  'V'
+   1  Figure
+   1  Stars
+   1  Board
+   1  Spawner01
+   1  Spawner02
+   1  Spawner03
+   1  White-Lip
+   1  Back
+   1  Lens
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  35  Key
-  35  to
-  24  Tomb
+  11  Key
+  11  to
+  11  Tomb
    5  Sixth
    5  House
    4  Punavit
    3  Ash
    3  Paint
-   2  Arano
    2  Scroll
    2  Soul
    2  Nine-holes
@@ -77,29 +76,6 @@
    2  Second
    2  Vault
    2  Shell
-   1  Andrethi
-   1  Andules
-   1  Arenim
-   1  Arkngthunch
-   1  Aryon
-   1  Ashmelech
-   1  Bthanchend
-   1  Darethi's
-   1  Dralas
-   1  Falas
-   1  Favel
-   1  Gimothran
-   1  Gustav's
-   1  Ienith
-   1  Lord
-   1  Brinne's
-   1  Mzahnch
-   1  Mzanchend
-   1  Nchardahrk
-   1  Nchuleftingth
-   1  Nelas
-   1  Nerano
-   1  Nobleman's
    1  Norvayn
    1  Omaren
    1  Ravel
@@ -121,3 +97,27 @@
    1  Bread
    1  Measuring
    1  Metal
+   1  Minotaur
+   1  Missing
+   1  Monstrous
+   1  Hybrid
+   1  Morvayn
+   1  Muck
+   1  Naval
+   1  Man's
+   1  Lucky
+   1  Oyster
+   1  Pan
+   1  Petty
+   1  Prince
+   1  Juliek's
+   1  Stirring
+   1  Puzzle
+   1  Rat
+   1  Renald
+   1  the
+   1  Incredible
+   1  Rolling
+   1  Sanctified
+   1  Sanguine
+   1  Satin
