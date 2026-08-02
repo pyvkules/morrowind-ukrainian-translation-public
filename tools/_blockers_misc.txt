@@ -1,16 +1,13 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 154  Key
-  25  Tomb
-  23  Index
-  19  tomb
+ 143  Key
+  20  Index
    9  key
-   8  chest
    6  Stone
    5  Head
    4  Arm
    4  Leg
    3  Hand
-   2  Catacombs
+   3  Tomb
    2  Foot
    2  Shin
    2  Wrist
@@ -27,17 +24,6 @@
    2  Guar
    2  Lantern
    2  Mat
-   1  Odirniran
-   1  door
-   1  Palace
-   1  Naga
-   1  Safe
-   1  Storage
-   1  quarters
-   1  Chessboard
-   1  Hlaalu
-   1  Chitin
-   1  Moth-Silk
    1  Ties
    1  Lyre
    1  Mallet
@@ -59,11 +45,22 @@
    1  White-Lip
    1  Back
    1  Lens
+   1  Package
+   1  Paintbrush
+   1  Palette
+   1  Pelvis
+   1  Penumbra
+   1  Hourglass
+   1  Pincushion
+   1  Placemat
+   1  Poker
+   1  Clay
+   1  Coherer
+   1  Vehk
+   1  Seht
+   1  Ayem
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  11  Key
-  11  to
-  11  Tomb
    5  Sixth
    5  House
    4  Punavit
@@ -76,22 +73,6 @@
    2  Second
    2  Vault
    2  Shell
-   1  Norvayn
-   1  Omaren
-   1  Ravel
-   1  Rethandus
-   1  Salvel
-   1  Sarano
-   1  Saren
-   1  Sarys
-   1  Senim
-   1  Tharys
-   1  Thelas
-   1  Khajiit
-   1  King
-   1  Orgnum's
-   1  Kollop
-   1  Dewmer
    1  Lesser
    1  Log
    1  Bread
@@ -121,3 +102,22 @@
    1  Sanctified
    1  Sanguine
    1  Satin
+   1  Empire
+   1  Servant's
+   1  Shulk
+   1  Egg
+   1  Mine
+   1  Ski
+   1  Skull
+   1  Snail
+   1  Square
+   1  Strange
+   1  Suspicious
+   1  Tea
+   1  Testing
+   1  Thin
+   1  Third
+   1  Tribunal
+   1  Trident
+   1  and
+   1  Dolphin
