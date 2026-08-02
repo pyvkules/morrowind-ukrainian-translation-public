@@ -1,22 +1,18 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 143  Key
-  20  Index
-   9  key
-   6  Stone
+ 102  Key
+  15  Index
+   7  key
+   5  Stone
    5  Head
-   4  Arm
-   4  Leg
-   3  Hand
+   3  Leg
    3  Tomb
-   2  Foot
-   2  Shin
-   2  Wrist
-   2  Landscape
    2  Painting
    2  Brush
    2  Sieve
    2  Pen
    2  Cloudrest
+   2  Arm
+   2  Hand
    2  Saw
    2  Glass
    2  Schematics
@@ -24,27 +20,7 @@
    2  Guar
    2  Lantern
    2  Mat
-   1  Ties
-   1  Lyre
-   1  Mallet
-   1  Map
-   1  File
-   1  Welkynd
-   1  Assassin
-   1  Nail
-   1  Nails
-   1  'A'
-   1  'S'
-   1  'V'
-   1  Figure
-   1  Stars
-   1  Board
-   1  Spawner01
-   1  Spawner02
-   1  Spawner03
-   1  White-Lip
-   1  Back
-   1  Lens
+   1  Landscape
    1  Package
    1  Paintbrush
    1  Palette
@@ -59,37 +35,46 @@
    1  Vehk
    1  Seht
    1  Ayem
+   1  Aralor
+   1  Delyn
+   1  Felms
+   1  Llothis
+   1  Meris
+   1  Nerevar
+   1  Olms
+   1  Rilms
+   1  Roris
+   1  Seryn
+   1  Veloth
+   1  Pulley
+   1  Lid
+   1  Barenziah
+   1  Dice
+   1  Die
+   1  Rag
+   1  Razor
+   1  Woodwork
+   1  Shaker
+   1  Elder
+   1  Smith
+   1  Miner
+   1  Father
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
    5  Sixth
    5  House
    4  Punavit
-   3  Ash
    3  Paint
-   2  Scroll
-   2  Soul
+   2  Ash
    2  Nine-holes
    2  Redas
    2  Second
    2  Vault
    2  Shell
-   1  Lesser
-   1  Log
-   1  Bread
-   1  Measuring
-   1  Metal
-   1  Minotaur
-   1  Missing
-   1  Monstrous
-   1  Hybrid
-   1  Morvayn
-   1  Muck
-   1  Naval
-   1  Man's
-   1  Lucky
    1  Oyster
    1  Pan
    1  Petty
+   1  Soul
    1  Prince
    1  Juliek's
    1  Stirring
@@ -102,6 +87,7 @@
    1  Sanctified
    1  Sanguine
    1  Satin
+   1  Scroll
    1  Empire
    1  Servant's
    1  Shulk
@@ -121,3 +107,10 @@
    1  Trident
    1  and
    1  Dolphin
+   1  Triune
+   1  Vampire
+   1  Vase
+   1  on
+   1  White
+   1  Woolen
+   1  Zuni's
