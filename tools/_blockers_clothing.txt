@@ -5,15 +5,6 @@
    2  Fire
    2  Wiles
    2  Whispers
-   1  Dragontorc
-   1  Blindfold
-   1  Hand
-   1  belt
-   1  Outfit
-   1  Firestone
-   1  Foe-Grinder
-   1  Foe-Quern
-   1  Gambolpuddy
    1  Heartstone
    1  glove
    1  Lifestone
@@ -39,20 +30,13 @@
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  22  Sigil
+  19  Sigil
   13  RETEX
-  10  Barrier
-   8  Bolt
    5  Family
    4  Signet
-   3  First
-   3  Second
+   4  Barrier
+   3  Bolt
    3  Travel-stained
-   2  Eye
-   2  Hierophant
-   2  Temple
-   2  Falling
-   2  Ghost
    2  Helseth's
    2  Bal
    2  Molagmer
@@ -66,36 +50,43 @@
    2  Necromancer's
    2  Necromancers
    2  Gentleman's
+   2  Second
    2  Third
-   1  Designer
-   1  Detect
-   1  Enchantment
-   1  Dibellan
-   1  Distraction
-   1  Doht
-   1  Donkey
-   1  Doze
-   1  Ekem
-   1  Elanande's
-   1  Embroidered
-   1  Erna
-   1  the
-   1  Quiet's
-   1  Evil
-   1  Hooded
-   1  Wizard
-   1  Black&Gold&Red
-   1  Black&Green
-   1  Black&Red
-   1  &
-   1  Green&Brown
-   1  Leather&Brocade
-   1  Vvardenfell
-   1  Agate
-   1  Emerald
-   1  Ruby
-   1  Sapphire
-   1  Topaz
-   1  Turquiose
-   1  Eye-Maze
-   1  Fathasa's
+   1  Gondolier
+   1  Graveward
+   1  Greenery
+   1  Gripes
+   1  Guardian
+   1  Hailstorm
+   1  Hawkshaw
+   1  Heart
+   1  Heartbite
+   1  Hearth
+   1  Hefhed
+   1  Hekhem
+   1  Hentus
+   1  Hentus'
+   1  Herder's
+   1  Hex
+   1  Hircine's
+   1  Hjergelmir's
+   1  Hlervu
+   1  Hoptoad
+   1  Horker
+   1  Horsehair
+   1  Hort-Ledd's
+   1  Hunter's
+   1  Ilmeni's
+   1  Iya
+   1  Jeb
+   1  Juicedaw
+   1  Julielle
+   1  Aumine's
+   1  Khan
+   1  Koht
+   1  Lord
+   1  Brinne's
+   1  Lyr
+   1  Mage
+   1  Magickeater
+   1  Magickguard
