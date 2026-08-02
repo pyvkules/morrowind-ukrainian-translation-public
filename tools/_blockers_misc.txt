@@ -1,29 +1,21 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 254  Key
+ 236  Key
   45  Tomb
   37  tomb
   33  Index
   32  chest
-  13  key
-  12  Stone
-   6  Glass
-   6  Schematics
-   5  Landscape
+  12  key
+  11  Stone
+   5  Schematics
+   5  Glass
    5  Head
-   4  Lantern
+   4  Landscape
    4  Arm
    4  Leg
-   3  Torso
-   3  Brush
    3  Plans
    3  Foot
+   3  Lantern
    3  Hand
-   2  Bone
-   2  Piece
-   2  Book
-   2  Cloth
-   2  Paper
-   2  Board
    2  Slaughterfish
    2  Dice
    2  Die
@@ -43,38 +35,43 @@
    2  Shin
    2  Wrist
    2  Painting
+   2  Brush
    2  Sieve
    2  Pen
    2  Cloudrest
    2  Saw
+   2  Torso
    2  Guar
    2  Mat
-   1  Canvas
-   1  Blotter
-   1  Bowel
-   1  Bobbin
-   1  Je
-   1  Bookend
-   1  Implement
-   1  Ladel
-   1  Broom
-   1  Snuffer
+   1  Sigilstone
+   1  Dals
+   1  Biscuit
+   1  Hide
+   1  Diceboard
+   1  Dram
+   1  Nomarch
+   1  Conjurer
+   1  Handler
+   1  Suzerain
+   1  Chap-thil
+   1  Overseer
+   1  Drill
+   1  Vaynth
+   1  Jandacia
+   1  Dren
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
   38  Key
   38  to
   25  Tomb
-   9  Paint
    7  House
-   6  Soul
+   6  Paint
+   5  Soul
    5  Sixth
    4  Punavit
    3  Drinking
    3  Vault
    3  Ash
-   2  and
-   2  Bread
-   2  Tea
    2  Puzzle
    2  First
    2  Empire
@@ -85,20 +82,6 @@
    2  Redas
    2  Second
    2  Shell
-   1  Bleeding
-   1  Chapel
-   1  Clam
-   1  Cliff
-   1  Racer
-   1  Coal
-   1  Cob
-   1  Cockle
-   1  Cold
-   1  Commemorative
-   1  Conch
-   1  Potting
-   1  Corprus
-   1  Ball
    1  Deerskin
    1  Flask
    1  Draw
@@ -121,3 +104,20 @@
    1  Hackle-Lo
    1  Hot
    1  Indulcet
+   1  Cooking
+   1  Ivory
+   1  Aleft
+   1  Andalen
+   1  Andrethi
+   1  Andules
+   1  Arenim
+   1  Arkngthunch
+   1  Aryon
+   1  Ashmelech
+   1  Bthanchend
+   1  Darethi's
+   1  Dralas
+   1  Falas
+   1  Favel
+   1  Gimothran
+   1  Gustav's
