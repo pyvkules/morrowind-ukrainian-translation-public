@@ -1,13 +1,6 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   3  Kollop
-   3  Bundle
    3  Lotus
-   2  Bolete
-   2  Thistle
-   2  Poppy
-   2  Russula
-   2  Shrub
-   2  Clutch
+   2  Bundle
    2  Belladonna
    2  Slaughterfish
    2  Blossom
@@ -20,76 +13,59 @@
    2  chest
    1  <Deprecated>
    1  <Depreciated>
-   1  Wreath
-   1  Huhne-Ah
-   1  Hutch
-   1  Facia
-   1  Hyrke
-   1  Fungus
-   1  Inkwood
-   1  Ironrye
-   1  Hornfish
-   1  Jarmush
-   1  Scholar
-   1  Kreshweed
-   1  Sprout
-   1  Cocoon
-   1  Husk
-   1  Molt
-   1  Cyst
-   1  Mantle
-   1  Smock
-   1  Cauldron
-   1  Couldron
-   1  Lavender
-   1  Lazandrum
-   1  Lectern
-   1  Leek
-   1  Foot
-   1  Graverobber
-   1  Rafflesia
-   1  Lycovine
-   1  Maidenhair
-   1  Stuff
-   1  Mandrake
-   1  Beads
-   1  Marrow
-   1  Marshmerrow
-   1  Cluster
-   1  Rye
-   1  Honey
-   1  Mercycress
+   1  Mustard
+   1  Nightshade
+   1  Nighttable
+   1  Nirnroot
+   1  Stalks
+   1  Sedge
+   1  Streakwort
+   1  Bookcase
+   1  Onion
+   1  Moss
+   1  Orcscrown
+   1  Clutch
+   1  Oyster
+   1  Oysters
+   1  Pack
+   1  Barracuda
+   1  Sage
+   1  Peony
+   1  Persarine
+   1  Pikeperch
+   1  Pillar
+   1  Plainwheat
+   1  Bloodgrass
+   1  Harrada
+   1  Bloom
+   1  Pomegranates
+   1  Gourd
+   1  Exidia
+   1  Potato
+   1  Primrose
+   1  Uracia
+   1  Radish
+   1  Folnos
+   1  Formosa
+   1  Adamantium
+   1  Amethyst
+   1  Bitterstone
+   1  Cobalt
+   1  Copper
+   1  Ebony
+   1  Vein
+   1  Emerald
+   1  Garnet
+   1  Glass
+   1  Gold
+   1  Iron
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-   5  Fashions
-   2  Supply
+   3  Fashions
    2  Man's
    2  Socatra
    2  Trama
    2  Vanilla
-   1  Honey
-   1  Hoom
-   1  Horn
-   1  House
-   1  Ivulen
-   1  Irano's
-   1  Egg
-   1  Kwoom
-   1  Leather-Sealed
-   1  Lord
-   1  Brinne's
-   1  Low
-   1  Quality
-   1  Mages
-   1  Mages'
-   1  Mainland
-   1  Marsh
-   1  Milvela
-   1  Dralen's
-   1  Miner's
-   1  Mire
-   1  Monarda
-   1  Mummified
    1  Murudius'
    1  Nail
    1  Nerium
@@ -121,3 +97,27 @@
    1  Sirilonwe's
    1  Snail
    1  Spoils
+   1  Sunken
+   1  Swamp
+   1  Tawny
+   1  Funnel
+   1  The
+   1  Greedy
+   1  Thirrine
+   1  Tiger
+   1  Tomato
+   1  Trinity
+   1  Trinket
+   1  Troll
+   1  Armor
+   1  Clothing
+   1  Varner
+   1  Hleras'
+   1  Vvardenfell
+   1  Waterstrider
+   1  Weeping
+   1  White
+   1  Willow
+   1  Wisp
+   1  Woad
+   1  Wrapped
