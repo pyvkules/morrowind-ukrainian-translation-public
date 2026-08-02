@@ -7,7 +7,6 @@
   20  key
   12  Stone
   10  Scales
-   7  Shell
    7  Gem
    6  Jar
    6  Pipe
@@ -34,7 +33,6 @@
    3  Hlaalu
    3  Hook
    3  Case
-   3  Box
    3  Candle
    3  Tile
    3  Weight
@@ -59,10 +57,12 @@
    2  Piece
    2  Book
    2  Cloth
+   2  Compass
+   2  Wire
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  38  Key
-  37  to
+  39  Key
+  38  to
   25  Tomb
    9  Paint
    9  Boneware
@@ -84,8 +84,10 @@
    3  Peach
    3  Punavit
    3  Sixth
+   2  Ash
    2  and
    2  Tea
+   2  Puzzle
    2  Empire
    2  Dagoth
    2  Arano
@@ -95,9 +97,11 @@
    1  Aryon's
    1  Ascended
    1  Sleeper
-   1  Ash
    1  Ghoul
+   1  Auger
    1  Azura's
+   1  Barenziah's
+   1  Jewelry
    1  Beer
    1  Beluelle's
    1  Bitter
@@ -105,19 +109,15 @@
    1  Figure
    1  Bleeding
    1  Chapel
+   1  Clam
    1  Cliff
    1  Racer
    1  Coal
+   1  Cockle
    1  Commemorative
+   1  Conch
    1  Corprus
    1  Draw
+   1  Mudan
    1  Egroamaro's
-   1  Ungorth
-   1  Extra-Comfy
-   1  First
-   1  Fishing
-   1  Gem
-   1  Encrusted
-   1  Indulcet
-   1  Cooking
-   1  Aleft
+   1  Potion
