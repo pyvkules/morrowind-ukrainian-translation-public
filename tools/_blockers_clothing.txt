@@ -1,16 +1,7 @@
 # НЕВІДОМІ ТИПИ (останній токен):
-   4  Piratess
-   2  Jinx
    2  Fire
    2  Wiles
    2  Whispers
-   1  Dice
-   1  Key
-   1  Common
-   1  Black
-   1  Brown
-   1  Lassy
-   1  vest
    1  Twin
    1  Jewel
    1  Safeguard
@@ -21,67 +12,68 @@
    1  amulet
    1  Thunderfall
    1  Treachery
+   1  Jinx
    1  Whitewalker
    1  Warning
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
-  13  RETEX
-  12  Sigil
-   4  Family
+   7  Sigil
    4  Barrier
    3  Bolt
    3  Travel-stained
-   2  Necromancer's
-   2  Necromancers
-   2  Gentleman's
    2  Signet
+   2  Family
    2  Second
    2  Third
-   1  Temple
-   1  Neht
-   1  Nervion
-   1  Ancestor
-   1  Nightstalker
-   1  Nuccius'
-   1  Nuccius's
-   1  Oht
-   1  Olive
-   1  Ordinator
-   1  in
-   1  Mourning
-   1  Othril
-   1  Payem
-   1  Pearlseeker
-   1  Peculiar
-   1  Wax
-   1  Penitent's
-   1  Pilgrim's
-   1  Pink
-   1  Plower
-   1  Poisoneater
-   1  Poisonguard
-   1  Poisonmirror
-   1  Pop's
-   1  Priest's
-   1  Processus
-   1  Vitellius'
-   1  Procolsul's
-   1  Quam
-   1  Quarra
-   1  Buckled
-   1  Peasant
-   1  Crushed
-   1  Dreamer's
-   1  Priest
-   1  Void
-   1  and
-   1  Lilac
-   1  Konami
-   1  Shojou's
-   1  Lace
-   1  Loose
-   1  Shirt
-   1  With
-   1  MESH
-   1  for
-   1  skiBlack
+   1  Runner
+   1  Wedding
+   1  Sacrifice
+   1  Salothran
+   1  Sarano
+   1  Slinker
+   1  Seafarer's
+   1  Seht
+   1  Selaro
+   1  Septim
+   1  Shadowmask
+   1  Shadowweave
+   1  Shaman's
+   1  Shame
+   1  Shashev's
+   1  Sheogorath's
+   1  Shockeater
+   1  Shockguard
+   1  Shockmirror
+   1  Silence
+   1  Picks
+   1  Sixth
+   1  House
+   1  Skink's
+   1  Sleep
+   1  Snare
+   1  Songbird
+   1  Soul
+   1  Soulpinch
+   1  Soultrap
+   1  Sovereign
+   1  Spirit
+   1  Spiritstrike
+   1  St.
+   1  Rakiv's
+   1  Stendarran
+   1  Stumble
+   1  Suldreni's
+   1  Tailored
+   1  Tantha
+   1  Tayem
+   1  Tel
+   1  Fyr
+   1  Therana's
+   1  Thief
+   1  Thunderstroke
+   1  Thunderstruck
+   1  Traitor's
+   1  Traveller's
+   1  Tsiya's
+   1  Vampiric
+   1  Vampyrum
