@@ -1,16 +1,11 @@
 # НЕВІДОМІ ТИПИ (останній токен):
- 102  Key
-  15  Index
-   7  key
-   5  Stone
+  85  Key
+  12  Index
+   6  key
    5  Head
    3  Leg
    3  Tomb
-   2  Painting
-   2  Brush
-   2  Sieve
-   2  Pen
-   2  Cloudrest
+   3  Stone
    2  Arm
    2  Hand
    2  Saw
@@ -20,69 +15,57 @@
    2  Guar
    2  Lantern
    2  Mat
-   1  Landscape
-   1  Package
-   1  Paintbrush
-   1  Palette
-   1  Pelvis
-   1  Penumbra
-   1  Hourglass
-   1  Pincushion
-   1  Placemat
-   1  Poker
-   1  Clay
-   1  Coherer
-   1  Vehk
-   1  Seht
-   1  Ayem
-   1  Aralor
-   1  Delyn
-   1  Felms
-   1  Llothis
-   1  Meris
-   1  Nerevar
-   1  Olms
-   1  Rilms
-   1  Roris
-   1  Seryn
-   1  Veloth
-   1  Pulley
-   1  Lid
-   1  Barenziah
-   1  Dice
-   1  Die
-   1  Rag
-   1  Razor
-   1  Woodwork
-   1  Shaker
-   1  Elder
-   1  Smith
-   1  Miner
-   1  Father
+   1  Foot
+   1  Shin
+   1  Wrist
+   1  Ringlet
+   1  Rope
+   1  Coil
+   1  Book
+   1  Spellbook
+   1  Handle-Key
+   1  Cog
+   1  River
+   1  Dahuul
+   1  Dibella
+   1  Naharine
+   1  Nille
+   1  Sieve
+   1  Andas
+   1  Tholer
+   1  Saucepan
+   1  Wood
+   1  Egg
+   1  Stamp
+   1  Wax
+   1  Space
+   1  Skin
+   1  Sextant
+   1  Shackles
+   1  fender
+   1  Shiratar
+   1  Mirror
+   1  Cigar
+   1  Ski
+   1  Slaughterfish
+   1  Explosive
+   1  Eyes
+   1  Soap
+   1  Spawner
+   1  Spindie
+   1  Sponge
+   1  Spool
+   1  Spyglass
+   1  Tooth
+   1  Life
+   1  Exploration
 
 # НЕВІДОМІ ПРИКМЕТНИКИ (тип відомий):
    5  Sixth
    5  House
-   4  Punavit
-   3  Paint
-   2  Ash
-   2  Nine-holes
-   2  Redas
    2  Second
    2  Vault
    2  Shell
-   1  Oyster
-   1  Pan
-   1  Petty
-   1  Soul
-   1  Prince
-   1  Juliek's
-   1  Stirring
-   1  Puzzle
-   1  Rat
-   1  Renald
-   1  the
-   1  Incredible
    1  Rolling
    1  Sanctified
    1  Sanguine
@@ -99,6 +82,7 @@
    1  Square
    1  Strange
    1  Suspicious
+   1  Ash
    1  Tea
    1  Testing
    1  Thin
@@ -112,5 +96,7 @@
    1  Vase
    1  on
    1  White
+   1  Nine-holes
    1  Woolen
+   1  Paint
    1  Zuni's
