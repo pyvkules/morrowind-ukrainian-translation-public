@@ -57,6 +57,7 @@ def compose():
         os.path.join(ITEMS, 'compose_creatures.py'),
         os.path.join(ITEMS, 'compose_potions.py'),
         os.path.join(ITEMS, 'compose_spells.py'),
+        os.path.join(ITEMS, 'compose_overrides.py'),
     ]
     for s in scripts:
         if not os.path.isfile(s):
