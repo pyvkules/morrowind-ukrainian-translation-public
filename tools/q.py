@@ -40,7 +40,7 @@ def corpus():
             if not isinstance(data, dict):
                 continue
             for k, v in data.items():
-                if isinstance(v, str):
+                if isinstance(v, str) and k != '_comment':
                     yield name, k, v
 
 

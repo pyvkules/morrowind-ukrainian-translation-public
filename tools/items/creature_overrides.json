@@ -1,8 +1,7 @@
 {
- "_comment": "Ручний переклад істот (власні назви, боси, описові типи). Пріоритет над compose_creatures. Наповнюється пакетами.",
  "A Lost Soul": "Загублена душа",
  "A Treacherous Soul": "Підступна душа",
- "Abecean Longfin": "Абеканський довгопер",
+ "Abecean Longfin": "Абесійський довгопер",
  "Abomination": "Мерзота",
  "Advanced Centurion Sphere": "Удосконалена сфера-центуріон",
  "Advanced Centurion Spider": "Удосконалений павук-центуріон",
@@ -19,6 +18,7 @@
  "Ancestor Guardian": "Страж-предок",
  "Ancestor Moth": "Міль предків",
  "Ancient Ancestor Ghost": "Прадавній привид предка",
+ "Ancient Lich": "Прадавній ліч",
  "Ancient Sturgeon": "Прадавній осетер",
  "Anhaedra": "Анаедра",
  "Antler Moth": "Рогата міль",
@@ -266,7 +266,7 @@
  "Elk": "Лось",
  "Ephialtic Nightkiss": "Ефіальтичний нічний поцілунок",
  "Ettiene of Glenmoril Wyrd": "Еттьєн з Ґленморільського Кола",
- "Eyestar": "Зіркоока",
+ "Eyestar": "Окозірка",
  "Faded Wraith": "Збякла примара",
  "Famine": "Голод",
  "Fearsome Grahl": "Страхітливий грал",
@@ -638,7 +638,7 @@
  "Wolf": "Вовк",
  "Wolf Pup": "Вовченя",
  "Wood Beetle": "Деревний жук",
- "Worm Lord": "Володар червів",
+ "Worm Lord": "Володар Червів",
  "Wormmouth": "Черворот",
  "Wraith": "Примара",
  "Wraith of Huhne-Ah": "Примара Хухне-Аг",
@@ -651,5 +651,6 @@
  "Yellow Moth": "Жовта міль",
  "Yeth-Grub": "Йет-личинка",
  "Zombie": "Зомбі",
+ "_comment": "Ручний переклад істот (власні назви, боси, описові типи). Пріоритет над compose_creatures. Наповнюється пакетами.",
  "draugr": "драугр"
 }

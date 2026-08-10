@@ -1,5 +1,4 @@
 {
- "_comment": "Ручний переклад різних предметів (ключі, пропілонні покажчики, прах, начиння, унікати). Пріоритет над compose_names.py. Тільки cp1251; апостроф ASCII '.",
  "A Fort Between Umbrella Trees": "Форт серед парасолькових дерев",
  "A Glowing Key": "Сяйливий ключ",
  "A Peculiar Fountain": "Чудернацький фонтан",
@@ -290,6 +289,7 @@
  "Dwemer puzzle box": "Двемерська скринька-головоломка",
  "Dyed Paper": "Фарбований папір",
  "Ebony Arrow (10)": "Ебонітова стріла (10)",
+ "Ebony Flask": "Ебонітова колба",
  "Egg Miner's Key": "Ключ яйцекопа",
  "Egroamaro's Skull": "Череп Егроамаро",
  "Elante's Blood": "Кров Еланте",
@@ -348,6 +348,7 @@
  "Girith's Guar Hides": "Шкури гуарів Ґіріта",
  "Glass": "Келих",
  "Glass Arrow (10)": "Скляна стріла (10)",
+ "Glass Rod": "Скляна паличка",
  "Glowing Key": "Сяйливий ключ",
  "Gnisis Eggmine Key": "Ключ від яйцешахти Ґнісіса",
  "Goblet": "Келих",
@@ -662,7 +663,7 @@
  "Kumarahaz Gate Key": "Ключ від брами Кумарагаз",
  "Kumarahaz Gem Chest Key": "Ключ від скрині з самоцвітами Кумарагаз",
  "Kumarahaz Gold Chest Key": "Ключ від скрині із золотом Кумарагаз",
- "Kwama Chitin": "Квамовий хітин",
+ "Kwama Chitin": "Хітин квами",
  "Laced Moth-Silk": "Мереживний мільний шовк",
  "Landscape of Dagon Urul": "Краєвид Дагон Урул",
  "Landscape of Molag Ruhn": "Краєвид Молаґ Рун",
@@ -924,7 +925,7 @@
  "Saucepan": "Каструля",
  "Savile's Slavepod Key": "Ключ від рабської капсули Савіля",
  "Saw": "Пилка",
- "Scales": "Терези",
+ "Scales": "Луска",
  "Scrap Wood": "Деревні уламки",
  "Scroll Case": "Футляр для сувоїв",
  "Seadrake Egg": "Яйце морського дракончика",
@@ -1172,5 +1173,6 @@
  "Young Woman from Rihad": "Молода жінка з Рігада",
  "Zainsipilu Slave Key": "Ключ від рабів Зайнсіпілу",
  "Zebabi Slave Key": "Ключ від рабів Зебабі",
- "Zuni's Drum": "Барабан Зуні"
+ "Zuni's Drum": "Барабан Зуні",
+ "_comment": "Ручний переклад різних предметів (ключі, пропілонні покажчики, прах, начиння, унікати). Пріоритет над compose_names.py. Тільки cp1251; апостроф ASCII '."
 }

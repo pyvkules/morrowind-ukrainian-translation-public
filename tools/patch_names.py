@@ -39,9 +39,22 @@ FNAM_TYPES = {b'ARMO', b'WEAP', b'CLOT', b'MISC', b'INGR', b'ALCH', b'NPC_',
               b'LOCK', b'PROB', b'REPA', b'CLAS', b'FACT', b'RACE', b'BSGN',
               b'REGN', b'BOOK'}
 
+def titled(s):
+    """Назва предмета починається з великої літери.
+
+    Композитори складають назву з малої ('адамантієві звірині чоботи'), бо
+    прикметник беруть із лексикону, а ручні переклади пишуться з великої. У грі
+    це один список, тож половина рядків виглядала б набагато нижчою за іншу.
+    Чіпаємо тільки перший символ: усе решта - навмисне (родові назви, RETEX-мітки).
+    """
+    return s[:1].upper() + s[1:] if s else s
+
+
 names = {}
 for p in sorted(glob.glob(os.path.join(TOOLS, 'items', 'uk_*.json'))):
-    names.update(json.load(open(p, encoding='utf-8')))
+    for k, v in json.load(open(p, encoding='utf-8')).items():
+        if k != '_comment':
+            names[k] = titled(v)
 ours = len(names)
 legacy = os.path.join(TOOLS, 'legacy', 'name.json')
 if os.path.isfile(legacy):
