@@ -52,12 +52,16 @@ def validate_cp1251():
 
 def compose():
     """Запустити всі композитори з --apply."""
+    # translit.py теж композитор, просто названий інакше: він зводить npc.json з
+    # npc_overrides.json у uk_npc.json. Поки його тут бракувало, правки імен NPC
+    # лишалися в overrides і до збірки не доїжджали.
     scripts = [
         os.path.join(ITEMS, 'compose_names.py'),
         os.path.join(ITEMS, 'compose_creatures.py'),
         os.path.join(ITEMS, 'compose_potions.py'),
         os.path.join(ITEMS, 'compose_spells.py'),
         os.path.join(ITEMS, 'compose_overrides.py'),
+        os.path.join(ITEMS, 'translit.py'),
     ]
     for s in scripts:
         if not os.path.isfile(s):
