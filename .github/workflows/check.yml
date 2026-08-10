@@ -12,9 +12,18 @@ on:
     paths: ['uk/**', 'tools/**', 'src/**']
   workflow_dispatch:
 
+# Партії перекладу пушаться одна за одною, і кожна ставила в чергу власний запуск.
+# Черга з раннерів GitHub не завжди розгрібається: 2026-08-06 запуск провисів
+# 15 хвилин і його скасували з «The job was not acquired by Runner of type hosted».
+# Перевіряти проміжні коміти сенсу немає - тримаємо в черзі лише найсвіжіший.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
