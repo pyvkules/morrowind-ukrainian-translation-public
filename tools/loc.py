@@ -30,6 +30,24 @@ def run(cmd, cwd=None):
                           encoding='utf-8', errors='replace')
 
 
+CYR = set('абвгдежзийклмнопрстуфхцчшщъыьэюяєіїґ')
+LAT = set('abcdefghijklmnopqrstuvwxyz')
+
+
+def mixed(word):
+    """Слово з літерами обох абеток - майже завжди описка.
+
+    Латинські a c e i o p x y виглядають точнісінько як кириличні, тож
+    'Нiвалiс' з латинським i мовчки проходить cp1251 і псує рядок уже в грі.
+    Мітки варіантів моделей ('Чорна01-1S', 'Руда02-2S') змішують абетки навмисно
+    і завжди містять цифру - саме за цифрою їх і відрізняємо від описки.
+    """
+    low = word.lower()
+    if any(c.isdigit() for c in low):
+        return False
+    return bool(set(low) & CYR) and bool(set(low) & LAT)
+
+
 def validate_cp1251():
     """Кожне значення в *_overrides.json має кодуватися в cp1251."""
     bad = 0
@@ -46,6 +64,10 @@ def validate_cp1251():
             except UnicodeEncodeError:
                 bad += 1
                 print('  CP1251 FAIL %s: %r -> %r' % (fn, k, v))
+            for w in v.split():
+                if mixed(w):
+                    bad += 1
+                    print('  ЗМІШАНІ АБЕТКИ %s: %r -> %r (слово %r)' % (fn, k, v, w))
     print('cp1251: %s' % ('OK' if bad == 0 else '%d ПОМИЛОК' % bad))
     return bad == 0
 
