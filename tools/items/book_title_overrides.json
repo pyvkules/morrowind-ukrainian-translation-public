@@ -114,5 +114,6 @@
  "A Short History of the Empires": "Коротка історія імперій",
  "A Small Kindness": "Мала ласка",
  "A Study of the Locked Novel": "Дослідження замкненого роману",
- "A Study on Dreughs": "Розвідка про дреугів"
+ "A Study on Dreughs": "Розвідка про дреугів",
+ "_comment": "Ручний переклад назв книг (BOOK FNAM). Серії нумеруються так само, як в оригіналі. Тільки cp1251; апостроф ASCII '."
 }
