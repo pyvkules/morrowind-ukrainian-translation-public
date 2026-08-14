@@ -48,8 +48,34 @@ def mixed(word):
     return bool(set(low) & CYR) and bool(set(low) & LAT)
 
 
+def normalize_apostrophes():
+    """Модифікаторний апостроф U+02BC замінюємо на звичайний ASCII.
+
+    Правильний він типографськи, але cp1251 його не має, тож у грі рядок просто
+    зникне. Іншого призначення в цього символу тут нема, тому не сваримося,
+    а мовчки чинимо - і лише повідомляємо, скільки разів довелося.
+    """
+    fixed = 0
+    for fn in sorted(os.listdir(ITEMS)):
+        if not fn.endswith('_overrides.json'):
+            continue
+        p = os.path.join(ITEMS, fn)
+        d = json.load(open(p, encoding='utf-8'))
+        hit = False
+        for k, v in list(d.items()):
+            if isinstance(v, str) and 'ʼ' in v:
+                d[k] = v.replace('ʼ', "'")
+                hit, fixed = True, fixed + 1
+        if hit:
+            with open(p, 'w', encoding='utf-8') as f:
+                json.dump(d, f, ensure_ascii=False, indent=1, sort_keys=True)
+    if fixed:
+        print('апострофи: виправлено %d (U+02BC -> ASCII)' % fixed)
+
+
 def validate_cp1251():
     """Кожне значення в *_overrides.json має кодуватися в cp1251."""
+    normalize_apostrophes()
     bad = 0
     for fn in sorted(os.listdir(ITEMS)):
         if not fn.endswith('_overrides.json'):
