@@ -1,5 +1,4 @@
 {
- "_comment": "Ручний переклад назв обладунку (кістяні 'домові' стилі — родовим відмінком, фракційні набори, прикраси, унікати, чари 'of X'). Пріоритет над compose_names.py. Тільки cp1251; апостроф ASCII '.",
  "Adamantium Helm of Tohan": "Адамантієвий шолом Тохана",
  "Advanced Chitin Pioneer Helm": "Удосконалений хітиновий піонерський шолом",
  "Adventurer's Pack (Leather)": "Ранець шукача пригод (шкіряний)",
@@ -255,7 +254,7 @@
  "Dunmer Noble Wig (Red03-1)": "Данмерська шляхетна перука (Руда03-1)",
  "Dunmer Noble Wig (White02-3)": "Данмерська шляхетна перука (Сива02-3)",
  "Dunmer Noble Wig (White03-1)": "Данмерська шляхетна перука (Сива03-1)",
- "Durgoc's Shield": "Щит Дурґоца",
+ "Durgoc's Shield": "Щит Дурґока",
  "Dust Merchant Bracer L.": "Лівий наруч торговця пилом",
  "Dust Merchant Bracer R.": "Правий наруч торговця пилом",
  "Dust Merchant Pauldron L.": "Лівий наплічник торговця пилом",
@@ -795,7 +794,7 @@
  "Snowcat's Sight": "Зір снігового кота",
  "Soscean's Cuirass": "Кіраса Сосцеана",
  "Spectacles": "Окуляри",
- "Spell Breaker": "Заклинаннєлам",
+ "Spell Breaker": "Чаролам",
  "Spellsword Armored Robe": "Броньована роба чароклинка",
  "Spirit of Indoril": "Дух Індорілів",
  "Splatter Goggles": "Окуляри від бризок",
@@ -881,5 +880,6 @@
  "Wraithmail": "Примарокольчуга",
  "Wrap and Googles": "Обмотка й окуляри",
  "Yellow Silk Scarf": "Жовтий шовковий шарф",
- "Zuni's Mask": "Маска Зуні"
+ "Zuni's Mask": "Маска Зуні",
+ "_comment": "Ручний переклад назв обладунку (кістяні 'домові' стилі — родовим відмінком, фракційні набори, прикраси, унікати, чари 'of X'). Пріоритет над compose_names.py. Тільки cp1251; апостроф ASCII '."
 }
