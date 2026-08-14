@@ -76,12 +76,25 @@ def compose(name):
 def main():
     apply = '--apply' in sys.argv
     names = list(json.load(open(os.path.join(HERE, 'spell.json'), encoding='utf-8')))
+
+    # Ручний переклад має пріоритет: двигун збирає лише «ефект + сила», а власні
+    # назви на кшталт «Гнів Азури» він скласти не може й не мусить.
+    ov = {}
+    op = os.path.join(HERE, 'spell_overrides.json')
+    if os.path.isfile(op):
+        ov = json.load(open(op, encoding='utf-8'))
+        ov.pop('_comment', None)
+
     out = {}
     for n in names:
-        uk = compose(n)
+        uk = ov.get(n) or compose(n)
         if uk:
             out[n] = uk
     print('складено %d / %d (%.0f%%)' % (len(out), len(names), 100.0 * len(out) / len(names)))
+    rest = [n for n in names if n not in out]
+    with open(os.path.join(HERE, '..', '_remaining_spell.txt'), 'w',
+              encoding='utf-8') as f:
+        f.write('\n'.join(rest))
     import random
     for n in list(out)[:6] + random.sample(list(out), min(6, len(out))):
         print('    %-30s -> %s' % (n, out[n]))
