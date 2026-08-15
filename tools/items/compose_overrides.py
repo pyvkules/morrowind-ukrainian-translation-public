@@ -16,7 +16,8 @@ import sys
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 HERE = os.path.dirname(os.path.abspath(__file__))
-CATEGORIES = ['ingredient', 'activator', 'book_title']
+CATEGORIES = ['ingredient', 'activator', 'book_title',
+              'class', 'race', 'faction', 'region']
 
 
 def main():
