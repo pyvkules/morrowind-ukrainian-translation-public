@@ -19,6 +19,8 @@ import sys
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import glyphs
 REPO = os.path.dirname(HERE)
 ITEMS = os.path.join(HERE, 'items')
 ESMTOOL = r'E:\Morrowind\OpenMW\esmtool.exe'
@@ -48,12 +50,14 @@ def mixed(word):
     return bool(set(low) & CYR) and bool(set(low) & LAT)
 
 
-def normalize_apostrophes():
-    """Модифікаторний апостроф U+02BC замінюємо на звичайний ASCII.
+def normalize_punctuation():
+    """Полагодити розділові знаки, які не доїдуть до екрана.
 
-    Правильний він типографськи, але cp1251 його не має, тож у грі рядок просто
-    зникне. Іншого призначення в цього символу тут нема, тому не сваримося,
-    а мовчки чинимо - і лише повідомляємо, скільки разів довелося.
+    Дві різні біди, обидві мовчазні:
+      * U+02BC і U+2019 у cp1251 не існують - рядок зникне цілком;
+      * «, », „ у cp1251 є, але в шрифтах мода нема гліфа - буде порожнеча.
+    В обох випадках заміна однозначна (див. glyphs.SUBST), тож не сваримося,
+    а чинимо самі й лише кажемо, скільки разів довелося.
     """
     fixed = 0
     for fn in sorted(os.listdir(ITEMS)):
@@ -63,19 +67,22 @@ def normalize_apostrophes():
         d = json.load(open(p, encoding='utf-8'))
         hit = False
         for k, v in list(d.items()):
-            if isinstance(v, str) and 'ʼ' in v:
-                d[k] = v.replace('ʼ', "'")
+            if not isinstance(v, str):
+                continue
+            new = glyphs.fix(v)
+            if new != v:
+                d[k] = new
                 hit, fixed = True, fixed + 1
         if hit:
             with open(p, 'w', encoding='utf-8') as f:
                 json.dump(d, f, ensure_ascii=False, indent=1, sort_keys=True)
     if fixed:
-        print('апострофи: виправлено %d (U+02BC -> ASCII)' % fixed)
+        print('розділові знаки: виправлено %d (нема в cp1251 або в шрифті)' % fixed)
 
 
 def validate_cp1251():
-    """Кожне значення в *_overrides.json має кодуватися в cp1251."""
-    normalize_apostrophes()
+    """Значення в *_overrides.json: cp1251, гліфи в шрифті, одна абетка."""
+    normalize_punctuation()
     bad = 0
     for fn in sorted(os.listdir(ITEMS)):
         if not fn.endswith('_overrides.json'):
@@ -90,6 +97,11 @@ def validate_cp1251():
             except UnicodeEncodeError:
                 bad += 1
                 print('  CP1251 FAIL %s: %r -> %r' % (fn, k, v))
+            gone = glyphs.missing(v)
+            if gone:
+                bad += 1
+                print('  НЕМА ГЛІФА %s: %r -> %r (%s)'
+                      % (fn, k, v, ' '.join('U+%04X' % ord(c) for c in sorted(gone))))
             for w in v.split():
                 if mixed(w):
                     bad += 1

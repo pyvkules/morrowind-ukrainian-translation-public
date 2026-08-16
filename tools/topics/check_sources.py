@@ -29,6 +29,8 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOOLS = os.path.abspath(os.path.join(HERE, '..'))
+sys.path.insert(0, TOOLS)
+import glyphs
 
 TOKEN = re.compile(r'%[A-Za-z]+')
 errors, warnings = [], []
@@ -48,6 +50,13 @@ def encodable(text, where):
     except UnicodeEncodeError as e:
         bad = text[e.start:e.end]
         err('%s: не кодується в cp1251: %r у %r' % (where, bad, text[:60]))
+    # cp1251 - лише половина справи: «, », „ у ньому Є, а гліфа в шрифті нема,
+    # і в грі на їх місці буде порожнеча
+    gone = glyphs.missing(text)
+    if gone:
+        err('%s: нема гліфа в шрифті: %s у %r'
+            % (where, ' '.join('%s U+%04X' % (c, ord(c)) for c in sorted(gone)),
+               text[:60]))
 
 
 # ---------------------------------------------------------------- 1-2, 4-5: зрізи

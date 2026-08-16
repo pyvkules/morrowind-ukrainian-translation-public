@@ -151,7 +151,8 @@
   "title": "InfoBox - Scamptallow Candles",
   "chars": 232,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "0346ffd5b50b1f00": {
   "title": "handwritten letter",
@@ -261,7 +262,8 @@
   "title": "InfoBox - Stencil Based Holes",
   "chars": 607,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "043adcf19ba012bd": {
   "title": "Meditations on Determined Law",
@@ -524,7 +526,8 @@
   "title": "<Deprecated>",
   "chars": 105,
   "ntags": 5,
-  "tagsig": "751dcba75590"
+  "tagsig": "751dcba75590",
+  "devnote": true
  },
  "088f9af31b4bb2f5": {
   "title": "Heavy Armor Repair",
@@ -1168,7 +1171,8 @@
   "title": "<Placeholder>",
   "chars": 367,
   "ntags": 17,
-  "tagsig": "4f507f9bf57e"
+  "tagsig": "4f507f9bf57e",
+  "devnote": true
  },
  "12d90761cf0e0b84": {
   "title": "Songs of the Return, Volume 7",
@@ -2715,7 +2719,8 @@
   "title": "InfoBox - Candle Placement",
   "chars": 515,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "2f5fd7867a1a75ed": {
   "title": "For my Gods and Emperor",
@@ -2877,7 +2882,8 @@
   "title": "InfoBox - Dwemer Nixie Lights",
   "chars": 188,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "31a603c508f23e73": {
   "title": "Spears of Darkness",
@@ -3199,7 +3205,8 @@
   "title": "<Deprecated>",
   "chars": 153,
   "ntags": 7,
-  "tagsig": "ffda51d542f0"
+  "tagsig": "ffda51d542f0",
+  "devnote": true
  },
  "373afc175f5671bd": {
   "title": "Demented Scrawling",
@@ -3447,7 +3454,8 @@
   "title": "InfoBox - Dwemer Act Fuse Box",
   "chars": 304,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "3ba41db6a052e82d": {
   "title": "A Hypothetical Treachery",
@@ -4147,7 +4155,8 @@
   "title": "<Deprecated>",
   "chars": 97,
   "ntags": 5,
-  "tagsig": "751dcba75590"
+  "tagsig": "751dcba75590",
+  "devnote": true
  },
  "48996fc61c103f5a": {
   "title": "Raid on Pyandonea, Book Five",
@@ -4293,7 +4302,8 @@
   "title": "InfoBox - Cave Scaffold",
   "chars": 125,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "4afaac5a5fe27adb": {
   "title": "Scroll of Mepp's Mismending",
@@ -4315,7 +4325,8 @@
   "title": "InfoBox - Kwama Egg Boom",
   "chars": 150,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "4b58f1e3909154fd": {
   "title": "Capn's Guide to the Fishy Stick",
@@ -4451,7 +4462,8 @@
   "title": "InfoBox - Dwemer Stencil Tricks",
   "chars": 379,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "4e04280be99809b8": {
   "title": "Analysis on the Asurani Writing",
@@ -5104,7 +5116,8 @@
   "title": "<Deprecated>",
   "chars": 626,
   "ntags": 10,
-  "tagsig": "2b87dd3dd808"
+  "tagsig": "2b87dd3dd808",
+  "devnote": true
  },
  "5a7d59c7bdc5c6fd": {
   "title": "Imperial Log Book",
@@ -5198,7 +5211,8 @@
   "title": "InfoBox - Dwemer Act Gear Box",
   "chars": 206,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "5c7b8291ebce9853": {
   "title": "Artificial Diseases, Vol. I",
@@ -5270,7 +5284,8 @@
   "title": "<Placeholder>",
   "chars": 328,
   "ntags": 16,
-  "tagsig": "e5f870cfaa92"
+  "tagsig": "e5f870cfaa92",
+  "devnote": true
  },
  "5dc73830a8eadb4d": {
   "title": "The Monomyth",
@@ -5439,7 +5454,8 @@
   "title": "InfoBox - Dwemer Shelves",
   "chars": 281,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "618dbb8d2af67daf": {
   "title": "The Uprising in Almalexia",
@@ -6032,7 +6048,8 @@
   "title": "InfoBox - Light Rays",
   "chars": 172,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "6a2446b9a898fea2": {
   "title": "On the Lunar Lattice",
@@ -6428,7 +6445,8 @@
   "title": "InfoBox - Dwemer Stove",
   "chars": 156,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "7196f6f8170a768f": {
   "title": "Dunmer Law: A Primer",
@@ -6539,7 +6557,8 @@
   "title": "InfoBox - Dwemer Scaffold Set",
   "chars": 68,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "73ba39176170fcd8": {
   "title": "Note to Seraali",
@@ -7262,7 +7281,8 @@
   "title": "InfoBox - Dwemer Drawers",
   "chars": 237,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "8038b8f376999fcd": {
   "title": "Codified Law, Vol. III",
@@ -7392,7 +7412,8 @@
   "title": "<Placeholder>",
   "chars": 370,
   "ntags": 17,
-  "tagsig": "83d023025291"
+  "tagsig": "83d023025291",
+  "devnote": true
  },
  "82c11d96ab01832b": {
   "title": "On Stirk",
@@ -7697,7 +7718,8 @@
   "title": "InfoBox - Velothi Hearths",
   "chars": 272,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "88e44b1914063490": {
   "title": "Brief History of the Empire v 3",
@@ -8093,7 +8115,8 @@
   "title": "InfoBox - AvoidNode",
   "chars": 210,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "905cad00d33fb6d6": {
   "title": "GANG WAR IN OLD EBONHEART",
@@ -8279,7 +8302,8 @@
   "title": "InfoBox - Dwemer Act Burst Pipe",
   "chars": 239,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "94780d36afa5052d": {
   "title": "36 Lessons of Vivec, Sermon 5",
@@ -8682,7 +8706,8 @@
   "title": "InfoBox - Climbing Picks",
   "chars": 147,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "9a85425b183adda1": {
   "title": "Drawing",
@@ -8753,7 +8778,8 @@
   "title": "InfoBox - Imperial Chain Pull",
   "chars": 250,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "9bd584551b28127e": {
   "title": "Scroll of Alvusia's Warping",
@@ -9760,7 +9786,8 @@
   "title": "InfoBox - Velothi Hidden Door",
   "chars": 181,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "ac1930c44608a559": {
   "title": "The Gospel of Saint Delyn",
@@ -10642,7 +10669,8 @@
   "title": "InfoBox - Dwemer Machine Toggle",
   "chars": 386,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "bce6aa08924d646b": {
   "title": "The Belharzareta IV",
@@ -10952,7 +10980,8 @@
   "title": "InfoBox - Dwemer Grate Stairs",
   "chars": 233,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "c2b2c14a84ab960d": {
   "title": "Overview of Gods and Worship",
@@ -11519,7 +11548,8 @@
   "title": "InfoBox - Dwemer Machine Kit",
   "chars": 238,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "ccdf57b5ece24266": {
   "title": "Masterwork of the Inducer",
@@ -11541,7 +11571,8 @@
   "title": "<Deprecated>",
   "chars": 101,
   "ntags": 5,
-  "tagsig": "751dcba75590"
+  "tagsig": "751dcba75590",
+  "devnote": true
  },
  "cd68e475e1d7fdfb": {
   "title": "Note from Nabari",
@@ -11583,7 +11614,8 @@
   "title": "InfoBox - Dwemer Ledge Plug",
   "chars": 992,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "cdd0fa1d46ac4579": {
   "title": "Stock Exchange Ledger",
@@ -11601,7 +11633,8 @@
   "title": "InfoBox - Com Hidden Panel Door",
   "chars": 398,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "ce0988927b56c88c": {
   "title": "Mineralogical Survey",
@@ -11953,7 +11986,8 @@
   "title": "InfoBox - Com Panel Set",
   "chars": 388,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "d40d71bf2ace074b": {
   "title": "The Adabal-a",
@@ -12013,7 +12047,8 @@
   "title": "InfoBox - Dwemer Act Coherer",
   "chars": 312,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "d4f4a61d7a3dea48": {
   "title": "Guide to Ancestral Tombs",
@@ -12333,7 +12368,8 @@
   "chars": 14,
   "ntags": 1,
   "tagsig": "bb5d2cee508c",
-  "notext": true
+  "notext": true,
+  "devnote": true
  },
  "da2b261ac5bbd018": {
   "title": "Property of Jolda",
@@ -12451,7 +12487,8 @@
   "title": "InfoBox - Dwemer Act Power Box",
   "chars": 202,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "dc54d95aaeb8457c": {
   "title": "On Hammerfell",
@@ -12554,7 +12591,8 @@
   "title": "InfoBox - Dwemer Building Int.",
   "chars": 825,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "dd8e86ada5cd5276": {
   "title": "2920, First Seed",
@@ -12814,7 +12852,8 @@
   "title": "InfoBox - Kwama Forager Tower",
   "chars": 101,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "e3a3a6779c180456": {
   "title": "Fascicle 41-45",
@@ -12842,7 +12881,8 @@
   "title": "InfoBox - Dwemer Chain Junc",
   "chars": 105,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "e436358ca80f2293": {
   "title": "Legal Basics",
@@ -13034,7 +13074,8 @@
   "title": "InfoBox - Dwemer Scaff Ladders",
   "chars": 60,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "e79cd361bb018651": {
   "title": "Scroll of Invalidation",
@@ -13522,7 +13563,8 @@
   "title": "InfoBox - Kwama Acid Drips",
   "chars": 227,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "devnote": true
  },
  "ef35dd2b26aa5ced": {
   "title": "2920, First Seed",
@@ -13665,7 +13707,8 @@
   "chars": 12,
   "ntags": 1,
   "tagsig": "f13866e79e9a",
-  "notext": true
+  "notext": true,
+  "devnote": true
  },
  "f13993a6f448b6f1": {
   "title": "The Firmament",

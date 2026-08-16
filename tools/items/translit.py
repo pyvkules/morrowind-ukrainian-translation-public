@@ -88,7 +88,9 @@ def translit_word(w):
                 # інакше -> к (Vivec->Вівек, Caius->Кай, Cosades->Косадес)
                 out.append('ц' if nxt in ('e', 'i', 'y') else 'к')
             elif ch == 'y':
-                out.append('і' if i == len(s) - 1 else 'и')   # кінцеве -y -> -і
+                # кінцеве -y -> -і; на початку слова теж і, бо українське слово
+                # з «и» не починається (Yngling -> Інґлінґ, а не Инґлінґ)
+                out.append('і' if i in (0, len(s) - 1) else 'и')
             else:
                 out.append(SINGLE.get(ch, ch))
             i += 1

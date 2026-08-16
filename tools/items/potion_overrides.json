@@ -140,7 +140,7 @@
  "Strongmead": "Міцний мед",
  "Sugar Rum": "Цукровий ром",
  "Sujamma": "Суджамма",
- "Surilie Brothers": "«Брати Сурілі»",
+ "Surilie Brothers": "“Брати Сурілі”",
  "Sweet Wine": "Солодке вино",
  "Talan's Heritage Wine": "Спадкове вино Талана",
  "Tamika's Cellar Fine Wine": "Добірне вино з льоху Таміки",
@@ -149,7 +149,7 @@
  "Trama Root Tea": "Чай з кореня трами",
  "Trebonius' Potion of Curing": "Требонієве зілля зцілення",
  "Tsokni": "Цокні",
- "Twin Moons Wine": "Вино «Двомісяччя»",
+ "Twin Moons Wine": "Вино “Двомісяччя”",
  "Ungorth": "Унґорт",
  "Valenwood Wine": "Валенвудське вино",
  "Veig": "Вейґ",
@@ -161,7 +161,7 @@
  "Void Essence": "Есенція порожнечі",
  "Wasabi Paste": "Паста васабі",
  "Wayrest Spiced Wine": "Вейрестське пряне вино",
- "Wolfsblood Wine": "Вино «Вовча кров»",
+ "Wolfsblood Wine": "Вино “Вовча кров”",
  "Yamuz": "Ямуз",
- "_comment": "Ручний переклад решти зілль (напої, еліксири, «Potion of X», «Spoiled X»). Лорні власні назви транслітеруємо, описові перекладаємо. Пріоритет над compose_potions."
+ "_comment": "Ручний переклад решти зілль (напої, еліксири, “Potion of X”, “Spoiled X”). Лорні власні назви транслітеруємо, описові перекладаємо. Пріоритет над compose_potions."
 }

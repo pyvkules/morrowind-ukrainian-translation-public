@@ -46,6 +46,12 @@ TAG = re.compile(r'<[^>]*>')
 # просто не намалюється: такі фрагменти лишаємо англійськими
 DAEDRIC = re.compile(r'<FONT[^>]*FACE="Daedric"[^>]*>(.*?)(?=</FONT>|<FONT|$)',
                      re.S | re.I)
+# книги-нотатки для модерів: пояснення до наборів моделей у ресурсних плагінах
+# (OAAB_Data, Tamriel_Data) і зняті з ужитку заготовки. Гравець їх не бачить -
+# у нього на обкладинці стояло б «InfoBox» або «<Deprecated>», - тож
+# перекладати їх нема сенсу
+DEVNOTE = re.compile(r'^(infobox|<deprecated|<placeholder|<template|<unused)',
+                     re.I)
 
 
 def key(text):
@@ -132,6 +138,8 @@ def main():
                 meta[k]['daedric'] = runes
             if not plain(text):
                 meta[k]['notext'] = True
+            if DEVNOTE.match(title):
+                meta[k]['devnote'] = True
 
     done = {}
     ukp = os.path.join(HERE, 'uk_books.json')
@@ -140,12 +148,14 @@ def main():
         done.pop('_comment', None)
 
     notext = [k for k in source if meta[k].get('notext')]
-    work = [k for k in source if k not in notext]
+    devnote = [k for k in source if meta[k].get('devnote') and k not in notext]
+    work = [k for k in source if k not in notext and k not in devnote]
     left = [k for k in work if k not in done]
     chars = sum(meta[k]['chars'] for k in work)
     print('плагінів прочитано : %d' % files)
     print('книг унікальних    : %d' % len(source))
     print('без читаного тексту: %d (руни, картинки, порожні заготовки)' % len(notext))
+    print('нотаток для модерів: %d (InfoBox, <Deprecated>)' % len(devnote))
     print('до перекладу       : %d' % len(work))
     print('символів у роботі  : %d' % chars)
     print('перекладено        : %d / %d (%.0f%%)'
