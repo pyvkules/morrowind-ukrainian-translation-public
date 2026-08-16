@@ -68,6 +68,18 @@ def daedric_spans(text):
     return [s.strip() for s in DAEDRIC.findall(text) if s.strip()]
 
 
+def plain(text):
+    """Що з книги взагалі можна перекласти.
+
+    Знімаємо розмітку й даедричні руни. Якщо не лишилось нічого - у книзі нема
+    читаного тексту: це або порожня заготовка, або сувій, чий весь напис
+    намальовано рунами чи запечено в картинку <IMG SRC>. Перекладати там нема
+    чого, тож такі книги не мають висіти в роботі.
+    """
+    rest = DAEDRIC.sub(' ', text)
+    return TAG.sub(' ', rest).strip()
+
+
 def subrecords(body):
     sp = 0
     while sp + 8 <= len(body):
@@ -118,6 +130,8 @@ def main():
             runes = daedric_spans(text)
             if runes:
                 meta[k]['daedric'] = runes
+            if not plain(text):
+                meta[k]['notext'] = True
 
     done = {}
     ukp = os.path.join(HERE, 'uk_books.json')
@@ -125,16 +139,20 @@ def main():
         done = json.load(open(ukp, encoding='utf-8'))
         done.pop('_comment', None)
 
-    chars = sum(m['chars'] for m in meta.values())
-    left = [k for k in source if k not in done]
+    notext = [k for k in source if meta[k].get('notext')]
+    work = [k for k in source if k not in notext]
+    left = [k for k in work if k not in done]
+    chars = sum(meta[k]['chars'] for k in work)
     print('плагінів прочитано : %d' % files)
     print('книг унікальних    : %d' % len(source))
-    print('символів усього    : %d' % chars)
+    print('без читаного тексту: %d (руни, картинки, порожні заготовки)' % len(notext))
+    print('до перекладу       : %d' % len(work))
+    print('символів у роботі  : %d' % chars)
     print('перекладено        : %d / %d (%.0f%%)'
-          % (len(source) - len(left), len(source),
-             100.0 * (len(source) - len(left)) / len(source) if source else 0))
-    if source:
-        print('найдовша книга     : %d символів' % max(m['chars'] for m in meta.values()))
+          % (len(work) - len(left), len(work),
+             100.0 * (len(work) - len(left)) / len(work) if work else 0))
+    if work:
+        print('найдовша книга     : %d символів' % max(meta[k]['chars'] for k in work))
 
     if not APPLY:
         print('(без --apply нічого не записано)')

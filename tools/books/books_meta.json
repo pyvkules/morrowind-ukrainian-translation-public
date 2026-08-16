@@ -84,7 +84,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "YOUR STAINED TABLET MUST FIRST BE WASHED WHITE BY THE FIRES OF MANA"
-  ]
+  ],
+  "notext": true
  },
  "015b577e230204dc": {
   "title": "Guide to Firewatch",
@@ -177,7 +178,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "I INVOKE FOR THE GODS, FOR MY ANCESTORS, AND FOR REVENGE"
-  ]
+  ],
+  "notext": true
  },
  "03849cbb3935e629": {
   "title": "A Dark Brotherhood Contract",
@@ -234,7 +236,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MY GODS, MAY THIS INVOCATION PROVE MY DEDICATION AND WORTH"
-  ]
+  ],
+  "notext": true
  },
  "03c31d23354600bd": {
   "title": "Arcturianism For Beginners",
@@ -390,7 +393,8 @@
   "title": "Scroll of Disastrous Visions",
   "chars": 94,
   "ntags": 3,
-  "tagsig": "0fd0ec4a7c95"
+  "tagsig": "0fd0ec4a7c95",
+  "notext": true
  },
  "06aab7218d3f2ebb": {
   "title": "Response from Divayth Fyr",
@@ -399,7 +403,8 @@
   "tagsig": "ca78497fab96",
   "daedric": [
    "FGIJMZGHZIFJEBEBCJGHHJWGFJQPCDFEHJMNIDGAIJVYJHBJTMCDNEGBIQIJHJFICDDBHJXACDIJBBBDFDTAEBEBVMEBFJJHIDIJBJFJCDFMBHNDFDNSEBGB<BR>\r\nKDCDWREBEBTZGHJHMBHJGHPNCJCJCDRYHJBGEBAIEHGBAWGHBVADADVKDHEZBBIJEBEBGHJHBBHJQBCDETHBFDBBGBGBEJEBMMGBAIDBBBGBBJTVE<BR>\r\nBADKOEBGLIDUWDHEBEBCYGHJHXLADWWCDZQFDICFDJEEBDHBBABFWCDBIIJISDHCDERJHIJCSFJGHJKIDIJIZHJNWCDPLIDOCHBKBCDBHAAIJCJNXGHHJ<BR>\r\nMUEBEBDWGHJHHBCDUTHJGCIDASGHGBBBFDFDVTEBEBBDJHHRIJPQEBSQBJZJGHGBGHIJBLADEBIDDHKAIJHFGHEBUUGBABGHKGFDABCDASFJMVEBEB<BR>\r\nYNIDXSCDAQFDCJYYEBGBYUIJDHLECDBJCDBBFDEBGBDBIDGHVYCJIJUADHSICDBHDMGHAEJHXBGBCLBHKJEBFDWAEBCJBWCDHGCDFDEBEBGHSUJHADZ<BR>\r\nLEBFDFDNUCJEUEBUXGBVOBJAGIDGHPBFJCDGHGBCDTJFJOMGHHJCDIDJHSAEBXEIJTQBBAABDJPFDURCDADIJGHEBEBQPGHJHHBHJHBWDJHHJKOHBGH<BR>\r\nDIIDTWCDCVIDMBGHGHSWGBJHGBEGIJKXEBGQFDCAIJFBDHUVCDGBPCHBCDHJDHBBVQHBHKIDEBEBGHMIJHBHGHWMJHFDBJCSHBDVCDHJGFIDOSJHBB<BR>\r\nBJTXCDBDSIBBVZFDQSBBBJBJUFBBIDBJEBXMABRBBBEBEBIJDHCJEBEBHJ"
-  ]
+  ],
+  "notext": true
  },
  "06b4490f13b154d0": {
   "title": "Prisoner Checklist",
@@ -621,7 +626,8 @@
   "title": "Locations of the Stones",
   "chars": 168,
   "ntags": 8,
-  "tagsig": "78728ff1563d"
+  "tagsig": "78728ff1563d",
+  "notext": true
  },
  "09d53e668e78f27e": {
   "title": "The Argonian Account II",
@@ -696,7 +702,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MAY YOUR FEET BE SWIFT AND SURE"
-  ]
+  ],
+  "notext": true
  },
  "0ae69011b47269d4": {
   "title": "Invoice",
@@ -747,7 +754,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "I AM THAT IS, ALWAYS WAS, AND ALWAYS SHALL BE"
-  ]
+  ],
+  "notext": true
  },
  "0b753aa1c88f0fe2": {
   "title": "A Study on Guar",
@@ -828,7 +836,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE HATE THE DARKNESS AND FEAR IT"
-  ]
+  ],
+  "notext": true
  },
  "0c9e0a615e36adc2": {
   "title": "The Homily of the Pilgrim",
@@ -846,7 +855,8 @@
   "title": "Secrets of Dwemer Animunculi",
   "chars": 246,
   "ntags": 13,
-  "tagsig": "f79028223bfd"
+  "tagsig": "f79028223bfd",
+  "notext": true
  },
  "0cf61f624199d001": {
   "title": "The Healer's Tale",
@@ -897,7 +907,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DEATH STALKS US ALL"
-  ]
+  ],
+  "notext": true
  },
  "0df6db75bfd8705d": {
   "title": "The Argonian Account, Chapter 4",
@@ -969,7 +980,8 @@
   "title": "Scroll of Divine Intervention",
   "chars": 87,
   "ntags": 3,
-  "tagsig": "c4aeb595c4f9"
+  "tagsig": "c4aeb595c4f9",
+  "notext": true
  },
  "0f69510d6a62bd47": {
   "title": "Dwemer Museum Welcome",
@@ -999,7 +1011,8 @@
   "title": "Scroll of The First Barrier",
   "chars": 90,
   "ntags": 3,
-  "tagsig": "72a882fc5861"
+  "tagsig": "72a882fc5861",
+  "notext": true
  },
  "0feb6b4043026fde": {
   "title": "Mages Guild Charter",
@@ -1299,7 +1312,8 @@
   "title": "Divine Metaphysics...",
   "chars": 297,
   "ntags": 12,
-  "tagsig": "8ca11c861e54"
+  "tagsig": "8ca11c861e54",
+  "notext": true
  },
  "16002ba6988b0b96": {
   "title": "Fascicle 50-53",
@@ -1365,7 +1379,8 @@
   "title": "Scroll of Deafening Hue",
   "chars": 87,
   "ntags": 3,
-  "tagsig": "8fbe86f6591d"
+  "tagsig": "8fbe86f6591d",
+  "notext": true
  },
  "16c06cfa510cd2d9": {
   "title": "How to Treat Heretics",
@@ -1410,7 +1425,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "NEITHER SICKNESS NOR DEATH SHALL TOUCH THEM"
-  ]
+  ],
+  "notext": true
  },
  "1735f7bca5f2888d": {
   "title": "Royal Writ of Execution",
@@ -1440,7 +1456,8 @@
   "title": "Scroll of Alate Waves",
   "chars": 154,
   "ntags": 6,
-  "tagsig": "a75b7e07997f"
+  "tagsig": "a75b7e07997f",
+  "notext": true
  },
  "17710c77ef508852": {
   "title": "Parchment with Scrawlings",
@@ -1497,7 +1514,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "GUIDANCE OF THY LORDS"
-  ]
+  ],
+  "notext": true
  },
  "183e16c2d8e46ba5": {
   "title": "Reflections on Cult Worship",
@@ -1590,7 +1608,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "CAST IT INTO THE GREAT FIRE"
-  ]
+  ],
+  "notext": true
  },
  "199c26c7b488f6d7": {
   "title": "Horskva Kongerike, VIII-XV",
@@ -1623,7 +1642,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE GREATEST THROUGHOUT HISTORY HAVE NEVER SHIED AWAY FROM THE TOTAL DESTRUCTION OF THEIR ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "1a21c88275b9e317": {
   "title": "Radr, Stag-King",
@@ -1656,7 +1676,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MY LIFE AND MY HONOR"
-  ]
+  ],
+  "notext": true
  },
  "1abe19221c2da4b2": {
   "title": "The Firmament",
@@ -1671,7 +1692,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "FOR THE GODS!"
-  ]
+  ],
+  "notext": true
  },
  "1ad8df087ba7f8df": {
   "title": "The Battle of Molag Beran",
@@ -1866,7 +1888,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "IN THE NAME OF THE DOGS!"
-  ]
+  ],
+  "notext": true
  },
  "1ef8a5b273b61cab": {
   "title": "2920, Morning Star",
@@ -1989,7 +2012,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "PASSWORD -- SORAMAORGEEGROAMAROS -- DROWSSAP"
-  ]
+  ],
+  "notext": true
  },
  "218537602f2b38c6": {
   "title": "The Lost Prophecy",
@@ -2112,7 +2136,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE DUST SHALL SERVE ME!"
-  ]
+  ],
+  "notext": true
  },
  "23fb0c5bef01d64c": {
   "title": "Trap",
@@ -2277,7 +2302,8 @@
   "tagsig": "979c634f920f",
   "daedric": [
    "CANDLE, BURN AT BOTH ENDS"
-  ]
+  ],
+  "notext": true
  },
  "28522822e8217c2a": {
   "title": "Ajira's Mushroom Report",
@@ -2334,7 +2360,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "CLEANSE IN THE SEAT OF GRACE"
-  ]
+  ],
+  "notext": true
  },
  "29f69172a92ae128": {
   "title": "Old Fjori the Cove",
@@ -2487,7 +2514,8 @@
   "tagsig": "fd3522462a0e",
   "daedric": [
    "<BR>\r\n\r\nI Call for<P>\r\nThe Fabricant of the Prince of Fools<P>\r\nThe Horned Titan of the Cursed King<P>\r\nThe Warrior of the Exalted Lord<P>\r\nThe Scuted Bearer of the Great Keeper<P>"
-  ]
+  ],
+  "notext": true
  },
  "2c3aaff13207709a": {
   "title": "MERCHANTS TO SAIL FOR AKAVIR?",
@@ -2574,7 +2602,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BIND MY ENEMIES AND UNMAKE THEIR WILL"
-  ]
+  ],
+  "notext": true
  },
  "2d5e9795ac497a79": {
   "title": "The Real Barenziah v IV",
@@ -2649,7 +2678,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "YOUR LIFE OR YOUR HONOR"
-  ]
+  ],
+  "notext": true
  },
  "2e643ff0376fb5be": {
   "title": "Grasping Fortune",
@@ -2700,7 +2730,8 @@
   "tagsig": "e7614ab5495b",
   "daedric": [
    "Elemental Burst - Fire<P>\r\n\r\nThe afore-mentioned personage has been marked for honorable execution in accordance to the lawful tradition and practice of the Morag Tong Guild. The Bearer of this non-disputable document has official sanctioned license to kill the afore-mentioned personage.<P>\r\n\r\nThe afore-mentioned personage has been marked for honorable execution in accordance to the lawful tradition and practice of the Morag Tong Guild. The Bearer of this non-disputable document has official sanctioned license to kill the afore-mentioned personage.<P>"
-  ]
+  ],
+  "notext": true
  },
  "2f9d2ec6865bc4b3": {
   "title": "Supply Ledger",
@@ -2721,7 +2752,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DOWN WITH DUNMER OPPRESSION"
-  ]
+  ],
+  "notext": true
  },
  "2fb9024243ba6153": {
   "title": "Feyfolken I",
@@ -2790,7 +2822,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "NO STRENGTH OR HONOR"
-  ]
+  ],
+  "notext": true
  },
  "30e9e74e21581051": {
   "title": "The Argonian Account I",
@@ -2931,7 +2964,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "SHE WAS A LOVELY CHILD, FULL OF LIFE AND BEAUTY. MY ACTIONS PAINED ME, BUT I DID WHAT HAD TO BE DONE...TO SAVE HER."
-  ]
+  ],
+  "notext": true
  },
  "33182548ef310fb7": {
   "title": "NARSIS ARCH-MAGE RETURNS",
@@ -3036,7 +3070,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INASI IS A HACK"
-  ]
+  ],
+  "notext": true
  },
  "350dbdcbe491fcb1": {
   "title": "Scroll of Hellfire",
@@ -3045,7 +3080,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "SANCTIFY WITH BLOOD AND FIRE"
-  ]
+  ],
+  "notext": true
  },
  "3579eba2c694a2c9": {
   "title": "Scroll of Baltham's Insight",
@@ -3054,7 +3090,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WHY DO YOU NOT DESPAIR"
-  ]
+  ],
+  "notext": true
  },
  "359f82405fb19b52": {
   "title": "Knowing Your Place",
@@ -3195,7 +3232,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DREADED WOLF, BEGONE!"
-  ]
+  ],
+  "notext": true
  },
  "3818e09340554c88": {
   "title": "Arkay the Enemy",
@@ -3390,7 +3428,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "RENDER MY FOES DEFENSELESS"
-  ]
+  ],
+  "notext": true
  },
  "3b472eccaef4ca21": {
   "title": "A Fable from Valenwood",
@@ -3480,7 +3519,8 @@
   "title": "Scroll of Jhunal's Intercession",
   "chars": 85,
   "ntags": 3,
-  "tagsig": "4fc955004ab0"
+  "tagsig": "4fc955004ab0",
+  "notext": true
  },
  "3d38e260d3e08364": {
   "title": "Dunmer Family Record",
@@ -3675,7 +3715,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE SERVE THE STRONG"
-  ]
+  ],
+  "notext": true
  },
  "40abd8546542309c": {
   "title": "Dispel Potion Formula",
@@ -3726,7 +3767,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "LONG LIVE THE PROPHECY"
-  ]
+  ],
+  "notext": true
  },
  "41b00c518c44d9e6": {
   "title": "Note from Priestess Sarethi",
@@ -3765,7 +3807,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INVOKE SWIFTLY AND WISELY"
-  ]
+  ],
+  "notext": true
  },
  "4261069b031bc04d": {
   "title": "Staff Crafting and Enchanting",
@@ -3900,7 +3943,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DARKSUNDARKSUNDARKSUNDARK"
-  ]
+  ],
+  "notext": true
  },
  "459086bf52fb904e": {
   "title": "Brown Book of 3E 426",
@@ -3960,7 +4004,8 @@
   "title": "Scroll of Deific Function",
   "chars": 153,
   "ntags": 6,
-  "tagsig": "ee75b5d25263"
+  "tagsig": "ee75b5d25263",
+  "notext": true
  },
  "46fe3e8311d62a4d": {
   "title": "Scroll of Dagon's Peerage",
@@ -3969,7 +4014,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "REVOLUTION AND RUIN. CHAOS AND CATACLYSM. DEATH AND DESTRUCTION."
-  ]
+  ],
+  "notext": true
  },
  "4702fea0ed238913": {
   "title": "Biography of Barenziah v III",
@@ -4128,7 +4174,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "NINE-FOLD WOES AND WEAKNESSES UPON YOU, HEATHEN SERVENTS OF DARKNESS"
-  ]
+  ],
+  "notext": true
  },
  "48e3bde60c349dee": {
   "title": "Thirsk, a History -- Revised",
@@ -4143,7 +4190,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "ENDLESS PAIN AND SUFFERING"
-  ]
+  ],
+  "notext": true
  },
  "4908cbf7731d63f2": {
   "title": "Geometry for Barbarians",
@@ -4254,7 +4302,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "GORGE ON CRUOR"
-  ]
+  ],
+  "notext": true
  },
  "4b09b994e6185207": {
   "title": "Colony Status Report",
@@ -4311,7 +4360,8 @@
   "tagsig": "5307c15069f7",
   "daedric": [
    "<BR>\r\nMoqk qk moi mikmqycaw ck aww moam Q oaqi kiia, aag aww moam Q oaqi wiaiaig, qa mocki wiaik moam Q oaqi eckkikkig moi Moiii Kiawk ck YAKKOO. Q oaqi kiia Cai Mocokaag aag-Cai yccak, aag koiiww moqk qk iacomo kci moi keaa ck a yaak wqki, mocomo qm qk kaqg moi Eiceoimk wqqig yoeo wcamii. Q ay siau, aag qww, aag ciai miiam mqiig- aikk aag iuoaokmqca, aag a kqmo oaamk qa yw ciiakm wqui a gaiu waamiia, Q ay cwg. \r\n<BR><BR>\r\nMoi scwqik eaiiw moiqi aayi qa moiqi yqgaqmom keiieoik, aag moam goqim, kocmwi Qcqei qk koyycaqam yi kicy akai. Aag a qcqei yoeo ewckii sqww kocom qamc yw iai sqmo oaocww qyeamqiaei. Moi siqmom ck yw kcow sqww gieqgi qmk kqaaw iikmqam ewaei. Cikcii moi mqyi, Q yokm eom gcsa oiii aww moam Q eaa ecaeiiaqam moi ociicik moam kmawu Sqmocom, aag soqeo wqi qa saqm am moi gcci ck iqiiw yaa, kci moqk qk moi aaeqiam aieaaa moam oak ciia oaagig gcsa ck cwg, com soqeo oak ciia kcimcmmia cw aww com a kis yia, moi scikoqeeiik ck moi Aaeqiam Caik (yaw moiqi aayik ci cwcmmig com!) \r\n<BR><BR>\r\nAag qk Q gc acm kqaqko moqk maku, maui soam qk oiii aag gqkecqii moi iikm, kci mqyi qk kocim aag yaauqag gcik acm uacs ci oagiikmaag moi iqqw moam asaqmk qm, kicy iqiiw kqgi, kicy iqiiw ceia Mami, kicy iqiiw cicuia caiiqii, kicy iqiiw yqagwikk aecwwmi am moi awmiik ck yagaikk. \r\n<BR><BR>\r\nKci moqk qk moi Cccu ck moi Giag, moi Cccu ck moi Cwaeu Iaimo, moam Q oaqi siqm gcsa am moi eiiqw ck yw wqki, iuaemww ak Q iieiqqig qm, ca moi ewaaik ck QMQMQ, moi eioiw eiwikmqaw keqiqmk kicy ciwcag moi Saagiiiik ck moi Sakmik. \r\n<BR><BR>\r\nWim aww soc iiag moqk cccu ci saiaig moiiicw moam moi oacqmamqca ck yia aii kiia aag koiqiwig cw moam Aaeqiam Iaei ck mcgk aag giycak kicy a mqyi cikcii mqyi, aag moam moiw kiiu iiqiami kci moam kcimcmmia cammwi moam mccu ewaei kcyisoiii qa moi Eckyck aag iiam moi Sciwgk qa moi gawk cikcii moi eiiamqca ck Yaa, soia moi Iwgii Mcgk sawuig moi Keaeik, moi iaei ck YAIGOU, ak oi qk uacsa mc moi Eoawgiaak, aag ck IAUQ coi yakmii, moi Wcig ck Yamqeqaak. \r\n<BR><BR>"
-  ]
+  ],
+  "notext": true
  },
  "4c210efaedc209ea": {
   "title": "Endar's Influx",
@@ -4560,7 +4610,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "HE IS HERE"
-  ]
+  ],
+  "notext": true
  },
  "51a49927fed453cc": {
   "title": "The Restless North, Book II",
@@ -4683,7 +4734,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DEATH DEFEAT AND FEAR"
-  ]
+  ],
+  "notext": true
  },
  "53ba1884e8242b6e": {
   "title": "An Addendum to the Armistice",
@@ -4764,7 +4816,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "SHADOWS AND FOG"
-  ]
+  ],
+  "notext": true
  },
  "55747e3764ab91ad": {
   "title": "Chance's Folly",
@@ -4836,7 +4889,8 @@
   "title": "Notebook",
   "chars": 121,
   "ntags": 9,
-  "tagsig": "c76845062813"
+  "tagsig": "c76845062813",
+  "notext": true
  },
  "56dc555ec66610a4": {
   "title": "FORT HEATH MINE OUTPUT SLOWS",
@@ -4959,7 +5013,8 @@
   "tagsig": "5bf79debed97",
   "daedric": [
    "<IMG SRC=\"TR\\tr_thieves_tools_01.dds\" WIDTH=\"290\" HEIGHT=\"290\"><BR> \r\n<IMG SRC=\"TR\\tr_thieves_tools_02.dds\" WIDTH=\"290\" HEIGHT=\"290\"><BR> \r\n<IMG SRC=\"TR\\tr_thieves_tools_03.dds\" WIDTH=\"290\" HEIGHT=\"290\"><BR> \r\n<IMG SRC=\"TR\\tr_thieves_tools_04.dds\" WIDTH=\"290\" HEIGHT=\"290\"><BR> \r\n<IMG SRC=\"TR\\tr_thieves_tools_05.dds\" WIDTH=\"290\" HEIGHT=\"290\"><BR> \r\n<IMG SRC=\"TR\\tr_thieves_tools_06.dds\" WIDTH=\"290\" HEIGHT=\"290\">"
-  ]
+  ],
+  "notext": true
  },
  "58e0786aec12c5f1": {
   "title": "The Worship of the Ashlanders",
@@ -5112,7 +5167,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE SPIRIT SHALL BE REVEALED IN ITS GLORY"
-  ]
+  ],
+  "notext": true
  },
  "5be5435ba70c3141": {
   "title": "The Rear Guard",
@@ -5283,7 +5339,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE DO NOT DIE, WE DO NOT FEAR DEATH"
-  ]
+  ],
+  "notext": true
  },
  "5ee830eba43a6b29": {
   "title": "Alessian Apologetics",
@@ -5403,7 +5460,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WELCOME!"
-  ]
+  ],
+  "notext": true
  },
  "61d161190af5c177": {
   "title": "2920, Rain's Hand",
@@ -5508,7 +5566,8 @@
   "tagsig": "f977e54781aa",
   "daedric": [
    "<BR>\r\n\r\n<B>\r\nMiracle of Daerir<P>\r\n</B>\r\n\r\nRide the storms, lest they ride thee.<P>\r\nConsume the red sands, lest they consume thee<P>\r\nBy the one from the dark waters<P>\r\nBy the one who was first in the deep waters<P>\r\nBy my will I cleanse myself of the red sands.<P>"
-  ]
+  ],
+  "notext": true
  },
  "62d037cfadea2a53": {
   "title": "Honorable Writ of Execution",
@@ -5685,7 +5744,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE HAVE PIERCED THE VEIL OF NIGHT AND TOUCHED THE FACES OF THE AEDRA"
-  ]
+  ],
+  "notext": true
  },
  "657a37ca08f99982": {
   "title": "Edrelle Mene's List of Supplies",
@@ -5730,7 +5790,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THAT WHICH DEFINES YOU WILL PROVE TO BE YOUR UNDOING"
-  ]
+  ],
+  "notext": true
  },
  "66aac9f78b99020c": {
   "title": "Hint to the fourth chest",
@@ -5805,7 +5866,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "REVEAL THYSELF!"
-  ]
+  ],
+  "notext": true
  },
  "676d4d9aa8cf7086": {
   "title": "The Wolf Queen, Book I",
@@ -5874,7 +5936,8 @@
   "tagsig": "fa29f8ad9ea5",
   "daedric": [
    "<BR>\r\n\r\nSend for<P>\r\nThe Winged Messenger of the Mother Soul<P>\r\nThe Tongued Servant of the Dark Warrior<P>\r\nThe Child of the Queen of Oblivion<P>"
-  ]
+  ],
+  "notext": true
  },
  "68894f59f1b28149": {
   "title": "EEC By-laws",
@@ -5886,7 +5949,8 @@
   "title": "Scroll of Spurred Incomers",
   "chars": 156,
   "ntags": 6,
-  "tagsig": "e7765a711f2e"
+  "tagsig": "e7765a711f2e",
+  "notext": true
  },
  "68c6ff3bb961e55d": {
   "title": "Yellow Book of 3E 426",
@@ -5943,7 +6007,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "STRENGTH AND HONOR"
-  ]
+  ],
+  "notext": true
  },
  "69e4bdccbe224e63": {
   "title": "Confessions of a Skooma-Eater",
@@ -6180,7 +6245,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "CRUSH YOUR ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "6da6fa0985fae509": {
   "title": "Fools' Ebony, Part The Oneth",
@@ -6231,7 +6297,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "A THOUSAND BLOWS AT ONCE"
-  ]
+  ],
+  "notext": true
  },
  "6e707809e48a67d7": {
   "title": "Ode to a Prince's Wealth",
@@ -6264,7 +6331,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "NO SOULICITORS"
-  ]
+  ],
+  "notext": true
  },
  "6f3e9740f253c1f1": {
   "title": "The Pilgrim and the Soldier I",
@@ -6411,7 +6479,8 @@
   "tagsig": "705dc1e65f9e",
   "daedric": [
    "<IMG SRC=\"TR\\DaedricSeptis.dds\" WIDTH=\"240\" HEIGHT=\"30\"><BR>\r\n<IMG SRC=\"TR\\DaeSep_CloseUp.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR>\r\n<BR>\r\n<IMG SRC=\"TR\\DaeSep_Transform.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR>\r\n<BR>\r\nWARLOCK OF MEHRUNES DAGON<BR>\r\n<BR>\r\n<IMG SRC=\"TR\\DaeSep_Silhouette.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR>\r\n<BR>\r\nWARLOCK OF MEHRUNES DAGON<BR>\r\n<BR>\r\n<IMG SRC=\"TR\\DaeSep_Dremora.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR>\r\n<BR>\r\nWARLOCK OF MEHRUNES DAGON<BR>"
-  ]
+  ],
+  "notext": true
  },
  "722b617f924b6c34": {
   "title": "Recipe - Silverfish",
@@ -6426,13 +6495,15 @@
   "tagsig": "b6f852fe4258",
   "daedric": [
    "YOU TOO SHALL SERVE"
-  ]
+  ],
+  "notext": true
  },
  "72843adc70fbd447": {
   "title": "Scroll of Celestial Benediction",
   "chars": 149,
   "ntags": 6,
-  "tagsig": "945558eeb1c9"
+  "tagsig": "945558eeb1c9",
+  "notext": true
  },
  "728dfb0d6ce21263": {
   "title": "The Cake and the Diamond",
@@ -6483,7 +6554,8 @@
   "tagsig": "0881b4d18a0d",
   "daedric": [
    "IJGHLUFJEBFDEBSZEBGBMNCJBBHJBBFJXLEBYYEBGHJHHJUKFDBBIJCDIDIJOPBJEBIDBHGHABCDHJEBPTEBRXEBIDPUEBGBBHHJCDBJEBBDFDCDROEBCJP\r\n<BR>QEBQREBGHJHWUBHBBGBVZHBBBHJIJYKADEBIJDHLOBBYUIDBBFJHBFDCDVKEBVNADGHJHFDBJZKBDCDMUCDIJCDHJGBBBFDFDEBROEBSVDBHJBBIJCDC\r\n<BR>JJHFDLWEBPLIJDHEBGBEHUMIJDHEBIDKUFJEBDBDHIJPLBDCDRVIJDHCDUOEHCDEBSZEBXYEBPODHBBABCDVLBDCDCDGBUTIDCDBBHJBHDHEBGBDBTY\r\n<BR>CJGHHJYOIJGHTYJHGBFDGHBHEHLKIJDHCDOZDBHJCDBBIJCDHJSMHBGHIJCDGBIJEBBBFDNKGHCJWNCDGBBHDHBBGBIJCDBJLMBJGHGHHJIDOWXREBM\r\n<BR>NEBGHJHUNEHGBGHADLOEBXDHBBABCDVIDIJJHBJEBCDBJOKIJDHGHIDCDVWEBGBZIJDHCDLRIJCDFDABBBGBGBEBMZABBBJHFDIJMXBBGBBJMOEBGBKV\r\n<BR>BBHJEBOEBGHGBIDZGHADGBRSIJGHADCDHJWBDJHIJTRIJDHCDHJCDTREBIDRTBBGBGHIJDHCDHJKMCDBBFJHBFDCDMKEBLMKDHGHHBCDNIJGHNOIDIJ\r\n<BR>JHBJEBONEBVYIDGHGHGBUVBBIJNIJDHCDQZHJJHEBGBIDXGHCJRQEBGBBJGHHJBBGBEBUYEBGHGBLQEBVOEBCDIDORCDDBHJGHBBFJBBHJGHIDYTFDB\r\n<BR>BEBHJMEBLYBDCDFDEBCDABCDZRIJDHBBIJUYDHEBIDYIDIJJHBJCDGBIJTHDGHHJADEBUYEBGBGBRXFJBBEBSTEBOPDHBBABCDTVBBBJABBBGBBHCDBJY\r\n<BR>UTBDCDEBZEBGHGBBJVRDHEBIDRTFJBBIDIJCDHJIDPOIDEHEBFDFDIDTVBDEBWEBXIDGHFDEBBHEBIJEBGBDBWZIJDHCDLOHBGHADCDHJRTGHCJUBBZ\r\n<BR>BJBBCDBJHJBBPLIJDHGHJHDBDHOEBUMEHGBGHADNGBGHIJXWADDHGHFJYNEBQEBGHJHHJRZHJCDIDHBCDBHIJCJJHFDQWBHGHFDFDCDBBDBJHCDKL\r\n<BR>\r\nDBBBFDGHIDPFJBBIJDHCDGBBJEBID<BR>"
-  ]
+  ],
+  "notext": true
  },
  "73eca73bb54f5ef9": {
   "title": "Lex Imperii V",
@@ -6516,7 +6588,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "YOUR FLESH IS SWEET"
-  ]
+  ],
+  "notext": true
  },
  "745705d8dd9d7963": {
   "title": "Narsis: A History",
@@ -6528,7 +6601,8 @@
   "title": "Scroll of Borgjen's Bloodfeast",
   "chars": 86,
   "ntags": 3,
-  "tagsig": "2814687b2382"
+  "tagsig": "2814687b2382",
+  "notext": true
  },
  "748f6fb3994d1082": {
   "title": "Accountant's Worksheet",
@@ -6789,7 +6863,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "SWORDLESS THEY FALL"
-  ]
+  ],
+  "notext": true
  },
  "7922ef888ea9cb52": {
   "title": "36 Lessons of Vivec, Sermon 13",
@@ -6894,7 +6969,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "HEART OF THE LAND FILLED WITH FEATHERED PEOPLE NO GRACE AMONG THEM"
-  ]
+  ],
+  "notext": true
  },
  "7a8dd93bcfff1ee7": {
   "title": "Manual of Armor",
@@ -7059,7 +7135,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE ARE NOT BORN"
-  ]
+  ],
+  "notext": true
  },
  "7e3c8105fef0d475": {
   "title": "Mixed Unit Tactics v2",
@@ -7308,7 +7385,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE WORLD SHALL HEAR!"
-  ]
+  ],
+  "notext": true
  },
  "82abf0adac5557d6": {
   "title": "<Placeholder>",
@@ -7422,7 +7500,8 @@
   "title": "Blank Journal",
   "chars": 111,
   "ntags": 8,
-  "tagsig": "bd3981c55e7c"
+  "tagsig": "bd3981c55e7c",
+  "notext": true
  },
  "851d5f3ab2e33f7d": {
   "title": "Erna's Note to Erna",
@@ -7569,7 +7648,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WHERE'S THE MONEY IN THAT?"
-  ]
+  ],
+  "notext": true
  },
  "876f9674ac969966": {
   "title": "The Cake and the Diamond",
@@ -7812,7 +7892,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WE ARE NOT ALL BRAVE"
-  ]
+  ],
+  "notext": true
  },
  "8c6afdc55da756c8": {
   "title": "Dren's Note",
@@ -7965,7 +8046,8 @@
   "tagsig": "ac65153cb444",
   "daedric": [
    "<IMG SRC=\"TR\\tr_bonew_bookart_01.dds\" WIDTH=\"265\" HEIGHT=\"265\"> <BR> FORGE A KEEN FAITH IN THE CRUCIBLE OF SUFFERING <br>\r\n<IMG SRC=\"TR\\tr_bonew_bookart_02.dds\" WIDTH=\"265\" HEIGHT=\"265\"><BR>\r\nFORGE DARKNESS INTO LIGHT<BR>"
-  ]
+  ],
+  "notext": true
  },
  "8f5752ea1f4dd0a8": {
   "title": "Odral's Land Deed",
@@ -7992,7 +8074,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "INVOKE SWIFTLY AND WISELY"
-  ]
+  ],
+  "notext": true
  },
  "8fcb46c1569a7f4d": {
   "title": "Hanin's Witnesses",
@@ -8223,7 +8306,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "AGENT OF MADNESS OR MISCHIEF THAT IS THE QUESTION"
-  ]
+  ],
+  "notext": true
  },
  "9513f6ca7a8aea7b": {
   "title": "Guide to Vivec",
@@ -8259,7 +8343,8 @@
   "title": "The Egg of Time",
   "chars": 355,
   "ntags": 15,
-  "tagsig": "57ff93e88956"
+  "tagsig": "57ff93e88956",
+  "notext": true
  },
  "95adf798927ebbbd": {
   "title": "A Dunce in Morrowind, vol. 2",
@@ -8286,7 +8371,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "TO OBLIVION WITH YOU ALL!"
-  ]
+  ],
+  "notext": true
  },
  "95fdd670d36de9c7": {
   "title": "EEC Accounting Ledger",
@@ -8307,7 +8393,8 @@
   "tagsig": "39b8eebedb74",
   "daedric": [
    "<BR>\r\n\r\nBlessing of Daerir<P>\r\n\r\nRide the storms, lest they ride thee.<P>\r\nConsume the red sands, lest they consume thee<P>\r\nBy the one from the dark waters<P>\r\nBy the one who was first in the deep waters<P>\r\nBy my will I cleanse thee of the red sands.<P>"
-  ]
+  ],
+  "notext": true
  },
  "9617116d1b289054": {
   "title": "Raid on Pyandonea, Book Six",
@@ -8406,7 +8493,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WIELD THE SPIRIT-DOOM IN THE WAR UPON OUR ENEMIES!"
-  ]
+  ],
+  "notext": true
  },
  "97a1f041428abb2d": {
   "title": "A Prayer of Deliverance",
@@ -8472,7 +8560,8 @@
   "title": "Scroll of Lucent Provenance",
   "chars": 153,
   "ntags": 6,
-  "tagsig": "3658a1723924"
+  "tagsig": "3658a1723924",
+  "notext": true
  },
  "989e6b6f38efc6b0": {
   "title": "Guide to Vvardenfell",
@@ -8502,7 +8591,8 @@
   "title": "Scroll of Summon Skeleton",
   "chars": 92,
   "ntags": 3,
-  "tagsig": "f0c061c553d3"
+  "tagsig": "f0c061c553d3",
+  "notext": true
  },
  "98d1c0bcc7043662": {
   "title": "36 Lessons of Vivec, Sermon 22",
@@ -8598,7 +8688,8 @@
   "title": "Drawing",
   "chars": 149,
   "ntags": 6,
-  "tagsig": "3e4322d59710"
+  "tagsig": "3e4322d59710",
+  "notext": true
  },
  "9a94cd3f8a7821e1": {
   "title": "Hospitality Papers",
@@ -8643,7 +8734,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "SHADOWS AND SUN"
-  ]
+  ],
+  "notext": true
  },
  "9afe343fb11c62f7": {
   "title": "Hasphat's notes for Cosades",
@@ -8670,7 +8762,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "BY THE POWER OF THE GODS, I INVOKE THEE"
-  ]
+  ],
+  "notext": true
  },
  "9be8c39e82dea423": {
   "title": "Djulighana's Role",
@@ -8769,7 +8862,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "FROM THE EARTH TO THE AETHER...AND BACK."
-  ]
+  ],
+  "notext": true
  },
  "9cfb1e2d3ec58907": {
   "title": "Codified Law, Vol. I",
@@ -8784,7 +8878,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE TENTH BARRIER BREAKS YOU!"
-  ]
+  ],
+  "notext": true
  },
  "9d15a468425a9724": {
   "title": "Honorable Writ of Execution",
@@ -8802,7 +8897,8 @@
   "title": "Oghma Infinium",
   "chars": 335,
   "ntags": 10,
-  "tagsig": "ea713026d483"
+  "tagsig": "ea713026d483",
+  "notext": true
  },
  "9d58e44a0e26cbc2": {
   "title": "Where Were You ... Dragon Broke",
@@ -8853,7 +8949,8 @@
   "tagsig": "eba86170f3cd",
   "daedric": [
    "FAR UNFOLD HER AMBIT CREPUSCULAR"
-  ]
+  ],
+  "notext": true
  },
  "9e5bb19debdb5fc8": {
   "title": "Father of the Niben",
@@ -8874,7 +8971,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WOE UPON THIS LOCK"
-  ]
+  ],
+  "notext": true
  },
  "9ea2f9bb0b7234a1": {
   "title": "Peakstar",
@@ -8970,7 +9068,8 @@
   "title": "N'Gasta's Necromancy Book",
   "chars": 283,
   "ntags": 19,
-  "tagsig": "20bf171f0be3"
+  "tagsig": "20bf171f0be3",
+  "notext": true
  },
  "a0013fd91847b2b3": {
   "title": "The Spectrum Study",
@@ -9090,7 +9189,8 @@
   "title": "Scroll of Doctrine Panoply",
   "chars": 152,
   "ntags": 6,
-  "tagsig": "91de84a4074d"
+  "tagsig": "91de84a4074d",
+  "notext": true
  },
  "a1a7b83599c00957": {
   "title": "Deed to Indrele's House",
@@ -9165,7 +9265,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "INVOKE WITH FAITH THAT YOUR ENEMIES MUST BE DESTROYED."
-  ]
+  ],
+  "notext": true
  },
  "a2d05401d86ea2fd": {
   "title": "Clerical Procedures",
@@ -9300,7 +9401,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BY THE GODS, I INVOKE THIS POWER"
-  ]
+  ],
+  "notext": true
  },
  "a6305ed547d15936": {
   "title": "Vivec Census and Excise Ledger",
@@ -9375,7 +9477,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BY THE POWER OF THE EIGHTH BARRIER BETWEEN OBLIVION AND AETHERIUS I DEFEND AGAINST MY ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "a72d130a4343c611": {
   "title": "ANCESTORS' ANGUISH REVEALED",
@@ -9456,7 +9559,8 @@
   "tagsig": "2c6341f5dd78",
   "daedric": [
    "CRUSH YOUR ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "a891baba4adfc3cf": {
   "title": "The Annotated Anuad",
@@ -9495,7 +9599,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WOE UPON YOU"
-  ]
+  ],
+  "notext": true
  },
  "a930c6fad10c5b67": {
   "title": "The Pilgrim's Path",
@@ -9558,7 +9663,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MARK WITH MOUTH AND GHOST"
-  ]
+  ],
+  "notext": true
  },
  "aaa76094f974bf82": {
   "title": "Treaty of the Armistice",
@@ -9702,7 +9808,8 @@
   "title": "Map of the Seawall",
   "chars": 169,
   "ntags": 10,
-  "tagsig": "2f5ca68f906f"
+  "tagsig": "2f5ca68f906f",
+  "notext": true
  },
  "ad64f0e779eb455e": {
   "title": "The Ebonheart Bellman",
@@ -9831,7 +9938,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "FATHER, FORGIVE ME."
-  ]
+  ],
+  "notext": true
  },
  "afc9f774f12a050f": {
   "title": "Honorable Writ of Execution",
@@ -9942,7 +10050,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WOE UPON YOU"
-  ]
+  ],
+  "notext": true
  },
  "b1947ba0146a4ee8": {
   "title": "Sheogorath Invents Music",
@@ -10089,7 +10198,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MAY THE WATER BEAR ME TO SAFETY"
-  ]
+  ],
+  "notext": true
  },
  "b52cfe80efc8c5af": {
   "title": "Bounty: Rogue Ashlanders",
@@ -10146,7 +10256,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BY THE POWER OF THE SEVENTH BARRIER BETWEEN MUNDUS AND AETHERIUS I DEFEND AGAINST MY ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "b643379fafa9bbfd": {
   "title": "Scroll of Daydene's Panacea",
@@ -10155,7 +10266,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "MY SOUL IS PAINED. INVOKE AND RELEASE ME FROM ANGUISH AND SUFFERING"
-  ]
+  ],
+  "notext": true
  },
  "b64d5624ed0b7b83": {
   "title": "EEC Articles of Incorporation",
@@ -10194,7 +10306,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DEATH AND DESTRUCTION TO YOUR ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "b70c7e98d1a2481a": {
   "title": "36 Lessons of Vivec, Sermon 20",
@@ -10209,7 +10322,8 @@
   "tagsig": "7a357846a022",
   "daedric": [
    "<IMG SRC=\"TR\\WormMystery01.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR> ENSNARE A MORTAL WITH THESE SIGILS <br>\r\n<IMG SRC=\"TR\\WormMystery02.dds\" WIDTH=\"240\" HEIGHT=\"240\"><BR>\r\nAND ITS SOUL SHALL SPLIT INTO THREE <BR>"
-  ]
+  ],
+  "notext": true
  },
  "b8c5bbe245c39161": {
   "title": "A Hypothetical Treachery",
@@ -10302,7 +10416,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DAMNATION IN THE NAME OF RIGHTEOUSNESS"
-  ]
+  ],
+  "notext": true
  },
  "ba3417194d0a0b11": {
   "title": "The Ruins of Kemel-Ze",
@@ -10338,7 +10453,8 @@
   "title": "Note",
   "chars": 2,
   "ntags": 0,
-  "tagsig": "da39a3ee5e6b"
+  "tagsig": "da39a3ee5e6b",
+  "notext": true
  },
  "baa31ea3a8425682": {
   "title": "Poem",
@@ -10353,7 +10469,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "DESTRUCTION TO ALL FOES"
-  ]
+  ],
+  "notext": true
  },
  "bad1e62789070681": {
   "title": "Horoscope for 3E 427",
@@ -10368,7 +10485,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "NINE-FOLD WOES AND WEAKNESSES UPON YOU, HEATHEN SERVANTS OF DARKNESS"
-  ]
+  ],
+  "notext": true
  },
  "bae9b38e0b98553b": {
   "title": "EEC INVESTS IN CANYON OUTPOST",
@@ -10695,7 +10813,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INVOKE SWIFTLY AND WISELY"
-  ]
+  ],
+  "notext": true
  },
  "c0375767bd295cd9": {
   "title": "Hasphat's Notes for Cosades",
@@ -10710,7 +10829,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INVOKE SWIFTLY AND UNWISELY"
-  ]
+  ],
+  "notext": true
  },
  "c0625c695678d03d": {
   "title": "History of The Oroynyon Family",
@@ -10791,7 +10911,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "FOLLOW THE GE"
-  ]
+  ],
+  "notext": true
  },
  "c16ab1690e7b6cce": {
   "title": "Defective Scroll of Jumping",
@@ -10800,7 +10921,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WOE UPON MY KNEES"
-  ]
+  ],
+  "notext": true
  },
  "c16ebdd05dcbfbd0": {
   "title": "100 Dream-Visions of Kallistis",
@@ -10971,7 +11093,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BE WISE INVOKING YOUR WILL"
-  ]
+  ],
+  "notext": true
  },
  "c4f0948ab228e07e": {
   "title": "Red Book of 3E 426",
@@ -11283,7 +11406,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "I AM THAT IS AND ALWAYS WAS"
-  ]
+  ],
+  "notext": true
  },
  "cabaea84e219c1c7": {
   "title": "Murudius",
@@ -11370,7 +11494,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "WOE UPON ME"
-  ]
+  ],
+  "notext": true
  },
  "cc726db97b23aedd": {
   "title": "Honorable Writ of Execution",
@@ -11409,7 +11534,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BEGONE!"
-  ]
+  ],
+  "notext": true
  },
  "cd532af7d4c2ac17": {
   "title": "<Deprecated>",
@@ -11772,7 +11898,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BEHOLD!"
-  ]
+  ],
+  "notext": true
  },
  "d325be188299e935": {
   "title": "2920, Second Seed",
@@ -11919,7 +12046,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE NINTH BARRIER CANNOT EXIST!"
-  ]
+  ],
+  "notext": true
  },
  "d529ab5f046eeca3": {
   "title": "2920, Sun's Height",
@@ -11958,7 +12086,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "BY THE GODS!"
-  ]
+  ],
+  "notext": true
  },
  "d5c3f65f3bb97d9c": {
   "title": "Old Schematics",
@@ -12147,7 +12276,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "YOU SHALL NOT PASS!"
-  ]
+  ],
+  "notext": true
  },
  "d96c84cc329e102b": {
   "title": "Lord Jornibret's Last Dance",
@@ -12177,7 +12307,8 @@
   "title": "Scroll of Divine Intervention",
   "chars": 85,
   "ntags": 3,
-  "tagsig": "2b00c69581f9"
+  "tagsig": "2b00c69581f9",
+  "notext": true
  },
  "d9cb43f58bd2f8d9": {
   "title": "The Dwarven Firmament",
@@ -12201,7 +12332,8 @@
   "title": "<Deprecated>",
   "chars": 14,
   "ntags": 1,
-  "tagsig": "bb5d2cee508c"
+  "tagsig": "bb5d2cee508c",
+  "notext": true
  },
  "da2b261ac5bbd018": {
   "title": "Property of Jolda",
@@ -12240,7 +12372,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "ALL LANGUAGE IS BASED ON MEAT"
-  ]
+  ],
+  "notext": true
  },
  "db082c4430e03c7e": {
   "title": "Realizations of Acrobacy",
@@ -12354,7 +12487,8 @@
   "title": "Scroll of Base Philosophies",
   "chars": 157,
   "ntags": 6,
-  "tagsig": "5832fc24d84c"
+  "tagsig": "5832fc24d84c",
+  "notext": true
  },
  "dca1192e59f350a3": {
   "title": "Tax Record",
@@ -12453,7 +12587,8 @@
   "tagsig": "356435609807",
   "daedric": [
    "<BR>\r\n<BR>\r\nMAY THE BEARER OF THIS MARK RESPECT THE AUTHORITY OF THE MASTER OF THE TOWER<BR>\r\n<BR>\r\nMAY THE MARK BE A PERMANENT CURSE UPON THE HEAD OF ANY WHO SPURN THE TRUST OF THE MASTER OF THE TOWER<BR>\r\n<BR>\r\nMAY THE RIGHT OF PASSKEY BE BESTOWED UPON THE FAITHFUL FRIEND OF THE MASTER OF THE TOWER<BR>\r\n<BR>\r\nMAY THE MASTER OF THE TOWER NEVER REVOKE THE RIGHT OF PASSKEY UNLESS THE WRIT BE VIOLATED<BR>\r\n<BR>"
-  ]
+  ],
+  "notext": true
  },
  "de01e6f9250d7613": {
   "title": "A Just Punishment",
@@ -12486,7 +12621,8 @@
   "tagsig": "979c634f920f",
   "daedric": [
    "THE GREATEST THROUGHOUT HISTORY HAVE NEVER SHIED AWAY FROM THE TOTAL DESTRUCTION OF THEIR ENEMIES"
-  ]
+  ],
+  "notext": true
  },
  "de7d12ba019a0c09": {
   "title": "The Seven Fights I",
@@ -12699,7 +12835,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "YOU CANNOT JUMP OVER OUR SHADOW"
-  ]
+  ],
+  "notext": true
  },
  "e3c4fd97a34b7277": {
   "title": "InfoBox - Dwemer Chain Junc",
@@ -12903,7 +13040,8 @@
   "title": "Scroll of Invalidation",
   "chars": 151,
   "ntags": 6,
-  "tagsig": "c66d334d3304"
+  "tagsig": "c66d334d3304",
+  "notext": true
  },
  "e7e06709854bd9a0": {
   "title": "The Magicka of a Moons Dancer",
@@ -12972,7 +13110,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THAT WHICH YOU CAN SEE IS YOURS"
-  ]
+  ],
+  "notext": true
  },
  "e88f0c8aa4c4af8e": {
   "title": "Scroll of Didala's Knack",
@@ -12981,7 +13120,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "IN THE NAME OF THE GODS!"
-  ]
+  ],
+  "notext": true
  },
  "e8a0c64f9dad9640": {
   "title": "Honorable Writ of Execution",
@@ -13041,7 +13181,8 @@
   "title": "Scroll of Tacit Ingress",
   "chars": 147,
   "ntags": 6,
-  "tagsig": "500004874ddc"
+  "tagsig": "500004874ddc",
+  "notext": true
  },
  "e9a041219108bac4": {
   "title": "Scroll of Celerity",
@@ -13050,7 +13191,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INVOKE IN THE NAME OF RIGHTEOUSNESS"
-  ]
+  ],
+  "notext": true
  },
  "e9b940a60921ddb7": {
   "title": "A Dunce in Morrowind, vol. 1",
@@ -13485,7 +13627,8 @@
   "tagsig": "cbb21458c5c3",
   "daedric": [
    "SUFFER NO FOOLS. INVOKE WITH NO DOUBTS, NO HESITATION."
-  ]
+  ],
+  "notext": true
  },
  "f0d0e30bf84e2590": {
   "title": "Fools' Ebony, part III",
@@ -13521,7 +13664,8 @@
   "title": "<Deprecated>",
   "chars": 12,
   "ntags": 1,
-  "tagsig": "f13866e79e9a"
+  "tagsig": "f13866e79e9a",
+  "notext": true
  },
  "f13993a6f448b6f1": {
   "title": "The Firmament",
@@ -13578,7 +13722,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE  SOUL OF ANOTHER IS PAINED. INVOKE AND RELEASE HIM FROM ANGUISH AND SUFFERING"
-  ]
+  ],
+  "notext": true
  },
  "f24f68deaeebbfcf": {
   "title": "36 Lessons of Vivec, Sermon 31",
@@ -13593,7 +13738,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "STRENGTH AND HONOR. DEATH TO OUR ENEMIES."
-  ]
+  ],
+  "notext": true
  },
  "f26cd645e7fc5e00": {
   "title": "Before the Ages of Man",
@@ -13626,7 +13772,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "UNTIL MY DEATH I ALWAYS STAND"
-  ]
+  ],
+  "notext": true
  },
  "f2ed9a98b5b0326a": {
   "title": "Guide to Silgrad",
@@ -13812,7 +13959,8 @@
   "title": "Scroll of Subterrene Axioms",
   "chars": 155,
   "ntags": 6,
-  "tagsig": "3c2227f6c8aa"
+  "tagsig": "3c2227f6c8aa",
+  "notext": true
  },
  "f6ad21a7d0880419": {
   "title": "Palla, Book I",
@@ -13953,7 +14101,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "INVOKE SWIFTLY AND WISELY"
-  ]
+  ],
+  "notext": true
  },
  "f889f87b5d64d6c8": {
   "title": "The Last Dart of the Scholar",
@@ -13980,7 +14129,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "THE STORM COMETH"
-  ]
+  ],
+  "notext": true
  },
  "f8fa93c32df46521": {
   "title": "Dres Cremation Practices",
@@ -14037,7 +14187,8 @@
   "tagsig": "c60b78cedf70",
   "daedric": [
    "GREED EVENTUALLY TRAPS US ALL"
-  ]
+  ],
+  "notext": true
  },
  "f97343b12695fd88": {
   "title": "Bones of Hlur'Matta",
@@ -14280,7 +14431,8 @@
   "tagsig": "b5ac92b0f23a",
   "daedric": [
    "WIIJNUGHWBIJVNDHCDCDIDIJXOCDCDLUFJAFCDUYBJXHBJBTEBABEZBBSJEBEBIJIDDHCJEBEBHJENEBULADEZEBDOFDFDBDCDBDZFFDJHGBDEIJEBGBGX<BR>\r\nCDQBCDFEBJBBJQGBYABBFDFDTCEBEBIJDHCDIJHJBBBJHYEBIJEBYOGHRBGBIKBBFDUEEBSNIDIJIDBBGBCDBJRWBHZNHJPNBBTSAHEBBZCDIDJKDHXTBB<BR>\r\nABLXCDEDGHWUEBGBRPCDIKBJOBIJGRGHMMDBCDBRIJDEDHCDLYHJAMBBDBBBVAEBGBIDIJIUFJAPCDXIEBAQCJVIIDOTGHFJUACDACIJDHEBHLGBNYDBK\r\n<BR>\r\nHEBIDNIGBGHIJBJVXGHGBCDIJDHCDEBCAHJPSIDDHGHHJIJHKIDEBXEDBDTDHIJCDBJGBQDCDIJIDANIDFJBBTPEBEBBDHJHEEBGBUJDBDHGHJHIDCDIJCDT\r\n<BR>\r\nFFDABKIBBGBGBEBEBLAGBIJLKGHFJGHHJCDBJEEEBHJIWCDNCBHIJBHGHIFGBCJFDEBBHXPIJPDADEBIJTCDHVHHJCDBJGTGHIAHJCWBBGBNREBXKGBUOB\r\n<BR>\r\nJFWGHSRHJEBFDDHFDSFBBHXBBFDRWJHEPBBFEGBBJXNCDBCABCDTWGBDKIJDHCDCDWGFJAPHBVPEBHJUGCDGGIDADJHHJCDFDLTEBEBEBEBGHJHB\r\n<BR>\r\nHAHBBNNGBCNHBHJJYCDBJEFEBDIBHQBIJTWIJDKDHCDSUCDJKFJHBANEBHJCDIDBHPZGHOJFDFDORBBHBIDFJCDBBKVIDTMADCDPEFDFDMCBBIDLOEBZ\r\n<BR>\r\nMADCDIDEMDHGHNDJHISFDMGBJADBHGHXXHJEHLIIJNAGHDBTMCDGPIJPPDHCDHJKTIJGHIDUPBBIRABPDCDINGHJHVYHJWIDHGHDXJHSUIDXDCDEBEBG\r\n<BR>\r\nHBHJHUNBHXTGHJHEXFDBJIRBHFDVOBBEBSUFJBBZFHBGHFGIDEBMSIJEBELGHGBGHNDGBOBIJKPDHMCCDFTBHGHTGJHGBBHEBFDBDQJEBEBNTFJCDHJ\r\n<BR>\r\nWBCDFDEBEBBBIDEHDPEBGBDBPJCDABRMCDSZGBUZDBGHNMIJDHRYHJVPCDGBWZBBAEGBMGBJGBLMCDFDUTGHCUIJEQDHFJJHPAIDYCIJESBBWFBJXH\r\n<BR>\r\nFJEBIJSFIJDHBBIJEBEBGHCQJHDQBBJCHJCDLIGHXYFDFLBJCDZNHJBTBBGBBJDOADEBIDJUCDHJCKBBLNGBBJSJEBKDGBCDBKABCDHJVDEBEBFGADBBEBE\r\n<BR>\r\nBJCIDJFJHCPHBCDMIHJMEEBGHHJFPIJRTGHIJDHCDZLFJEBGBNYIJDXDHJRCDXHBBRMHJBHBBGBCDBBHJIJWKIDEBEBWIGHUOJHEJHJDHEUGHLFGBHYGH\r\n<BR>\r\nPMHJCDBJIDIJJHBJQHCDGBIJYJFJBBRIIDIJCDHJAZBBHJRDEBEBGHHUGB"
-  ]
+  ],
+  "notext": true
  },
  "ff448509d49d380f": {
   "title": "Rolled Paper",
