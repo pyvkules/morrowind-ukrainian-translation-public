@@ -26,6 +26,11 @@ _backup*/
 tools/base.esm
 tools/corpus.json
 
+# Англійські тексти книг - 8,5 МБ чужої прози, витягнутої з гри на місці.
+# Переклад прив'язаний до хеша, а не до цього файлу, тож тримати його в git
+# не треба: extract_books.py відтворює його з копії гри самого гравця.
+tools/books/_source.json
+
 # Local machine paths
 config.json
 

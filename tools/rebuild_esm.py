@@ -63,15 +63,20 @@ if os.path.isfile(legacy_info):
     for en, uk_text in json.load(open(legacy_info, encoding='utf-8')).items():
         memory.setdefault(en, uk_text)      # наш переклад має пріоритет
 
+import books as book_texts
+BOOKS = book_texts.load()
+
 print('base: %s (%s)' % (os.path.basename(BASE), base_kind))
 print('translation memory entries: %d (%d наших + %d давніх)'
       % (len(memory), ours, len(memory) - ours))
+print('перекладених текстів книг: %d' % len(BOOKS))
 
 data = open(BASE, 'rb').read()
 out = bytearray()
 pos = 0
 n = len(data)
 replaced = 0
+books_done = 0
 warn = 0
 
 while pos + 16 <= n:
@@ -80,28 +85,35 @@ while pos + 16 <= n:
     header_rest = data[pos+8:pos+16]
     body = data[pos+16:pos+16+size]
 
-    if rtype == b'INFO':
-        # rebuild body with possibly replaced NAME subrecord
+    # INFO/NAME - репліка діалогу, BOOK/TEXT - сторінки книги. Механіка та сама:
+    # знайти підзапис, підмінити рядок, перерахувати довжини.
+    if rtype in (b'INFO', b'BOOK'):
+        want = b'NAME' if rtype == b'INFO' else b'TEXT'
         new_body = bytearray()
         sp = 0
         while sp + 8 <= len(body):
             st = body[sp:sp+4]
             ssize = struct.unpack('<I', body[sp+4:sp+8])[0]
             sdata = body[sp+8:sp+8+ssize]
-            if st == b'NAME':
+            if st == want:
                 had_null = sdata.endswith(b'\0')
                 text = (sdata[:-1] if had_null else sdata).decode('cp1251', 'replace')
-                if text in memory:
+                uk = memory.get(text) if rtype == b'INFO' \
+                    else BOOKS.get(book_texts.key(text))
+                if uk:
                     try:
-                        enc = memory[text].encode('cp1251')
+                        enc = uk.encode('cp1251')
                     except UnicodeEncodeError as e:
                         warn += 1
-                        print('WARN cp1251 fail:', repr(memory[text][:60]), e)
-                        enc = memory[text].encode('cp1251', 'replace')
+                        print('WARN cp1251 fail:', repr(uk[:60]), e)
+                        enc = uk.encode('cp1251', 'replace')
                     if had_null:
                         enc += b'\0'
                     sdata = enc
-                    replaced += 1
+                    if rtype == b'INFO':
+                        replaced += 1
+                    else:
+                        books_done += 1
             new_body += st + struct.pack('<I', len(sdata)) + sdata
             sp += 8 + ssize
         body = bytes(new_body)
@@ -112,5 +124,6 @@ while pos + 16 <= n:
 
 with open(OUT, 'wb') as f:
     f.write(out)
-print(f'INFO texts replaced: {replaced}, encode warnings: {warn}')
+print(f'INFO texts replaced: {replaced}, BOOK texts replaced: {books_done}, '
+      f'encode warnings: {warn}')
 print(f'written: {OUT} ({len(out)} bytes)')

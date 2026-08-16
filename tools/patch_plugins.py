@@ -47,7 +47,11 @@ for src_path in glob.glob(os.path.join(TOOLS, 'src', '*.json')):
             idx = int(idx_str)
             if 0 <= idx < len(src) and translation and translation != src[idx]:
                 memory[src[idx]] = translation
+import books as book_texts
+BOOKS = book_texts.load()
+
 print('translation memory entries:', len(memory))
+print('перекладених текстів книг:', len(BOOKS))
 
 # --- resolve modlist: data dirs (later wins) + content order ---
 dirs, contents = paths.read_modlist()
@@ -64,23 +68,27 @@ def patch(data):
         size = struct.unpack('<I', data[pos + 4:pos + 8])[0]
         header_rest = data[pos + 8:pos + 16]
         body = data[pos + 16:pos + 16 + size]
-        if rtype == b'INFO':
+        # INFO/NAME - репліка діалогу, BOOK/TEXT - сторінки книги
+        if rtype in (b'INFO', b'BOOK'):
+            want = b'NAME' if rtype == b'INFO' else b'TEXT'
             new_body = bytearray()
             sp = 0
             while sp + 8 <= len(body):
                 st = body[sp:sp + 4]
                 ssize = struct.unpack('<I', body[sp + 4:sp + 8])[0]
                 sdata = body[sp + 8:sp + 8 + ssize]
-                if st == b'NAME':
+                if st == want:
                     had_null = sdata.endswith(b'\0')
                     text = (sdata[:-1] if had_null else sdata).decode('cp1251', 'replace')
-                    if text in memory:
+                    uk = memory.get(text) if rtype == b'INFO' \
+                        else BOOKS.get(book_texts.key(text))
+                    if uk:
                         try:
-                            enc = memory[text].encode('cp1251')
+                            enc = uk.encode('cp1251')
                         except UnicodeEncodeError as e:
                             warn += 1
-                            print('  WARN cp1251:', repr(memory[text][:60]), e)
-                            enc = memory[text].encode('cp1251', 'replace')
+                            print('  WARN cp1251:', repr(uk[:60]), e)
+                            enc = uk.encode('cp1251', 'replace')
                         sdata = enc + b'\0' if had_null else enc
                         replaced += 1
                 new_body += st + struct.pack('<I', len(sdata)) + sdata

@@ -157,13 +157,57 @@ def check_gmst():
     return len(uk), len(en)
 
 
+# ---------------------------------------------------------------- 7: тексти книг
+def check_books():
+    """Переклад книги мусить зберегти розмітку й даедричні руни.
+
+    Англійських текстів у репозиторії нема (8,5 МБ чужої прози), тож звіряємось
+    із books_meta.json: там кількість тегів, підпис їхньої послідовності та самі
+    фрагменти, писані даедричним шрифтом. Цього досить, щоб спіймати зламану
+    розмітку, не тримаючи оригіналу.
+    """
+    b = os.path.join(TOOLS, 'books')
+    metap = os.path.join(b, 'books_meta.json')
+    ukp = os.path.join(b, 'uk_books.json')
+    if not (os.path.isfile(metap) and os.path.isfile(ukp)):
+        return 0, 0
+    meta = json.load(open(metap, encoding='utf-8'))
+    uk = json.load(open(ukp, encoding='utf-8'))
+    uk.pop('_comment', None)
+    tag = re.compile(r'<[^>]*>')
+    for k, v in uk.items():
+        where = 'uk_books.json[%s]' % k
+        m = meta.get(k)
+        if m is None:
+            err('%s: такої книги нема в books_meta.json' % where)
+            continue
+        where = 'uk_books.json[%s]' % m['title']
+        encodable(v, where)
+        seq = tag.findall(v)
+        if len(seq) != m['ntags']:
+            err('%s: тегів %d, а в оригіналі %d' % (where, len(seq), m['ntags']))
+        else:
+            import hashlib
+            sig = hashlib.sha1('|'.join(seq).encode('utf-8')).hexdigest()[:12]
+            if sig != m['tagsig']:
+                err('%s: теги ті самі числом, але змінені або переставлені' % where)
+        for span in m.get('daedric', []):
+            if span not in v:
+                err('%s: втрачено даедричний фрагмент %r - цей шрифт малює '
+                    'латиницю рунами, кирилиця в ньому не покажеться'
+                    % (where, span[:40]))
+    return len(uk), len(meta)
+
+
 pairs = check_slices()
 topics_done, topics_all = check_topics()
 gmst_done, gmst_all = check_gmst()
+books_done, books_all = check_books()
 
 print('перекладених рядків у зрізах : %d' % pairs)
 print('теми діалогів                : %d / %d' % (topics_done, topics_all))
 print('рядки інтерфейсу             : %d перекладено з %d наявних' % (gmst_done, gmst_all))
+print('тексти книг                  : %d / %d' % (books_done, books_all))
 print()
 for w in warnings:
     print('  ? %s' % w)
