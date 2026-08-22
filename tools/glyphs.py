@@ -28,6 +28,7 @@ cp1251 - лише половина перевірки. Символ може ч�
 import io
 import json
 import os
+import re
 import struct
 import sys
 
@@ -132,8 +133,17 @@ def missing(text):
             if ord(c) not in have and c not in '\r\n\t '}
 
 
+PAIR = re.compile('[«„]([^«»„“”]*)[»“]')
+
+
 def fix(text):
-    """Замінити те, що має відому заміну. Решту не чіпаємо - це має побачити людина."""
+    """Замінити те, що має відому заміну. Решту не чіпаємо - це має побачити людина.
+
+    Пари лапок обробляємо ПЕРШИМИ й цілком: посимвольна заміна дала б з «„текст“»
+    рядок «“текст“» - дві однакові відкривні лапки замість пари.
+    """
+    if PAIR.search(text):
+        text = PAIR.sub('“\\1”', text)
     for bad, good in SUBST.items():
         if bad in text:
             text = text.replace(bad, good)
