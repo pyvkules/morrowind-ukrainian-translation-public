@@ -185,7 +185,7 @@ def check_books():
     metap = os.path.join(b, 'books_meta.json')
     ukp = os.path.join(b, 'uk_books.json')
     if not (os.path.isfile(metap) and os.path.isfile(ukp)):
-        return 0, 0
+        return 0, 0, 0, 0
     meta = json.load(open(metap, encoding='utf-8'))
     uk = json.load(open(ukp, encoding='utf-8'))
     uk.pop('_comment', None)
@@ -211,18 +211,25 @@ def check_books():
                 err('%s: втрачено даедричний фрагмент %r - цей шрифт малює '
                     'латиницю рунами, кирилиця в ньому не покажеться'
                     % (where, span[:40]))
-    return len(uk), len(meta)
+    # У роботі не всі 2327 книг: 152 без читаного тексту (суцільні руни,
+    # картинка, порожня заготовка) і 41 нотатка для модерів відсіяні ще
+    # видобувачем. Друкувати «з 2327» - значить занижувати частку і щоразу
+    # наново з'ясовувати, чому цифри не сходяться.
+    work = [k for k, m in meta.items()
+            if not m.get('notext') and not m.get('devnote')]
+    return sum(1 for k in work if k in uk), len(work), len(uk), len(meta)
 
 
 pairs = check_slices()
 topics_done, topics_all = check_topics()
 gmst_done, gmst_all = check_gmst()
-books_done, books_all = check_books()
+books_done, books_work, books_written, books_all = check_books()
 
 print('перекладених рядків у зрізах : %d' % pairs)
 print('теми діалогів                : %d / %d' % (topics_done, topics_all))
 print('рядки інтерфейсу             : %d перекладено з %d наявних' % (gmst_done, gmst_all))
-print('тексти книг                  : %d / %d' % (books_done, books_all))
+print('тексти книг                  : %d / %d у роботі (записів %d, книг усього %d)'
+      % (books_done, books_work, books_written, books_all))
 print()
 for w in warnings:
     print('  ? %s' % w)

@@ -55,7 +55,9 @@ def bare(text):
 
 groups = defaultdict(list)
 for k, m in meta.items():
-    if m.get('devnote') or not m.get('chars'):
+    # notext теж пропускаємо: без нього тут вічно висіла пара суцільно
+    # даедричних сувоїв, яку перекласти неможливо в принципі
+    if m.get('notext') or m.get('devnote') or not m.get('chars'):
         continue
     groups[(bare(src[k]), m['tagsig'])].append(k)
 
