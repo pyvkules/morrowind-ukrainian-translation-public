@@ -22,6 +22,7 @@
 | `py tools\items\settle_names.py` | суперечка «одна назва — два написання»: хто перемагає за корпусом; `--apply` переписує безпечні |
 | `py tools\dialogue\latin_left.py` | англійські назви, що лишилися **всередині** вже перекладених реплік |
 | `py tools\items\check_generated.py` | чи перезбірка не з'їла ручних правок у складених `uk_*.json` |
+| `py tools\books\transplant.py` | копія книги з тією ж прозою, але іншими тегами: пересадити переклад |
 | `py tools\books\extract_books.py --apply` | зібрати книги з модліста, оновити метадані |
 | `py tools\books\propagate.py --apply` | перенести переклад книги на її близнюків з інших плагінів |
 | `py tools\topics\check_sources.py` | те, що ганяє CI: зрізи, теми, GMST, книги |
