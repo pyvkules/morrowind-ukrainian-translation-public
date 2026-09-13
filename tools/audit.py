@@ -18,7 +18,11 @@ from collections import defaultdict
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace', write_through=True)
 
 CFG = r'E:\Morrowind\OpenMW\just-good-morrowind-plus\openmw.cfg'
-MODROOT = r'E:\Morrowind\OpenMW\mods\ukrainian-l10n'
+# Каталог самого мода: беремо від файлу, а не рядком. Каталог уже раз
+# перейменували, і закам'янілий шлях тоді перестав збігатися - перевірка
+# нижче почала пропускати не нашу латку, а нічого, і лічильник міряв
+# український текст замість англійського джерела.
+MODROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # record type -> (subrecord holding the human-readable string, category label)
 NAMED = {
