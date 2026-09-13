@@ -149,6 +149,12 @@ def translit_word(w):
         s = s[:-3]
     out = []
     i = 0
+    # Данмерське Hl- на початку слова - Хл-, а не Гл- (CONVENTIONS §4):
+    # Хлаалу, Хлеран, Хлан. Звичайне h у нас дає г, тож без цього винятку
+    # виходив «Глеран», і кожне таке ім'я доводилося правити руками.
+    if s.startswith('hl'):
+        out.append('хл')
+        i = 2
     while i < len(s):
         for dg, rep in DIGRAPHS:
             if s.startswith(dg, i):
