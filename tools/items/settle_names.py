@@ -190,9 +190,39 @@ def apply(fixes):
     return changed
 
 
+def caps(name):
+    return sum(1 for w in WORD.findall(name) if w[:1].isupper())
+
+
+def case_only(bad):
+    """Суперечки, де різниця лише у великих літерах усередині назви.
+
+    Український правопис лишає велику літеру першому слову, а всередині —
+    тільки власним назвам. «Амулет Єдності» проти «Амулет єдності», «Гільдія
+    Бійців» проти «Гільдія бійців» — тут нема чого зважувати корпусом: беремо
+    варіант із меншою кількістю великих. Слово, велике в обох варіантах
+    («Крижаний клинок **Монарха**»), таким і лишається.
+    """
+    out = {}
+    for en, (vs, _) in bad.items():
+        if len(set(v.lower() for v in vs)) != 1:
+            continue
+        out[en] = min(vs, key=lambda v: (caps(v), v))
+    return out
+
+
 def main():
     quiet = '--quiet' in sys.argv
     doit = '--apply' in sys.argv
+    if '--case' in sys.argv:
+        bad = conflicts()
+        fixes = case_only(bad)
+        for en in sorted(fixes):
+            print('%-42s -> %s' % (en, fixes[en]))
+        print('назв: %d' % len(fixes))
+        if doit:
+            print('змінено записів: %d' % apply(fixes))
+        return
     bad = conflicts()
     blob = '\n'.join(texts())
 

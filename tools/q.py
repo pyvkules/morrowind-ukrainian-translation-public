@@ -141,6 +141,11 @@ def left(cat, limit):
     return 0
 
 
+# Назва раси - це одна особа, тема діалогу - народ. «Імперець» на вивісці
+# й «імперці» в темі обидва правильні, і зводити їх нікуди не треба.
+ALLOW = {'Imperial', 'Khajiit', 'Skaal'}
+
+
 def dup(limit):
     """Одна англійська назва з різними українськими - джерело різнобою.
 
@@ -152,6 +157,8 @@ def dup(limit):
     variants = defaultdict(set)
     where = defaultdict(set)
     for name, k, v in corpus():
+        if k in ALLOW:
+            continue
         variants[k].add(v[:1].upper() + v[1:])
         where[k].add(name)
     bad = {k: vs for k, vs in variants.items() if len(vs) > 1}
