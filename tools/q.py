@@ -9,7 +9,7 @@
   py q.py key <підрядок> [...]   - як перекладено ключі, що містять підрядок
   py q.py val <підрядок> [...]   - де в перекладах трапляється цей рядок
   py q.py left <категорія> [N]   - перші N неперекладених назв категорії
-  py q.py dup                    - той самий ключ з різними перекладами
+  py q.py dup [N]                - той самий ключ з різними перекладами (перші N)
 
 Пошук без урахування регістру; кілька підрядків - кілька незалежних питань.
 """
@@ -26,12 +26,45 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LIMIT = 12
 
 
+def topic_names():
+    """Теми діалогів: у файлах перекладу ключ - це номер рядка, а не англійська.
+
+    Через це `dup` роками не бачив цілого класу різнобою: та сама річ звалася
+    в темі одним словом, а в словнику предметів іншим (Bitter Cup - «Гірка
+    Чаша» проти «Гіркий келих»). Розгортаємо номер назад в англійську назву,
+    і питання стає таким самим, як для предметів.
+    """
+    src = os.path.join(HERE, 'topics', 'dial_topics.json')
+    if not os.path.isfile(src):
+        return
+    try:
+        names = json.load(open(src, encoding='utf-8'))
+    except (ValueError, OSError):
+        return
+    if not isinstance(names, list):
+        return
+    for path in sorted(glob.glob(os.path.join(HERE, 'topics', 'uk_dial_topics*.json'))):
+        name = os.path.basename(path)
+        try:
+            data = json.load(open(path, encoding='utf-8'))
+        except (ValueError, OSError):
+            continue
+        if not isinstance(data, dict):
+            continue
+        for k, v in data.items():
+            if not (isinstance(v, str) and k.isdigit()):
+                continue
+            i = int(k)
+            if 0 <= i < len(names):
+                yield name, names[i], v
+
+
 def corpus():
     """Усі пари англійська->українська, які вже десь зафіксовані."""
     for pat in ('items/*.json', 'topics/uk_*.json', 'gmst/uk_*.json'):
         for path in sorted(glob.glob(os.path.join(HERE, pat))):
             name = os.path.basename(path)
-            if name.startswith('_'):
+            if name.startswith('_') or name.startswith('uk_dial_topics'):
                 continue
             try:
                 data = json.load(open(path, encoding='utf-8'))
@@ -42,6 +75,8 @@ def corpus():
             for k, v in data.items():
                 if isinstance(v, str) and k != '_comment':
                     yield name, k, v
+    for row in topic_names():
+        yield row
 
 
 def by_key(needles):
@@ -106,7 +141,7 @@ def left(cat, limit):
     return 0
 
 
-def dup():
+def dup(limit):
     """Одна англійська назва з різними українськими - джерело різнобою.
 
     Велику літеру на початку не рахуємо за розбіжність: композитори складають
@@ -121,7 +156,7 @@ def dup():
         where[k].add(name)
     bad = {k: vs for k, vs in variants.items() if len(vs) > 1}
     print('розбіжностей: %d' % len(bad))
-    for k in sorted(bad)[:60]:
+    for k in sorted(bad)[:limit]:
         print('   %-40s %s' % (k, ' | '.join(sorted(bad[k]))))
         print('   %-40s   у: %s' % ('', ', '.join(sorted(where[k]))))
     return 0
@@ -139,7 +174,7 @@ def main(argv):
     elif cmd == 'left' and args:
         return left(args[0], int(args[1]) if len(args) > 1 else 60)
     elif cmd == 'dup':
-        return dup()
+        return dup(int(args[0]) if args else 60)
     else:
         print(__doc__)
         return 1
