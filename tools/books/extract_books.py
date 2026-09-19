@@ -50,6 +50,16 @@ DAEDRIC = re.compile(r'<FONT[^>]*FACE="Daedric"[^>]*>(.*?)(?=</FONT>|<FONT|$)',
 # (OAAB_Data, Tamriel_Data) і зняті з ужитку заготовки. Гравець їх не бачить -
 # у нього на обкладинці стояло б «InfoBox» або «<Deprecated>», - тож
 # перекладати їх нема сенсу
+# Частина нотаток для модерів має цілком звичайну назву - «The Abecean
+# Monitor», - і впізнати їх можна лише з тексту. Модер і сам лишає там
+# прикмету: «якщо ти читаєш це в грі, щось пішло не так», вказівки, куди
+# класти запис, або незаповнену заготовку «TITLE GOES HERE».
+DEVBODY = re.compile(
+    r"(if you'?re reading this in game"
+    r"|do not place it into inventories"
+    r"|title goes here"
+    r"|remember to end the last paragraph)", re.IGNORECASE)
+
 DEVNOTE = re.compile(r'^(infobox|<deprecated|<placeholder|<template|<unused)',
                      re.I)
 
@@ -138,7 +148,7 @@ def main():
                 meta[k]['daedric'] = runes
             if not plain(text):
                 meta[k]['notext'] = True
-            if DEVNOTE.match(title):
+            if DEVNOTE.match(title) or DEVBODY.search(text):
                 meta[k]['devnote'] = True
 
     done = {}

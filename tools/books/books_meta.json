@@ -2895,7 +2895,8 @@
   "title": "The Abecean Monitor",
   "chars": 694,
   "ntags": 14,
-  "tagsig": "e13c83361426"
+  "tagsig": "e13c83361426",
+  "devnote": true
  },
  "31c5c8cb3295cc31": {
   "title": "Emeralds",
@@ -4278,7 +4279,8 @@
   "title": "The Abecean Monitor",
   "chars": 694,
   "ntags": 14,
-  "tagsig": "e13c83361426"
+  "tagsig": "e13c83361426",
+  "devnote": true
  },
  "4a94bd42a6bb40e9": {
   "title": "HIGH HLAALU ABDICATES",
@@ -5513,7 +5515,8 @@
   "title": "The Canyon Echo",
   "chars": 833,
   "ntags": 14,
-  "tagsig": "a178fb1cb3d4"
+  "tagsig": "a178fb1cb3d4",
+  "devnote": true
  },
  "6228446031321930": {
   "title": "Fragment: On Artaeum",
@@ -7606,7 +7609,8 @@
   "title": "The Abecean Monitor",
   "chars": 654,
   "ntags": 14,
-  "tagsig": "e13c83361426"
+  "tagsig": "e13c83361426",
+  "devnote": true
  },
  "863b18f141245fee": {
   "title": "Honorable Writ of Execution",
@@ -9388,7 +9392,8 @@
   "title": "The Ebonheart Bellman",
   "chars": 837,
   "ntags": 13,
-  "tagsig": "96efec5f80f2"
+  "tagsig": "96efec5f80f2",
+  "devnote": true
  },
  "a4f008734278d494": {
   "title": "GENERAL CASIK ACQUITTED",
@@ -9842,7 +9847,8 @@
   "title": "The Ebonheart Bellman",
   "chars": 837,
   "ntags": 13,
-  "tagsig": "96efec5f80f2"
+  "tagsig": "96efec5f80f2",
+  "devnote": true
  },
  "ad9b85963bd0f93c": {
   "title": "EDITORIAL: DARK ELF SLAVERY",
@@ -10748,7 +10754,8 @@
   "title": "The Canyon Echo",
   "chars": 790,
   "ntags": 14,
-  "tagsig": "a178fb1cb3d4"
+  "tagsig": "a178fb1cb3d4",
+  "devnote": true
  },
  "be2aaa2338188672": {
   "title": "Court Transcript",
@@ -12041,7 +12048,8 @@
   "title": "The Ebonheart Bellman",
   "chars": 794,
   "ntags": 13,
-  "tagsig": "96efec5f80f2"
+  "tagsig": "96efec5f80f2",
+  "devnote": true
  },
  "d4cb85dd83669f33": {
   "title": "InfoBox - Dwemer Act Coherer",
