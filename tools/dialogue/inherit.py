@@ -44,7 +44,9 @@ APPLY = '--apply' in sys.argv
 UNSAFE = '--unsafe' in sys.argv
 CYR = re.compile(u'[Ѐ-ӿ]')
 LAT = re.compile(r'[A-Za-z]{3}')
-WORD = re.compile(r'\w+', re.UNICODE)
+# Апостроф - частина слова, а не межа: інакше `You're` розпадається на два
+# токени, і правка `You're`->`Your` виглядає зміною змісту, хоч це описка.
+WORD = re.compile(r"[\w']+", re.UNICODE)
 # %PCName, %PCRank... - рушій підставляє в них ім'я й звання гравця. Якщо мод
 # додав підстановку, якої у ванілі не було, старий переклад її не має, і в грі
 # лишиться дірка. `check_sources` це ловить, але краще не створювати.
@@ -101,10 +103,32 @@ def edits(a, b):
     return prev[-1]
 
 
+# Службові слова англійської, які в українську не переносяться зовсім:
+# артиклі, прийменники, сполучники. «Patch for Purists» тим і зайнятий,
+# що лагодить граматику оригіналу, а переклад від цього не змінюється.
+# Займенників і дієслів тут свідомо нема: `his`->`her` чи `We`->`They`
+# змінюють зміст, і такі випадки мусить бачити людина.
+ARTICLE = re.compile(
+    r'\b(?:a|an|the|to|of|in|on|at|and|or|that|s)\b', re.IGNORECASE)
+
+
+def letters(text):
+    """Самі літери, без артиклів, пробілів і розділових знаків.
+
+    Англійська граматика на українську не переноситься: вставлений артикль,
+    `soulgems` -> `soul gems`, `alot` -> `a lot` - усе це той самий текст для
+    перекладача. Звівши обидва до суцільного ряду літер, ми саме ці правки й
+    робимо невидимими.
+    """
+    return re.sub(r'[^a-z]', '', ARTICLE.sub(' ', text).lower())
+
+
 def only_typos(new, old):
     """Чи відмінність між текстами - самі лише описки в окремих словах."""
     if sorted(TOKEN.findall(new)) != sorted(TOKEN.findall(old)):
         return False                      # набір підстановок різний
+    if letters(new) == letters(old):
+        return True                       # різниця суто англограматична
     a, b = WORD.findall(new), WORD.findall(old)
     if len(a) != len(b):
         return False                      # слово додано або викинуто
