@@ -98,7 +98,12 @@ def main():
         pool = sorted(seen, key=lambda c: -seen[c])[:40]
         best, score = None, 0.0
         for cand in pool:
-            s = difflib.SequenceMatcher(None, en, cand).ratio()
+            # autojunk=False - обов'язково. За замовчуванням difflib на
+            # послідовності довшій за 200 вважає «сміттям» усе, що трапляється
+            # частіше ніж у 1% елементів, а для рядка це кожна звичайна літера.
+            # Через це та сама репліка з однією викинутою фразою діставала
+            # схожість 0.37 замість 0.89, і добрі відповідники ховалися.
+            s = difflib.SequenceMatcher(None, en, cand, autojunk=False).ratio()
             if s > score:
                 best, score = cand, s
         print('%s:%d  схожість %.2f' % (want, i, score))
