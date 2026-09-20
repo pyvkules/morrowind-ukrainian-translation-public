@@ -64,6 +64,23 @@ def load(path):
     return json.loads(raw.decode('utf-8-sig'))
 
 
+# Яка українська літера може стояти на початку слова, що передає цю
+# англійську. Потрібно, щоб зіставляння слів у назві з двох слів не
+# припасувало `Hlaalu` до «Вартовий» у «Hlaalu Guard» -> «Вартовий Хлаалу».
+FIRST = {
+    'a': 'аеі', 'b': 'б', 'c': 'ксцч', 'd': 'дз', 'e': 'еєі', 'f': 'ф',
+    'g': 'гґдж', 'h': 'хг', 'i': 'іїи', 'j': 'джйж', 'k': 'к', 'l': 'л',
+    'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п', 'q': 'к', 'r': 'р', 's': 'сшз',
+    't': 'тс', 'u': 'ую', 'v': 'в', 'w': 'ву', 'x': 'ксз', 'y': 'йія',
+    'z': 'зжд',
+}
+
+
+def plausible(en, uk):
+    """Чи може це українське слово передавати саме це англійське."""
+    return uk[:1].lower() in FIRST.get(en[:1].lower(), '')
+
+
 def key(word):
     """Ключ групування: початок слова. Відмінок міняє хвіст, а не початок."""
     return word.lower()[:PREFIX]
@@ -89,6 +106,13 @@ def close(a, b):
     return edits(a.lower(), b.lower()) <= MAX_EDITS
 
 
+# Словники, де ключ може бути іменем, а не фразою. Додаткова умова - усі
+# українські слова з великої: «Морений квама-робітник» так не пройде.
+NAME_FILES = ('npc_overrides.json', 'uk_npc.json',
+              'creature_overrides.json', 'uk_creature.json')
+inside = defaultdict(lambda: defaultdict(set))
+
+
 def dict_names():
     """Англійське ім'я -> українське написання зі словників."""
     out = {}
@@ -105,9 +129,49 @@ def dict_names():
                 continue
             ek = [x[:-2] if x.endswith("'s") else x for x in EN_NAME.findall(k)]
             uw = UK_WORD.findall(v)
+            # Ключ мусить **цілком** бути іменем. Інакше «Rock Beetle» дає
+            # одне англійське слово `Beetle`, а «Beetle Shell» - «Панцир»,
+            # і одне припасовується до другого.
+            if ' '.join(ek) != k.replace("'s", '').strip():
+                continue
+            # Ім'я з одного слова беремо звідусіль.
             if len(ek) == 1 and len(uw) == 1 and ek[0] not in STOP:
                 out.setdefault(ek[0], uw[0])
+                inside[ek[0]][uw[0]].add(os.path.basename(path))
+                continue
+            # Ім'я з двох слів розбираємо по словах: `Dagoth Fovon` дає і
+            # Dagoth, і Fovon. Без цього ціле гніздо лишалося невидимим -
+            # 45 словникових «Даґот» проти 533 «Дагот» у текстах.
+            #
+            # Тільки в словниках імен і тільки коли ключ **цілком** є ім'ям:
+            # назви чарів теж усі з великої, і «Absorb Health» припасувало б
+            # «Health» до «здоров'я», а «Absorption» - до «чарів».
+            if (os.path.basename(path) not in NAME_FILES
+                    or len(ek) != len(uw)
+                    or not all(w[:1].isupper() for w in uw)
+                    or not all(plausible(e, u) for e, u in zip(ek, uw))):
+                continue              # власне ім'я - усі слова з великої
+            for e, u in zip(ek, uw):
+                if e not in STOP:
+                    out.setdefault(e, u)
+                    inside[e][u].add(os.path.basename(path))
     return out
+
+
+def dict_clash(inside, ok):
+    """Розбіжність усередині самих словників.
+
+    `q.py dup` її теж не бачить: ключі різні (`Dagoth Ur` і `Dagoth Fovon`),
+    хоч ім'я те саме. Саме так 45 істот стали «Даґот», поки решта гри
+    лишалася «Дагот».
+    """
+    rows = []
+    for e, forms in inside.items():
+        skip = {key(w) for w in ok.get(e, {}) if not w.startswith('_')}
+        forms = {u: f for u, f in forms.items() if key(u) not in skip}
+        if len({key(u) for u in forms}) > 1:
+            rows.append((e, forms))
+    return sorted(rows)
 
 
 def pairs():
@@ -193,6 +257,12 @@ def main():
             continue
         rows.append((total, e, forms))
 
+    clash = dict_clash(inside, ok)
+    for e, forms in clash:
+        print('%s: словники самі розходяться' % e)
+        for u, files in sorted(forms.items(), key=lambda kv: -len(kv[1])):
+            print('   %-24s %s' % (u, ', '.join(sorted(files))[:70]))
+
     rows.sort(reverse=True)
     for total, e, forms in rows:
         want = names[e]
@@ -203,8 +273,9 @@ def main():
             print('   %-28s %3d  %s%s'
                   % (', '.join(sorted(c)[:4]), sum(c.values()),
                      ', '.join(place[e][s]), mark))
-    print('імен із двома написаннями: %d' % len(rows))
-    return 1 if rows else 0
+    print('імен із двома написаннями: %d (з них у самих словниках: %d)'
+          % (len(rows) + len(clash), len(clash)))
+    return 1 if rows or clash else 0
 
 
 if __name__ == '__main__':
