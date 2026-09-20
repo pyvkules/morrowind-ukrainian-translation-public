@@ -113,14 +113,21 @@ ARTICLE = re.compile(
 
 
 def letters(text):
-    """Самі літери, без артиклів, пробілів і розділових знаків.
+    """Літери й цифри, без артиклів, пробілів і розділових знаків.
 
     Англійська граматика на українську не переноситься: вставлений артикль,
     `soulgems` -> `soul gems`, `alot` -> `a lot` - усе це той самий текст для
-    перекладача. Звівши обидва до суцільного ряду літер, ми саме ці правки й
-    робимо невидимими.
+    перекладача. Звівши обидва до суцільного ряду, ми саме ці правки й робимо
+    невидимими.
+
+    Цифри лишаємо. Спершу їх тут не було, і `500 септимів` зводилося до того
+    самого ряду, що й `100 септимів`: «Patch for Purists» виправляє винагороди,
+    і такий запис успадкував би переклад із чужою сумою.
     """
-    return re.sub(r'[^a-z]', '', ARTICLE.sub(' ', text).lower())
+    return re.sub(r'[^a-z0-9]', '', ARTICLE.sub(' ', text).lower())
+
+
+DIGIT = re.compile(r'\d')
 
 
 def only_typos(new, old):
@@ -136,6 +143,8 @@ def only_typos(new, old):
     for x, y in zip(a, b):
         if x == y:
             continue
+        if DIGIT.search(x) or DIGIT.search(y):
+            return False                  # 500 проти 100 - це сума, не описка
         changed += 1
         if changed > 3 or edits(x.lower(), y.lower()) > MAX_EDITS:
             return False
