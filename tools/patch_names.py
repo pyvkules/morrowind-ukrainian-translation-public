@@ -61,6 +61,17 @@ if os.path.isfile(legacy):
     for k, v in json.load(open(legacy, encoding='utf-8')).items():
         names.setdefault(k, v)
 
+# Виправлення вже-українських назв. Звичайний шлях (англійський ключ -> наша
+# назва) до них не дістається: у base.esm вони давно кирилицею, і зачепитися
+# нема за що. Тут ключ - поточне написання, а щоб «Молаг Мар» як край не
+# потягнув за собою однойменного міста, мапа ще й розділена за типом запису.
+fixups = {}
+fixp = os.path.join(TOOLS, 'legacy', 'name_fix.json')
+if os.path.isfile(fixp):
+    for rt, pairs in json.load(open(fixp, encoding='utf-8')).items():
+        if rt != '_comment':
+            fixups[rt.encode('ascii')] = pairs
+
 cells = {}
 legacy_cell = os.path.join(TOOLS, 'legacy', 'cell.json')
 if CELLS and os.path.isfile(legacy_cell):
@@ -105,7 +116,7 @@ def process(data, stats):
                     continue
                 z = sd.endswith(b'\0')
                 cur = (sd[:-1] if z else sd).decode('cp1251', 'replace')
-                new = table.get(cur)
+                new = fixups.get(rtype, {}).get(cur) or table.get(cur)
                 if new:
                     try:
                         b = new.encode('cp1251')
