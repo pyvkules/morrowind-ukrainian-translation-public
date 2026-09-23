@@ -30,6 +30,10 @@ concurrency:
   group: installer-${{ github.ref }}
   cancel-in-progress: true
 
+# Реліз оновлюємо з самого воркфлову, тож токену потрібне право на запис.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -81,8 +85,38 @@ jobs:
           path: installer/dist/ukrainizer-setup.exe
           retention-days: 90
 
-      - name: Додати до релізу
-        if: github.event_name == 'release'
+      - name: Опис релізу
+        shell: pwsh
+        run: |
+          $stats = python tools/stats.py --md | Out-String
+          $body = @"
+          Свіжа збірка з гілки ``main``. Оновлюється автоматично на кожну
+          партію перекладу — окремих версій тут немає й не треба.
+
+          **Як поставити:** завантаж ``ukrainizer-setup.exe`` нижче й запусти.
+          Windows скаже «Windows protected your PC» — це тому, що файл не
+          підписаний сертифікатом; **Докладніше → Виконати в будь-якому разі**.
+
+          Потрібен **OpenMW**. На оригінальному ``Morrowind.exe`` не працює:
+          той рушій не вміє шрифтів, у яких є українські літери.
+
+          $stats
+
+          Зібрано з $(git rev-parse --short HEAD) — $(git log -1 --pretty=%s)
+          "@
+          $body | Out-File -FilePath release-notes.md -Encoding utf8
+          Get-Content release-notes.md
+
+      - name: Оновити реліз
+        # Одна «рухома» позначка замість нової версії на кожен пуш: посилання
+        # .../releases/latest лишається сталим, і людині не треба нічого
+        # шукати. Артефакт вище — для нас: він вимагає входу в GitHub і
+        # зникає, а реліз доступний будь-кому й назавжди.
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: latest
+          name: Українізатор — свіжа збірка
+          body_path: release-notes.md
+          make_latest: true
           files: installer/dist/ukrainizer-setup.exe
