@@ -17,6 +17,9 @@ on:
       - 'Fonts/**'
       - 'installer/**'
       - 'build.py'
+      # зміну самого воркфлову теж треба перевіряти — інакше правка в ньому
+      # мовчки не запускає нічого, і про поломку дізнаєшся наступного разу
+      - '.github/workflows/installer.yml'
   workflow_dispatch:
   release:
     types: [published]
