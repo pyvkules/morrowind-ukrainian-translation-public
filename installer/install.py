@@ -108,6 +108,21 @@ def set_sink(fn):
     _sink = fn
 
 
+# Сигнал про поступ: (ключ кроку, стан). Стан - 'run', 'ok', 'skip', 'fail'.
+# Вікно малює з цього людські назви; консоль на це не зважає.
+_progress = None
+
+
+def set_progress(fn):
+    global _progress
+    _progress = fn
+
+
+def step(key, state):
+    if _progress is not None:
+        _progress(key, state)
+
+
 def payload_root():
     """Тека з розпакованим вмістом: поруч із exe або сам каталог репозиторію."""
     if getattr(sys, 'frozen', False):
@@ -366,6 +381,7 @@ def run_steps(mod_dir, steps):
         script = os.path.join(mod_dir, rel.replace('/', os.sep))
         name = os.path.basename(rel)
         t0 = time.time()
+        step(label, 'run')
         sys.argv = [script] + extra
         buf = Capture()
         try:
@@ -383,6 +399,8 @@ def run_steps(mod_dir, steps):
                 SKIP_NONE: 'нема'}.get(code, 'ЗБІЙ')
         out('  %-11s %-26s %s  %4.1f с'
             % (label, name, mark, time.time() - t0))
+        step(label, {0: 'ok'}.get(code, 'skip')
+             if code in (0,) + SKIPS else 'fail')
         results[rel + ' '.join(extra)] = code
         if code not in (0,) + SKIPS:
             ok = False
