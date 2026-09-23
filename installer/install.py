@@ -90,9 +90,22 @@ STEPS = [
 ]
 
 
+# Куди йде вивід. У консолі - у stdout; у віконному режимі gui.py підмінює
+# цей приймач на запис у поле журналу, і логіка встановлення про це не знає.
+_sink = None
+
+
 def out(msg=''):
+    if _sink is not None:
+        _sink(msg)
+        return
     sys.stdout.write(msg + '\n')
     sys.stdout.flush()
+
+
+def set_sink(fn):
+    global _sink
+    _sink = fn
 
 
 def payload_root():
@@ -353,8 +366,6 @@ def run_steps(mod_dir, steps):
         script = os.path.join(mod_dir, rel.replace('/', os.sep))
         name = os.path.basename(rel)
         t0 = time.time()
-        sys.stdout.write('  %-11s %-26s' % (label, name))
-        sys.stdout.flush()
         sys.argv = [script] + extra
         buf = Capture()
         try:
@@ -370,7 +381,8 @@ def run_steps(mod_dir, steps):
             sys.stdout = saved_stdout
         mark = {0: 'ок  ', SKIP_HAVE: 'вже ', SKIP_CANT: 'нема',
                 SKIP_NONE: 'нема'}.get(code, 'ЗБІЙ')
-        out('%s  %4.1f с' % (mark, time.time() - t0))
+        out('  %-11s %-26s %s  %4.1f с'
+            % (label, name, mark, time.time() - t0))
         results[rel + ' '.join(extra)] = code
         if code not in (0,) + SKIPS:
             ok = False
@@ -459,68 +471,58 @@ def copy_payload(src, dst, allow=None):
     return n
 
 
-def main():
-    out('=' * 62)
-    out(' %s' % APP)
-    out('=' * 62)
-    out()
-
-    dry = '--dry-run' in sys.argv
-    cfg = pick_cfg()
-
-    if not cfg:
-        mw = morrowind_exes()
-        out('OpenMW не знайдено.')
-        out()
-        if mw:
-            out('Знайдено оригінальний Morrowind:')
-            for p in mw:
-                out('    %s' % p)
-            out()
-            out('На оригінальному рушії 2002 року переклад не запрацює.')
-            out('Він вантажить растрові шрифти .fnt, а наш — TrueType із')
-            out('дорисованими Є І Ї Ґ. Замість українських літер будуть')
-            out('порожні квадратики. Постав OpenMW — він читає ту саму гру,')
-            out('нічого перевстановлювати не треба.')
-        else:
-            out('Гри теж не видно. Якщо OpenMW стоїть у незвичному місці,')
-            out('запусти так:   ukrainizer-setup.exe --cfg "шлях\\openmw.cfg"')
-        return 2
-
-    out('Конфігурація OpenMW : %s' % cfg)
+def describe(cfg):
+    """Що ми знайшли за цією конфігурацією: гру, теки, куди ставитимемо."""
     lines = read_cfg(cfg)
     dirs = data_dirs(lines, cfg)
     master = find_master(dirs)
+    mod_dir = os.path.join(os.path.dirname(cfg), 'mods', MOD_DIR_NAME)
+    return lines, dirs, master, mod_dir
+
+
+def why_no_openmw():
+    """Текст пояснення, коли OpenMW немає. Однаковий у консолі й у вікні."""
+    mw = morrowind_exes()
+    if mw:
+        found = ['OpenMW не знайдено, зате знайдено оригінальний Morrowind:']
+        found += ['    ' + p for p in mw]
+        found += [
+            '',
+            'На рушії 2002 року переклад не запрацює: він малює інтерфейс',
+            'растровими шрифтами .fnt, а українські літери ми дорисовуємо',
+            'в TrueType. Замість тексту були б порожні квадратики.',
+            '',
+            'Постав OpenMW — він читає ту саму гру, нічого',
+            'перевстановлювати не треба.',
+        ]
+        return chr(10).join(found)
+    return chr(10).join([
+        'OpenMW не знайдено, і гри теж не видно.',
+        '',
+        'Якщо OpenMW стоїть у незвичному місці, вкажи його openmw.cfg',
+        'вручну.',
+    ])
+
+def uninstall_from(cfg):
+    lines, dirs, master, mod_dir = describe(cfg)
+    for note in rewrite_cfg(cfg, mod_dir, remove=True):
+        out('  ' + note)
+    if os.path.isfile(os.path.join(mod_dir, MARKER)):
+        shutil.rmtree(mod_dir, ignore_errors=True)
+        out('  вилучено теку перекладу')
+    elif os.path.isdir(mod_dir):
+        out('  теку лишено: немає нашої мітки, могло бути не наше')
+    out()
+    out('Готово. Гра знову англійською.')
+    return 0
+
+
+def install_to(cfg):
+    lines, dirs, master, mod_dir = describe(cfg)
     if not master:
-        out()
         out('У цій конфігурації немає Morrowind.esm — нема чого перекладати.')
         out('Спершу пройди майстер налаштування OpenMW і вкажи йому гру.')
         return 2
-    out('Гра                 : %s' % master)
-    out('Тек із даними       : %d' % len(dirs))
-
-    mod_dir = os.path.join(os.path.dirname(cfg), 'mods', MOD_DIR_NAME)
-    out('Ставимо у           : %s' % mod_dir)
-    out()
-
-    if '--uninstall' in sys.argv:
-        if dry:
-            out('(пробний запуск) прибрав би теку і рядок data=')
-            return 0
-        for note in rewrite_cfg(cfg, mod_dir, remove=True):
-            out('  ' + note)
-        if os.path.isfile(os.path.join(mod_dir, MARKER)):
-            shutil.rmtree(mod_dir, ignore_errors=True)
-            out('  вилучено теку перекладу')
-        elif os.path.isdir(mod_dir):
-            out('  теку лишено: немає нашої мітки, могло бути не наше')
-        out()
-        out('Готово. Гра знову англійською.')
-        return 0
-
-    if dry:
-        out('(пробний запуск) розпакував би переклад, зібрав і прописав data=')
-        return 0
 
     # Прибираємо попередню версію: інакше файл-тінь, якого вже немає в новій
     # збірці, лишиться в теці й далі перекриватиме справжній плагін мода.
@@ -539,7 +541,6 @@ def main():
     out('  файлів: %d' % n)
 
     # звідси наші скрипти знають, який модліст читати
-    import json
     with io.open(os.path.join(mod_dir, 'config.json'), 'w', encoding='utf-8') as f:
         json.dump({'openmw_cfg': cfg}, f, ensure_ascii=False, indent=1)
 
@@ -561,25 +562,59 @@ def main():
     asked = [step[2][1] for step in fonts]
     codes = {step[2][1]: results.get(step[1] + ' '.join(step[2]))
              for step in fonts}
-    left = [n for n in asked
-            if n.lower() not in done and codes.get(n) != SKIP_HAVE]
+    left = [x for x in asked
+            if x.lower() not in done and codes.get(x) != SKIP_HAVE]
     if done:
         out()
         out('Шрифти з українськими літерами: %s'
-            % ', '.join(sorted(n for n in asked if n.lower() in done)))
+            % ', '.join(sorted(x for x in asked if x.lower() in done)))
     if left:
-        out('Не вдалося доробити: %s' % ', '.join(left))
-        out('  (у них бракує знаків, з яких будуються Є І Ї Ґ)')
+        out('Без кирилиці, використати не вийде: %s' % ', '.join(left))
     if not done:
         out()
         out('! УВАГА: не вдалося пропатчити жодного шрифту.')
-        out('! Гра буде українською, але замість Є І Ї Ґ будуть порожні місця.')
+        out('! Гра буде українською, але замість літер будуть порожні місця.')
         out('! Напиши про це автору перекладу разом із цим виводом.')
 
     out()
     out('Прописую в openmw.cfg:')
     for note in rewrite_cfg(cfg, mod_dir):
         out('  ' + note)
+    return 0
+
+
+def main():
+    out('=' * 62)
+    out(' %s' % APP)
+    out('=' * 62)
+    out()
+
+    dry = '--dry-run' in sys.argv
+    cfg = pick_cfg()
+    if not cfg:
+        out(why_no_openmw())
+        return 2
+
+    lines, dirs, master, mod_dir = describe(cfg)
+    out('Конфігурація OpenMW : %s' % cfg)
+    out('Гра                 : %s' % (master or 'не знайдено'))
+    out('Тек із даними       : %d' % len(dirs))
+    out('Ставимо у           : %s' % mod_dir)
+    out()
+
+    if '--uninstall' in sys.argv:
+        if dry:
+            out('(пробний запуск) прибрав би теку і рядок data=')
+            return 0
+        return uninstall_from(cfg)
+
+    if dry:
+        out('(пробний запуск) розпакував би переклад, зібрав і прописав data=')
+        return 0
+
+    code = install_to(cfg)
+    if code:
+        return code
 
     out()
     out('=' * 62)
@@ -595,7 +630,15 @@ def main():
     return 0
 
 
+# Аргументи, що означають «працюємо в консолі». Без жодного з них людина,
+# найпевніше, просто двічі клацнула файл — тоді відкриваємо вікно.
+CLI_FLAGS = ('--cfg', '--uninstall', '--dry-run', '--no-pause', '--console')
+
+
 if __name__ == '__main__':
+    if not any(a in CLI_FLAGS or a.startswith('--cfg=') for a in sys.argv[1:]):
+        import gui
+        sys.exit(gui.run())
     try:
         code = main()
     except KeyboardInterrupt:
