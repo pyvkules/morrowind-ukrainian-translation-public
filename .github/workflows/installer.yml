@@ -1,0 +1,82 @@
+name: build installer
+
+# Збирає ukrainizer-setup.exe на кожен пуш у main, що зачепив переклад або сам
+# інсталятор. Сенс простий: людина, яка хоче спробувати, не мусить ані ставити
+# Python, ані знати про git - вона забирає один файл.
+#
+# Гри тут немає і бути не може, тож CI перевіряє лише те, що exe **збирається**
+# і запускається. Що він робить із чужою грою, перевіряється вручну на живих
+# конфігураціях: чистій і модпаковій.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/**'
+      - 'l10n/**'
+      - 'Fonts/**'
+      - 'installer/**'
+      - 'build.py'
+  workflow_dispatch:
+  release:
+    types: [published]
+
+# Партії перекладу пушаться одна за одною, а збірка важча за перевірку текстів.
+# Тримаємо в черзі лише найсвіжіший коміт - проміжні нікому не потрібні.
+concurrency:
+  group: installer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        # make.py питає в git, що саме наше: цим і проведено межу між нашим
+        # перекладом і даними гри. Без історії ls-files усе одно працює.
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Залежності
+        run: pip install pyinstaller fonttools
+
+      - name: Зібрати exe
+        run: python installer/make.py
+
+      - name: Перевірити, що запускається
+        # Гри на раннері немає, тож інсталятор мусить чесно сказати, що не
+        # знайшов OpenMW, і вийти з кодом 2. Якщо він падає інакше - збірка
+        # зламана, і краще дізнатися про це тут, а не від тестувальника.
+        shell: pwsh
+        run: |
+          $out = & ".\installer\dist\ukrainizer-setup.exe" --no-pause --cfg "Z:\none\openmw.cfg" 2>&1 | Out-String
+          Write-Host $out
+          if ($LASTEXITCODE -ne 2) {
+            Write-Error "очікували код 2 (гру не знайдено), отримали $LASTEXITCODE"
+            exit 1
+          }
+          if ($out -notmatch 'OpenMW') {
+            Write-Error "вивід не схожий на наш"
+            exit 1
+          }
+
+      - name: Розмір
+        shell: pwsh
+        run: |
+          $f = Get-Item ".\installer\dist\ukrainizer-setup.exe"
+          "{0:N1} МБ" -f ($f.Length / 1MB)
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ukrainizer-setup
+          path: installer/dist/ukrainizer-setup.exe
+          retention-days: 90
+
+      - name: Додати до релізу
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: installer/dist/ukrainizer-setup.exe

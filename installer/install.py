@@ -75,8 +75,11 @@ ENCODING_LINE = 'encoding=win1251'
 # Шрифти йдуть двома кроками, бо різні збірки малюють інтерфейс різними: чиста
 # OpenMW — своїм MysticCards, модпаки — Pelagiad. Патчимо той, що знайдено;
 # код 3 означає «такого тут немає», і це не помилка.
-SKIP = 3
-FONTS = ('MysticCards', 'Pelagiad')
+SKIP_HAVE, SKIP_CANT, SKIP_NONE = 3, 4, 5   # уже є / нема з чого / нема файлу
+SKIPS = (SKIP_HAVE, SKIP_CANT, SKIP_NONE)
+# Даедричний шрифт лишається латиницею навмисно: у грі це руни, і кирилиці
+# в них нема чого робити.
+FONT_SKIP = ('demonicletters', 'daedric')
 STEPS = [
     ('ядро',    'tools/rebuild_esm.py',           []),
     ('плагіни', 'tools/patch_plugins.py',         ['--apply']),
@@ -193,22 +196,39 @@ def engine_font_dirs(cfg_path, lines):
 
 
 def font_steps(cfg_path, lines):
-    """Кроки для шрифтів, із явним джерелом там, де ми його знаємо.
+    """По кроку на кожен шрифт, який гра може малювати.
 
-    Без свого джерела patch_font шукає шрифт у модлисті - саме так знаходиться
-    Pelagiad у модпаках. MysticCards натомість везе сам рушій.
+    Двох імен не досить: модпаки вживають і Pelagiad, і OMWAyembedt, а чиста
+    OpenMW — свій MysticCards. Якщо пропустити той, що гра насправді вантажить,
+    гравець побачить порожні квадратики замість кожної української літери. Тому
+    беремо **всі** .ttf з тек модліста й ресурсів рушія; ті, що вже мають
+    кирилицю, patch_font пропустить сам.
+
+    Порядок той самий, що у VFS: пізніша тека перекриває ранішу, тож для
+    однойменних шрифтів лишаємо останній.
     """
-    srcs = engine_font_dirs(cfg_path, lines)
-    steps = []
-    for name in FONTS:
-        extra = ['--font', name]
-        for d in srcs:
-            cand = os.path.join(d, name + '.ttf')
-            if os.path.isfile(cand):
-                extra += ['--src', cand]
-                break
-        steps.append(('шрифт', 'tools/patch_font.py', extra))
-    return steps
+    dirs = engine_font_dirs(cfg_path, lines)
+    for d in data_dirs(lines, cfg_path):
+        cand = os.path.join(d, 'fonts')
+        if os.path.isdir(cand):
+            dirs.append(cand)
+
+    found = {}
+    for d in dirs:
+        try:
+            entries = os.listdir(d)
+        except OSError:
+            continue
+        for e in entries:
+            if not e.lower().endswith('.ttf'):
+                continue
+            name = e[:-4]
+            if name.lower() in FONT_SKIP:
+                continue
+            found[name.lower()] = (name, os.path.join(d, e))
+
+    return [('шрифт', 'tools/patch_font.py', ['--font', name, '--src', path])
+            for name, path in sorted(found.values())]
 
 
 def read_cfg(path):
@@ -280,6 +300,18 @@ def rewrite_cfg(cfg_path, mod_dir, remove=False):
 
 # --- збірка ------------------------------------------------------------------
 
+class _KeepOpen(io.BytesIO):
+    """Буфер, який не дає себе закрити.
+
+    Кожен крок загортає наш потік у власний `TextIOWrapper`, а той, коли його
+    збирає смітник, закриває буфер під собою. Нам той буфер ще потрібен —
+    інакше читання виводу падає з «I/O operation on closed file».
+    """
+
+    def close(self):
+        pass
+
+
 class Capture(io.TextIOWrapper):
     """Перехопити вивід кроку, не ламаючи його власне загортання.
 
@@ -289,14 +321,14 @@ class Capture(io.TextIOWrapper):
     """
 
     def __init__(self):
-        self._raw = io.BytesIO()
+        self._raw = _KeepOpen()
         super().__init__(self._raw, encoding='utf-8', errors='replace',
                          write_through=True)
 
     def text(self):
         try:
             self.flush()
-        except ValueError:                 # крок міг закрити потік
+        except ValueError:                 # крок міг закрити обгортку
             pass
         return self._raw.getvalue().decode('utf-8', 'replace')
 
@@ -309,6 +341,7 @@ def run_steps(mod_dir, steps):
     через runpy, підмінивши argv.
     """
     ok = True
+    results = {}
     saved_argv, saved_cwd, saved_stdout = sys.argv[:], os.getcwd(), sys.stdout
     os.chdir(mod_dir)
     if mod_dir not in sys.path:
@@ -335,16 +368,18 @@ def run_steps(mod_dir, steps):
             buf.write('%s: %s\n' % (type(e).__name__, e))
         finally:
             sys.stdout = saved_stdout
-        mark = 'ок  ' if code == 0 else ('нема' if code == SKIP else 'ЗБІЙ')
+        mark = {0: 'ок  ', SKIP_HAVE: 'вже ', SKIP_CANT: 'нема',
+                SKIP_NONE: 'нема'}.get(code, 'ЗБІЙ')
         out('%s  %4.1f с' % (mark, time.time() - t0))
-        if code not in (0, SKIP):
+        results[rel + ' '.join(extra)] = code
+        if code not in (0,) + SKIPS:
             ok = False
             for ln in buf.text().splitlines()[-12:]:
                 out('      ' + ln)
             break
     sys.argv = saved_argv
     os.chdir(saved_cwd)
-    return ok
+    return ok, results
 
 
 # --- головне -----------------------------------------------------------------
@@ -510,14 +545,32 @@ def main():
 
     out()
     out('Збираю (це кілька хвилин — патчимо твої власні файли):')
-    if not run_steps(mod_dir, font_steps(cfg, lines) + STEPS):
+    fonts = font_steps(cfg, lines)
+    built, results = run_steps(mod_dir, fonts + STEPS)
+    if not built:
         out()
         out('Збірка не вдалася. Гру не чіпали: рядок data= не дописано.')
         return 1
 
-    patched = [f for f in os.listdir(os.path.join(mod_dir, 'Fonts'))
-               if f.lower().endswith('.ttf')]         if os.path.isdir(os.path.join(mod_dir, 'Fonts')) else []
-    if not patched:
+    # Який шрифт гра малює насправді, знає тільки вона. Тому кажемо прямо, що
+    # вдалося, а що ні: якщо непропатченим лишився саме той, гравець побачить
+    # порожні квадратики, і краще, щоб він знав, про що писати.
+    fdir = os.path.join(mod_dir, 'Fonts')
+    done = {f[:-4].lower() for f in (os.listdir(fdir) if os.path.isdir(fdir) else [])
+            if f.lower().endswith('.ttf')}
+    asked = [step[2][1] for step in fonts]
+    codes = {step[2][1]: results.get(step[1] + ' '.join(step[2]))
+             for step in fonts}
+    left = [n for n in asked
+            if n.lower() not in done and codes.get(n) != SKIP_HAVE]
+    if done:
+        out()
+        out('Шрифти з українськими літерами: %s'
+            % ', '.join(sorted(n for n in asked if n.lower() in done)))
+    if left:
+        out('Не вдалося доробити: %s' % ', '.join(left))
+        out('  (у них бракує знаків, з яких будуються Є І Ї Ґ)')
+    if not done:
         out()
         out('! УВАГА: не вдалося пропатчити жодного шрифту.')
         out('! Гра буде українською, але замість Є І Ї Ґ будуть порожні місця.')

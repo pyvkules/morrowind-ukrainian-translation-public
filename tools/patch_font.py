@@ -89,10 +89,10 @@ if not SRC:
                 SRC = cand
                 break
     if not SRC:
-        # код 3 = «такого шрифту тут просто немає»; інсталятор це пропускає,
+        # 5 = «такого шрифту тут просто немає»; інсталятор це пропускає,
         # бо модліст може вантажити зовсім інший шрифт
         print('no source %s.ttf anywhere - skipping' % NAME)
-        raise SystemExit(3)
+        raise SystemExit(5)
 
 DST_DIR = os.path.join(paths.MOD_ROOT, 'Fonts')
 os.makedirs(DST_DIR, exist_ok=True)
@@ -102,6 +102,13 @@ print('target:', DST)
 
 font = TTFont(SRC)
 cmap_old = font.getBestCmap()
+
+# Шрифт, який уже має всі чотири літери, чіпати нема потреби: DejaVu везе повну
+# кирилицю, а даедричний навмисно лишається латиницею (у грі це руни).
+UKRAINIAN = (0x0404, 0x0406, 0x0407, 0x0490, 0x0454, 0x0456, 0x0457, 0x0491)
+if all(cp in cmap_old for cp in UKRAINIAN):
+    print('%s already has the Ukrainian letters - nothing to do' % NAME)
+    raise SystemExit(3)                    # 3 = уже все гаразд
 glyf = font['glyf']
 hmtx = font['hmtx']
 order = list(font.getGlyphOrder())
@@ -129,15 +136,22 @@ CLONES = [(ord('I'), 'uni0406'), (ord('i'), 'uni0456'),
           (0x0413, 'uni0490'), (0x0433, 'uni0491')]
 MIRRORS = [(0x042D, 'uni0404'), (0x044D, 'uni0454')]
 
+# Бракує вихідного знака - зібрати з нього нічого. Це не поломка, а межа
+# самого шрифту (OMWAyembedt, наприклад, не має Ï, з якого робиться Ї), тож
+# код 3: інсталятор такий шрифт пропускає, а не спиняє всю збірку.
+MISSING = 4                                # 4 = зібрати літери нема з чого
+
 added = {}
 for cp, new in CLONES:
     if cp not in cmap_old:
-        raise SystemExit('font lacks the source glyph U+%04X needed for %s' % (cp, new))
+        print('font lacks the source glyph U+%04X needed for %s' % (cp, new))
+        raise SystemExit(MISSING)
     clone_glyph(cmap_old[cp], new)
     added[int(new[3:], 16)] = new
 for cp, new in MIRRORS:
     if cp not in cmap_old:
-        raise SystemExit('font lacks the source glyph U+%04X needed for %s' % (cp, new))
+        print('font lacks the source glyph U+%04X needed for %s' % (cp, new))
+        raise SystemExit(MISSING)
     mirror_glyph(cmap_old[cp], new)
     added[int(new[3:], 16)] = new
 
