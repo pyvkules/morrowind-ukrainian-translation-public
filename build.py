@@ -55,10 +55,17 @@ def main():
     print('output goes to : %s' % paths.MOD_ROOT)
     print()
 
+    # rebuild_esm prefers tools/base.esm but falls back to the Morrowind.esm the
+    # modlist already points at, so a plain Steam copy is enough. The old check
+    # demanded base.esm outright, which blocked every fresh install.
     base = os.path.join(HERE, 'tools', 'base.esm')
     if not os.path.isfile(base):
-        print('MISSING tools/base.esm - see README, the ESM step cannot run without it.')
-        return 1
+        dirs, _ = paths.read_modlist()
+        found = any(os.path.isfile(os.path.join(d, 'Morrowind.esm'))
+                    for d in dirs if os.path.abspath(d) != paths.MOD_ROOT)
+        if not found:
+            print('MISSING Morrowind.esm - neither tools/base.esm nor the modlist has one.')
+            return 1
 
     steps = STEPS + (CHECKS if '--check' in sys.argv else [])
     failed = []

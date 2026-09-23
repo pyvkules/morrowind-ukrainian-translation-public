@@ -48,14 +48,51 @@ def arg(flag, default=None):
 
 NAME = arg('--font', 'Pelagiad')
 SRC = arg('--src')
+
+
+def engine_fonts():
+    """Шрифти, що їх везе сам OpenMW (resources/vfs/fonts).
+
+    На чистій інсталяції жоден мод шрифту не дає, а рушій усе одно малює
+    інтерфейс своїм MysticCards. Патчити треба саме його, інакше гравець
+    побачить порожні квадратики замість кирилиці.
+    """
+    seen = []
+    starts = [paths.MOD_ROOT]
+    try:
+        starts.append(os.path.dirname(paths.openmw_cfg()))
+    except Exception:                      # noqa: BLE001 - конфіг може бути будь-де
+        pass
+    for start in starts:
+        d = os.path.abspath(start)
+        for _ in range(4):                 # угору до теки рушія
+            cand = os.path.join(d, 'resources', 'vfs', 'fonts')
+            if os.path.isdir(cand) and cand not in seen:
+                seen.append(cand)
+            parent = os.path.dirname(d)
+            if parent == d:
+                break
+            d = parent
+    return seen
+
+
 if not SRC:
     dirs, _ = paths.read_modlist()
     for d in dirs:
         cand = os.path.join(d, 'fonts', NAME + '.ttf')
         if os.path.abspath(d) != paths.MOD_ROOT and os.path.isfile(cand):
-            SRC = cand
+            SRC = cand                     # останній модліст виграє, як у VFS
     if not SRC:
-        raise SystemExit('No source %s.ttf found in the modlist data dirs.' % NAME)
+        for d in engine_fonts():
+            cand = os.path.join(d, NAME + '.ttf')
+            if os.path.isfile(cand):
+                SRC = cand
+                break
+    if not SRC:
+        # код 3 = «такого шрифту тут просто немає»; інсталятор це пропускає,
+        # бо модліст може вантажити зовсім інший шрифт
+        print('no source %s.ttf anywhere - skipping' % NAME)
+        raise SystemExit(3)
 
 DST_DIR = os.path.join(paths.MOD_ROOT, 'Fonts')
 os.makedirs(DST_DIR, exist_ok=True)

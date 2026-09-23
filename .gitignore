@@ -41,3 +41,7 @@ __pycache__/
 venv/
 tools/_msg.txt
 tools/_remaining_*.txt
+
+# Інсталятор: пакунок і готовий exe складаються з того, що вже є в репозиторії
+installer/build/
+installer/dist/
