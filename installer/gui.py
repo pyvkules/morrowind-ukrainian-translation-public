@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Вікно інсталятора: людина обирає одне з трьох і тисне одну кнопку.
+"""Вікно інсталятора.
 
 Правила, за якими це зроблено:
 
-* у вікні лише те, що людині треба вирішити. Шлях до `openmw.cfg` — не
-  рішення, а подробиця, тож його видно лише тоді, коли є з чого вибирати;
-* кроки звуться так, як їх розуміє гравець, а не як звуться наші скрипти;
-* показуємо тільки ті кроки, які справді виконуватимуться за обраним шляхом;
-* небезпечне («Вилучити переклад») стоїть окремо й вмикається лише тоді, коли
-  є що вилучати.
+* у вікні лише те, що людині треба вирішити, і те, що вже сталося. Жодних
+  пояснень, заспокоєнь і розповідей програми про саму себе;
+* підписи — іменники, не речення: «Основна гра», а не «Перекладаю основну
+  гру». Число праворуч каже решту;
+* геометрія однакова в усіх станах. Картки не зникають під час роботи, а
+  результат пишеться туди ж, де стояв заголовок кроків, — ніщо не стрибає
+  під курсором;
+* розмір сталий, тож усе розкладено в пікселях, а шрифти задано від'ємним
+  розміром — це теж пікселі, і вигляд не залежить від масштабу в системі.
+
+Панель кроків — полотно, а не набір віджетів: крізь неї проходить
+вертикальна лінія поступу, а прозорого тла Tk не має.
 
 Консольний режим лишається: exe з будь-яким аргументом вікна не відкриває.
 """
@@ -19,45 +25,71 @@ import threading
 import traceback
 
 import tkinter as tk
-from tkinter import filedialog, font as tkfont, ttk
+from tkinter import filedialog, font as tkfont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import install                                  # noqa: E402
 
-BG = '#1b1917'
-PANEL = '#232020'
-FG = '#e9e2d2'
-DIM = '#968f7e'
-OFF = '#5d574c'
-GOLD = '#cba85f'
-GOOD = '#8fbf6b'
-BAD = '#d98b6a'
+# --- фарби -------------------------------------------------------------------
+# Холодне тло й тепла позолота: саме це поєднання дає впізнаваний Морровінд,
+# а не коричневий колір сам собою.
+BG, SURF, SEL, OFFBG = '#101216', '#181B21', '#23262E', '#14161A'
+LINE, TICK, SOFT = '#2B2F38', '#3A3E48', '#21242B'
+STRIP, FOOT, LOGBG, TRACK = '#14171C', '#0C0E11', '#0A0C0E', '#1A1D23'
+GRAD_TOP, EMBBG = '#1A1E25', '#161A20'
+TEXT, MUTED, LABEL = '#E3DAC2', '#9C947E', '#8A8371'
+OFF, DEAD, GHOST = '#6F6A5C', '#5E5A4E', '#4A4740'
+GOLD, GOLDTOP, GOLDDIM, GOLDINK = '#D3B26B', '#EBCE8E', '#6A5A32', '#14120C'
+GOOD, GOODDIM, GOODBG = '#93C47D', '#4C7A3C', '#14201A'
+BAD, BADDIM, BADBG = '#DE8C67', '#7A4A32', '#201410'
+BUSYBG, BUSYTOP, DEADEDGE = '#3A3526', '#4A442F', '#1F2229'
+
+PAD = 28                    # бічні поля
+W = 760                     # ширина стала; змінюється тільки висота
+H_PLAIN, H_LOG = 680, 900   # без подробиць і з ними
 
 TR, ENGINE, MODS = 'tr', 'engine', 'mods'
 
+# план -> (назва, підказка). Пояснення живе в підказці, а не у вікні: у списку
+# видно самі назви, а подробиця приходить тоді, коли на неї дивляться.
 PLANS = [
-    (TR, 'Тільки українська мова',
-     'Перекласти гру, яка вже стоїть.'),
-    (ENGINE, 'Українська мова + OpenMW',
-     'Поставити OpenMW — програму, через яку працює гра, — і перекласти.'),
-    (MODS, 'Українська мова + OpenMW + моди',
-     'Ще й зібрати той самий набір модів, що в автора перекладу: '
-     'десятки гігабайтів і кілька годин. Потрібен обліковий запис Nexus Mods.'),
+    (TR, 'Переклад',
+     'Гра вже стоїть — лишається перекласти. Хвилина.'),
+    (ENGINE, 'Переклад + OpenMW',
+     'OpenMW стане поруч зі старою грою й читатиме ту саму гру. '
+     'Без нього переклад не працює. Кілька хвилин.'),
+    (MODS, 'Переклад + OpenMW + моди автора',
+     'Той самий набір модів, у який грає автор перекладу. Кілька годин, '
+     'десятки гігабайтів, і потрібен акаунт на Nexus Mods.'),
 ]
 
-# ключ кроку -> (людська назва, у яких шляхах він потрібен)
+# ключ кроку -> (підпис, у яких планах потрібен)
 STEPS = [
-    ('рушій',     'Ставлю OpenMW',                      {ENGINE, MODS}),
-    ('моди',      'Завантажую моди',                    {MODS}),
-    ('шрифт',     'Додаю українські літери до шрифту',  {TR, ENGINE, MODS}),
-    ('ядро',      'Перекладаю основну гру',             {TR, ENGINE, MODS}),
-    ('плагіни',   'Перекладаю доповнення й моди',       {TR, ENGINE, MODS}),
-    ('назви',     'Перекладаю назви предметів і людей', {TR, ENGINE, MODS}),
-    ('теми',      'Перекладаю теми розмов',             {TR, ENGINE, MODS}),
-    ('інтерфейс', 'Перекладаю меню гри',                {TR, ENGINE, MODS}),
-    ('посилання', 'Зв’язую згадки в розмовах',          {TR, ENGINE, MODS}),
+    ('рушій',     'OpenMW',            {ENGINE, MODS}),
+    ('моди',      'Моди',              {MODS}),
+    ('шрифт',     'Шрифт',             {TR, ENGINE, MODS}),
+    ('ядро',      'Основна гра',       {TR, ENGINE, MODS}),
+    ('плагіни',   'Доповнення й моди', {TR, ENGINE, MODS}),
+    ('назви',     'Назви',             {TR, ENGINE, MODS}),
+    ('теми',      'Теми розмов',       {TR, ENGINE, MODS}),
+    ('інтерфейс', 'Меню',              {TR, ENGINE, MODS}),
+    ('посилання', 'Згадки в розмовах', {TR, ENGINE, MODS}),
 ]
-HINTS = {k: n for k, _, n in PLANS}
+TITLES = dict((k, t) for k, t, _ in STEPS)
+
+# стан кроку -> (значок, колір значка, колір підпису, жирність)
+MARK = {
+    'todo': ('·', OFF, MUTED, 'normal'),
+    'run': ('▸', GOLD, TEXT, 'bold'),
+    'ok': ('✓', GOOD, TEXT, 'normal'),
+    'skip': ('–', OFF, MUTED, 'normal'),
+    'fail': ('✕', BAD, TEXT, 'bold'),
+    'never': ('·', GHOST, OFF, 'normal'),
+}
+
+ROW = 22          # висота рядка кроку
+FIRST = 23        # центр першого рядка від верху полотна
+SPINE = 22        # по цій вертикалі стоять значки й іде лінія поступу
 
 
 class App:
@@ -66,117 +98,244 @@ class App:
         self.queue = queue.Queue()
         self.busy = False
         self.cfgs = install.cfg_candidates()
-        self.rows = {}
         self.state = {}
-        self.details_open = False
+        self.visible = []
+        self.items = {}
+        self.spine = None
+        self.details = False
         self.plan = tk.StringVar(value=TR if self.cfgs else ENGINE)
 
         root.title('Українізатор Morrowind')
         root.configure(bg=BG)
-        root.geometry('760x660')
-        root.minsize(760, 660)
-        try:
-            root.tk.call('tk', 'scaling', 1.3)
-        except tk.TclError:
-            pass
+        root.resizable(False, False)
+        self.resize(H_PLAIN)
+        self.make_fonts()
 
-        base = tkfont.nametofont('TkDefaultFont')
-        self.f_head = base.copy(); self.f_head.configure(size=16, weight='bold')
-        self.f_body = base.copy(); self.f_body.configure(size=10)
-        self.f_small = base.copy(); self.f_small.configure(size=9)
-        self.f_btn = base.copy(); self.f_btn.configure(size=10, weight='bold')
-        self.f_mono = tkfont.nametofont('TkFixedFont').copy()
-        self.f_mono.configure(size=8)
-
-        tk.Label(root, text='Українська мова для Morrowind', bg=BG, fg=GOLD,
-                 font=self.f_head).pack(anchor='w', padx=24, pady=(20, 2))
-        self.sub = tk.Label(root, bg=BG, fg=DIM, font=self.f_body,
-                            justify='left', anchor='w', wraplength=700)
-        self.sub.pack(anchor='w', padx=24, pady=(0, 14), fill='x')
-
-        # --- що саме робимо ---------------------------------------------------
-        self.opts = {}
-        for key, title, note in PLANS:
-            block = tk.Frame(root, bg=BG)
-            block.pack(fill='x', padx=24, pady=(0, 4))
-            rb = tk.Radiobutton(
-                block, text=title, value=key, variable=self.plan,
-                command=self.refresh, bg=BG, fg=FG, selectcolor=PANEL,
-                activebackground=BG, activeforeground=GOLD, font=self.f_body,
-                anchor='w', highlightthickness=0, bd=0, cursor='hand2')
-            rb.pack(anchor='w')
-            hint = tk.Label(block, text=note, bg=BG, fg=DIM, font=self.f_small,
-                            justify='left', anchor='w', wraplength=650)
-            hint.pack(anchor='w', padx=(26, 0))
-            self.opts[key] = (rb, hint)
-
-        # --- куди ставимо: подробиця, а не рішення ----------------------------
-        self.wrapcfg = tk.Frame(root, bg=BG)
-        self.choice = ttk.Combobox(self.wrapcfg, state='readonly',
-                                   values=self.cfgs, font=self.f_mono)
-        self.choice.pack(side='left', fill='x', expand=True, ipady=2)
-        if self.cfgs:
-            self.choice.current(0)
-        self.choice.bind('<<ComboboxSelected>>', lambda e: self.refresh())
-        self.mk_button(self.wrapcfg, 'Інша гра', self.browse,
-                       small=True).pack(side='left', padx=(8, 0))
-
-        # --- кроки ------------------------------------------------------------
-        self.panel = tk.Frame(root, bg=PANEL)
-        self.panel.pack(fill='x', padx=24, pady=(14, 12))
-        for key, title, plans in STEPS:
-            line = tk.Frame(self.panel, bg=PANEL)
-            mark = tk.Label(line, text='·', bg=PANEL, fg=DIM, width=2,
-                            font=self.f_body)
-            mark.pack(side='left')
-            name = tk.Label(line, text=title, bg=PANEL, fg=DIM,
-                            font=self.f_body, anchor='w')
-            name.pack(side='left', fill='x', expand=True)
-            self.rows[key] = (mark, name, line, plans)
-
-        # --- дії ---------------------------------------------------------------
-        act = tk.Frame(root, bg=BG)
-        act.pack(fill='x', padx=24)
-        self.go = self.mk_button(act, 'Встановити', self.start, primary=True)
-        self.go.pack(side='left')
-        self.details_btn = self.mk_button(act, 'Подробиці', self.toggle)
-        self.details_btn.pack(side='left', padx=(10, 0))
-        self.rm = self.mk_button(act, 'Вилучити переклад', self.remove)
-        self.rm.pack(side='right')
-
-        self.bar = ttk.Progressbar(root, mode='indeterminate')
-        self.result = tk.Label(root, bg=BG, fg=GOOD, font=self.f_body,
-                               justify='left', anchor='w', wraplength=700)
-
-        self.logwrap = tk.Frame(root, bg=BG)
-        self.log = tk.Text(self.logwrap, bg='#131211', fg=DIM, relief='flat',
-                           wrap='word', font=self.f_mono, height=9,
-                           state='disabled', padx=10, pady=8)
-        self.log.pack(side='left', fill='both', expand=True)
-        sb = ttk.Scrollbar(self.logwrap, command=self.log.yview)
-        sb.pack(side='right', fill='y')
-        self.log.configure(yscrollcommand=sb.set)
+        self.build_header()
+        self.build_rules()
+        self.build_pathbar()
+        self.build_footer()          # перед тілом: він тримається за низ
+        self.build_body()
 
         install.set_sink(lambda m: self.queue.put(('log', m)))
-        install.set_progress(lambda k, s: self.queue.put(('step', (k, s))))
+        install.set_progress(
+            lambda k, s, n=None: self.queue.put(('step', (k, s, n))))
+        root.bind('<Return>', lambda e: self.start())
+        root.bind('<Escape>', lambda e: root.destroy())
+        root.bind('<Up>', lambda e: self.move(-1))
+        root.bind('<Down>', lambda e: self.move(1))
+
         self.refresh()
-        self.root.after(80, self.drain)
+        threading.Thread(target=self.read_stamp, daemon=True).start()
+        root.after(80, self.drain)
 
-    # --- дрібниці --------------------------------------------------------------
+    # --- каркас ----------------------------------------------------------------
 
-    def mk_button(self, parent, text, cmd, primary=False, small=False):
-        """Усі кнопки одного розміру; головна відрізняється лише кольором."""
-        return tk.Button(
-            parent, text=text, command=cmd,
-            font=self.f_small if small else self.f_btn,
-            bg=GOLD if primary else PANEL, fg='#1b1917' if primary else FG,
-            activebackground=GOLD if primary else PANEL,
-            activeforeground='#1b1917' if primary else GOLD,
-            relief='flat', bd=0, padx=14 if small else 18,
-            pady=5 if small else 9, width=11 if small else 17, cursor='hand2')
+    def resize(self, height):
+        self.root.geometry('%dx%d' % (W, height))
+        self.root.minsize(W, height)
+        self.root.maxsize(W, height)
+
+    def make_fonts(self):
+        def f(family, px, weight='normal'):
+            return tkfont.Font(family=family, size=-px, weight=weight)
+
+        self.f_title = f('Georgia', 25)
+        self.f_emblem = f('Georgia', 27)
+        self.f_glyph = f('Segoe UI', 15)
+        self.f_card = f('Segoe UI', 14, 'bold')
+        self.f_step = f('Segoe UI', 13)
+        self.f_step_b = f('Segoe UI', 13, 'bold')
+        self.f_small = f('Segoe UI', 11)
+        self.f_label = f('Georgia', 13)
+        self.f_btn = f('Segoe UI', 13)
+        self.f_go = f('Segoe UI', 13, 'bold')
+        self.f_mono = f('Consolas', 11)
+
+    def build_header(self):
+        """Заголовок на градієнті. Квадрат із літерою — він же індикатор стану."""
+        c = tk.Canvas(self.root, height=88, width=W, highlightthickness=0,
+                      bd=0, bg=BG)
+        c.pack(fill='x')
+        self.head = c
+
+        top, bot = self.root.winfo_rgb(GRAD_TOP), self.root.winfo_rgb(BG)
+        for y in range(88):
+            k = y / 87.0
+            c.create_line(0, y, W, y, fill='#%02x%02x%02x' % tuple(
+                int((top[i] * (1 - k) + bot[i] * k) / 257) for i in range(3)))
+
+        self.emb_box = c.create_rectangle(PAD, 22, PAD + 46, 68,
+                                          outline=GOLDDIM, fill=EMBBG)
+        self.emb_txt = c.create_text(PAD + 23, 45, text='Є',
+                                     font=self.f_emblem, fill=GOLD)
+        c.create_text(PAD + 62, 45, anchor='w', text='Morrowind українською',
+                      font=self.f_title, fill=GOLD)
+        self.stamp = c.create_text(W - PAD, 45, anchor='e', text='',
+                                   justify='right', font=self.f_small, fill=OFF)
+
+    def build_rules(self):
+        tk.Frame(self.root, height=1, bg=GOLDDIM).pack(fill='x')
+        tk.Frame(self.root, height=1, bg=BG).pack(fill='x')
+        track = tk.Frame(self.root, height=3, bg=TRACK)
+        track.pack(fill='x')
+        track.pack_propagate(False)
+        self.fill = tk.Frame(track, bg=GOLD)
+        self.fill.place(x=0, y=0, relheight=1, relwidth=0)
+
+    def build_pathbar(self):
+        wrap = tk.Frame(self.root, bg=STRIP)
+        wrap.pack(fill='x')
+        row = tk.Frame(wrap, bg=STRIP)
+        row.pack(fill='x', padx=PAD, pady=9)
+        self.path = tk.Label(row, bg=STRIP, fg=MUTED, font=self.f_mono,
+                             anchor='w')
+        self.path.pack(side='left', fill='x', expand=True)
+        self.change = tk.Label(row, text='Змінити', bg=STRIP, fg=GOLD,
+                               font=self.f_small, cursor='hand2')
+        self.change.pack(side='left', padx=(12, 0))
+        self.change.bind('<Button-1>', lambda e: self.browse())
+        tk.Frame(wrap, height=1, bg=SOFT).pack(fill='x')
+
+    def build_body(self):
+        box = tk.Frame(self.root, bg=BG)
+        box.pack(fill='x', padx=PAD, pady=(20, 0))
+
+        self.cards = {}
+        for i, (key, title, tip) in enumerate(PLANS):
+            card = Card(box, key, title, tip, self)
+            card.pack(fill='x', pady=(0 if not i else 8, 0))
+            self.cards[key] = card
+
+        self.label = tk.Label(box, text='Кроки', bg=BG, fg=LABEL,
+                              font=self.f_label, anchor='w')
+        self.label.pack(fill='x', pady=(20, 10))
+
+        self.panel = tk.Canvas(box, width=W - 2 * PAD, highlightthickness=0,
+                               bd=0, bg=SURF)
+        self.panel.pack(fill='x')
+
+        self.logwrap = tk.Frame(box, bg=BG)
+        self.log = tk.Text(self.logwrap, bg=LOGBG, fg='#8E8674', relief='flat',
+                           wrap='word', font=self.f_mono, height=11,
+                           state='disabled', padx=12, pady=10,
+                           highlightthickness=1, highlightbackground=SOFT)
+        self.log.pack(fill='both', expand=True)
+
+    def build_footer(self):
+        bar = tk.Frame(self.root, bg=FOOT)
+        bar.pack(side='bottom', fill='x')
+        tk.Frame(bar, height=1, bg=LINE).pack(fill='x')
+        row = tk.Frame(bar, bg=FOOT)
+        row.pack(fill='x', padx=PAD, pady=15)
+        self.rm = Button(row, 'Вилучити', self.remove, self)
+        self.rm.pack(side='left')
+        self.more = Button(row, 'Подробиці', self.toggle, self)
+        self.more.pack(side='left', padx=(10, 0))
+        self.go = Button(row, 'Встановити', self.start, self, primary=True)
+        self.go.pack(side='right')
+
+    # --- шапка й поступ ---------------------------------------------------------
+
+    def emblem(self, kind):
+        fg, edge, fill, glyph, font = {
+            'brand': (GOLD, GOLDDIM, EMBBG, 'Є', self.f_emblem),
+            'ok': (GOOD, GOODDIM, GOODBG, '✓', self.f_title),
+            'fail': (BAD, BADDIM, BADBG, '✕', self.f_title)}[kind]
+        self.head.itemconfigure(self.emb_box, outline=edge, fill=fill)
+        self.head.itemconfigure(self.emb_txt, text=glyph, fill=fg, font=font)
+
+    def read_stamp(self):
+        """Версія й повнота перекладу.
+
+        У зібраному exe це читання `build.json`, а з репозиторію — підрахунок
+        усіх зрізів, тобто секунди. Тому окремим потоком.
+        """
+        try:
+            line = install.version_line()
+        except Exception:                       # noqa: BLE001 - лише підпис
+            return
+        head, _, tail = line.partition(' · ')
+        self.queue.put(('stamp', head + ('\n' + tail if tail else '')))
+
+    def progress(self, frac, color=GOLD):
+        self.fill.configure(bg=color)
+        self.fill.place_configure(relwidth=max(0.0, min(1.0, frac)))
+
+    # --- панель кроків ----------------------------------------------------------
+
+    def draw_panel(self):
+        c = self.panel
+        c.delete('all')
+        self.items, self.spine = {}, None
+        n = len(self.visible)
+        h, w = 12 + ROW * n + 13, W - 2 * PAD
+        c.configure(height=h)
+
+        for x, dx in ((0, 7), (w - 1, -7)):             # кутові засічки
+            for y, dy in ((0, 7), (h - 1, -7)):
+                c.create_line(x, y, x + dx, y, fill=TICK)
+                c.create_line(x, y, x, y + dy, fill=TICK)
+
+        if n > 1:
+            c.create_line(SPINE, FIRST, SPINE, FIRST + ROW * (n - 1), fill=LINE)
+        for i, key in enumerate(self.visible):
+            y = FIRST + ROW * i
+            glyph, gc, nc, _ = MARK['todo']
+            self.items[key] = (
+                c.create_text(SPINE, y, text=glyph, fill=gc, font=self.f_glyph),
+                c.create_text(40, y, anchor='w', text=TITLES[key], fill=nc,
+                              font=self.f_step),
+                c.create_text(w - 16, y, anchor='e', text='', fill=LABEL,
+                              font=self.f_small))
+
+    def mark_step(self, key, state, note=None):
+        # успіх не затирається пропуском: крок шрифту виконується кілька разів,
+        # і якщо котрогось шрифту в системі немає, рядок має лишитися зробленим
+        if self.state.get(key) == 'ok' and state == 'skip':
+            return
+        self.state[key] = state
+        if key in self.items:
+            glyph, gc, nc, weight = MARK[state]
+            gid, nid, note_id = self.items[key]
+            self.panel.itemconfigure(gid, text=glyph, fill=gc)
+            self.panel.itemconfigure(
+                nid, fill=nc,
+                font=self.f_step_b if weight == 'bold' else self.f_step)
+            if note:
+                self.panel.itemconfigure(
+                    note_id, text=note,
+                    fill={'run': GOLD, 'fail': BAD}.get(state, LABEL))
+
+        total = max(1, len(self.visible))
+        done = sum(1 for k in self.visible
+                   if self.state.get(k) in ('ok', 'skip'))
+        self.progress(float(done) / total)
+        self.label.configure(text='%d з %d' % (done, len(self.visible)))
+        self.paint_spine()
+
+    def paint_spine(self):
+        """Пройдена частина вертикалі — це шкала поступу збоку від списку."""
+        if self.spine:
+            self.panel.delete(self.spine)
+            self.spine = None
+        last, color = -1, GOODDIM
+        for i, key in enumerate(self.visible):
+            st = self.state.get(key)
+            if st == 'fail':
+                last, color = i, BADDIM
+                break
+            if st in ('ok', 'skip', 'run'):
+                last = i
+        if last > 0:
+            self.spine = self.panel.create_line(
+                SPINE, FIRST, SPINE, FIRST + ROW * last, fill=color)
+            self.panel.tag_lower(self.spine)
+
+    # --- стан -------------------------------------------------------------------
 
     def cfg(self):
-        return self.choice.get().strip()
+        return self.path.cget('text').strip() if self.cfgs else ''
 
     def installed(self, cfg):
         if not cfg or not os.path.isfile(cfg):
@@ -184,59 +343,54 @@ class App:
         _, _, _, mod_dir = install.describe(cfg)
         return os.path.isfile(os.path.join(mod_dir, install.MARKER))
 
-    def set_enabled(self, key, ok, why):
-        rb, hint = self.opts[key]
-        rb.configure(state='normal' if ok else 'disabled',
-                     fg=FG if ok else OFF)
-        hint.configure(text=HINTS[key] if ok else why, fg=DIM if ok else OFF)
-
-    # --- стан -------------------------------------------------------------------
+    def move(self, delta):
+        keys = [k for k, _, _ in PLANS if self.cards[k].enabled]
+        if self.busy or not keys:
+            return
+        i = keys.index(self.plan.get()) if self.plan.get() in keys else 0
+        self.plan.set(keys[(i + delta) % len(keys)])
+        self.refresh()
 
     def refresh(self):
         game = install.game_data_dir()
         have = bool(self.cfgs)
 
-        self.set_enabled(TR, have, 'спершу потрібен OpenMW')
-        self.set_enabled(ENGINE, bool(game) and not have,
-                         'OpenMW уже стоїть' if have else 'не знайдено гри')
-        self.set_enabled(MODS, bool(game), 'не знайдено гри')
-        plan = self.plan.get()
-        if self.opts[plan][0].cget('state') == 'disabled':
-            plan = TR if have else (MODS if game else TR)
-            self.plan.set(plan)
-
-        for key, title, plans in STEPS:
-            line = self.rows[key][2]
-            if plan in plans and not (key == 'рушій' and have):
-                line.pack(fill='x', padx=14, pady=3)
-            else:
-                line.pack_forget()
-
-        if have and len(self.cfgs) > 1:
-            self.wrapcfg.pack(fill='x', padx=24, pady=(10, 0), before=self.panel)
-        else:
-            self.wrapcfg.pack_forget()
-
-        if not game and not have:
-            self.sub.configure(text=install.why_no_openmw().splitlines()[0],
-                               fg=BAD)
-            self.go.configure(state='disabled')
-            self.rm.configure(state='disabled')
-            return
+        if have and not self.path.cget('text'):
+            self.path.configure(text=self.cfgs[0])
+        elif not have:
+            exes = install.morrowind_exes()
+            self.path.configure(text=(os.path.dirname(exes[0]) if exes
+                                      else 'гру не знайдено'))
+        self.change.configure(fg=GOLD if (have or game) else OFF)
 
         has_tr = have and self.installed(self.cfg())
-        self.sub.configure(fg=DIM, text={
-            TR: ('Переклад уже стоїть — можна оновити до свіжого.' if has_tr
-                 else 'Гру знайдено. Це займе близько хвилини.'),
-            ENGINE: 'OpenMW ще немає — поставлю сам. Windows один раз запитає '
-                    'дозвіл: це звичайне встановлення програми.',
-            MODS: 'Найдовший шлях. Спершу моди, тоді переклад — інакше моди '
-                  'перекрили б його.',
-        }[plan])
-        self.go.configure(
-            state='normal',
-            text='Оновити' if (plan == TR and has_tr) else 'Встановити')
-        self.rm.configure(state='normal' if has_tr else 'disabled')
+        self.cards[TR].set(have, 'потрібен OpenMW')
+        self.cards[ENGINE].set(bool(game) and not have, 'уже є')
+        self.cards[MODS].set(bool(game), 'гру не знайдено')
+        if has_tr:
+            self.cards[TR].state_word('стоїть')
+
+        plan = self.plan.get()
+        if not self.cards[plan].enabled:
+            plan = TR if have else (ENGINE if game else TR)
+            self.plan.set(plan)
+        for key, card in self.cards.items():
+            card.select(key == plan)
+
+        self.visible = [k for k, _, plans in STEPS
+                        if plan in plans and not (k == 'рушій' and have)]
+        self.state.clear()
+        self.draw_panel()
+        self.label.configure(text='Кроки', fg=LABEL)
+        self.progress(0)
+        self.emblem('brand')
+
+        self.go.set_text('Оновити' if (plan == TR and has_tr) else 'Встановити')
+        self.go.set_command(self.start)
+        self.go.enable(bool(game) or have)
+        self.rm.set_text('Вилучити')
+        self.rm.set_command(self.remove)
+        self.rm.enable(has_tr)
 
     def browse(self):
         p = filedialog.askopenfilename(
@@ -246,20 +400,10 @@ class App:
         if p:
             if p not in self.cfgs:
                 self.cfgs.append(p)
-                self.choice.configure(values=self.cfgs)
-            self.choice.set(p)
+            self.path.configure(text=p)
             self.refresh()
 
-    def toggle(self):
-        self.details_open = not self.details_open
-        if self.details_open:
-            self.logwrap.pack(fill='both', expand=True, padx=24, pady=(10, 16))
-            self.details_btn.configure(text='Сховати')
-        else:
-            self.logwrap.pack_forget()
-            self.details_btn.configure(text='Подробиці')
-
-    # --- журнал і кроки -----------------------------------------------------------
+    # --- журнал -----------------------------------------------------------------
 
     def write(self, msg):
         self.log.configure(state='normal')
@@ -267,19 +411,21 @@ class App:
         self.log.see('end')
         self.log.configure(state='disabled')
 
-    def mark_step(self, key, state):
-        if key not in self.rows:
-            return
-        # успіх не затирається пропуском: крок шрифту виконується кілька разів,
-        # і якщо котрогось шрифту в системі немає, рядок має лишитися зробленим
-        if self.state.get(key) == 'ok' and state == 'skip':
-            return
-        self.state[key] = state
-        mark, name = self.rows[key][0], self.rows[key][1]
-        look = {'run': ('▸', GOLD), 'ok': ('✓', GOOD),
-                'skip': ('–', DIM), 'fail': ('✕', BAD)}[state]
-        mark.configure(text=look[0], fg=look[1])
-        name.configure(fg=FG if state in ('run', 'ok') else DIM)
+    def copy_report(self):
+        self.root.clipboard_clear()
+        self.root.clipboard_append(self.log.get('1.0', 'end').strip())
+        self.rm.set_text('Скопійовано')
+
+    def toggle(self):
+        self.details = not self.details
+        if self.details:
+            self.logwrap.pack(fill='x', pady=(20, 0))
+            self.more.set_text('Сховати')
+            self.resize(H_LOG)
+        else:
+            self.logwrap.pack_forget()
+            self.more.set_text('Подробиці')
+            self.resize(H_PLAIN)
 
     def drain(self):
         try:
@@ -287,23 +433,21 @@ class App:
                 kind, payload = self.queue.get_nowait()
                 if kind == 'log':
                     self.write(payload)
+                elif kind == 'stamp':
+                    self.head.itemconfigure(self.stamp, text=payload)
                 else:
                     self.mark_step(*payload)
         except queue.Empty:
             pass
         self.root.after(80, self.drain)
 
-    # --- робота --------------------------------------------------------------------
+    # --- робота -----------------------------------------------------------------
 
     def start(self):
+        if self.busy or not self.go.enabled:
+            return
         plan = self.plan.get()
-        done = {
-            TR: 'Готово. Запускай гру як завжди — вона буде українською.',
-            ENGINE: 'Готово. У меню «Пуск» з’явився OpenMW — запускай його.',
-            MODS: 'Готово. Запускай OpenMW: це та сама збірка, що в автора '
-                  'перекладу, українською.',
-        }[plan]
-        self.run(lambda cfg: self.chain(plan, cfg), ok=done)
+        self.run(lambda cfg: self.chain(plan, cfg))
 
     def chain(self, plan, cfg):
         """Порядок кроків тут не випадковий.
@@ -317,30 +461,26 @@ class App:
             if not cfg:
                 return 1
             self.cfgs = install.cfg_candidates() or [cfg]
-            self.root.after(0, lambda: self.choice.configure(values=self.cfgs))
-            self.root.after(0, lambda: self.choice.set(cfg))
+            self.root.after(0, lambda: self.path.configure(text=cfg))
         if plan == MODS and install.install_modlist(cfg):
             return 1
         return install.install_to(cfg)
 
     def remove(self):
-        self.run(install.uninstall_from,
-                 ok='Переклад вилучено. Гра знову англійською.')
-
-    def run(self, fn, ok):
-        if self.busy:
+        if self.busy or not self.rm.enabled:
             return
-        cfg = self.cfg()
+        self.run(install.uninstall_from)
+
+    def run(self, fn):
         self.busy = True
         self.state.clear()
-        for key in self.rows:
-            self.rows[key][0].configure(text='·', fg=DIM)
-            self.rows[key][1].configure(fg=DIM)
-        self.result.pack_forget()
-        for b in (self.go, self.rm):
-            b.configure(state='disabled')
-        self.bar.pack(fill='x', padx=24, pady=(0, 10))
-        self.bar.start(12)
+        self.draw_panel()
+        self.emblem('brand')
+        self.progress(0)
+        self.go.enable(False)
+        self.rm.enable(False)
+        self.go.set_text('Працюю…', busy=True)
+        cfg = self.cfg()
 
         def work():
             try:
@@ -350,24 +490,203 @@ class App:
                 for ln in traceback.format_exc().splitlines()[-8:]:
                     self.queue.put(('log', '  ' + ln))
                 code = 1
-            self.root.after(0, lambda: self.finish(code, ok))
+            self.root.after(0, lambda: self.finish(code))
 
         threading.Thread(target=work, daemon=True).start()
 
-    def finish(self, code, ok):
+    def finish(self, code):
         self.busy = False
-        self.bar.stop()
-        self.bar.pack_forget()
+        total = len(self.visible)
+        done = sum(1 for k in self.visible
+                   if self.state.get(k) in ('ok', 'skip'))
+
         if code == 0:
-            self.result.configure(text=ok, fg=GOOD)
+            self.emblem('ok')
+            self.progress(1.0, GOOD)
+            self.label.configure(fg=GOOD,
+                                 text='Готово · %d з %d' % (done, total))
+            self.go.set_text('Запустити', busy=False)
+            self.go.set_command(self.launch)
+            self.rm.enable(True)
         else:
-            self.result.configure(
-                text='Не вийшло. Гру не змінено. Натисни «Подробиці» й надішли '
-                     'цей текст автору перекладу.', fg=BAD)
-            if not self.details_open:
+            self.emblem('fail')
+            self.progress(float(done) / max(1, total), BAD)
+            self.label.configure(fg=BAD,
+                                 text='Не вийшло · %d з %d' % (done, total))
+            self.go.set_text('Ще раз', busy=False)
+            self.go.set_command(self.start)
+            self.rm.set_text('Копіювати звіт')
+            self.rm.set_command(self.copy_report)
+            self.rm.enable(True)
+            if not self.details:
                 self.toggle()
-        self.result.pack(anchor='w', fill='x', padx=24, pady=(4, 8))
-        self.refresh()
+
+        self.go.enable(True)
+        self.paint_spine()
+
+    def launch(self):
+        """Після успіху найкорисніша дія — запустити гру, а не закрити вікно."""
+        exes = install.openmw_exes()
+        exe = exes[0] if exes else None
+        if exe and os.path.isfile(exe):
+            os.startfile(exe)                   # noqa: S606 - свій же рушій
+        self.root.destroy()
+
+
+class Card(tk.Frame):
+    """Варіант установлення: смужка з перемикачем і назвою. Решта — в підказці."""
+
+    def __init__(self, parent, key, title, tip, app):
+        tk.Frame.__init__(self, parent, bg=SURF)
+        self.app, self.key, self.enabled = app, key, True
+
+        self.edge = tk.Frame(self, width=3, bg=SURF)
+        self.edge.pack(side='left', fill='y')
+        inner = tk.Frame(self, bg=SURF)
+        inner.pack(side='left', fill='both', expand=True, padx=(14, 16),
+                   pady=(12, 13))
+
+        # Власний індикатор, а не tk.Radiobutton: рідний малюється світлим
+        # квадратом і на темному тлі виглядає як чужий елемент.
+        self.dot = tk.Canvas(inner, width=14, height=17, highlightthickness=0,
+                             bd=0, bg=SURF)
+        self.dot.pack(side='left')
+        self.ring = self.dot.create_oval(1, 2, 13, 14, outline=OFF)
+        self.pip = self.dot.create_oval(4, 5, 10, 11, outline='', fill='')
+
+        self.word = tk.Label(inner, text='', bg=SURF, fg=DEAD, font=app.f_small)
+        self.word.pack(side='right')
+        self.title = tk.Label(inner, text=title, bg=SURF, fg=TEXT,
+                              font=app.f_card, anchor='w')
+        self.title.pack(side='left', fill='x', expand=True, padx=(13, 0))
+
+        self.parts = [self, inner, self.dot, self.title, self.word]
+        for w in self.parts:
+            w.bind('<Button-1>', self.click)
+        Tip(self.parts, tip, app)
+
+    def click(self, _event=None):
+        if self.enabled and not self.app.busy:
+            self.app.plan.set(self.key)
+            self.app.refresh()
+
+    def select(self, on):
+        bg = SEL if on else (SURF if self.enabled else OFFBG)
+        for w in self.parts:
+            w.configure(bg=bg)
+        self.edge.configure(bg=GOLD if on else bg)
+        self.dot.itemconfigure(self.ring, outline=GOLD if on else OFF)
+        self.dot.itemconfigure(self.pip, fill=GOLD if on else '')
+        self.configure(cursor='hand2' if self.enabled else '')
+
+    def set(self, enabled, why):
+        self.enabled = enabled
+        self.title.configure(fg=TEXT if enabled else OFF)
+        self.word.configure(text='' if enabled else why)
+
+    def state_word(self, text):
+        self.word.configure(text=text)
+
+
+class Tip:
+    """Підказка під карткою.
+
+    Пояснення варіанта живе тут, а не у вікні: у списку стоять самі назви, а
+    подробиця приходить тоді, коли на неї дивляться. Затримки з обох боків —
+    щоб підказка не блимала, коли курсор переходить між частинами картки.
+    """
+
+    def __init__(self, widgets, text, app):
+        self.text, self.app = text, app
+        self.win = self.show_id = self.hide_id = None
+        for w in widgets:
+            w.bind('<Enter>', self.enter, add='+')
+            w.bind('<Leave>', self.leave, add='+')
+
+    def stop(self, which):
+        job = getattr(self, which)
+        if job:
+            self.app.root.after_cancel(job)
+            setattr(self, which, None)
+
+    def enter(self, _e=None):
+        self.stop('hide_id')
+        if not self.win and not self.show_id:
+            self.show_id = self.app.root.after(450, self.show)
+
+    def leave(self, _e=None):
+        self.stop('show_id')
+        self.hide_id = self.app.root.after(120, self.hide)
+
+    def show(self):
+        self.show_id = None
+        if self.win or not self.text:
+            return
+        self.win = tk.Toplevel(self.app.root)
+        self.win.wm_overrideredirect(True)
+        self.win.configure(bg=TICK)
+        tk.Label(self.win, text=self.text, bg=SURF, fg=TEXT, justify='left',
+                 font=self.app.f_small, wraplength=360, padx=12,
+                 pady=9).pack(padx=1, pady=1)
+        self.win.wm_geometry('+%d+%d' % (self.app.root.winfo_pointerx() + 14,
+                                         self.app.root.winfo_pointery() + 20))
+
+    def hide(self):
+        self.hide_id = None
+        if self.win:
+            self.win.destroy()
+            self.win = None
+
+
+class Button(tk.Frame):
+    """Кнопка сталої висоти: tk.Button міряє себе в літерах, а не пікселях."""
+
+    def __init__(self, parent, text, command, app, primary=False):
+        tk.Frame.__init__(self, parent, height=44, bg=FOOT)
+        self.pack_propagate(False)
+        self.app, self.cmd, self.primary = app, command, primary
+        self.enabled, self.busy = True, False
+        self.bevel = tk.Frame(self, height=1, bg=GOLDTOP)
+        self.label = tk.Label(self, text=text, cursor='hand2')
+        self.label.pack(fill='both', expand=True)
+        self.label.bind('<Button-1>', lambda e: self.fire())
+        self.bind('<Button-1>', lambda e: self.fire())
+        self.set_text(text)
+
+    def fire(self):
+        if self.enabled and self.cmd:
+            self.cmd()
+
+    def set_command(self, fn):
+        self.cmd = fn
+
+    def set_text(self, text, busy=None):
+        if busy is not None:
+            self.busy = busy
+        self.label.configure(
+            text=text, font=self.app.f_go if self.primary else self.app.f_btn)
+        pad = 34 if self.primary else 18
+        self.configure(width=self.label.winfo_reqwidth() + 2 * pad)
+        self.paint()
+
+    def enable(self, on):
+        self.enabled = on
+        self.label.configure(cursor='hand2' if on else '')
+        self.paint()
+
+    def paint(self):
+        if self.primary:
+            live = self.enabled and not self.busy
+            bg, fg = (GOLD, GOLDINK) if live else (BUSYBG, LABEL)
+            self.bevel.configure(bg=GOLDTOP if live else BUSYTOP)
+            self.bevel.place(x=0, y=0, relwidth=1)
+            edge, thick = bg, 0
+        elif self.enabled:
+            bg, fg, edge, thick = SURF, MUTED, LINE, 1
+        else:
+            bg, fg, edge, thick = OFFBG, DEAD, DEADEDGE, 1
+        self.configure(bg=bg, highlightthickness=thick, highlightbackground=edge)
+        self.label.configure(bg=bg, fg=fg)
 
 
 def hide_console():

@@ -13,8 +13,6 @@ import json
 import os
 import sys
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',
-                              errors='replace', write_through=True)
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # Зрізи базової гри. Решта (`mod_*`) — це моди, і їхній стан залежить від того,
@@ -74,6 +72,10 @@ def names():
 
 
 def main():
+    # Вивід перемикаємо тут, а не при імпорті: `installer/make.py`
+    # імпортує цей модуль заради чисел, і підміняти йому stdout не можна.
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',
+                                  errors='replace', write_through=True)
     vd, vt, md, mt = count()
     td, tt = topics()
     pct = 100.0 * vd / vt if vt else 0

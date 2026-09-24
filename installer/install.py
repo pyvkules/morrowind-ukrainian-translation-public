@@ -118,9 +118,10 @@ def set_progress(fn):
     _progress = fn
 
 
-def step(key, state):
+def step(key, state, note=None):
+    """`note` — коротке число праворуч у рядку кроку; може бути None."""
     if _progress is not None:
-        _progress(key, state)
+        _progress(key, state, note)
 
 
 def payload_root():
@@ -128,6 +129,57 @@ def payload_root():
     if getattr(sys, 'frozen', False):
         return os.path.join(sys._MEIPASS, 'payload')
     return os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+
+def measure(root):
+    """Порахувати переклад просто зараз — тим самим кодом, що й у релізі."""
+    sys.path.insert(0, os.path.join(root, 'tools'))
+    try:
+        import stats
+    except ImportError:
+        return {}
+    vd, vt, md, mt = stats.count()
+    td, tt = stats.topics()
+    return {'vanilla': [vd, vt], 'topics': [td, tt],
+            'names': stats.names(), 'mods': [md, mt]}
+
+
+_BUILD = None
+
+
+def build_info():
+    """Версія збірки й стан перекладу.
+
+    `make.py` кладе це у `payload/build.json` під час збірки, бо перерахунок
+    усіх зрізів — секунди, і платити їх щоразу при відкритті вікна нема за що.
+    Коли запускаємося з репозиторію, файлу немає: рахуємо на місці, там пауза
+    не заважає. Так число в шапці не може розійтися з тим, що всередині.
+    """
+    global _BUILD
+    if _BUILD is None:
+        try:
+            with io.open(os.path.join(payload_root(), 'build.json'),
+                         encoding='utf-8') as f:
+                _BUILD = json.load(f)
+        except (OSError, ValueError):
+            _BUILD = measure(payload_root())
+    return _BUILD
+
+
+def version_line():
+    """Рядок для шапки вікна й для звіту про помилку.
+
+    Два числа, а не одне: базова гра перекладена повністю, моди — ні, і
+    самотнє «100%» читалося б як «усе готово».
+    """
+    b = build_info()
+    ver = b.get('version') or 'з репозиторію'
+    parts = [ver]
+    for label, key in (('гра', 'vanilla'), ('моди', 'mods')):
+        done, total = (b.get(key) or [0, 0])[:2]
+        if total:
+            parts.append('%s %d%%' % (label, 100 * done // total))
+    return ' \u00b7 '.join(parts)
 
 
 def arg(flag, default=None):
@@ -726,6 +778,7 @@ def install_to(cfg):
 def main():
     out('=' * 62)
     out(' %s' % APP)
+    out(' %s' % version_line())
     out('=' * 62)
     out()
 

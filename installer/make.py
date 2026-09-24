@@ -8,10 +8,13 @@
     py installer/make.py            # зібрати
     py installer/make.py --clean    # зібрати з нуля
 """
+import io
+import json
 import os
 import shutil
 import subprocess
 import sys
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..'))
@@ -37,6 +40,38 @@ def tracked_files():
             for l in r.stdout.splitlines() if l.strip()}
 
 
+def git_short():
+    try:
+        r = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], cwd=REPO,
+                           capture_output=True, text=True, encoding='utf-8')
+    except OSError:
+        return '?'
+    return r.stdout.strip() if r.returncode == 0 else '?'
+
+
+def write_build_info(payload):
+    """Покласти у вміст версію й стан перекладу.
+
+    Робимо це тут, а не константою в коді: числа міняються з кожним пушем, і
+    вписане руками застаріє наступного ж дня. `stats.py` рахує по зрізах у
+    репозиторії, тож ігрові дані для цього не потрібні — CI теж упорається.
+    """
+    sys.path.insert(0, os.path.join(REPO, 'tools'))
+    import stats                              # noqa: E402 - шлях щойно додано
+
+    vd, vt, md, mt = stats.count()
+    td, tt = stats.topics()
+    info = {'version': time.strftime('%y.%m.%d'), 'commit': git_short(),
+            'vanilla': [vd, vt], 'topics': [td, tt],
+            'names': stats.names(), 'mods': [md, mt]}
+    with io.open(os.path.join(payload, 'build.json'), 'w',
+                 encoding='utf-8', newline='\n') as f:
+        f.write(json.dumps(info, ensure_ascii=False, indent=1))
+    print('збірка %s (%s): базова гра %d/%d, теми %d/%d, назви %d, моди %d/%d'
+          % (info['version'], info['commit'], vd, vt, td, tt,
+             info['names'], md, mt))
+
+
 def main():
     if '--clean' in sys.argv:
         for d in (BUILD, DIST, os.path.join(HERE, '__pycache__')):
@@ -52,6 +87,7 @@ def main():
     size = sum(os.path.getsize(os.path.join(r, f))
                for r, _, fs in os.walk(PAYLOAD) for f in fs)
     print('вміст: %d файлів, %.1f МБ' % (n, size / 1048576.0))
+    write_build_info(PAYLOAD)
 
     cmd = [
         sys.executable, '-m', 'PyInstaller',
