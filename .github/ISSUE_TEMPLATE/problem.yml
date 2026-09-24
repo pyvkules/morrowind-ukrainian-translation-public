@@ -1,0 +1,70 @@
+name: Щось не працює
+description: Гра вилітає, текст англійською, замість літер квадратики, щось не малюється
+labels: ["проблема"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Заповни те, що знаєш. Найважливіше — два останні поля: без них
+        доведеться вгадувати.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Що сталося
+      options:
+        - Гра не запускається
+        - Гра вилітає під час гри
+        - Текст англійською
+        - Замість літер квадратики
+        - Щось не малюється або малюється не так
+        - Встановлювач спинився з помилкою
+        - Інше
+    validations:
+      required: true
+
+  - type: input
+    id: build
+    attributes:
+      label: Збірка
+      description: Рядок у правому верхньому куті вікна встановлювача
+      placeholder: 24.09 · гра 100% · моди 28%
+    validations:
+      required: true
+
+  - type: textarea
+    id: where
+    attributes:
+      label: Де саме
+      description: Місто чи печера, ім'я персонажа, що ти робив перед тим
+      placeholder: Балмора, розмова з Косадесом, після другого питання
+    validations:
+      required: true
+
+  - type: textarea
+    id: report
+    attributes:
+      label: Звіт встановлювача
+      description: У вікні — «Подробиці», далі «Копіювати звіт»
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: openmw.log
+      description: |
+        Лежить у теці `Документи\My Games\OpenMW`. Якщо гра вилетіла, поруч
+        буде ще `crash.log` — додай і його.
+      render: text
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: without
+    attributes:
+      label: Перевірка
+      options:
+        - label: Спробував `ukrainizer-setup.exe --uninstall` — і те саме повторюється без перекладу
+        - label: Прикладаю знімок екрана
