@@ -22,6 +22,7 @@ BUILD = os.path.join(HERE, 'build')
 PAYLOAD = os.path.join(BUILD, 'payload')
 DIST = os.path.join(HERE, 'dist')
 NAME = 'ukrainizer-setup'
+ICON = os.path.join(HERE, 'icon.ico')
 
 sys.path.insert(0, HERE)
 import install                                   # noqa: E402 - той самий фільтр
@@ -97,6 +98,10 @@ def main():
         '--workpath', os.path.join(BUILD, 'work'),
         '--specpath', BUILD,
         '--add-data', PAYLOAD + os.pathsep + 'payload',
+        # піктограма потрібна двічі: на самому файлі та всередині —
+        # exe бере її з ресурсів, а вікно відкриває як файл
+        '--icon', ICON,
+        '--add-data', ICON + os.pathsep + '.',
         # patch_font вантажиться через runpy, тож статичний аналіз його імпортів
         # не бачить - fontTools треба забрати цілком
         '--collect-all', 'fontTools',

@@ -106,6 +106,7 @@ class App:
         self.plan = tk.StringVar(value=TR if self.cfgs else ENGINE)
 
         root.title('Українізатор Morrowind')
+        self.set_icon()
         root.configure(bg=BG)
         root.resizable(False, False)
         self.resize(H_PLAIN)
@@ -130,6 +131,17 @@ class App:
         root.after(80, self.drain)
 
     # --- каркас ----------------------------------------------------------------
+
+    def set_icon(self):
+        """Піктограма вікна: у зібраному exe вона лежить у вмісті."""
+        base = (getattr(sys, '_MEIPASS', None)
+                or os.path.dirname(os.path.abspath(__file__)))
+        ico = os.path.join(base, 'icon.ico')
+        if os.path.isfile(ico):
+            try:
+                self.root.iconbitmap(ico)
+            except tk.TclError:
+                pass
 
     def resize(self, height):
         self.root.geometry('%dx%d' % (W, height))
