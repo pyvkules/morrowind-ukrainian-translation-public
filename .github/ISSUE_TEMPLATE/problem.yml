@@ -5,8 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Заповни те, що знаєш. Найважливіше — два останні поля: без них
-        доведеться вгадувати.
+        Заповни те, що знаєш. Найважливіші тут два останні поля.
+        Без них доведеться вгадувати причину.
 
   - type: dropdown
     id: kind
@@ -45,7 +45,7 @@ body:
     id: report
     attributes:
       label: Звіт встановлювача
-      description: У вікні — «Подробиці», далі «Копіювати звіт»
+      description: У вікні натисни «Подробиці», а тоді «Копіювати звіт»
       render: text
     validations:
       required: true
@@ -55,8 +55,8 @@ body:
     attributes:
       label: openmw.log
       description: |
-        Лежить у теці `Документи\My Games\OpenMW`. Якщо гра вилетіла, поруч
-        буде ще `crash.log` — додай і його.
+        Лежить у теці `Документи\My Games\OpenMW`. Якщо гра вилетіла,
+        поруч буде ще `crash.log`. Додай і його.
       render: text
     validations:
       required: true
@@ -66,5 +66,5 @@ body:
     attributes:
       label: Перевірка
       options:
-        - label: Спробував `ukrainizer-setup.exe --uninstall` — і те саме повторюється без перекладу
+        - label: Прибрав переклад через `ukrainizer-setup.exe --uninstall`, і те саме повторюється
         - label: Прикладаю знімок екрана
