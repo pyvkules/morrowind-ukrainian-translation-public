@@ -521,6 +521,77 @@ def why_no_openmw():
         'вручну.',
     ])
 
+def game_data_dir():
+    """Тека Data Files знайденої гри — те, що потрібно новому OpenMW."""
+    for exe in morrowind_exes():
+        d = os.path.join(os.path.dirname(exe), 'Data Files')
+        if os.path.isfile(os.path.join(d, 'Morrowind.esm')):
+            return d
+    return None
+
+
+def install_engine():
+    """Завантажити й поставити OpenMW, тоді налаштувати його під знайдену гру.
+
+    Повертає шлях до створеного openmw.cfg або None. Потрібне лише тоді, коли
+    OpenMW у людини ще немає: наявний ми не чіпаємо.
+    """
+    import engine
+
+    data = game_data_dir()
+    if not data:
+        out('Не знайшов саму гру — нема що налаштовувати.')
+        out('Купи й постав Morrowind (Steam або GOG), тоді запусти ще раз.')
+        return None
+
+    out('Гра: %s' % data)
+    step('рушій', 'run')
+    try:
+        name, url, size, tag = engine.latest_windows_build()
+    except Exception as e:                     # noqa: BLE001 - мережа
+        out('Не вдалося спитати GitHub про OpenMW: %s' % e)
+        step('рушій', 'fail')
+        return None
+
+    out('Завантажую OpenMW %s (%.0f МБ)...' % (tag.replace('openmw-', ''),
+                                               size / 1048576.0))
+    tmp = os.path.join(os.environ.get('TEMP', '.'), name)
+    try:
+        engine.download(url, tmp, size,
+                        lambda p: out('  %d%%' % p) if p % 20 == 0 else None)
+    except Exception as e:                     # noqa: BLE001 - мережа
+        out('Завантаження не вдалося: %s' % e)
+        step('рушій', 'fail')
+        return None
+
+    target = os.path.join(os.environ.get('PROGRAMFILES', r'C:\Program Files'),
+                          'OpenMW')
+    out('Ставлю у %s' % target)
+    out('Windows зараз запитає дозвіл — це звичайне встановлення програми.')
+    try:
+        code = engine.silent_install(tmp, target)
+    except PermissionError as e:
+        out('OpenMW не встановлено: %s' % e)
+        step('рушій', 'fail')
+        return None
+    if code != 0:
+        out('Встановлення повернуло код %s' % code)
+
+    exe = engine.find_engine(target)
+    if not exe:
+        out('Не бачу openmw.exe після встановлення.')
+        step('рушій', 'fail')
+        return None
+    out('Рушій: %s' % exe)
+
+    cfg = os.path.join(os.path.expanduser('~'), 'Documents', 'My Games',
+                       'OpenMW', 'openmw.cfg')
+    engine.bootstrap_config(exe, data, cfg, on_line=lambda m: out('  ' + m))
+    out('Налаштування: %s' % cfg)
+    step('рушій', 'ok')
+    return cfg
+
+
 def uninstall_from(cfg):
     lines, dirs, master, mod_dir = describe(cfg)
     for note in rewrite_cfg(cfg, mod_dir, remove=True):

@@ -33,6 +33,7 @@ BAD = '#d98b6a'
 # Внутрішня назва кроку -> те, що бачить людина. Імена скриптів їй ні про що
 # не кажуть, а «Перекладаю меню» каже все.
 STEP_NAMES = [
+    ('рушій',     'Ставлю OpenMW'),
     ('шрифт',     'Додаю українські літери до шрифту'),
     ('ядро',      'Перекладаю основну гру'),
     ('плагіни',   'Перекладаю доповнення й моди'),
@@ -160,10 +161,29 @@ class App:
     # --- стан ----------------------------------------------------------------
 
     def refresh(self):
-        if not self.cfgs:
-            self.sub.configure(text='Не знайдено OpenMW', fg=BAD)
-            self.where.configure(text=install.why_no_openmw(), fg=BAD)
-            self.go.configure(state='disabled')
+        # Рядок «Ставлю OpenMW» показуємо лише тоді, коли його справді
+        # доведеться ставити: зайвий крок у списку тільки лякає.
+        need_engine = not self.cfgs
+        mark, name = self.rows['рушій']
+        line = mark.master
+        if need_engine:
+            line.pack(fill='x', padx=14, pady=3, before=self.rows['шрифт'][0].master)
+        else:
+            line.pack_forget()
+
+        if need_engine:
+            game = install.game_data_dir()
+            if game:
+                self.sub.configure(
+                    text='OpenMW ще немає — це програма, через яку працює гра. '
+                         'Поставлю її сам, а тоді перекладу.', fg=DIM)
+                self.where.configure(text='гра: %s' % game, fg=DIM)
+                self.go.configure(state='normal',
+                                  text='Поставити все')
+            else:
+                self.sub.configure(text='Не знайдено ані OpenMW, ані гри', fg=BAD)
+                self.where.configure(text=install.why_no_openmw(), fg=BAD)
+                self.go.configure(state='disabled')
             self.rm.configure(state='disabled')
             return
         cfg = self.cfg()
@@ -262,8 +282,27 @@ class App:
     # --- робота ---------------------------------------------------------------
 
     def start(self):
-        self.run(install.install_to, ok='Готово. Запускай гру як завжди — '
-                                        'вона буде українською.')
+        if not self.cfgs:
+            self.run(self.engine_then_translate,
+                     ok='Готово. У меню «Пуск» з’явився OpenMW — запускай його, '
+                        'гра буде українською.')
+        else:
+            self.run(install.install_to,
+                     ok='Готово. Запускай гру як завжди — вона буде українською.')
+
+    def engine_then_translate(self, _cfg):
+        """Спершу рушій, тоді переклад — саме в цьому порядку.
+
+        Перекладати нема куди, доки немає налаштувань OpenMW: саме вони
+        кажуть, де гра й які моди стоять.
+        """
+        cfg = install.install_engine()
+        if not cfg:
+            return 1
+        self.cfgs = install.cfg_candidates() or [cfg]
+        self.root.after(0, lambda: self.choice.configure(values=self.cfgs))
+        self.root.after(0, lambda: self.choice.set(cfg))
+        return install.install_to(cfg)
 
     def remove(self):
         self.run(install.uninstall_from,
