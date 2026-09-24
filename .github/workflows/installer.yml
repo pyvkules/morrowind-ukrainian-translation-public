@@ -79,11 +79,11 @@ jobs:
           $f = Get-Item ".\installer\dist\ukrainizer-setup.exe"
           "{0:N1} МБ" -f ($f.Length / 1MB)
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ukrainizer-setup
-          path: installer/dist/ukrainizer-setup.exe
-          retention-days: 90
+      # Артефакт тут НЕ вантажимо навмисно. Він дублює реліз, але, на відміну
+      # від нього, з'їдає сховище Actions: 20 МБ на кожен пуш, а безплатна
+      # квота — 500 МБ. За півдня збірок вона скінчилася. Готовий файл лежить
+      # у релізі: посилання стале, місця не займає, і завантажити його можна
+      # без входу в GitHub.
 
       - name: Опис релізу
         shell: pwsh
