@@ -215,6 +215,22 @@ class App:
                                bd=0, bg=SURF)
         self.panel.pack(fill='x')
 
+        # Рядок для Steam. З'являється тільки після успіху — доти показувати
+        # нема чого.
+        self.steam = tk.Frame(box, bg=BG)
+        tk.Label(self.steam, text='Ярлик для Steam', bg=BG, fg=LABEL,
+                 font=self.f_label).pack(side='left')
+        self.steam_copy = tk.Label(self.steam, text='Копіювати', bg=BG,
+                                   fg=GOLD, font=self.f_small, cursor='hand2')
+        self.steam_copy.pack(side='right')
+        self.steam_path = tk.Label(self.steam, text='', bg=BG, fg=MUTED,
+                                   font=self.f_mono, anchor='w')
+        self.steam_path.pack(side='left', fill='x', expand=True, padx=(12, 12))
+        self.steam_copy.bind('<Button-1>', lambda e: self.copy_path())
+        Tip([self.steam, self.steam_path, self.steam_copy],
+            'Steam → Ігри → Додати гру не зі Steam → Огляд. Вкажи цей файл і '
+            'назви його Morrowind. Далі Steam рахуватиме години сам.', self)
+
         self.logwrap = tk.Frame(box, bg=BG)
         self.log = tk.Text(self.logwrap, bg=LOGBG, fg='#8E8674', relief='flat',
                            wrap='word', font=self.f_mono, height=11,
@@ -508,6 +524,7 @@ class App:
             self.go.set_text('Запустити', busy=False)
             self.go.set_command(self.launch)
             self.rm.enable(True)
+            self.show_steam()
         else:
             self.emblem('fail')
             self.progress(float(done) / max(1, total), BAD)
@@ -523,6 +540,19 @@ class App:
 
         self.go.enable(True)
         self.paint_spine()
+
+    def show_steam(self):
+        """Готовий рядок запуску: людині лишається вставити його в Steam."""
+        exes = install.openmw_exes()
+        if not exes:
+            return
+        self.steam_path.configure(text='"%s"' % exes[0])
+        self.steam.pack(fill='x', pady=(16, 0), after=self.panel)
+
+    def copy_path(self):
+        self.root.clipboard_clear()
+        self.root.clipboard_append(self.steam_path.cget('text'))
+        self.steam_copy.configure(text='Скопійовано', fg=GOOD)
 
     def launch(self):
         """Після успіху найкорисніша дія — запустити гру, а не закрити вікно."""
