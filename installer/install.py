@@ -441,7 +441,7 @@ def pick_cfg():
 # Що саме їде в пакунку. Явний список, а не «усе, крім»: у теці репозиторію
 # поруч із джерелами лежать 76 зібраних плагінів модпака - це і 340 зайвих МБ,
 # і роздача чужого вмісту разом із даними Bethesda.
-PAYLOAD_DIRS = ('tools', 'l10n', 'Fonts')
+PAYLOAD_DIRS = ('tools', 'l10n', 'Fonts', 'recipe')
 PAYLOAD_FILES = ('build.py', 'README.md')
 SKIP_NAMES = {'base.esm', '__pycache__', '.git', 'installer'}
 # .ttf не возимо: Pelagiad має ліцензію SIL OFL із зарезервованою назвою, тож
@@ -590,6 +590,57 @@ def install_engine():
     out('Налаштування: %s' % cfg)
     step('рушій', 'ok')
     return cfg
+
+
+def install_modlist(cfg):
+    """Поставити модліст автора й відтворити його профіль.
+
+    Найдовший крок: моди важать десятки гігабайтів, і тягне їх `umo` — рідний
+    завантажувач Modding-OpenMW. Ми лише кажемо йому, які списки потрібні, а
+    тоді складаємо профіль із рецепта.
+    """
+    import mods as modlist
+
+    step('моди', 'run')
+    tools = modlist.find_tools()
+    if not tools:
+        out('Не знайшов інструментів Modding-OpenMW (umo, momw-configurator).')
+        out('Візьми momw-tools-pack тут і поклади поруч із цим файлом:')
+        out('  ' + modlist.SITE)
+        step('моди', 'fail')
+        return 1
+    out('Інструменти: %s' % tools)
+
+    lists = modlist.wanted_lists(payload_root())
+    if not lists:
+        out('У пакунку немає рецепта модліста.')
+        step('моди', 'fail')
+        return 1
+    out('Списки: %s' % ', '.join(lists))
+
+    mods_dir = modlist.umo_dirs(tools)
+    if not mods_dir:
+        out('umo не сказав, куди складає моди. Запусти `umo reconfig`.')
+        step('моди', 'fail')
+        return 1
+    out('Моди підуть у %s' % mods_dir)
+
+    if not modlist.install_lists(tools, lists, out):
+        step('моди', 'fail')
+        return 1
+
+    _, _, master, _ = describe(cfg)
+    game = os.path.dirname(master) if master else game_data_dir()
+    if not game:
+        out('Не знайшов теки гри.')
+        step('моди', 'fail')
+        return 1
+
+    if not modlist.write_profile(payload_root(), cfg, mods_dir, game, out):
+        step('моди', 'fail')
+        return 1
+    step('моди', 'ok')
+    return 0
 
 
 def uninstall_from(cfg):

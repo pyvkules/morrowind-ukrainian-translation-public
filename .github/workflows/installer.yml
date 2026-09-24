@@ -85,6 +85,34 @@ jobs:
       # у релізі: посилання стале, місця не займає, і завантажити його можна
       # без входу в GitHub.
 
+      - name: Підписати
+        # Підпис прибирає попередження SmartScreen, але потребує сертифіката,
+        # який купує людина: приблизно 200-400 доларів на рік і перевірка
+        # особи. Самопідписаний не зараховується — Windows довіряє не факту
+        # підпису, а тому, хто його видав.
+        #
+        # Тому крок умовний: щойно в секретах репозиторію з'являться
+        # SIGN_CERT (сертифікат .pfx у base64) і SIGN_PASS, збірка почне
+        # підписуватися сама, без жодних інших змін.
+        if: env.SIGN_CERT != ''
+        env:
+          SIGN_CERT: ${{ secrets.SIGN_CERT }}
+          SIGN_PASS: ${{ secrets.SIGN_PASS }}
+        shell: pwsh
+        run: |
+          $pfx = Join-Path $env:RUNNER_TEMP 'sign.pfx'
+          [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String($env:SIGN_CERT))
+          $tool = Get-ChildItem 'C:/Program Files (x86)/Windows Kits/10/bin' `
+                  -Recurse -Filter signtool.exe |
+                  Where-Object { $_.FullName -match 'x64' } |
+                  Select-Object -Last 1
+          & $tool.FullName sign /fd SHA256 /f $pfx /p $env:SIGN_PASS `
+            /tr http://timestamp.digicert.com /td SHA256 `
+            installer/dist/ukrainizer-setup.exe
+          Remove-Item $pfx -Force
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          exit 0
+
       - name: Опис релізу
         shell: pwsh
         run: |
