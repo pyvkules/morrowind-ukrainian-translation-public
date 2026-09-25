@@ -175,6 +175,18 @@ def find_form(text, topic):
     return None
 
 
+AT = re.compile(r'@([^#]{1,80})#')
+
+
+def known_form(surface, topic):
+    """Чи веде вже наявна розмітка `@surface#` саме на цю тему."""
+    pat = TOPIC_PAT.get(topic)
+    if not pat:
+        return False
+    rx, stems = pat
+    return bool(rx.fullmatch(surface)) and _suffix_ok(surface, stems)
+
+
 stats = {'wrapped': 0, 'added': 0, 'infos': 0, 'files': 0, 'warn': 0}
 top_used = {}
 touched = []
@@ -250,6 +262,19 @@ for c in contents:
                                 file_wrapped += len(clean)
                                 stats['wrapped'] += len(clean)
                                 stats['infos'] += 1
+                        else:
+                            # Текст уже розмічений давнім перекладом або
+                            # попереднім запуском. Ці форми теж мусять
+                            # потрапити в Morrowind.top, інакше наступна
+                            # збірка запише мапу без них і посилання
+                            # перестануть вести куди треба.
+                            for m in AT.finditer(text):
+                                surf = m.group(1)
+                                for topic in referenced:
+                                    if known_form(surf, topic):
+                                        top_used[surf] = topic
+                                        linked.add(topic)
+                                        break
                     # --- запасний AddTopic для тем, які не вдалося обгорнути ---
                     missing = sorted(t for t in referenced if t not in linked)
                     if missing:
@@ -291,6 +316,17 @@ top_entries = dict(top_used)
 for phrase, topic in glossary.items():
     top_entries.setdefault(phrase, topic)
 
+TOP_PATH = os.path.join(MODROOT, 'Morrowind.top')
+was = 0
+if os.path.isfile(TOP_PATH):
+    was = sum(1 for line in open(TOP_PATH, 'rb').read()
+              .decode('cp1251', 'replace').splitlines() if '\t' in line)
+if was and len(top_entries) < was * 0.9 and '--force' not in sys.argv:
+    raise SystemExit(
+        'Morrowind.top мав %d рядків, а вийшло %d. Це вимкнуло б наявні'
+        ' посилання, тож не пишу. Якщо так і треба, додай --force.'
+        % (was, len(top_entries)))
+
 if APPLY:
     buf = bytearray()
     for phrase in sorted(top_entries):
@@ -298,7 +334,7 @@ if APPLY:
             buf += phrase.encode('cp1251') + b'\t' + top_entries[phrase].encode('cp1251') + b'\r\n'
         except UnicodeEncodeError:
             stats['warn'] += 1
-    with open(os.path.join(MODROOT, 'Morrowind.top'), 'wb') as f:
+    with open(TOP_PATH, 'wb') as f:
         f.write(bytes(buf))
 
 touched.sort(reverse=True)
