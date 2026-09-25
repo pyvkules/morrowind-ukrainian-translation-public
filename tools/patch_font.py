@@ -136,6 +136,11 @@ CLONES = [(ord('I'), 'uni0406'), (ord('i'), 'uni0456'),
           (0x0413, 'uni0490'), (0x0433, 'uni0491')]
 MIRRORS = [(0x042D, 'uni0404'), (0x044D, 'uni0454')]
 
+# Знак множення. Рушій сам пише ним роздільну здатність («2560 × 1440»),
+# у l10n його немає, тож текстом не виправиш: лишається шрифт. Беремо
+# форму латинської x. Необов'язковий: якщо джерела нема, просто без нього.
+EXTRA = [(ord('x'), 'uni00D7')]
+
 # Бракує вихідного знака - зібрати з нього нічого. Це не поломка, а межа
 # самого шрифту (OMWAyembedt, наприклад, не має Ï, з якого робиться Ї), тож
 # код 3: інсталятор такий шрифт пропускає, а не спиняє всю збірку.
@@ -154,6 +159,12 @@ for cp, new in MIRRORS:
         raise SystemExit(MISSING)
     mirror_glyph(cmap_old[cp], new)
     added[int(new[3:], 16)] = new
+for cp, new in EXTRA:
+    want = int(new[3:], 16)
+    if want in cmap_old or cp not in cmap_old:
+        continue
+    clone_glyph(cmap_old[cp], new)
+    added[want] = new
 
 font.setGlyphOrder(order)
 if 'post' in font:
