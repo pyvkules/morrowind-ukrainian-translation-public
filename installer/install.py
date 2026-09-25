@@ -493,7 +493,7 @@ def pick_cfg():
 # Що саме їде в пакунку. Явний список, а не «усе, крім»: у теці репозиторію
 # поруч із джерелами лежать 76 зібраних плагінів модпака - це і 340 зайвих МБ,
 # і роздача чужого вмісту разом із даними Bethesda.
-PAYLOAD_DIRS = ('tools', 'l10n', 'Fonts', 'recipe')
+PAYLOAD_DIRS = ('tools', 'l10n', 'Fonts', 'Textures', 'recipe')
 PAYLOAD_FILES = ('build.py', 'README.md')
 SKIP_NAMES = {'base.esm', '__pycache__', '.git', 'installer'}
 # .ttf не возимо: Pelagiad має ліцензію SIL OFL із зарезервованою назвою, тож
