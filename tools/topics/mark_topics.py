@@ -86,6 +86,7 @@ def _stem(word):
 
 # Закритий склад дає і, відкритий о або е: Дім -> Дому, ніч -> ночі.
 ALT = {'і': 'іо', 'о': 'оі', 'е': 'еі'}
+VOWELS = 'аеєиіїоуюя'
 
 
 def _flex(stem):
@@ -97,9 +98,15 @@ def _flex(stem):
         if i == len(stem) - 1:      # голосна в кінці не чергується
             break
         head = re.escape(stem[:i])
-        tail = re.escape(stem[i + 1:])
+        rest = stem[i + 1:]
+        tail = re.escape(rest)
         pick = alt.upper() + alt if stem[i].isupper() else alt
-        return head + '[' + pick + ']' + tail
+        # Випадний голосний: «чужинець» -> «чужинця», «будинок» -> «будинку».
+        # Голосна перед одним-двома приголосними в кінці основи зникає,
+        # тож робимо її необов'язковою.
+        drops = (0 < len(rest) <= 2
+                 and not any(ch.lower() in VOWELS for ch in rest))
+        return head + '[' + pick + ']' + ('?' if drops else '') + tail
     return re.escape(stem)
 
 
@@ -180,8 +187,12 @@ def records(raw):
         pos += 16 + size
 
 
-def find_form(text, topic):
-    """(start, end, surface) першої згадки теми в тексті (за стемом), або None."""
+def find_form(text, topic, taken=()):
+    """(start, end, surface) першої згадки теми в тексті, або None.
+
+    `taken` - ділянки, які вже під посиланням: усередину них не лізем,
+    інакше вийшло б `@@текст#…#`.
+    """
     pat = TOPIC_PAT.get(topic)
     if not pat:
         return None
@@ -189,8 +200,11 @@ def find_form(text, topic):
     for m in rx.finditer(text):
         surface = m.group(1)
         # згадка має бути приблизно того ж розміру, що й тема (проти надто вільних збігів)
-        if abs(len(surface) - len(topic)) <= 4 and _suffix_ok(surface, stems):
-            return m.start(), m.end(), surface
+        if abs(len(surface) - len(topic)) > 4 or not _suffix_ok(surface, stems):
+            continue
+        if any(m.start() < b and a < m.end() for a, b in taken):
+            continue
+        return m.start(), m.end(), surface
     return None
 
 
@@ -250,10 +264,23 @@ for c in contents:
                     if name_i is not None:
                         z = subs[name_i][1].endswith(b'\0')
                         text = (subs[name_i][1][:-1] if z else subs[name_i][1]).decode('cp1251', 'replace')
-                        if '@' not in text:
+                        # Наявні посилання спершу реєструємо, а тоді
+                        # обгортаємо решту згадок повз них. Доти текст
+                        # із бодай одним `@…#` оминався цілком.
+                        taken = [(m.start(), m.end()) for m in AT.finditer(text)]
+                        for m in AT.finditer(text):
+                            surf = m.group(1)
+                            for topic in referenced:
+                                if known_form(surf, topic):
+                                    top_used[surf] = topic
+                                    linked.add(topic)
+                                    break
+                        if True:
                             spans = []
                             for topic in referenced:
-                                hit = find_form(text, topic)
+                                if topic in linked:
+                                    continue
+                                hit = find_form(text, topic, taken)
                                 if hit:
                                     spans.append((hit[0], hit[1], hit[2], topic))
                             spans.sort()
@@ -281,19 +308,6 @@ for c in contents:
                                 file_wrapped += len(clean)
                                 stats['wrapped'] += len(clean)
                                 stats['infos'] += 1
-                        else:
-                            # Текст уже розмічений давнім перекладом або
-                            # попереднім запуском. Ці форми теж мусять
-                            # потрапити в Morrowind.top, інакше наступна
-                            # збірка запише мапу без них і посилання
-                            # перестануть вести куди треба.
-                            for m in AT.finditer(text):
-                                surf = m.group(1)
-                                for topic in referenced:
-                                    if known_form(surf, topic):
-                                        top_used[surf] = topic
-                                        linked.add(topic)
-                                        break
                     # --- запасний AddTopic для тем, які не вдалося обгорнути ---
                     missing = sorted(t for t in referenced if t not in linked)
                     if missing:

@@ -76,6 +76,7 @@ def _stem(word):
 
 # Закритий склад дає і, відкритий о або е: Дім -> Дому, ніч -> ночі.
 ALT = {'і': 'іо', 'о': 'оі', 'е': 'еі'}
+VOWELS = 'аеєиіїоуюя'
 
 
 def _flex(stem):
@@ -87,9 +88,15 @@ def _flex(stem):
         if i == len(stem) - 1:      # голосна в кінці не чергується
             break
         head = re.escape(stem[:i])
-        tail = re.escape(stem[i + 1:])
+        rest = stem[i + 1:]
+        tail = re.escape(rest)
         pick = alt.upper() + alt if stem[i].isupper() else alt
-        return head + '[' + pick + ']' + tail
+        # Випадний голосний: «чужинець» -> «чужинця», «будинок» -> «будинку».
+        # Голосна перед одним-двома приголосними в кінці основи зникає,
+        # тож робимо її необов'язковою.
+        drops = (0 < len(rest) <= 2
+                 and not any(ch.lower() in VOWELS for ch in rest))
+        return head + '[' + pick + ']' + ('?' if drops else '') + tail
     return re.escape(stem)
 
 
