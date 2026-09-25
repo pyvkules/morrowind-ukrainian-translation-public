@@ -169,7 +169,34 @@ def check_gmst():
         lost = set(want) - set(got)
         if lost:
             err('uk_gmst.json[%s]: втрачено підстановки %s' % (k, ', '.join(sorted(lost))))
-    return len(uk), len(en)
+    return gmst_coverage(en, uk), len(uk), len(en)
+
+
+CYRILLIC = re.compile(r'[а-яїієґА-ЯЇІЄҐ]')
+
+
+def gmst_coverage(en, uk):
+    """Скільки налаштувань гравець бачить українською.
+
+    Не все з решти треба перекладати, і це не недоробка:
+
+    * `sMagic*ID` - це ідентифікатори записів, якими рушій прикликає
+      істоту чи річ (`Atronach_Flame_summon`). Переклад їх зламає;
+    * `sKeyName_*`, `sShift`, `sSpace`, `sBackspace` підписують фізичні
+      клавіші, а на клавіатурі написано «Caps Lock»;
+    * `sQuick*Xbox` - заглушки для консолі, на ПК їх не видно.
+    """
+    done = 0
+    for k, v in en.items():
+        if k in uk or not isinstance(v, str):
+            done += 1
+        elif CYRILLIC.search(v) or not re.search(r'[A-Za-z]{2,}', v):
+            done += 1
+        elif k.startswith(('sMagic', 'sKeyName', 'sQuick')):
+            done += 1
+        elif k in ('sShift', 'sSpace', 'sBackspace'):
+            done += 1
+    return done
 
 
 # ---------------------------------------------------------------- 7: тексти книг
@@ -222,12 +249,13 @@ def check_books():
 
 pairs = check_slices()
 topics_done, topics_all = check_topics()
-gmst_done, gmst_all = check_gmst()
+gmst_done, gmst_fixed, gmst_all = check_gmst()
 books_done, books_work, books_written, books_all = check_books()
 
 print('перекладених рядків у зрізах : %d' % pairs)
 print('теми діалогів                : %d / %d' % (topics_done, topics_all))
-print('рядки інтерфейсу             : %d перекладено з %d наявних' % (gmst_done, gmst_all))
+print('рядки інтерфейсу             : %d / %d (наших правок %d)'
+      % (gmst_done, gmst_all, gmst_fixed))
 print('тексти книг                  : %d / %d у роботі (записів %d, книг усього %d)'
       % (books_done, books_work, books_written, books_all))
 print()
