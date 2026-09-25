@@ -84,13 +84,32 @@ def _stem(word):
     return word
 
 
+# Закритий склад дає і, відкритий о або е: Дім -> Дому, ніч -> ночі.
+ALT = {'і': 'іо', 'о': 'оі', 'е': 'еі'}
+
+
+def _flex(stem):
+    """Основа як взірець: остання голосна може чергуватися."""
+    for i in range(len(stem) - 1, -1, -1):
+        alt = ALT.get(stem[i].lower())
+        if not alt:
+            continue
+        if i == len(stem) - 1:      # голосна в кінці не чергується
+            break
+        head = re.escape(stem[:i])
+        tail = re.escape(stem[i + 1:])
+        pick = alt.upper() + alt if stem[i].isupper() else alt
+        return head + '[' + pick + ']' + tail
+    return re.escape(stem)
+
+
 def _pattern(name):
     parts, last, stems = [], 0, []
     for m in WORD.finditer(name):
         parts.append(re.escape(name[last:m.start()]))
         s = _stem(m.group(0))
         stems.append(s)
-        parts.append(re.escape(s) + '[' + CYR + ']{0,%d}' % MAX_SUF)
+        parts.append(_flex(s) + '[' + CYR + ']{0,%d}' % MAX_SUF)
         last = m.end()
     parts.append(re.escape(name[last:]))
     body = ''.join(parts)
