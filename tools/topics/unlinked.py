@@ -27,16 +27,13 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',
                               errors='replace', write_through=True)
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, '..')))
-import paths                                                    # noqa: E402
+sys.path.insert(0, HERE)
+import paths
+import forms                                                    # noqa: E402
 
 MODROOT = paths.MOD_ROOT
 BASE_ESM = os.path.join(paths.TOOLS, 'base.esm')
-CYR = 'а-щьюяєіїґА-ЩЬЮЯЄІЇҐ'
-WORD = re.compile('[' + CYR + ']+')
 AT = re.compile(r'@([^#]{1,80})#')
-MAX_SUF = 3
-VOWEL_END = set('аяоеєуюіи')
-BAD_SUF = re.compile('^(у[юєяії]|ув|яч|ськ|цьк)')
 
 
 def load(path):
@@ -65,63 +62,6 @@ def subrecs(body):
         i += 8 + size
 
 
-def _stem(word):
-    low, n = word.lower(), len(word)
-    if n >= 6 and low[-2:] in ('ий', 'ій'):
-        return word[:-2]
-    if n >= 5 and (low[-1] in VOWEL_END or low[-1] == 'ь'):
-        return word[:-1]
-    return word
-
-
-# Закритий склад дає і, відкритий о або е: Дім -> Дому, ніч -> ночі.
-ALT = {'і': 'іо', 'о': 'оі', 'е': 'еі'}
-VOWELS = 'аеєиіїоуюя'
-
-
-def _flex(stem):
-    """Основа як взірець: остання голосна може чергуватися."""
-    for i in range(len(stem) - 1, -1, -1):
-        alt = ALT.get(stem[i].lower())
-        if not alt:
-            continue
-        if i == len(stem) - 1:      # голосна в кінці не чергується
-            break
-        head = re.escape(stem[:i])
-        rest = stem[i + 1:]
-        tail = re.escape(rest)
-        pick = alt.upper() + alt if stem[i].isupper() else alt
-        # Випадний голосний: «чужинець» -> «чужинця», «будинок» -> «будинку».
-        # Голосна перед одним-двома приголосними в кінці основи зникає,
-        # тож робимо її необов'язковою.
-        drops = (0 < len(rest) <= 2
-                 and not any(ch.lower() in VOWELS for ch in rest))
-        return head + '[' + pick + ']' + ('?' if drops else '') + tail
-    return re.escape(stem)
-
-
-def _pattern(name):
-    parts, last, stems = [], 0, []
-    for m in WORD.finditer(name):
-        parts.append(re.escape(name[last:m.start()]))
-        s = _stem(m.group(0))
-        stems.append(s)
-        parts.append(_flex(s) + '[' + CYR + ']{0,%d}' % MAX_SUF)
-        last = m.end()
-    parts.append(re.escape(name[last:]))
-    body = ''.join(parts)
-    if not body.strip():
-        return None, []
-    return re.compile(r'(?<![' + CYR + r'])(' + body + r')(?![' + CYR + r'])'), stems
-
-
-def _suffix_ok(surface, stems):
-    words = WORD.findall(surface)
-    if len(words) != len(stems):
-        return False
-    return not any(BAD_SUF.match(w[len(s):].lower()) for w, s in zip(words, stems))
-
-
 def build_maps():
     src = load(os.path.join(HERE, 'dial_topics.json'))
     uk = {}
@@ -136,11 +76,7 @@ def build_maps():
     if os.path.isfile(legacy):
         for en, ukid in load(legacy).items():
             en2uk.setdefault(en.lower(), ukid)
-    pat = {}
-    for topic in set(en2uk.values()):
-        rx, stems = _pattern(topic)
-        if rx is not None:
-            pat[topic] = (rx, stems)
+    pat = forms.build(set(en2uk.values()))
     ws = sorted({w for w in en2uk if len(w) >= 3}, key=len, reverse=True)
     en_re = re.compile(r'(?<!\w)(' + '|'.join(re.escape(w) for w in ws) + r')(?!\w)',
                        re.IGNORECASE)
@@ -194,9 +130,7 @@ def main():
             for m in AT.finditer(uk):
                 surf = m.group(1)
                 for t in referenced:
-                    rx_stems = pat.get(t)
-                    if rx_stems and rx_stems[0].fullmatch(surf) \
-                            and _suffix_ok(surf, rx_stems[1]):
+                    if forms.known(surf, t, pat):
                         here.add(t)
                         break
             for t in referenced:

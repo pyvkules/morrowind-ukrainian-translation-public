@@ -36,7 +36,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(HERE, '..')))
+sys.path.insert(0, HERE)
 import paths
+import forms
 
 MODROOT = paths.MOD_ROOT
 APPLY = '--apply' in sys.argv
@@ -62,84 +64,7 @@ if os.path.isfile(legacy):
 # Замість наперед зібраного списку форм шукаємо згадку теми в тексті за СТЕМОМ —
 # так ловимо будь-який відмінок (напр. орудний «Морровіндом»), а не лише ті форми,
 # що трапилися в корпусі. Ті самі запобіжники, що й у harvest_forms.py.
-MAX_SUF = 3
-WORD = re.compile('[' + CYR + ']+')
-BAD_SUF = re.compile('^(у[юєяії]|ув|яч|ськ|цьк)')
-VOWEL_END = set('аяоеєуюіи')
-
-
-def _stem(word):
-    """Відкинути лише ВЛАСНЕ закінчення, а не частину основи.
-
-    Приголосна в кінці (Морровінд, легіон) — основа = все слово, змінюється тільки
-    приросле закінчення (Морровінд+ом). Голосна (Балмора, Гільдія) чи -ий/-ій
-    (прикметник) — те закінчення відкидаємо, бо в непрямих відмінках воно інше.
-    """
-    low = word.lower()
-    n = len(word)
-    if n >= 6 and low[-2:] in ('ий', 'ій'):
-        return word[:-2]
-    if n >= 5 and (low[-1] in VOWEL_END or low[-1] == 'ь'):
-        return word[:-1]
-    return word
-
-
-# Закритий склад дає і, відкритий о або е: Дім -> Дому, ніч -> ночі.
-ALT = {'і': 'іо', 'о': 'оі', 'е': 'еі'}
-VOWELS = 'аеєиіїоуюя'
-
-
-def _flex(stem):
-    """Основа як взірець: остання голосна може чергуватися."""
-    for i in range(len(stem) - 1, -1, -1):
-        alt = ALT.get(stem[i].lower())
-        if not alt:
-            continue
-        if i == len(stem) - 1:      # голосна в кінці не чергується
-            break
-        head = re.escape(stem[:i])
-        rest = stem[i + 1:]
-        tail = re.escape(rest)
-        pick = alt.upper() + alt if stem[i].isupper() else alt
-        # Випадний голосний: «чужинець» -> «чужинця», «будинок» -> «будинку».
-        # Голосна перед одним-двома приголосними в кінці основи зникає,
-        # тож робимо її необов'язковою.
-        drops = (0 < len(rest) <= 2
-                 and not any(ch.lower() in VOWELS for ch in rest))
-        return head + '[' + pick + ']' + ('?' if drops else '') + tail
-    return re.escape(stem)
-
-
-def _pattern(name):
-    parts, last, stems = [], 0, []
-    for m in WORD.finditer(name):
-        parts.append(re.escape(name[last:m.start()]))
-        s = _stem(m.group(0))
-        stems.append(s)
-        parts.append(_flex(s) + '[' + CYR + ']{0,%d}' % MAX_SUF)
-        last = m.end()
-    parts.append(re.escape(name[last:]))
-    body = ''.join(parts)
-    if not body.strip():
-        return None, []
-    return re.compile(r'(?<![' + CYR + r'])(' + body + r')(?![' + CYR + r'])'), stems
-
-
-def _suffix_ok(surface, stems):
-    words = WORD.findall(surface)
-    if len(words) != len(stems):
-        return False
-    for w, s in zip(words, stems):
-        if BAD_SUF.match(w[len(s):].lower()):
-            return False
-    return True
-
-
-TOPIC_PAT = {}
-for topic in set(en2uk.values()):
-    rx, stems = _pattern(topic)
-    if rx is not None:
-        TOPIC_PAT[topic] = (rx, stems)
+TOPIC_PAT = forms.build(set(en2uk.values()))
 
 
 def alt(words):
@@ -188,24 +113,8 @@ def records(raw):
 
 
 def find_form(text, topic, taken=()):
-    """(start, end, surface) першої згадки теми в тексті, або None.
-
-    `taken` - ділянки, які вже під посиланням: усередину них не лізем,
-    інакше вийшло б `@@текст#…#`.
-    """
-    pat = TOPIC_PAT.get(topic)
-    if not pat:
-        return None
-    rx, stems = pat
-    for m in rx.finditer(text):
-        surface = m.group(1)
-        # згадка має бути приблизно того ж розміру, що й тема (проти надто вільних збігів)
-        if abs(len(surface) - len(topic)) > 4 or not _suffix_ok(surface, stems):
-            continue
-        if any(m.start() < b and a < m.end() for a, b in taken):
-            continue
-        return m.start(), m.end(), surface
-    return None
+    """Перша згадка теми в тексті, повз уже розмічені ділянки."""
+    return forms.find(text, topic, TOPIC_PAT, taken)
 
 
 AT = re.compile(r'@([^#]{1,80})#')
@@ -213,11 +122,7 @@ AT = re.compile(r'@([^#]{1,80})#')
 
 def known_form(surface, topic):
     """Чи веде вже наявна розмітка `@surface#` саме на цю тему."""
-    pat = TOPIC_PAT.get(topic)
-    if not pat:
-        return False
-    rx, stems = pat
-    return bool(rx.fullmatch(surface)) and _suffix_ok(surface, stems)
+    return forms.known(surface, topic, TOPIC_PAT)
 
 
 stats = {'wrapped': 0, 'added': 0, 'infos': 0, 'files': 0, 'warn': 0}
