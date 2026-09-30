@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Поставити модліст автора й відтворити його профіль.
+"""Поставити моди з профілю автора й відтворити сам профіль.
 
 Як це працює
 ------------
-«Мій модліст» — не офіційний список: профіль зібраний із чотирьох одразу
-(`total-overhaul`, `expanded-vanilla`, `just-good-morrowind`,
-`i-heart-vanilla`) плюс власний порядок завантаження на 327 рядків. Тому:
+Профіль `just-good-morrowind-plus` зібраний із чотирьох офіційних наборів
+Modding-OpenMW плюс власний порядок завантаження на 327 рядків. Разом ті
+чотири набори містять понад тисячу модів, а профіль бере чотириста, тож
+решту качати немає навіщо: у гру вона однаково не потрапить.
 
-1. самі моди тягне `umo` — рідний завантажувач Modding-OpenMW. Він уміє
-   реєструватися обробником посилань `nxm://`, тож із преміумом на Nexus качає
-   сам, а без нього відкриває сторінки по черзі;
-2. профіль складаємо з рецепта (`recipe/profile.cfg`), підставивши шляхи цієї
-   машини замість міток `{МОДИ}` і `{ГРА}`.
+1. `umo sync` бере опис набору з modding-openmw.com;
+2. `umo install --subset` качає з нього саме ті моди, що стоять у профілі.
+   Перелік беремо з самого рецепта: кожен рядок `data=` називає свій мод;
+3. профіль складаємо з рецепта (`recipe/profile.cfg`), підставивши шляхи
+   цієї машини замість міток `{МОДИ}` і `{ГРА}`.
 
 Чого ми НЕ робимо
 -----------------
-Не качаємо самі моди й не возимо їх: це чужі файли з Nexus, і роздавати їх не
-можна. Не качаємо й самі інструменти MOMW — сталої адреси в них немає, а
+Не качаємо самі моди й не возимо їх: це чужі файли з Nexus, і роздавати їх
+не можна. Не качаємо й самі інструменти MOMW: сталої адреси в них немає, а
 вгадана адреса тихо зламається. Якщо інструментів немає, кажемо, звідки взяти.
 """
 import io
@@ -29,25 +30,58 @@ import time
 TOOLS = ('umo.exe', 'momw-configurator.exe')
 SITE = 'https://modding-openmw.com/tools/'
 HERE = os.path.dirname(os.path.abspath(__file__))
+MODS = '{МОДИ}'
 
 
 def recipe_dir(payload_root):
     return os.path.join(payload_root, 'recipe')
 
 
-def wanted_lists(payload_root):
-    p = os.path.join(recipe_dir(payload_root), 'lists.txt')
+def profile_mods(payload_root):
+    """Які моди бере профіль: набір -> теки модів.
+
+    Шлях у рецепті має вигляд {МОДИ}\\<набір>\\<категорія>\\<мод>, іноді з
+    підтекою. Перші три частини й кажуть, що саме качати.
+    """
+    src = os.path.join(recipe_dir(payload_root), 'profile.cfg')
+    need = {}
+    if not os.path.isfile(src):
+        return need
+    for line in io.open(src, encoding='utf-8'):
+        s = line.strip()
+        if not (s.startswith('data=') and MODS in s):
+            continue
+        parts = [p for p in s.split(MODS, 1)[1].strip('"').split('\\') if p]
+        if len(parts) >= 3:
+            need.setdefault(parts[0], set()).add((parts[1], parts[2]))
+    return need
+
+
+def skip_mods(payload_root):
+    """Моди, які причепилися б за збігом назв. Їх складає make_recipe.py."""
+    p = os.path.join(recipe_dir(payload_root), 'skip.txt')
+    out = {}
     if not os.path.isfile(p):
-        return []
-    return [l.strip() for l in io.open(p, encoding='utf-8') if l.strip()]
+        return out
+    for line in io.open(p, encoding='utf-8'):
+        if '\t' in line:
+            name, mod = line.rstrip('\n').split('\t', 1)
+            out.setdefault(name, []).append(mod)
+    return out
+
+
+def expected_dirs(need, mods_dir):
+    """Теки модів, які мають з'явитися. Саме по них рахуємо поступ."""
+    base = mods_dir.rstrip('\\')
+    return [os.path.join(base, name, cat, mod)
+            for name in sorted(need)
+            for cat, mod in sorted(need[name])]
 
 
 def find_tools():
     """Де лежить momw-tools-pack. Повертає теку або None."""
-    seen = []
     for base in (os.path.dirname(HERE), os.getcwd(),
                  os.path.expanduser('~'), r'C:\games', r'E:\Morrowind'):
-        seen.append(base)
         for sub in ('', 'momw-tools-pack-windows', 'momw-tools-pack',
                     'tools', 'Downloads'):
             d = os.path.join(base, sub) if sub else base
@@ -61,7 +95,7 @@ def find_tools():
 
 
 def umo_dirs(tools):
-    """Куди umo складає моди — питаємо його самого, а не вгадуємо."""
+    """Куди umo складає моди: питаємо його самого, а не вгадуємо."""
     try:
         r = subprocess.run([os.path.join(tools, 'umo.exe'), 'info'],
                            capture_output=True, text=True, timeout=180,
@@ -102,22 +136,8 @@ def tidy(raw):
     return s if len(s) <= 150 else s[:147] + '...'
 
 
-def expected_dirs(payload_root, mods_dir):
-    """Теки модів, які мають з'явитися. Саме по них рахуємо поступ."""
-    src = os.path.join(recipe_dir(payload_root), 'profile.cfg')
-    if not os.path.isfile(src):
-        return []
-    base = mods_dir.rstrip('\\')
-    found = []
-    for line in io.open(src, encoding='utf-8'):
-        s = line.strip()
-        if s.startswith('data=') and '{МОДИ}' in s:
-            found.append(s[5:].strip().strip('"').replace('{МОДИ}', base))
-    return found
-
-
 class Counter(object):
-    """Скільки тек модів уже на місці.
+    """Скільки модів уже на місці.
 
     umo друкує назви й відсотки, але скільки лишилося, з того не видно.
     Зате видно з самого диска: у рецепті перелічені всі теки профілю, і ми
@@ -201,15 +221,16 @@ def hhmm(seconds):
     return '%d хв' % m if m < 60 else '%d год %d хв' % (m // 60, m % 60)
 
 
-def install_lists(tools, lists, on_line, expected=(), on_count=None):
-    """Провести `umo install` по кожному списку. Це найдовша частина.
+def install_lists(tools, need, skips, on_line, expected=(), on_count=None):
+    """Завантажити моди профілю. Це найдовша частина.
 
-    Моди важать десятки гігабайтів, тож людина сидить перед вікном довго.
-    Тому показуємо і те, що каже umo, і те, скільки тек уже на місці.
+    Спершу `umo sync`: він бере з modding-openmw.com опис усього набору.
+    Тоді `umo install --subset`, де перелічені саме потрібні моди. umo звіряє
+    елемент із рядком «категорія-тека» як підрядок, тож коротша назва тягне
+    за собою довшу; такі збіги перелічені в рецепті й ідуть у `--skip`.
     """
     umo = os.path.join(tools, 'umo.exe')
     began = time.time()
-
     said = [-1]
 
     def report(have, total):
@@ -219,18 +240,26 @@ def install_lists(tools, lists, on_line, expected=(), on_count=None):
             return
         said[0] = have
         share = 100.0 * have / total if total else 0
-        on_line('Готово %d тек із %d (%d%%), минуло %s'
+        on_line('Готово %d модів із %d (%d%%), минуло %s'
                 % (have, total, share, hhmm(time.time() - began)))
 
     with Counter(expected, report):
-        for n, name in enumerate(lists, 1):
+        for name in sorted(need):
+            subset = ','.join(sorted({mod for _cat, mod in need[name]}))
+            cmd = [umo, 'install', '--subset', subset]
+            skip = skips.get(name)
+            if skip:
+                cmd += ['--skip', ','.join(skip)]
+
             on_line('')
-            on_line('Список %d з %d: %s' % (n, len(lists), name))
-            code = run_umo([umo, 'install', name], on_line)
-            if code != 0:
-                on_line('umo повернув %d на списку «%s»' % (code, name))
+            if run_umo([umo, 'sync', name], on_line) != 0:
+                on_line('Не вдалося взяти опис модів.')
                 return False
-    on_line('Усі списки завантажено за %s.' % hhmm(time.time() - began))
+            if run_umo(cmd + [name], on_line) != 0:
+                on_line('Моди завантажилися не всі.')
+                return False
+
+    on_line('Усі моди завантажено за %s.' % hhmm(time.time() - began))
     return True
 
 

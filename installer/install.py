@@ -558,12 +558,10 @@ def why_no_openmw():
         found += ['    ' + p for p in mw]
         found += [
             '',
-            'На рушії 2002 року переклад не запрацює: він малює інтерфейс',
-            'растровими шрифтами .fnt, а українські літери ми дорисовуємо',
-            'в TrueType. Замість тексту були б порожні квадратики.',
+            'На ньому переклад не запрацює: замість українських літер',
+            'будуть порожні квадратики.',
             '',
-            'Постав OpenMW — він читає ту саму гру, нічого',
-            'перевстановлювати не треба.',
+            'Постав OpenMW, він читає ту саму гру.',
         ]
         return chr(10).join(found)
     return chr(10).join([
@@ -649,11 +647,11 @@ def install_engine():
 
 
 def install_modlist(cfg):
-    """Поставити модліст автора й відтворити його профіль.
+    """Поставити моди з профілю автора й відтворити сам профіль.
 
-    Найдовший крок: моди важать десятки гігабайтів, і тягне їх `umo` — рідний
-    завантажувач Modding-OpenMW. Ми лише кажемо йому, які списки потрібні, а
-    тоді складаємо профіль із рецепта.
+    Найдовший крок: моди важать десятки гігабайтів, і тягне їх `umo`, рідний
+    завантажувач Modding-OpenMW. Ми називаємо йому саме ті моди, що стоять у
+    профілі, а тоді складаємо профіль із рецепта.
     """
     import mods as modlist
 
@@ -667,12 +665,11 @@ def install_modlist(cfg):
         return 1
     out('Інструменти: %s' % tools)
 
-    lists = modlist.wanted_lists(payload_root())
-    if not lists:
+    need = modlist.profile_mods(payload_root())
+    if not need:
         out('У пакунку немає рецепта модліста.')
         step('моди', 'fail')
         return 1
-    out('Списки: %s' % ', '.join(lists))
 
     mods_dir = modlist.umo_dirs(tools)
     if not mods_dir:
@@ -681,18 +678,17 @@ def install_modlist(cfg):
         return 1
     out('Моди підуть у %s' % mods_dir)
 
-    out('З преміумом на Nexus моди завантажаться самі.')
+    expected = modlist.expected_dirs(need, mods_dir)
+    out('Треба %d модів.' % len(expected))
+    out('З преміумом на Nexus вони завантажаться самі.')
     out('Без преміуму umo відкриватиме сторінки по черзі, і кожен файл '
         'забираєш сам.')
-
-    expected = modlist.expected_dirs(payload_root(), mods_dir)
-    if expected:
-        out('У профілі %d тек модів.' % len(expected))
 
     def count(have, total):
         step('моди', 'run', '%d з %d' % (have, total))
 
-    if not modlist.install_lists(tools, lists, out, expected, count):
+    skips = modlist.skip_mods(payload_root())
+    if not modlist.install_lists(tools, need, skips, out, expected, count):
         step('моди', 'fail')
         return 1
 

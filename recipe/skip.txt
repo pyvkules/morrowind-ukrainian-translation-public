@@ -1,0 +1,9 @@
+expanded-vanilla	PlantersforAjiraBeautifulCitiesofMorrowind
+expanded-vanilla	DiverseBloodforTamrielRebuiltandProjectTamriel
+total-overhaul	AudiobooksofTamrielData
+total-overhaul	StoreEntranceChimesforCyrodiilandTRMainland
+total-overhaul	LogsonFireCyrodiil
+total-overhaul	LogsonFireSkyrim
+total-overhaul	LogsonFireTamrielRebuilt
+total-overhaul	QuestlineVivecLighthouseKeeper
+total-overhaul	TamrielDataTextureUpscale

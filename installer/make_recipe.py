@@ -92,17 +92,59 @@ def main():
              kinds.get('fallback', 0)))
     print('  викинуто наших рядків: %d' % dropped)
 
-    # Які офіційні списки треба поставити, щоб ці теки з'явилися
-    # Нашу ж теку сюди не рахуємо: вона лежить під тим самим коренем, але це
-    # не офіційний список, а те, що інсталятор допише сам.
-    lists = sorted({d[len(mods):].strip(os.sep).split(os.sep)[0]
-                    for d in data
-                    if os.path.normcase(d).startswith(os.path.normcase(mods))
-                    and d[len(mods):].strip(os.sep) and OURS not in d})
-    print('  списки: %s' % ', '.join(lists))
-    io.open(os.path.join(HERE, '..', 'recipe', 'lists.txt'), 'w',
-            encoding='utf-8', newline='\n').write('\n'.join(lists) + '\n')
+    write_skips(mods, out)
     return 0
+
+
+def profile_mods(lines):
+    """Які моди бере профіль: список -> теки модів.
+
+    Шлях у профілі має вигляд {МОДИ}\\<список>\\<категорія>\\<мод>, іноді з
+    підтекою. Нам потрібні перші три частини.
+    """
+    need = {}
+    for line in lines:
+        s = line.strip()
+        if not (s.startswith('data=') and MODS in s):
+            continue
+        parts = [p for p in s.split(MODS, 1)[1].strip('"').split(os.sep) if p]
+        if len(parts) >= 3:
+            need.setdefault(parts[0], set()).add((parts[1], parts[2]))
+    return need
+
+
+def write_skips(mods_root, lines):
+    """Моди, які umo причепить за підрядком, хоч профіль їх не бере.
+
+    Інсталятор відбирає моди через `umo install --subset`, а той звіряє
+    елемент із рядком «категорія-тека» як підрядок. Через це «TamrielData»
+    тягне за собою «TamrielDataTextureUpscale» на двадцять гігабайтів.
+    Такі збіги видно тільки тут, на машині, де стоять усі списки цілком,
+    тож перелічуємо їх у рецепті.
+    """
+    need = profile_mods(lines)
+    skips = []
+    for name in sorted(need):
+        root = os.path.join(mods_root, name)
+        if not os.path.isdir(root):
+            continue
+        want = {mod for _cat, mod in need[name]}
+        for cat in sorted(os.listdir(root)):
+            cdir = os.path.join(root, cat)
+            if not os.path.isdir(cdir):
+                continue
+            for mod in sorted(os.listdir(cdir)):
+                if mod in want or not os.path.isdir(os.path.join(cdir, mod)):
+                    continue
+                s = ('%s-%s' % (cat, mod)).lower()
+                if any(w.lower() in s for w in want):
+                    skips.append('%s\t%s' % (name, mod))
+
+    path = os.path.join(HERE, '..', 'recipe', 'skip.txt')
+    io.open(path, 'w', encoding='utf-8', newline='\n').write(
+        '\n'.join(skips) + ('\n' if skips else ''))
+    total = sum(len(v) for v in need.values())
+    print('  модів у профілі %d, зайвих збігів %d' % (total, len(skips)))
 
 
 if __name__ == '__main__':
