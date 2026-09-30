@@ -17,20 +17,32 @@ Modding-OpenMW плюс власний порядок завантаження �
 Чого ми НЕ робимо
 -----------------
 Не качаємо самі моди й не возимо їх: це чужі файли з Nexus, і роздавати їх
-не можна. Не качаємо й самі інструменти MOMW: сталої адреси в них немає, а
-вгадана адреса тихо зламається. Якщо інструментів немає, кажемо, звідки взяти.
+не можна. А от самі інструменти MOMW качаємо: GitLab віддає їхню збірку за
+сталою адресою свого API, тож людині нічого шукати руками.
 """
 import io
+import json
 import os
 import re
+import shutil
 import subprocess
 import threading
 import time
+import urllib.request
+import zipfile
 
 TOOLS = ('umo.exe', 'momw-configurator.exe')
 SITE = 'https://modding-openmw.com/tools/'
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODS = '{МОДИ}'
+
+# Збірку інструментів складає CI GitLab, і лежить вона артефактом завдання.
+# Адреса стала: це API, а не сторінка, яку перемалюють.
+PACK_API = ('https://gitlab.com/api/v4/projects/'
+            'modding-openmw%2Fmomw-tools-pack')
+PACK_JOB = '/jobs/artifacts/%s/raw/momw-tools-pack-windows.zip?job=make'
+PACK_HOME = os.path.join(os.environ.get('LOCALAPPDATA', os.path.expanduser('~')),
+                         'Programs', 'momw-tools-pack-windows')
 
 
 def recipe_dir(payload_root):
@@ -80,6 +92,8 @@ def expected_dirs(need, mods_dir):
 
 def find_tools():
     """Де лежить momw-tools-pack. Повертає теку або None."""
+    if all(os.path.isfile(os.path.join(PACK_HOME, t)) for t in TOOLS):
+        return PACK_HOME
     for base in (os.path.dirname(HERE), os.getcwd(),
                  os.path.expanduser('~'), r'C:\games', r'E:\Morrowind'):
         for sub in ('', 'momw-tools-pack-windows', 'momw-tools-pack',
@@ -92,6 +106,82 @@ def find_tools():
         if all(os.path.isfile(os.path.join(d, t)) for t in TOOLS):
             return d
     return None
+
+
+def pack_url():
+    """Адреса свіжої збірки інструментів.
+
+    Беремо останній випуск, а як його артефакти вже прибрали, то збірку з
+    master. Обидві адреси однаково сталі.
+    """
+    tag = None
+    try:
+        req = urllib.request.Request(PACK_API + '/releases?per_page=1')
+        data = json.load(urllib.request.urlopen(req, timeout=30))
+        tag = data[0]['tag_name'] if data else None
+    except Exception:                          # noqa: BLE001 - мережа
+        tag = None
+
+    for ref in (tag, 'master'):
+        if not ref:
+            continue
+        url = PACK_API + PACK_JOB % ref
+        try:
+            head = urllib.request.Request(url, method='HEAD')
+            r = urllib.request.urlopen(head, timeout=30)
+            return url, ref, int(r.headers.get('Content-Length') or 0)
+        except Exception:                      # noqa: BLE001 - мережа
+            continue
+    raise RuntimeError('GitLab не віддав збірку інструментів')
+
+
+def fetch_tools(on_line):
+    """Завантажити momw-tools-pack і розпакувати. Повертає теку або None."""
+    have = find_tools()
+    if have:
+        return have
+
+    on_line('Інструментів Modding-OpenMW немає, качаю.')
+    try:
+        url, ref, size = pack_url()
+    except Exception as e:                     # noqa: BLE001 - мережа
+        on_line('Не вдалося спитати GitLab: %s' % e)
+        return None
+
+    on_line('Версія %s, %.0f МБ' % (ref, size / 1048576.0))
+    tmp = os.path.join(os.environ.get('TEMP', '.'),
+                       'momw-tools-pack-windows.zip')
+    try:
+        engine_download(url, tmp, size,
+                        lambda p: on_line('  %d%%' % p) if p % 20 == 0 else None)
+    except Exception as e:                     # noqa: BLE001 - мережа
+        on_line('Завантаження не вдалося: %s' % e)
+        return None
+
+    on_line('Розпаковую у %s' % PACK_HOME)
+    try:
+        os.makedirs(PACK_HOME, exist_ok=True)
+        with zipfile.ZipFile(tmp) as z:
+            z.extractall(PACK_HOME)
+    except (OSError, zipfile.BadZipFile) as e:
+        on_line('Розпакувати не вдалося: %s' % e)
+        return None
+    finally:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+
+    have = find_tools()
+    if not have:
+        on_line('У збірці немає umo.exe. Візьми її руками: ' + SITE)
+    return have
+
+
+def engine_download(url, dest, size, on_progress):
+    """Те саме завантаження, що й для OpenMW. Тримаємо його в одному місці."""
+    import engine
+    return engine.download(url, dest, size, on_progress)
 
 
 def umo_dirs(tools):
@@ -113,6 +203,26 @@ def umo_dirs(tools):
 
 
 NEW_CONSOLE = 0x00000010      # CREATE_NEW_CONSOLE: umo потрібне своє вікно
+
+
+def suggest_mods_dir():
+    """Куди радити складати моди: диск, де найбільше вільного місця.
+
+    Повертає (шлях, вільно байтів). Профіль важить близько 80 ГБ, і людині
+    легше вибрати теку, коли перед очима є готовий варіант.
+    """
+    best, free = None, 0
+    for letter in 'CDEFGHIJ':
+        root = letter + ':' + os.sep
+        if not os.path.isdir(root):
+            continue
+        try:
+            avail = shutil.disk_usage(root).free
+        except OSError:
+            continue
+        if avail > free:
+            best, free = root, avail
+    return (os.path.join(best, 'Morrowind'), free) if best else (None, 0)
 
 
 def setup_umo(tools):

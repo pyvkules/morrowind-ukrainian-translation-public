@@ -490,13 +490,6 @@ class App:
         переписують профіль цілком. Переклад останній, бо його тека мусить
         лишитися в списку найостаннішою — інакше моди її перекриють.
         """
-        if plan == MODS:
-            blocked = install.modlist_blocked()
-            if blocked:
-                for line in blocked:
-                    install.out(line)
-                install.step('моди', 'fail')
-                return 1
         if plan in (ENGINE, MODS) and not self.cfgs:
             cfg = install.install_engine()
             if not cfg:

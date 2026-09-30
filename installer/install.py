@@ -646,21 +646,6 @@ def install_engine():
     return cfg
 
 
-def modlist_blocked():
-    """Чого бракує для модів. Порожньо, якщо все на місці.
-
-    Питаємо до того, як ставити OpenMW: інакше людина чекала б завантаження
-    рушія, щоб аж тоді почути, що моди все одно не підуть.
-    """
-    import mods as modlist
-
-    if not modlist.find_tools():
-        return ['Для модів потрібен momw-tools-pack.',
-                'Візьми його тут і поклади поруч із цим файлом:',
-                '  ' + modlist.SITE]
-    return []
-
-
 def install_modlist(cfg):
     """Поставити моди з профілю автора й відтворити сам профіль.
 
@@ -671,13 +656,10 @@ def install_modlist(cfg):
     import mods as modlist
 
     step('моди', 'run')
-    blocked = modlist_blocked()
-    if blocked:
-        for line in blocked:
-            out(line)
+    tools = modlist.fetch_tools(out)
+    if not tools:
         step('моди', 'fail')
         return 1
-    tools = modlist.find_tools()
     out('Інструменти: %s' % tools)
 
     need = modlist.profile_mods(payload_root())
@@ -688,8 +670,13 @@ def install_modlist(cfg):
 
     mods_dir = modlist.umo_dirs(tools)
     if not mods_dir:
-        out('umo ще не налаштований. Зараз він відкриє власне вікно:')
-        out('там треба ввійти в Nexus і вказати теку для модів.')
+        out('umo ще не налаштований. Зараз він відкриє власне вікно.')
+        out('Спершу увійди в Nexus у браузері, тоді вкажи теку для модів.')
+        where, free = modlist.suggest_mods_dir()
+        if where:
+            out('Раджу %s, там вільно %.0f ГБ. Моди займуть близько 80 ГБ.'
+                % (where, free / 1073741824.0))
+        out('З рештою питань погоджуйся.')
         modlist.setup_umo(tools)
         mods_dir = modlist.umo_dirs(tools)
     if not mods_dir:
