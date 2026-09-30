@@ -88,6 +88,7 @@ MARK = {
     'never': ('·', GHOST, OFF, 'normal'),
 }
 
+LOG_LINES = 2000  # скільки рядків журналу тримаємо
 ROW = 22          # висота рядка кроку
 FIRST = 23        # центр першого рядка від верху полотна
 SPINE = 22        # по цій вертикалі стоять значки й іде лінія поступу
@@ -437,6 +438,9 @@ class App:
     def write(self, msg):
         self.log.configure(state='normal')
         self.log.insert('end', msg + '\n')
+        extra = int(self.log.index('end-1c').split('.')[0]) - LOG_LINES
+        if extra > 0:
+            self.log.delete('1.0', '%d.0' % (extra + 1))
         self.log.see('end')
         self.log.configure(state='disabled')
 

@@ -79,7 +79,9 @@ def silent_install(installer_exe, target, timeout=900):
     import ctypes
     from ctypes import wintypes
 
-    os.makedirs(target, exist_ok=True)
+    # Теку НЕ створюємо. Ми ще без прав адміністратора, і os.makedirs у
+    # «Program Files» падає з WinError 5. Тека потрібна тільки самому
+    # інсталяторові, а він створить її вже з правами.
     params = '/S /D=%s' % target          # саме без лапок, див. вище
 
     class SHELLEXECUTEINFO(ctypes.Structure):

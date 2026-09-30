@@ -624,6 +624,12 @@ def install_engine():
         code = engine.silent_install(tmp, target)
     except PermissionError as e:
         out('OpenMW не встановлено: %s' % e)
+        out('Windows питає дозвіл, бо програма ставиться для всіх.')
+        out('Натисни «Встановити» ще раз і дай згоду.')
+        step('рушій', 'fail')
+        return None
+    except OSError as e:
+        out('OpenMW не встановлено: %s' % e)
         step('рушій', 'fail')
         return None
     if code != 0:
@@ -677,7 +683,14 @@ def install_modlist(cfg):
         return 1
     out('Моди підуть у %s' % mods_dir)
 
-    if not modlist.install_lists(tools, lists, out):
+    expected = modlist.expected_dirs(payload_root(), mods_dir)
+    if expected:
+        out('У профілі %d тек модів.' % len(expected))
+
+    def count(have, total):
+        step('моди', 'run', '%d з %d' % (have, total))
+
+    if not modlist.install_lists(tools, lists, out, expected, count):
         step('моди', 'fail')
         return 1
 
