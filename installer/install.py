@@ -729,6 +729,38 @@ def uninstall_from(cfg):
     return 0
 
 
+def modlist_drift(lines):
+    """Скільки модів рецепта немає у встановленому профілі.
+
+    Людина, яка оновлює тільки переклад, інакше не дізналася б, що в новій
+    версії набір модів інший. Повертає (бракує, усього). Нуль і нуль, якщо
+    цей профіль узагалі не наш.
+    """
+    import mods as modlist
+
+    need = modlist.profile_mods(payload_root())
+    want = {os.path.join(name, cat, mod).lower()
+            for name in need for cat, mod in need[name]}
+    if not want:
+        return 0, 0
+
+    have = set()
+    for line in lines:
+        s = line.strip()
+        if not s.startswith('data='):
+            continue
+        d = s[5:].strip().strip('"').lower()
+        # Межа обов'язкова: інакше WeaponSheathing зарахував би себе
+        # замість WeaponSheathingAdditions, бо є його початком.
+        tail = d + os.sep
+        for w in want:
+            if (os.sep + w + os.sep) in tail:
+                have.add(w)
+    if not have:
+        return 0, 0                      # профіль не наш, мовчимо
+    return len(want - have), len(want)
+
+
 def install_to(cfg):
     lines, dirs, master, mod_dir = describe(cfg)
     if not master:
@@ -792,6 +824,12 @@ def install_to(cfg):
     out('Прописую в openmw.cfg:')
     for note in rewrite_cfg(cfg, mod_dir):
         out('  ' + note)
+
+    short, total = modlist_drift(lines)
+    if short:
+        out()
+        out('У цій версії набір модів інший: бракує %d із %d.' % (short, total))
+        out('Щоб дібрати їх, запусти ще раз і вибери варіант із модами.')
     return 0
 
 

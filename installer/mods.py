@@ -20,6 +20,7 @@ Modding-OpenMW плюс власний порядок завантаження �
 не можна. А от самі інструменти MOMW качаємо: GitLab віддає їхню збірку за
 сталою адресою свого API, тож людині нічого шукати руками.
 """
+import hashlib
 import io
 import json
 import os
@@ -467,14 +468,39 @@ def _run_in(cmd, cwd, on_line):
     return p.returncode
 
 
+STAMP = '.made'          # чим саме зроблено те, що лежить у теці
+
+
+def load_stamp(out_dir):
+    p = os.path.join(out_dir, STAMP)
+    try:
+        return io.open(p, encoding='utf-8').read().strip()
+    except OSError:
+        return ''
+
+
+def all_made(out_dir):
+    return all(os.path.isfile(os.path.join(out_dir, n)) for n in MADE)
+
+
 def make_plugins(tools, cfg_path, text, out_dir, on_line):
     """Зробити злитий плагін, траву і світло.
 
     Кожен інструмент читає openmw.cfg, тож перед його запуском у файлі не
     має бути того, що він аж тепер зробить. Тому профіль переписуємо тричі,
     щоразу додаючи вже готове.
+
+    Робота ця залежить тільки від порядку завантаження, тож поруч лишаємо
+    його відбиток. Коли порядок не змінився, переробляти нічого: людина,
+    що оновлює переклад, не чекатиме зайвої хвилини.
     """
     os.makedirs(out_dir, exist_ok=True)
+    base = cfg_without(text, set(MADE))
+    mark = hashlib.sha256(base.encode('utf-8')).hexdigest()[:16]
+    if all_made(out_dir) and load_stamp(out_dir) == mark:
+        on_line('Порядок завантаження той самий, плагіни лишаються.')
+        return set()
+
     left = set(MADE)
 
     def stage():
@@ -507,6 +533,9 @@ def make_plugins(tools, cfg_path, text, out_dir, on_line):
     for name in MADE:
         if name not in have:
             on_line('Не вийшло зробити %s, рядок про нього прибрано.' % name)
+    if len(have) == len(MADE):
+        io.open(os.path.join(out_dir, STAMP), 'w',
+                encoding='utf-8').write(mark + '\n')
     return set(MADE) - set(have)
 
 
@@ -524,6 +553,54 @@ def write_extras(payload_root, cfg_path, on_line):
                 io.open(backup, 'wb').write(io.open(dest, 'rb').read())
         io.open(dest, 'wb').write(io.open(src, 'rb').read())
         on_line('покладено %s' % name)
+
+
+def data_dirs(text):
+    """Теки даних профілю, у порядку профілю."""
+    out = []
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith('data='):
+            out.append(s[5:].strip().strip('"'))
+    return out
+
+
+def prune_missing(text, on_line):
+    """Прибрати з порядку завантаження плагіни, яких немає на диску.
+
+    OpenMW на такому профілі не стартує взагалі: «the content file does not
+    exist». Набори Modding-OpenMW живуть своїм життям, моди з них зникають і
+    перейменовуються, тож тримати рядок про те, чого немає, означало б
+    віддати людині гру, яка не запускається. Краще без кількох модів.
+    """
+    dirs = data_dirs(text)
+    known = {}
+    for d in dirs:
+        try:
+            for f in os.listdir(d):
+                known.setdefault(f.lower(), d)
+        except OSError:
+            continue
+
+    kept, dropped = [], []
+    for line in text.splitlines():
+        s = line.strip()
+        name = ''
+        for tag in ('content=', 'groundcover='):
+            if s.startswith(tag):
+                name = s[len(tag):].strip()
+        if name and name.lower() not in known:
+            dropped.append(name)
+            continue
+        kept.append(line)
+
+    if dropped:
+        on_line('Немає %d плагінів, рядки про них прибрано.' % len(dropped))
+        for name in dropped[:8]:
+            on_line('  %s' % name)
+        if len(dropped) > 8:
+            on_line('  і ще %d' % (len(dropped) - 8))
+    return '\n'.join(kept) + '\n', dropped
 
 
 def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line,
@@ -565,7 +642,7 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line,
         failed = make_plugins(tools, cfg_path, text, out_dir, on_line)
     elif out_dir:
         on_line('Інструментів немає, згенерованих плагінів не буде.')
-    io.open(cfg_path, 'w', encoding='utf-8',
-            newline='\n').write(cfg_without(text, failed))
+    final, _dropped = prune_missing(cfg_without(text, failed), on_line)
+    io.open(cfg_path, 'w', encoding='utf-8', newline='\n').write(final)
     on_line('профіль записано: %s' % cfg_path)
     return True
