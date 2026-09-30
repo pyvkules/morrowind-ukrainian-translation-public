@@ -592,7 +592,7 @@ def install_engine():
 
     data = game_data_dir()
     if not data:
-        out('Не знайшов саму гру — нема що налаштовувати.')
+        out('Не знайшов гру.')
         out('Купи й постав Morrowind (Steam або GOG), тоді запусти ще раз.')
         return None
 
@@ -619,13 +619,11 @@ def install_engine():
     target = os.path.join(os.environ.get('PROGRAMFILES', r'C:\Program Files'),
                           'OpenMW')
     out('Ставлю у %s' % target)
-    out('Windows зараз запитає дозвіл — це звичайне встановлення програми.')
     try:
         code = engine.silent_install(tmp, target)
     except PermissionError as e:
         out('OpenMW не встановлено: %s' % e)
-        out('Windows питає дозвіл, бо програма ставиться для всіх.')
-        out('Натисни «Встановити» ще раз і дай згоду.')
+        out('Спробуй ще раз і дай дозвіл.')
         step('рушій', 'fail')
         return None
     except OSError as e:
@@ -683,6 +681,10 @@ def install_modlist(cfg):
         return 1
     out('Моди підуть у %s' % mods_dir)
 
+    out('З преміумом на Nexus моди завантажаться самі.')
+    out('Без преміуму umo відкриватиме сторінки по черзі, і кожен файл '
+        'забираєш сам.')
+
     expected = modlist.expected_dirs(payload_root(), mods_dir)
     if expected:
         out('У профілі %d тек модів.' % len(expected))
@@ -716,7 +718,7 @@ def uninstall_from(cfg):
         shutil.rmtree(mod_dir, ignore_errors=True)
         out('  вилучено теку перекладу')
     elif os.path.isdir(mod_dir):
-        out('  теку лишено: немає нашої мітки, могло бути не наше')
+        out('  теку лишено: там щось не наше')
     out()
     out('Готово. Гра знову англійською.')
     return 0
@@ -725,7 +727,7 @@ def uninstall_from(cfg):
 def install_to(cfg):
     lines, dirs, master, mod_dir = describe(cfg)
     if not master:
-        out('У цій конфігурації немає Morrowind.esm — нема чого перекладати.')
+        out('Тут немає Morrowind.esm. Нема чого перекладати.')
         out('Спершу пройди майстер налаштування OpenMW і вкажи йому гру.')
         return 2
 
@@ -735,7 +737,7 @@ def install_to(cfg):
         shutil.rmtree(mod_dir, ignore_errors=True)
         out('Прибрано попередню версію.')
     elif os.path.isdir(mod_dir) and os.listdir(mod_dir):
-        out('У теці вже щось є, а мітки нашої немає — не чіпаю її.')
+        out('У теці вже щось є, і воно не наше. Не чіпаю.')
         out('  %s' % mod_dir)
         return 1
 
@@ -750,12 +752,12 @@ def install_to(cfg):
         json.dump({'openmw_cfg': cfg}, f, ensure_ascii=False, indent=1)
 
     out()
-    out('Збираю (це кілька хвилин — патчимо твої власні файли):')
+    out('Збираю. Це кілька хвилин.')
     fonts = font_steps(cfg, lines)
     built, results = run_steps(mod_dir, fonts + STEPS)
     if not built:
         out()
-        out('Збірка не вдалася. Гру не чіпали: рядок data= не дописано.')
+        out('Збірка не вдалася. Гру не змінено.')
         return 1
 
     # Який шрифт гра малює насправді, знає тільки вона. Тому кажемо прямо, що
@@ -774,11 +776,11 @@ def install_to(cfg):
         out('Шрифти з українськими літерами: %s'
             % ', '.join(sorted(x for x in asked if x.lower() in done)))
     if left:
-        out('Без кирилиці, використати не вийде: %s' % ', '.join(left))
+        out('Без кирилиці: %s' % ', '.join(left))
     if not done:
         out()
         out('! УВАГА: не вдалося пропатчити жодного шрифту.')
-        out('! Гра буде українською, але замість літер будуть порожні місця.')
+        out('! Замість українських літер будуть порожні місця.')
         out('! Напиши про це автору перекладу разом із цим виводом.')
 
     out()
@@ -827,10 +829,8 @@ def main():
     out(' Готово. Запускай OpenMW як звичайно.')
     out('=' * 62)
     out()
-    out('Переклад працює тим, що його тека стоїть **останньою** в списку —')
-    out('виграє останній. Якщо відкриєш лаунчер OpenMW і переставиш теки на')
-    out('вкладці Data Files, гра знову стане англійською. Тоді просто запусти')
-    out('цей файл ще раз.')
+    out('Якщо переставити теки на вкладці Data Files у лаунчері OpenMW,')
+    out('гра знову стане англійською. Тоді запусти цей файл ще раз.')
     out()
     out('Щоб відкотити: ukrainizer-setup.exe --uninstall')
     return 0

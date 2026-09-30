@@ -238,7 +238,7 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line):
     """Скласти openmw.cfg із рецепта, підставивши шляхи цієї машини."""
     src = os.path.join(recipe_dir(payload_root), 'profile.cfg')
     if not os.path.isfile(src):
-        on_line('Рецепта профілю немає — нічого відтворювати.')
+        on_line('Рецепта профілю немає.')
         return False
     text = io.open(src, encoding='utf-8').read()
     text = text.replace('{МОДИ}', mods_dir.rstrip('\\')) \
@@ -252,7 +252,7 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line):
             if not os.path.isdir(d):
                 missing += 1
     if missing:
-        on_line('Увага: %d тек із профілю ще немає — якісь моди не '
+        on_line('Увага: %d тек із профілю ще немає, якісь моди не '
                 'завантажилися.' % missing)
 
     if os.path.isfile(cfg_path):
