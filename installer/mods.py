@@ -37,6 +37,13 @@ SITE = 'https://modding-openmw.com/tools/'
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODS = '{МОДИ}'
 
+# Частину модів профілю Modding-OpenMW прибрав зі своїх наборів, а частину
+# перевів у набори «wip». Описи їх лишилися в базі MOMW, тож ми складаємо з
+# них власний набір: umo вміє такі, і файл для них має ту саму будову, що й
+# відповідь його ж API.
+EXTRAS_FILE = 'extra-mods.json'
+EXTRAS_LIST = 'ukrainizer-extras'
+
 # Збірку інструментів складає CI GitLab, і лежить вона артефактом завдання.
 # Адреса стала: це API, а не сторінка, яку перемалюють.
 PACK_API = ('https://gitlab.com/api/v4/projects/'
@@ -381,6 +388,19 @@ def install_lists(tools, need, skips, on_line, payload_root='',
 
     with Counter(items, lambda it: find_mod(base, it[0], it[1]) is not None,
                  report):
+        extra = os.path.join(recipe_dir(payload_root), EXTRAS_FILE)
+        if os.path.isfile(extra):
+            on_line('')
+            on_line('Ставлю моди, яких уже немає в наборах.')
+            if run_umo([umo, 'list', 'add', extra, '-n', EXTRAS_LIST],
+                       on_line) == 0:
+                if run_umo([umo, 'sync', EXTRAS_LIST], on_line) == 0:
+                    run_umo([umo, 'install', EXTRAS_LIST], on_line)
+                else:
+                    on_line('Опис цих модів узяти не вдалося.')
+            else:
+                on_line('Власний набір не прийнявся.')
+
         for name in sorted(need):
             subset = ','.join(sorted({swap.get((name, mod), mod)
                                       for _cat, mod in need[name]}))
@@ -578,14 +598,8 @@ def renames(payload_root):
     return out
 
 
-def find_mod(mods_dir, name, mod):
-    """Де насправді лежить цей мод. Категорію не вгадуємо, а шукаємо.
-
-    umo кладе мод у <набір>/<категорія>/<тека>, і категорію бере зі своїх
-    нинішніх даних. Modding-OpenMW їх час від часу перетасовує, тож шлях,
-    знятий колись, сьогодні вказує в порожнечу. Тека мода зберігає назву,
-    тому шукаємо саме її.
-    """
+def in_list(mods_dir, name, mod):
+    """Пошук теки мода в одному наборі."""
     root = os.path.join(mods_dir, name)
     try:
         cats = os.listdir(root)
@@ -594,6 +608,31 @@ def find_mod(mods_dir, name, mod):
     for cat in cats:
         here = os.path.join(root, cat, mod)
         if os.path.isdir(here):
+            return here
+    return None
+
+
+def find_mod(mods_dir, name, mod):
+    """Де насправді лежить цей мод. Категорію не вгадуємо, а шукаємо.
+
+    umo кладе мод у <набір>/<категорія>/<тека>, і категорію бере зі своїх
+    нинішніх даних. Modding-OpenMW їх час від часу перетасовує, тож шлях,
+    знятий колись, сьогодні вказує в порожнечу. Тека мода зберігає назву,
+    тому шукаємо саме її: спершу у своєму наборі, тоді в усіх інших, бо
+    частина модів переїхала, а частину ми ставимо власним набором.
+    """
+    here = in_list(mods_dir, name, mod)
+    if here:
+        return here
+    try:
+        others = os.listdir(mods_dir)
+    except OSError:
+        return None
+    for other in others:
+        if other == name or not os.path.isdir(os.path.join(mods_dir, other)):
+            continue
+        here = in_list(mods_dir, other, mod)
+        if here:
             return here
     return None
 

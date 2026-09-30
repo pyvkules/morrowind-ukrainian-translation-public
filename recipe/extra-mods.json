@@ -1,0 +1,875 @@
+[
+ {
+  "name": "Alternative TrueType Fonts",
+  "author": "Isaskar and Georgd",
+  "description": "Fonts to replace the default fonts used by OpenMW: Pelagiad by Isak Larborn and Ayembedt by Georg Duffner.",
+  "url": "/files/AlternativeTrueTypeFonts.7z",
+  "category": "Fonts",
+  "dl_url": "/files/AlternativeTrueTypeFonts.7z",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "AlternativeTrueTypeFonts",
+  "slug": "alternative-truetype-fonts",
+  "date_added": "2023-12-23T08:54:23+00:00",
+  "date_updated": "2023-12-23T08:54:23+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Alternative TrueType Fonts",
+    "extract_to": "AlternativeTrueTypeFonts",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "high-res",
+   "tes3mp-graphics"
+  ],
+  "on_lists": [
+   "just-good-morrowind-wip"
+  ],
+  "data_paths": [],
+  "plugins": []
+ },
+ {
+  "name": "Comfy Pillow for a restful sleep",
+  "author": "<a href=\"https://next.nexusmods.com/profile/redondepremiere/about-me\">redondepremiere</a>",
+  "description": "Tired of your vampire getting their rest disturbed by Vaermina's intrusions? Are you looking for a roleplay-friendly solution without completely disabling/reducing the nightmares? Comfy Pillow for a restful sleep offers such an option by giving some use to a lesser known unique object from the base game: Drarayne Thelas' extra-comfy pillow. From now on, sleeping as a vampire with the pillow in your inventory will disable the nightmares. Get rid of the pillow to experience them again. Simple as that.",
+  "url": "https://www.nexusmods.com/morrowind/mods/46613",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "ComfyPillowforarestfulsleep",
+  "slug": "comfy-pillow-for-a-restful-sleep",
+  "date_added": "2019-05-15T00:27:01+00:00",
+  "date_updated": "2019-05-15T00:27:01+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Comfy Pillow for a restful sleep",
+    "extract_to": "ComfyPillowforarestfulsleep",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "no-mod-manager-download",
+   "vanilla-friendly"
+  ],
+  "on_lists": [
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [
+   "ComfyPillowforarestfulsleep/00 Base version"
+  ],
+  "plugins": [
+   "ComfyPillowForARestfulSleep.ESP"
+  ]
+ },
+ {
+  "name": "OAAB Integrations",
+  "author": "OAAB_Data Team",
+  "description": "These mods add some of the new items in OAAB_Data to appropriate creatures and leveled lists and adds OAAB creatures to vanilla leveled creature lists so that you will find them in the world as you explore. See the readmes for a full list of additions.",
+  "url": "https://www.nexusmods.com/morrowind/mods/49045",
+  "category": "NewItems",
+  "dl_url": "",
+  "usage_notes": "<p>Download the <code>OAAB Creature Loot</code>, <code>OAAB Leveled Creatures</code>, and <code>OAAB Leveled Lists</code> files. TES3Merge is not required (it doesn't work for OpenMW anyways), <a href='/mods/delta-plugin/'>Delta Plugin</a> does that for us instead. Using it will be one of the last steps of the modlist.</p>\n",
+  "compat": 4,
+  "dir": "OAABIntegrations",
+  "slug": "oaab-integrations",
+  "date_added": "2022-11-09T15:24:00+00:00",
+  "date_updated": "2022-11-09T15:24:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "OAAB Creature Loot",
+    "extract_to": "OAABIntegrations",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   },
+   {
+    "direct_download": null,
+    "file_name": "OAAB Leveled Creatures",
+    "extract_to": "OAABIntegrations",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   },
+   {
+    "direct_download": null,
+    "file_name": "OAAB Leveled Lists",
+    "extract_to": "OAABIntegrations",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   },
+   {
+    "direct_download": null,
+    "file_name": "OAAB Classes",
+    "extract_to": "OAABIntegrations",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "oaab-data"
+  ],
+  "on_lists": [
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [
+   "OAABIntegrations"
+  ],
+  "plugins": [
+   "OAAB Leveled Lists.ESP",
+   "OAAB Classes.ESP",
+   "OAAB Creature Loot.ESP",
+   "OAAB Leveled Creatures.ESP"
+  ]
+ },
+ {
+  "name": "Pharis' Magicka Regeneration",
+  "author": "<a href=\"https://next.nexusmods.com/profile/lucipharis/about-me\">Pharis</a>",
+  "description": "Magicka regeneration Lua mod for all actors based on Willpower, current Fatigue ratio, and optionally current Magicka ratio.",
+  "url": "https://modding-openmw.gitlab.io/pharis-magicka-regeneration/",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "PharisMagickaRegeneration",
+  "slug": "pharis-magicka-regeneration",
+  "date_added": "2023-09-27T20:08:00+00:00",
+  "date_updated": "2023-09-27T20:08:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Pharis' Magicka Regeneration",
+    "extract_to": "PharisMagickaRegeneration",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua",
+   "gitlab-mods",
+   "only-on-momw"
+  ],
+  "on_lists": [
+   "just-good-morrowind-wip",
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [],
+  "plugins": []
+ },
+ {
+  "name": "Simple HUD for OpenMW (with compass or minimap)",
+  "author": "<a href=\"https://next.nexusmods.com/profile/MisterFlames/about-me\">MisterFlames</a>",
+  "description": "A better HUD for OpenMW with many different flavors; compass, vanilla, compact, skyrim-like.",
+  "url": "https://www.nexusmods.com/morrowind/mods/53038",
+  "category": "UserInterface",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "SimpleHUDforOpenMWwithcompassorminimap",
+  "slug": "simple-hud-for-openmw-with-compass-or-minimap",
+  "date_added": "2023-11-09T20:41:00+00:00",
+  "date_updated": "2023-11-09T20:41:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Simple HUD for OpenMW-53038-1-2-1686390733.zip",
+    "extract_to": "SimpleHUDforOpenMWwithcompassorminimap",
+    "nexus_file_id": 1000038490,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [
+   "just-good-morrowind-wip",
+   "starwind-modded"
+  ],
+  "data_paths": [],
+  "plugins": [],
+  "nexus_id": "53038",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Solthas Combat Pack (OpenMW Lua)",
+  "author": "<a href=\"https://next.nexusmods.com/profile/Solthas/about-me\">Solthas</a>",
+  "description": "Get all my combat mods in one place, pre-configured to work together seamlessly. Charge attacks. Timed directional attacks. Dodge \"rolls\". Etc. Fully configurable.",
+  "url": "https://www.nexusmods.com/morrowind/mods/52221",
+  "category": "Combat",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "SolthasCombatPackOpenMWLua",
+  "slug": "solthas-combat-pack-openmw-lua",
+  "date_added": "2023-04-30T14:36:00+00:00",
+  "date_updated": "2023-04-30T14:36:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Solthas combat Pack-52221-1-19-1747270782.7z",
+    "extract_to": "SolthasCombatPackOpenMWLua",
+    "nexus_file_id": 1000052956,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [
+   "just-good-morrowind-wip",
+   "starwind-modded"
+  ],
+  "data_paths": [],
+  "plugins": [],
+  "nexus_id": "52221",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Speechcraft Rebalance (OpenMW)",
+  "author": "<a href=\"https://next.nexusmods.com/profile/Aphain/about-me\">Aphain</a>",
+  "description": "This mod changes several game modifiers to make leveling speechcraft a more worthwhile and (hopefully) less broken experience. It also dramatically increases the worth of speechcraft as a major or minor skill by nerfing 'ye olde throw money at the problem' method.",
+  "url": "https://www.nexusmods.com/morrowind/mods/53177",
+  "category": "Balance",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "SpeechcraftRebalanceOpenMW",
+  "slug": "speechcraft-rebalance-openmw",
+  "date_added": "2023-09-27T17:31:00+00:00",
+  "date_updated": "2023-09-27T17:31:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Speechcraft Rebalance (OpenMW) 1.0-53177-1-0-1688946668.zip",
+    "extract_to": "SpeechcraftRebalanceOpenMW",
+    "nexus_file_id": 1000038984,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [
+   "just-good-morrowind-wip",
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [],
+  "plugins": [],
+  "nexus_id": "53177",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Tabletop Alchemy",
+  "author": "<a href=\"https://next.nexusmods.com/profile/SkyHasACat/about-me\">DaisyHasaCat</a>",
+  "description": "This mod allows you to enter the alchemy interface by activating alchemy apparatus in the world, so you don't have to pick it up first.",
+  "url": "https://www.nexusmods.com/morrowind/mods/52891",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "TabletopAlchemy",
+  "slug": "tabletop-alchemy",
+  "date_added": "2023-11-29T14:36:00+00:00",
+  "date_updated": "2023-11-29T14:36:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Tabletop Alchemy",
+    "extract_to": "TabletopAlchemy",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [
+   "just-good-morrowind-wip",
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [],
+  "plugins": []
+ },
+ {
+  "name": "Talking Trains Speechcraft-openmw lua",
+  "author": "<a href=\"https://next.nexusmods.com/profile/MISTERSMELLIES/about-me\">MISTERSMELLIES</a>",
+  "description": "Every dialogue opening will now increase speechcraft level your progress so you will slowly level your speechcraft over the course of the game.",
+  "url": "https://www.nexusmods.com/morrowind/mods/56078",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "TalkingTrainsSpeechcraftopenmwlua",
+  "slug": "talking-trains-speechcraft-openmw-lua",
+  "date_added": "2025-06-21T20:00:00+00:00",
+  "date_updated": "2025-06-21T20:00:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Talking Trains Speechcraft-openmw lua",
+    "extract_to": "TalkingTrainsSpeechcraftopenmwlua",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [
+   "of-ash-and-blight-wip"
+  ],
+  "data_paths": [
+   "TalkingTrainsSpeechcraftopenmwlua/Talking Trains Speechcraft openmw lua"
+  ],
+  "plugins": [
+   "Talking Trains Speechcraft.omwscripts"
+  ]
+ },
+ {
+  "name": "Alchemical Hustle",
+  "author": "<a href=\"https://next.nexusmods.com/profile/Rosynant/about-me\">Rosynant</a>",
+  "description": "OpenMW-friendly alchemy rebalance. Features toxicity mechanics, prevents common exploits and scales down effects of many overpowered potions. Fully modular, compatible with Tamriel Rebuilt.",
+  "url": "https://www.nexusmods.com/morrowind/mods/51050",
+  "category": "Balance",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "AlchemicalHustle",
+  "slug": "alchemical-hustle",
+  "date_added": "2022-11-12T13:25:00+00:00",
+  "date_updated": "2023-12-26T15:21:59+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Alchemical Hustle-51050-1-6-1769854349.zip",
+    "extract_to": "AlchemicalHustle",
+    "nexus_file_id": 1000060377,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "tamriel-data"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "AlchemicalHustle/Alchemical Hustle/Fatigue Toxicity/Data Files"
+  ],
+  "plugins": [
+   "AH_Toxicity_Drink.ESP",
+   "AH_Toxicity_Eat.ESP",
+   "AH_GMSTs.ESP",
+   "AH_Magic.ESP"
+  ],
+  "nexus_id": "51050",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Attend Me",
+  "author": "<a href=\"https://next.nexusmods.com/profile/uramer/about-me\">urm</a>",
+  "description": "Attend me features a follower HUD and automatic teleportation of your followers.",
+  "url": "https://www.nexusmods.com/morrowind/mods/51232",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "AttendMe",
+  "slug": "attend-me",
+  "date_added": "2022-11-11T14:11:00+00:00",
+  "date_updated": "2022-11-11T14:11:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "AttendMe 1.9-51232-1-9-1741508300.zip",
+    "extract_to": "AttendMe",
+    "nexus_file_id": 1000051019,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "AttendMe/AttendMe_1.9"
+  ],
+  "plugins": [
+   "AttendMe.omwscripts"
+  ],
+  "nexus_id": "51232",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Audiobooks of Morrowind",
+  "author": "<a href=\"https://next.nexusmods.com/profile/frogstat/about-me\">frogstat</a>",
+  "description": "Turn the books in Morrowind into listenable audiobooks!",
+  "url": "https://www.nexusmods.com/morrowind/mods/52458",
+  "category": "Audio",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "AudiobooksofMorrowind",
+  "slug": "audiobooks-of-morrowind",
+  "date_added": "2023-05-07T16:21:00+00:00",
+  "date_updated": "2024-04-18T16:36:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Audiobooks of Morrowind-52458-2-1-1713697822.zip",
+    "extract_to": "AudiobooksofMorrowind",
+    "nexus_file_id": 1000044072,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "AudiobooksofMorrowind"
+  ],
+  "plugins": [
+   "audiobook-openmw.omwscripts",
+   "AudiobooksOfMorrowind.ESP",
+   "Audiobook_ColorDesigned_patch.ESP"
+  ],
+  "nexus_id": "52458",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Corporeal Carryable Containers",
+  "author": "<a href=\"https://next.nexusmods.com/profile/SkyHasACat/about-me\">DaisyHasaCat</a>",
+  "description": "Adds carryable containers that can store items for organizational purposes. Includes a keychain use.",
+  "url": "https://www.nexusmods.com/morrowind/mods/53772",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "CorporealCarryableContainers",
+  "slug": "corporeal-carryable-containers",
+  "date_added": "2023-11-29T14:40:00+00:00",
+  "date_updated": "2023-11-29T14:40:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Corporeal Carryable Containers-53772-1-02-1706715770.zip",
+    "extract_to": "CorporealCarryableContainers",
+    "nexus_file_id": 1000042412,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "CorporealCarryableContainers/Corporeal-Carryable-Containers-master"
+  ],
+  "plugins": [
+   "Corporeal-Carryable-Containers.omwscripts"
+  ],
+  "nexus_id": "53772",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Diverse Blood",
+  "author": "<a href=\"https://next.nexusmods.com/profile/OffworldDevil/about-me\">OffworldDevil</a>",
+  "description": "8 new blood textures for NPCs and creatures. 1k quality.",
+  "url": "https://www.nexusmods.com/morrowind/mods/45368",
+  "category": "VFX",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "DiverseBlood",
+  "slug": "diverse-blood",
+  "date_added": "2021-08-29T16:30:12+00:00",
+  "date_updated": "2021-08-29T16:30:12+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Diverse Blood-45368-1-41-1561159970.7z",
+    "extract_to": "DiverseBlood",
+    "nexus_file_id": 1000014954,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "DiverseBlood/Data Files"
+  ],
+  "plugins": [
+   "Bob's Diverse Blood.ESP"
+  ],
+  "nexus_id": "45368",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Indoril and Her Hand Armor Privileges - OpenMW",
+  "author": "<a href=\"https://next.nexusmods.com/profile/AbbaddoN33/about-me\">AbbaddoN33</a>",
+  "description": "This mod allows the use of Indoril and Her Hand armor sets without consequences, as long as certain conditions are met. Adds conditional hostility logic for Ordinators, High Ordinators, and Hands of Almalexia based on the player's equipped armor and faction status.",
+  "url": "https://www.nexusmods.com/morrowind/mods/57666",
+  "category": "PatchesFixesandConsistency",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "IndorilandHerHandArmorPrivilegesOpenMW",
+  "slug": "indoril-and-her-hand-armor-privileges-openmw",
+  "date_added": "2025-11-02T13:05:00+00:00",
+  "date_updated": "2025-11-02T13:05:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Indoril and Her Hand Armor Privileges - OpenMW-57666-1-0-1761157631.zip",
+    "extract_to": "IndorilandHerHandArmorPrivilegesOpenMW",
+    "nexus_file_id": 1000057850,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "IndorilandHerHandArmorPrivilegesOpenMW",
+   "IndorilandHerHandArmorPrivilegesOpenMW/TR"
+  ],
+  "plugins": [
+   "Indoril & Her Hand Armor Privileges.omwaddon",
+   "Indoril & Her Hand Armor Privileges.omwscripts"
+  ],
+  "nexus_id": "57666",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Protective Guards - Factions and NPCs Protections (OpenMW)",
+  "author": "<a href=\"https://next.nexusmods.com/profile/kuyondo/about-me\">kuyondo</a> and <a href=\"https://next.nexusmods.com/profile/lelimule/about-me\">lelimule</a>",
+  "description": "This mod is an improvement of Protective Guards. Now the guards don't systematically protect the player; it depends of the guard/attacker/defensor faction, and possibly of attacker/defensor rank, and possibly if attacker/defensor is a guard or not. Furthermore, guards can protect NPCs too (example: if a NPC attacks another NPC), with the same rules",
+  "url": "https://www.nexusmods.com/morrowind/mods/54858",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "ProtectiveGuardsFactionsandNPCsProtectionsOpenMW",
+  "slug": "protective-guards-factions-and-npcs-protections-op",
+  "date_added": "2025-01-26T00:54:00+00:00",
+  "date_updated": "2025-01-26T00:54:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Protective Guards - Factions and NPCs Protections-54858-1-6-1772627968.zip",
+    "extract_to": "ProtectiveGuardsFactionsandNPCsProtectionsOpenMW",
+    "nexus_file_id": 1000061283,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "ProtectiveGuardsFactionsandNPCsProtectionsOpenMW"
+  ],
+  "plugins": [
+   "protective_guards_for_omw.omwscripts"
+  ],
+  "nexus_id": "54858",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Protective Guards (OpenMW)",
+  "author": "<a href=\"https://next.nexusmods.com/profile/kuyondo/about-me\">kuyondo</a>",
+  "description": "Guards now protect against hostile NPCs, that includes NPCs that have high fight ratings, NPCs that attack you first, and even the guards themselves. Taunting NPCs is now a new weapon. Can't fight them? Just taunt them, and let the guards take care of it.",
+  "url": "https://www.nexusmods.com/morrowind/mods/46992",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "ProtectiveGuardsOpenMW",
+  "slug": "protective-guards-openmw",
+  "date_added": "2023-11-11T00:50:00+00:00",
+  "date_updated": "2023-11-11T00:50:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Protective Guards - OpenMW 46992 2.0 2026-08-31T14-40Z zf8JfgZO.7z",
+    "extract_to": "ProtectiveGuardsOpenMW",
+    "nexus_file_id": 1000069517,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "openmw-lua"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "ProtectiveGuardsOpenMW"
+  ],
+  "plugins": [
+   "Protective Guards for OpenMW - Lua Edition.ESP",
+   "protective_guards_for_omw.omwscripts"
+  ],
+  "nexus_id": "46992",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Quest Voice Greetings",
+  "author": "<a href=\"https://next.nexusmods.com/profile/vonwolfe/about-me\">Von Djangos</a>",
+  "description": "ElevenAI generated voices for quest-giving NPCs in Morrowind. Currently adds over 1400 original lines of voiced dialogue using the original actors voices.",
+  "url": "https://www.nexusmods.com/morrowind/mods/52273",
+  "category": "Dialogue",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "QuestVoiceGreetings",
+  "slug": "quest-voice-greetings",
+  "date_added": "2023-10-31T05:37:00+00:00",
+  "date_updated": "2023-10-31T05:37:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Quest Voice Greetings-52273-3-82-1721416774.zip",
+    "extract_to": "QuestVoiceGreetings",
+    "nexus_file_id": 1000046349,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "QuestVoiceGreetings/Quest Voice Greetings 3.82"
+  ],
+  "plugins": [
+   "Quest Voice Greetings.ESP"
+  ],
+  "nexus_id": "52273",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Quill of Feyfolken - Scroll Enchanting",
+  "author": "Dormouse",
+  "description": "This is a scroll making mod that will make enchanting scrolls a viable option in Morrowind. Without this mod, enchanting scrolls is just as difficult as enchanting jewelry, but they can only be cast once. This makes enchanting scrolls pointless. The purpose of this mod is to counter these limitations.",
+  "url": "/files/Quill_of_Feyfolken_20.7z",
+  "category": "Gameplay",
+  "dl_url": "/files/Quill_of_Feyfolken_20.7z",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "QuillofFeyfolkenScrollEnchanting",
+  "slug": "quill-of-feyfolken-scroll-enchanting",
+  "date_added": "2018-08-06T02:00:00+00:00",
+  "date_updated": "2020-10-30T17:00:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": null,
+    "extract_to": "QuillofFeyfolkenScrollEnchanting",
+    "nexus_file_id": null,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "QuillofFeyfolkenScrollEnchanting"
+  ],
+  "plugins": [
+   "Quill of Feyfolken 2.0.esp"
+  ]
+ },
+ {
+  "name": "Solthas Blight Weather Pack",
+  "author": "<a href=\"https://next.nexusmods.com/profile/Solthas/about-me\">Solthas</a>",
+  "description": "Harsher and more dynamic weather. Worsening blight storms, with roaming beasts and airborne diseases. Traveling through the Blight is especially dangerous. Modular and fully configurable.",
+  "url": "https://www.nexusmods.com/morrowind/mods/52354",
+  "category": "SkiesandWeather",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "SolthasBlightWeatherPack",
+  "slug": "solthas-blight-weather-pack",
+  "date_added": "2023-10-31T17:34:00+00:00",
+  "date_updated": "2023-10-31T17:34:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Solthas Blight Weather Pack-52354-1-3-1677197272.7z",
+    "extract_to": "SolthasBlightWeatherPack",
+    "nexus_file_id": 1000036094,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "SolthasBlightWeatherPack/Solthas Blight Weather Pack"
+  ],
+  "plugins": [
+   "solBlightByDay.esp",
+   "solDeadlyBlight.esp",
+   "solWeatherRebalance.esp"
+  ],
+  "nexus_id": "52354",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "TimeScale Change - OpenMW",
+  "author": "<a href=\"https://next.nexusmods.com/profile/HunterSpark/about-me\">HunterSpark</a>",
+  "description": "This is simply a TimeScale Change mod, which changes the Timescale from 30:1 to 15:1.",
+  "url": "https://www.nexusmods.com/morrowind/mods/46332",
+  "category": "Gameplay",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "TimeScaleChangeOpenMW",
+  "slug": "timescale-change-openmw",
+  "date_added": "2019-02-26T03:00:00+00:00",
+  "date_updated": "2019-02-26T03:00:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "TimeScale Change - Normal Morrowind-46332-1-0-1547996082.rar",
+    "extract_to": "TimeScaleChangeOpenMW",
+    "nexus_file_id": 1000013195,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "TimeScaleChangeOpenMW"
+  ],
+  "plugins": [
+   "TimescaleChange.omwaddon"
+  ],
+  "nexus_id": "46332",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Vanilla friendly creatures and undeads expansion",
+  "author": "<a href=\"https://next.nexusmods.com/profile/RandomPal/about-me\">RandomPal</a>",
+  "description": "Vanilla friendly creatures and undeads expansion mod based on some of the great old creatures mods.",
+  "url": "https://www.nexusmods.com/morrowind/mods/48818",
+  "category": "Creatures",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "Vanillafriendlycreaturesandundeadsexpansion",
+  "slug": "vanilla-friendly-creatures-and-undeads-expansion",
+  "date_added": "2023-11-11T00:38:00+00:00",
+  "date_updated": "2023-11-11T00:38:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Creatures_RP-48818-3-7-1754824350.7z",
+    "extract_to": "Vanillafriendlycreaturesandundeadsexpansion",
+    "nexus_file_id": 1000055811,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [
+   "oaab-data",
+   "tamriel-data"
+  ],
+  "on_lists": [],
+  "data_paths": [
+   "Vanillafriendlycreaturesandundeadsexpansion/00 Core",
+   "Vanillafriendlycreaturesandundeadsexpansion/02 Daedric creatures drop rebalance",
+   "Vanillafriendlycreaturesandundeadsexpansion/03 Summons have 0 soul"
+  ],
+  "plugins": [
+   "Creatures_RP_Purist.ESP",
+   "Creatures_RP_daedric_drop_rebalance.ESP",
+   "Creatures_RP_Soulless summons.ESP"
+  ],
+  "nexus_id": "48818",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "Vivec Voice Addon Tribunal Version",
+  "author": "tomsnellen",
+  "description": "Bored with the tedious discussions of Vivec? Couldn't he just have given you his dialogue on a piece of paper and send you on your way? If you think so, then this plugin is for you! It adds a real voice to Vivec's dialogue!  Now you can read *and listen* when the god Vivec speaks to you in his 'divine voice'.",
+  "url": "https://www.nexusmods.com/morrowind/mods/589",
+  "category": "Dialogue",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "VivecVoiceAddonTribunalVersion",
+  "slug": "vivec-voice-addon-tribunal-version",
+  "date_added": "2018-04-22T02:00:00+00:00",
+  "date_updated": "2021-09-07T18:18:56+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "Vivec Voice Addon Tribunal Version-589.7z",
+    "extract_to": "VivecVoiceAddonTribunalVersion",
+    "nexus_file_id": 14950,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "VivecVoiceAddonTribunalVersion"
+  ],
+  "plugins": [
+   "Vivec_Voice_addon TRIBUNAL.esp"
+  ],
+  "nexus_id": "589",
+  "nexus_game": "morrowind"
+ },
+ {
+  "name": "ZEF Focus Magicka",
+  "author": "<a href=\"https://next.nexusmods.com/profile/Zefirotte/about-me\">Zefirotte</a>",
+  "description": "Add a custom spell named Focus that allow the player to recover it's magicka while standing still and meditating. Automatic learning depending on player Willpower.",
+  "url": "https://www.nexusmods.com/morrowind/mods/48431",
+  "category": "MagicSpells",
+  "dl_url": "",
+  "usage_notes": "",
+  "compat": 4,
+  "dir": "ZEFFocusMagicka",
+  "slug": "zef-focus-magicka",
+  "date_added": "2020-06-25T00:13:34+00:00",
+  "date_updated": "2022-12-10T14:00:00+00:00",
+  "download_info": [
+   {
+    "direct_download": null,
+    "file_name": "ZEF Focus Magicka-48431-1-2-2-1691266288.zip",
+    "extract_to": "ZEFFocusMagicka",
+    "nexus_file_id": 1000039614,
+    "pinned": false,
+    "actions": []
+   }
+  ],
+  "tags": [],
+  "on_lists": [],
+  "data_paths": [
+   "ZEFFocusMagicka"
+  ],
+  "plugins": [
+   "ZEF_FocusMagicka_1.2.2.esp"
+  ],
+  "nexus_id": "48431",
+  "nexus_game": "morrowind"
+ }
+]
