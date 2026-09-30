@@ -686,8 +686,7 @@ def install_modlist(cfg):
         return 1
     out('Моди підуть у %s' % mods_dir)
 
-    expected = modlist.expected_dirs(need, mods_dir)
-    out('Треба %d модів.' % len(expected))
+    out('Треба %d модів.' % len(modlist.mod_items(need, payload_root())))
     out('З преміумом на Nexus вони завантажаться самі.')
     out('Без преміуму umo відкриватиме сторінки по черзі, і кожен файл '
         'забираєш сам.')
@@ -696,7 +695,8 @@ def install_modlist(cfg):
         step('моди', 'run', '%d з %d' % (have, total))
 
     skips = modlist.skip_mods(payload_root())
-    if not modlist.install_lists(tools, need, skips, out, expected, count):
+    if not modlist.install_lists(tools, need, skips, out, payload_root(),
+                                 mods_dir, count):
         step('моди', 'fail')
         return 1
 

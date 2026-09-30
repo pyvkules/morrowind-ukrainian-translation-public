@@ -1,0 +1,5 @@
+expanded-vanilla	ReAnimationv2Roguefirstpersonanimationpack	ReAnimationv3Completefirstpersonanimationpack
+total-overhaul	NomoreDrNerevarine	MagicRebalanceandFixesMRF
+total-overhaul	RepopulatedVassirDidanatMine	VariousModsandPatches
+total-overhaul	TamrielData	TamrielDataHD
+total-overhaul	DiverseKhajiitNewandImproved	DiverseKhajiit

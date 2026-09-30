@@ -85,12 +85,15 @@ def skip_mods(payload_root):
     return out
 
 
-def expected_dirs(need, mods_dir):
-    """Теки модів, які мають з'явитися. Саме по них рахуємо поступ."""
-    base = mods_dir.rstrip('\\')
-    return [os.path.join(base, name, cat, mod)
-            for name in sorted(need)
-            for cat, mod in sorted(need[name])]
+def mod_items(need, payload_root):
+    """Пари «набір, тека мода» з урахуванням перейменувань.
+
+    Категорію сюди не беремо: набори її час від часу міняють, і тека мода
+    єдине, що лишається сталим.
+    """
+    swap = renames(payload_root)
+    return sorted({(name, swap.get((name, mod), mod))
+                   for name in need for _cat, mod in need[name]})
 
 
 def find_tools():
@@ -272,8 +275,9 @@ class Counter(object):
     просто дивимося, скільки їх уже є. Раз на кілька секунд, окремою ниткою.
     """
 
-    def __init__(self, dirs, on_count, every=4.0):
-        self.dirs = list(dirs)
+    def __init__(self, items, probe, on_count, every=4.0):
+        self.items = list(items)
+        self.probe = probe
         self.on_count = on_count
         self.every = every
         self.stop = threading.Event()
@@ -281,11 +285,11 @@ class Counter(object):
         self.have = 0
 
     def count(self):
-        return sum(1 for d in self.dirs if os.path.isdir(d))
+        return sum(1 for it in self.items if self.probe(it))
 
     def tell(self):
         self.have = self.count()
-        self.on_count(self.have, len(self.dirs))
+        self.on_count(self.have, len(self.items))
 
     def run(self):
         while not self.stop.wait(self.every):
@@ -295,7 +299,7 @@ class Counter(object):
                 self.on_count(self.have, len(self.dirs))
 
     def __enter__(self):
-        if self.dirs:
+        if self.items:
             self.tell()
             self.thread = threading.Thread(target=self.run, daemon=True)
             self.thread.start()
@@ -305,7 +309,7 @@ class Counter(object):
         self.stop.set()
         if self.thread:
             self.thread.join(timeout=self.every + 1)
-        if self.dirs and self.count() != self.have:
+        if self.items and self.count() != self.have:
             self.tell()
         return False
 
@@ -349,7 +353,8 @@ def hhmm(seconds):
     return '%d хв' % m if m < 60 else '%d год %d хв' % (m // 60, m % 60)
 
 
-def install_lists(tools, need, skips, on_line, expected=(), on_count=None):
+def install_lists(tools, need, skips, on_line, payload_root='',
+                  mods_dir='', on_count=None):
     """Завантажити моди профілю. Це найдовша частина.
 
     Спершу `umo sync`: він бере з modding-openmw.com опис усього набору.
@@ -360,6 +365,9 @@ def install_lists(tools, need, skips, on_line, expected=(), on_count=None):
     umo = os.path.join(tools, 'umo.exe')
     began = time.time()
     said = [-1]
+    swap = renames(payload_root)
+    base = mods_dir.rstrip('\\')
+    items = mod_items(need, payload_root)
 
     def report(have, total):
         if on_count:
@@ -371,9 +379,11 @@ def install_lists(tools, need, skips, on_line, expected=(), on_count=None):
         on_line('Готово %d модів із %d (%d%%), минуло %s'
                 % (have, total, share, hhmm(time.time() - began)))
 
-    with Counter(expected, report):
+    with Counter(items, lambda it: find_mod(base, it[0], it[1]) is not None,
+                 report):
         for name in sorted(need):
-            subset = ','.join(sorted({mod for _cat, mod in need[name]}))
+            subset = ','.join(sorted({swap.get((name, mod), mod)
+                                      for _cat, mod in need[name]}))
             cmd = [umo, 'install', '--subset', subset]
             skip = skips.get(name)
             if skip:
@@ -555,6 +565,81 @@ def write_extras(payload_root, cfg_path, on_line):
         on_line('покладено %s' % name)
 
 
+def renames(payload_root):
+    """Моди, які в наборах перейменували. Складає make_recipe.py."""
+    p = os.path.join(recipe_dir(payload_root), 'renames.txt')
+    out = {}
+    if not os.path.isfile(p):
+        return out
+    for line in io.open(p, encoding='utf-8'):
+        parts = line.rstrip('\n').split('\t')
+        if len(parts) == 3:
+            out[(parts[0], parts[1])] = parts[2]
+    return out
+
+
+def find_mod(mods_dir, name, mod):
+    """Де насправді лежить цей мод. Категорію не вгадуємо, а шукаємо.
+
+    umo кладе мод у <набір>/<категорія>/<тека>, і категорію бере зі своїх
+    нинішніх даних. Modding-OpenMW їх час від часу перетасовує, тож шлях,
+    знятий колись, сьогодні вказує в порожнечу. Тека мода зберігає назву,
+    тому шукаємо саме її.
+    """
+    root = os.path.join(mods_dir, name)
+    try:
+        cats = os.listdir(root)
+    except OSError:
+        return None
+    for cat in cats:
+        here = os.path.join(root, cat, mod)
+        if os.path.isdir(here):
+            return here
+    return None
+
+
+def relocate(text, mods_dir, payload_root, on_line):
+    """Полагодити ті шляхи профілю, які вказують не туди.
+
+    Робимо це перед записом: інакше сто з гаком модів просто не потрапили б
+    у гру, хоч і стоять на диску.
+    """
+    swap = renames(payload_root)
+    base = mods_dir.rstrip('\\')
+    fixed = gone = 0
+    out = []
+    for line in text.splitlines():
+        s = line.strip()
+        if not (s.startswith('data=') and s[5:].strip().strip('"')
+                .lower().startswith(base.lower() + os.sep)):
+            out.append(line)
+            continue
+        path = s[5:].strip().strip('"')
+        parts = path[len(base) + 1:].split(os.sep)
+        if len(parts) < 3 or os.path.isdir(path):
+            out.append(line)
+            continue
+        name, mod, rest = parts[0], parts[2], parts[3:]
+        if mod == 'MOMWToolsPack':
+            out.append(line)             # цю теку зробимо самі, трохи згодом
+            continue
+        mod = swap.get((name, mod), mod)
+        here = find_mod(base, name, mod)
+        if here is None:
+            gone += 1
+            out.append(line)
+            continue
+        out.append('data="%s"' % os.path.join(here, *rest))
+        fixed += 1
+
+    if fixed:
+        on_line('Теки %d модів у наборах перемістилися, шляхи виправлено.'
+                % fixed)
+    if gone:
+        on_line('Тек %d модів немає: у наборах їх уже не роздають.' % gone)
+    return '\n'.join(out) + '\n'
+
+
 def data_dirs(text):
     """Теки даних профілю, у порядку профілю."""
     out = []
@@ -635,6 +720,7 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line,
     os.makedirs(os.path.dirname(cfg_path), exist_ok=True)
 
     write_extras(payload_root, cfg_path, on_line)
+    text = relocate(text, mods_dir, payload_root, on_line)
 
     out_dir = tools_out(text)
     failed = set(MADE)
