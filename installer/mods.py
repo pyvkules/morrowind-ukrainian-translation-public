@@ -112,6 +112,21 @@ def umo_dirs(tools):
     return None
 
 
+NEW_CONSOLE = 0x00000010      # CREATE_NEW_CONSOLE: umo потрібне своє вікно
+
+
+def setup_umo(tools):
+    """Перше налаштування umo: вхід у Nexus і тека для модів.
+
+    Відповісти на це може тільки людина, а з нашого вікна показати ті
+    питання нема як. Тож даємо umo власне вікно консолі й чекаємо, поки
+    вона закриється. Теку з tes3cmd він знайде сам, бо той лежить поруч.
+    """
+    p = subprocess.Popen([os.path.join(tools, 'umo.exe'), 'setup'],
+                         cwd=tools, creationflags=NEW_CONSOLE)
+    return p.wait()
+
+
 # Рамки й кольори rich: у журналі з них користі немає.
 ANSI = re.compile(r'\x1b\[[0-9;?]*[ -/]*[@-~]')
 FRAME = re.compile('[\u2500-\u257f]+')
