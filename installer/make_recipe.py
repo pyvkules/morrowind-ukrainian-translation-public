@@ -93,7 +93,39 @@ def main():
     print('  викинуто наших рядків: %d' % dropped)
 
     write_skips(mods, out)
+    write_extras(os.path.dirname(src))
     return 0
+
+
+# Що в settings.cfg належить цій машині й цій людині, а не профілю.
+PERSONAL = ('resolution x', 'resolution y', 'window mode', 'sfx volume',
+            'music volume', 'master volume', 'voice volume', 'character',
+            'camera sensitivity', 'screenshot format', 'fullscreen')
+
+EXTRAS = ('settings.cfg', 'shaders.yaml', 'lightconfig.toml')
+
+
+def write_extras(profile_dir):
+    """Решта файлів профілю: від них залежить, як гра виглядає.
+
+    openmw.cfg каже, які моди вантажити, а от тіні, післяобробка, трава,
+    видноколо й мова меню лежать у settings.cfg. Без нього моди стоять, а
+    гра має інший вигляд. Роздільність екрана й гучність не беремо: це вже
+    не профіль, а конкретна машина.
+    """
+    for name in EXTRAS:
+        src = os.path.join(profile_dir, name)
+        if not os.path.isfile(src):
+            print('  %s у профілі немає' % name)
+            continue
+        text = io.open(src, encoding='utf-8', errors='replace').read()
+        if name == 'settings.cfg':
+            kept = [l for l in text.splitlines()
+                    if not any(l.strip().startswith(k) for k in PERSONAL)]
+            text = '\n'.join(kept) + '\n'
+        dest = os.path.join(HERE, '..', 'recipe', name)
+        io.open(dest, 'w', encoding='utf-8', newline='\n').write(text)
+        print('  %s: %d рядків' % (name, text.count('\n')))
 
 
 def profile_mods(lines):
@@ -108,7 +140,9 @@ def profile_mods(lines):
         if not (s.startswith('data=') and MODS in s):
             continue
         parts = [p for p in s.split(MODS, 1)[1].strip('"').split(os.sep) if p]
-        if len(parts) >= 3:
+        # MOMWToolsPack сюди не рахуємо: його вміст роблять інструменти,
+        # качати там нема чого.
+        if len(parts) >= 3 and parts[2] != 'MOMWToolsPack':
             need.setdefault(parts[0], set()).add((parts[1], parts[2]))
     return need
 

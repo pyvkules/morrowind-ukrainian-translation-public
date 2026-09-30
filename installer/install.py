@@ -707,7 +707,8 @@ def install_modlist(cfg):
         step('моди', 'fail')
         return 1
 
-    if not modlist.write_profile(payload_root(), cfg, mods_dir, game, out):
+    if not modlist.write_profile(payload_root(), cfg, mods_dir, game, out,
+                                 tools):
         step('моди', 'fail')
         return 1
     step('моди', 'ok')

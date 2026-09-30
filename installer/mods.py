@@ -64,7 +64,9 @@ def profile_mods(payload_root):
         if not (s.startswith('data=') and MODS in s):
             continue
         parts = [p for p in s.split(MODS, 1)[1].strip('"').split('\\') if p]
-        if len(parts) >= 3:
+        # MOMWToolsPack на Nexus немає: цю теку наповнюють інструменти,
+        # і просити її в umo означало б шукати те, чого не існує.
+        if len(parts) >= 3 and parts[2] != 'MOMWToolsPack':
             need.setdefault(parts[0], set()).add((parts[1], parts[2]))
     return need
 
@@ -388,8 +390,145 @@ def install_lists(tools, need, skips, on_line, expected=(), on_count=None):
     return True
 
 
-def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line):
-    """Скласти openmw.cfg із рецепта, підставивши шляхи цієї машини."""
+# Плагіни, яких немає на Nexus: їх складають із самого порядку завантаження.
+# Порядок тут той, у якому їх треба робити, і він не випадковий: злиття має
+# пройти до трави, бо інакше вони посилалися б одне на одне по колу.
+DELTA = 'delta-merged.omwaddon'
+GROUND = 'groundcover.omwaddon'
+NO_GROUND = 'deleted_groundcover.omwaddon'
+LIGHTS = 'S3LightFixes.omwaddon'
+MADE = (DELTA, GROUND, NO_GROUND, LIGHTS)
+
+# Файли профілю поза openmw.cfg. Без них моди стоять, але гра має інший
+# вигляд: без тіней, без післяобробки, з коротким видноколом.
+EXTRAS = ('settings.cfg', 'shaders.yaml', 'lightconfig.toml')
+
+
+def made_name(line):
+    """Яку саме згенеровану річ називає цей рядок. Порожньо, якщо жодну."""
+    s = line.strip()
+    for tag in ('content=', 'groundcover='):
+        if s.startswith(tag):
+            name = s[len(tag):].strip()
+            if name in MADE:
+                return name
+    return ''
+
+
+def cfg_without(text, names):
+    """Той самий профіль, але без рядків про ці згенеровані файли."""
+    return '\n'.join(l for l in text.splitlines()
+                      if made_name(l) not in names) + '\n'
+
+
+def tools_out(text):
+    """Куди профіль чекає згенеровані плагіни."""
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith('data=') and s.rstrip('"').endswith('MOMWToolsPack'):
+            return s[5:].strip().strip('"')
+    return None
+
+
+def run_tool(cmd, cwd, on_line):
+    """Один інструмент. Довгий, тож переказуємо його рядки в журнал.
+
+    Робоча тека важить: groundcoverify кладе свій доробок саме туди.
+    """
+    try:
+        return _run_in(cmd, cwd, on_line)
+    except OSError as e:
+        on_line('  не запустився: %s' % e)
+        return 1
+
+
+def _run_in(cmd, cwd, on_line):
+    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL,
+                         bufsize=0, creationflags=NO_WINDOW)
+    buf = b''
+    last = ''
+    try:
+        while True:
+            chunk = p.stdout.read(4096)
+            if not chunk:
+                break
+            buf += chunk
+            parts = re.split(b'[\r\n]', buf)
+            buf = parts.pop()
+            for part in parts:
+                line = tidy(part.decode('utf-8', 'replace'))
+                if line and line != last:
+                    last = line
+                    on_line('  ' + line)
+    finally:
+        p.stdout.close()
+        p.wait()
+    return p.returncode
+
+
+def make_plugins(tools, cfg_path, text, out_dir, on_line):
+    """Зробити злитий плагін, траву і світло.
+
+    Кожен інструмент читає openmw.cfg, тож перед його запуском у файлі не
+    має бути того, що він аж тепер зробить. Тому профіль переписуємо тричі,
+    щоразу додаючи вже готове.
+    """
+    os.makedirs(out_dir, exist_ok=True)
+    left = set(MADE)
+
+    def stage():
+        io.open(cfg_path, 'w', encoding='utf-8',
+                newline='\n').write(cfg_without(text, left))
+
+    on_line('Зливаю плагіни в один. Це кілька хвилин.')
+    stage()
+    run_tool([os.path.join(tools, 'delta_plugin.exe'), '-q',
+              '-c', cfg_path, 'merge', '--ignore', NO_GROUND,
+              os.path.join(out_dir, DELTA)], out_dir, on_line)
+    left.discard(DELTA)
+
+    on_line('Роблю траву.')
+    stage()
+    run_tool([os.path.join(tools, 'groundcoverify.exe'),
+              '--openmw-config', cfg_path,
+              '--delta-plugin-exe', os.path.join(tools, 'delta_plugin.exe')],
+             out_dir, on_line)
+    left.discard(GROUND)
+    left.discard(NO_GROUND)
+
+    on_line('Правлю світло.')
+    stage()
+    run_tool([os.path.join(tools, 's3lightfixes.exe'), '-n',
+              '-c', cfg_path, '-o', out_dir], out_dir, on_line)
+    left.discard(LIGHTS)
+
+    have = [n for n in MADE if os.path.isfile(os.path.join(out_dir, n))]
+    for name in MADE:
+        if name not in have:
+            on_line('Не вийшло зробити %s, рядок про нього прибрано.' % name)
+    return set(MADE) - set(have)
+
+
+def write_extras(payload_root, cfg_path, on_line):
+    """Покласти решту налаштувань профілю поруч із openmw.cfg."""
+    here = os.path.dirname(cfg_path)
+    for name in EXTRAS:
+        src = os.path.join(recipe_dir(payload_root), name)
+        if not os.path.isfile(src):
+            continue
+        dest = os.path.join(here, name)
+        if os.path.isfile(dest):
+            backup = dest + '.before-modlist'
+            if not os.path.exists(backup):
+                io.open(backup, 'wb').write(io.open(dest, 'rb').read())
+        io.open(dest, 'wb').write(io.open(src, 'rb').read())
+        on_line('покладено %s' % name)
+
+
+def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line,
+                  tools=None):
+    """Скласти профіль цієї машини: openmw.cfg, згенеровані плагіни, решта."""
     src = os.path.join(recipe_dir(payload_root), 'profile.cfg')
     if not os.path.isfile(src):
         on_line('Рецепта профілю немає.')
@@ -403,7 +542,7 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line):
         s = line.strip()
         if s.startswith('data='):
             d = s[5:].strip().strip('"')
-            if not os.path.isdir(d):
+            if not os.path.isdir(d) and not d.endswith('MOMWToolsPack'):
                 missing += 1
     if missing:
         on_line('Увага: %d тек із профілю ще немає, якісь моди не '
@@ -417,6 +556,16 @@ def write_profile(payload_root, cfg_path, mods_dir, game_dir, on_line):
             on_line('стару конфігурацію збережено як %s'
                     % os.path.basename(backup))
     os.makedirs(os.path.dirname(cfg_path), exist_ok=True)
-    io.open(cfg_path, 'w', encoding='utf-8', newline='\n').write(text)
+
+    write_extras(payload_root, cfg_path, on_line)
+
+    out_dir = tools_out(text)
+    failed = set(MADE)
+    if tools and out_dir:
+        failed = make_plugins(tools, cfg_path, text, out_dir, on_line)
+    elif out_dir:
+        on_line('Інструментів немає, згенерованих плагінів не буде.')
+    io.open(cfg_path, 'w', encoding='utf-8',
+            newline='\n').write(cfg_without(text, failed))
     on_line('профіль записано: %s' % cfg_path)
     return True
