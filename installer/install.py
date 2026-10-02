@@ -191,6 +191,20 @@ def arg(flag, default=None):
 
 # --- пошук гри ---------------------------------------------------------------
 
+def visible(path):
+    """Чи видно цей шлях встановлювачеві.
+
+    Пісочниця ставить UKR_ONLY_UNDER, бо на машині випробувача справжній
+    OpenMW однаково стоїть, і випробування натикалося на нього замість
+    порожньої системи. У людини цієї змінної немає, тож видно все.
+    """
+    only = os.environ.get('UKR_ONLY_UNDER')
+    if not only:
+        return True
+    root = os.path.normcase(os.path.abspath(only)).rstrip(os.sep)
+    return os.path.normcase(os.path.abspath(path)).startswith(root + os.sep)
+
+
 def cfg_candidates():
     """Де зазвичай лежить openmw.cfg, від найімовірнішого."""
     seen, found = set(), []
@@ -202,7 +216,7 @@ def cfg_candidates():
     ]
     for root in roots:
         p = os.path.join(root, 'openmw.cfg')
-        if os.path.isfile(p) and p.lower() not in seen:
+        if os.path.isfile(p) and visible(p) and p.lower() not in seen:
             seen.add(p.lower())
             found.append(p)
     # momw-configurator тримає по теці на модліст поруч із рушієм; там і профілі
@@ -210,7 +224,7 @@ def cfg_candidates():
         base = os.path.dirname(exe)
         for sub in [base] + [os.path.join(base, d) for d in safe_listdir(base)]:
             p = os.path.join(sub, 'openmw.cfg')
-            if os.path.isfile(p) and p.lower() not in seen:
+            if os.path.isfile(p) and visible(p) and p.lower() not in seen:
                 seen.add(p.lower())
                 found.append(p)
     return found
@@ -237,7 +251,7 @@ def openmw_exes():
                   r'%s:\Games\OpenMW' % drive]
     for r in roots:
         p = os.path.join(r, 'openmw.exe')
-        if os.path.isfile(p):
+        if os.path.isfile(p) and visible(p):
             out_.append(p)
     return out_
 

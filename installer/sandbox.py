@@ -66,6 +66,9 @@ def paths(home):
         # процесові наново з реєстру, хоч що передай. Тому встановлювач
         # дивиться ще й на власну UKR_PROGRAMFILES.
         'UKR_PROGRAMFILES': os.path.join(home, 'Program Files'),
+        # А цією він погоджується не бачити справжній OpenMW: той стоїть
+        # на диску випробувача, і без неї випробування чіплялося за нього.
+        'UKR_ONLY_UNDER': home,
     }
 
 
@@ -180,7 +183,8 @@ def cmd_run(args):
         cmd = [target]
     else:
         cmd = [sys.executable, os.path.join(HERE, 'install.py')]
-    cmd += args.rest
+    rest = args.rest[1:] if args.rest[:1] == ['--'] else args.rest
+    cmd += rest
     print('Пісочниця: %s' % home)
     print('Запускаю: %s' % ' '.join(cmd))
     return subprocess.run(cmd, env=env(home), cwd=home).returncode

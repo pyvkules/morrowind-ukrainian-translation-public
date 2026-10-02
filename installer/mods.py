@@ -103,10 +103,29 @@ def mod_items(need, payload_root):
                    for name in need for _cat, mod in need[name]})
 
 
+def tools_from_umo():
+    """Тека набору з налаштувань umo.
+
+    Хто ставив umo сам, той уже вказав йому tes3cmd, а той лежить усередині
+    набору. Це єдиний спосіб знайти чужу теку, не вгадуючи шляхів.
+    """
+    try:
+        with io.open(umo_config(), encoding='utf-8') as f:
+            where = json.load(f).get('TES3CMD') or ''
+    except (OSError, ValueError):
+        return None
+    d = os.path.dirname(where)
+    return d if d and all(os.path.isfile(os.path.join(d, t))
+                          for t in TOOLS) else None
+
+
 def find_tools():
     """Де лежить momw-tools-pack. Повертає теку або None."""
     if all(os.path.isfile(os.path.join(PACK_HOME, t)) for t in TOOLS):
         return PACK_HOME
+    mine = tools_from_umo()
+    if mine:
+        return mine
     # Поруч із собою, у поточній теці й у домівці. Шляхів із власної машини
     # тут бути не повинно: в людини їх немає, а пісочниця через них бачила
     # справжні інструменти замість порожньої системи.
