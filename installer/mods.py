@@ -107,8 +107,11 @@ def find_tools():
     """Де лежить momw-tools-pack. Повертає теку або None."""
     if all(os.path.isfile(os.path.join(PACK_HOME, t)) for t in TOOLS):
         return PACK_HOME
+    # Поруч із собою, у поточній теці й у домівці. Шляхів із власної машини
+    # тут бути не повинно: в людини їх немає, а пісочниця через них бачила
+    # справжні інструменти замість порожньої системи.
     for base in (os.path.dirname(HERE), os.getcwd(),
-                 os.path.expanduser('~'), r'C:\games', r'E:\Morrowind'):
+                 os.path.expanduser('~')):
         for sub in ('', 'momw-tools-pack-windows', 'momw-tools-pack',
                     'tools', 'Downloads'):
             d = os.path.join(base, sub) if sub else base
@@ -197,22 +200,35 @@ def engine_download(url, dest, size, on_progress):
     return engine.download(url, dest, size, on_progress)
 
 
-def umo_dirs(tools):
-    """Куди umo складає моди: питаємо його самого, а не вгадуємо."""
+def umo_config():
+    """Файл, у якому umo тримає свої налаштування.
+
+    Шлях сталий: umo складає його з LOCALAPPDATA і сам же друкує в `umo
+    info`. Поруч із текою модів там лежить ключ Nexus, тож беремо з файла
+    тільки теку й більше нічого.
+    """
+    base = os.environ.get('LOCALAPPDATA') or os.path.expanduser('~')
+    return os.path.join(base, 'umomwd', 'umomwd', 'config.json')
+
+
+def umo_dirs():
+    """Куди umo складає моди. Читаємо його config.json, а не питаємо його.
+
+    Питати через `umo info` не можна. На неналаштованій машині ця команда
+    нічого не доповідає, а сама починає налаштування: відкриває браузер на
+    вході в Nexus, а тоді чекає відповіді на наступне питання. Відповісти
+    нема де, бо вікна в неї немає, а вивід ми забираємо в трубу. Убити її
+    теж замало: браузер, якого вона запустила, успадкував ту саму трубу й
+    тримає її відкритою, тож читання не кінчається ніколи і тайм-аут не
+    рятує. Саме на цьому встановлювач і завмирав після рядка «Інструменти».
+    """
     try:
-        r = subprocess.run([os.path.join(tools, 'umo.exe'), 'info'],
-                           capture_output=True, text=True, timeout=180,
-                           encoding='utf-8', errors='replace')
-    except (OSError, subprocess.SubprocessError):
+        with io.open(umo_config(), encoding='utf-8') as f:
+            cfg = json.load(f)
+    except (OSError, ValueError):
         return None
-    # `umo info` друкує рядок «basepath dir: <шлях>» — саме туди він і
-    # складає моди. У різних людей тека різна, тож питаємо, а не гадаємо.
-    for line in (r.stdout or '').splitlines():
-        if 'basepath' in line.lower() and ':' in line:
-            path = line.split(':', 1)[1].strip()
-            if len(path) > 2 and path[1] == ':':
-                return path
-    return None
+    path = (cfg.get('BASEPATH') or '').strip()
+    return path if len(path) > 2 and path[1] == ':' else None
 
 
 NEW_CONSOLE = 0x00000010      # CREATE_NEW_CONSOLE: umo потрібне своє вікно

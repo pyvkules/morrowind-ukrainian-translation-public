@@ -614,8 +614,11 @@ def install_engine():
         step('рушій', 'fail')
         return None
 
-    target = os.path.join(os.environ.get('PROGRAMFILES', r'C:\Program Files'),
-                          'OpenMW')
+    # UKR_PROGRAMFILES потрібен пісочниці: сам PROGRAMFILES підмінити не
+    # можна, бо Windows виставляє його кожному процесові наново.
+    base = (os.environ.get('UKR_PROGRAMFILES')
+            or os.environ.get('PROGRAMFILES') or r'C:\Program Files')
+    target = os.path.join(base, 'OpenMW')
     out('Ставлю у %s' % target)
     try:
         code = engine.silent_install(tmp, target)
@@ -668,7 +671,7 @@ def install_modlist(cfg):
         step('моди', 'fail')
         return 1
 
-    mods_dir = modlist.umo_dirs(tools)
+    mods_dir = modlist.umo_dirs()
     if not mods_dir:
         out('umo ще не налаштований. Зараз він відкриє власне вікно.')
         out('Спершу увійди в Nexus у браузері, тоді вкажи теку для модів.')
@@ -678,7 +681,7 @@ def install_modlist(cfg):
                 % (where, free / 1073741824.0))
         out('З рештою питань погоджуйся.')
         modlist.setup_umo(tools)
-        mods_dir = modlist.umo_dirs(tools)
+        mods_dir = modlist.umo_dirs()
     if not mods_dir:
         out('umo так і не налаштувався.')
         out('Запусти umo.exe setup у теці з інструментами і пройди питання.')

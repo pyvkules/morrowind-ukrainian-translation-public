@@ -27,6 +27,8 @@ import re
 import subprocess
 import urllib.request
 
+NO_WINDOW = 0x08000000        # CREATE_NO_WINDOW: чорне вікно не треба
+
 RELEASES = 'https://api.github.com/repos/OpenMW/openmw/releases/latest'
 ASSET = re.compile(r'^OpenMW-[\d.]+-Windows-x64\.exe$', re.IGNORECASE)
 MASTERS = ('Morrowind.esm', 'Tribunal.esm', 'Bloodmoon.esm')
@@ -149,10 +151,18 @@ def bootstrap_config(engine_exe, data_files, cfg_path, on_line=None):
     ini = morrowind_ini(data_files)
     importer = os.path.join(engine_dir, 'openmw-iniimporter.exe')
     if ini and os.path.isfile(importer):
-        r = subprocess.run([importer, '-i', ini, '-c', cfg_path, '--game-files'],
-                           capture_output=True)
+        # Закритий вхід і строк: інакше чуже вікно з питанням зупинило б
+        # усе встановлення намертво, а побачити його нема де.
+        try:
+            r = subprocess.run([importer, '-i', ini, '-c', cfg_path,
+                                '--game-files'], capture_output=True,
+                               stdin=subprocess.DEVNULL, timeout=180,
+                               creationflags=NO_WINDOW)
+            ok = r.returncode == 0
+        except (OSError, subprocess.SubprocessError):
+            ok = False
         say('перенесено налаштування з Morrowind.ini'
-            if r.returncode == 0 else 'Morrowind.ini перенести не вдалося')
+            if ok else 'Morrowind.ini перенести не вдалося')
 
     lines = io.open(cfg_path, encoding='utf-8', errors='replace').read().splitlines()
     have_data = any(l.strip().startswith('data=') for l in lines)
