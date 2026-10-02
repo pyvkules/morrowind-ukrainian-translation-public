@@ -698,7 +698,10 @@ def install_modlist(cfg):
         mods_dir = modlist.umo_dirs()
     if not mods_dir:
         out('umo так і не налаштувався.')
-        out('Запусти umo.exe setup у теці з інструментами і пройди питання.')
+        # Саме reconfig, а не setup: setup реєструє umo обробником посилань
+        # nxm, а питання задає лише принагідно, коли налаштувань ще немає.
+        out('Запусти umo.exe reconfig у теці з інструментами '
+            'і пройди питання.')
         step('моди', 'fail')
         return 1
     out('Моди підуть у %s' % mods_dir)
