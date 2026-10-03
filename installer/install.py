@@ -440,6 +440,13 @@ def engine_log(cfg_path):
     Найцінніше джерело, яке в нас є: рушій пише туди те, чого з конфігурації
     гравця не видно. Весь ланцюжок файлів, теку ресурсів, які шрифти він
     насправді вантажив і яким кодуванням читав текст.
+
+    Коли гравець скаржиться, за цими трьома рядками видно все:
+
+        Using Cyrillic font encoding.      кодування взялося
+        Using default (English) font ...   текст читається як win1252
+        Preferred locales: gmst uk en      мова меню взялася
+        Loading font file <ім'я>           оцей шрифт і треба патчити
     """
     for d in [os.path.dirname(cfg_path)] + user_cfg_dirs():
         p = os.path.join(d, 'openmw.log')
