@@ -15,7 +15,11 @@
 3. запускаємо звичайну збірку (`build.py`) — вона читає **чисті** плагіни
    гравця й пише поруч наші копії з українським текстом;
 4. дописуємо в `openmw.cfg` рядок `data=` **останнім** (виграє останній) і
-   `encoding=win1251`, без якого рушій прочитає кирилицю як мотлох.
+   `encoding=win1251`, без якого рушій прочитає кирилицю як мотлох. Це саме
+   кодування ставимо в усіх файлах ланцюжка: `data=` з них складаються, а
+   `encoding=` одне на гру, і інший файл може перекрити наш;
+5. дописуємо в `settings.cfg` рядок `preferred locales = uk, en` - це мова
+   підписів самого рушія, яку він бере з `l10n/`, а не з гри.
 
 Оригінальний Morrowind.exe
 --------------------------
@@ -205,15 +209,20 @@ def visible(path):
     return os.path.normcase(os.path.abspath(path)).startswith(root + os.sep)
 
 
-def cfg_candidates():
-    """Де зазвичай лежить openmw.cfg, від найімовірнішого."""
-    seen, found = set(), []
+def user_cfg_dirs():
+    """Теки, де OpenMW тримає конфігурацію самого гравця."""
     home = os.path.expanduser('~')
-    roots = [
+    return [
         os.path.join(home, 'Documents', 'My Games', 'OpenMW'),
         os.path.join(os.environ.get('LOCALAPPDATA', ''), 'openmw'),
         os.path.join(os.environ.get('APPDATA', ''), 'openmw'),
     ]
+
+
+def cfg_candidates():
+    """Де зазвичай лежить openmw.cfg, від найімовірнішого."""
+    seen, found = set(), []
+    roots = user_cfg_dirs()
     for root in roots:
         p = os.path.join(root, 'openmw.cfg')
         if os.path.isfile(p) and visible(p) and p.lower() not in seen:
@@ -352,6 +361,14 @@ def find_master(dirs):
 
 # --- правка openmw.cfg -------------------------------------------------------
 
+def backup_once(path, changed):
+    """Копія файлу перед першою нашою правкою. Повторний запуск її не чіпає."""
+    backup = path + '.ukr-backup'
+    if os.path.exists(path) and not os.path.exists(backup):
+        shutil.copy2(path, backup)
+        changed.append('збережено копію ' + os.path.basename(backup))
+
+
 def rewrite_cfg(cfg_path, mod_dir, remove=False):
     """Прописати (або прибрати) нашу теку і кодування. Повертає, що змінилось."""
     lines = read_cfg(cfg_path)
@@ -383,12 +400,138 @@ def rewrite_cfg(cfg_path, mod_dir, remove=False):
         kept.append('data="%s"' % mod_dir)     # останній виграє
         changed.append('дописано data= останнім рядком')
 
-    backup = cfg_path + '.ukr-backup'
-    if not os.path.exists(backup):
-        shutil.copy2(cfg_path, backup)
-        changed.append('збережено копію ' + os.path.basename(backup))
+    backup_once(cfg_path, changed)
     with io.open(cfg_path, 'w', encoding='utf-8', newline='\n') as f:
         f.write('\n'.join(kept) + '\n')
+    return changed
+
+
+def chain_cfgs(cfg_path):
+    """Усі openmw.cfg, які рушій складає в одну конфігурацію.
+
+    Біля exe зазвичай лежить коротенький файл із `config="?userconfig?"`, а
+    решта - у теках гравця; momw-configurator додає ще по файлу на профіль.
+    Ідемо за рядками `config=` і повертаємо шляхи без повторів, починаючи з
+    нашого.
+    """
+    seen, queue, found = set(), [cfg_path], []
+    while queue:
+        p = queue.pop(0)
+        key = os.path.normcase(os.path.abspath(p))
+        if key in seen or not os.path.isfile(p):
+            continue
+        seen.add(key)
+        found.append(p)
+        for ln in read_cfg(p):
+            s = ln.strip()
+            if not s.startswith('config='):
+                continue
+            val = s[len('config='):].strip().strip('"')
+            roots = user_cfg_dirs() if '?userconfig?' in val else [val]
+            for root in roots:
+                if not os.path.isabs(root):
+                    root = os.path.join(os.path.dirname(p), root)
+                queue.append(os.path.join(root, 'openmw.cfg'))
+    return found
+
+
+def sync_chain_encoding(cfg_path):
+    """Звести `encoding=` в усьому ланцюжку до win1251.
+
+    `data=` з різних файлів складаються, а `encoding=` одне на всю гру, і хто
+    кого перекриє, залежить від порядку читання. Через це бувало так: теку з
+    перекладом рушій бачив, а текст усе одно читав як win1252 і замість
+    кирилиці малював «Íàëàøò.» - бо win1252 стояло в іншому файлі ланцюжка.
+    Тому ставимо скрізь однакове значення, і порядок більше не важить.
+
+    Нові рядки нікуди не дописуємо: чіпаємо лише ті файли, де `encoding=` уже
+    є і де воно інше.
+    """
+    changed = []
+    for p in chain_cfgs(cfg_path)[1:]:
+        lines = read_cfg(p)
+        hit = [i for i, l in enumerate(lines)
+               if l.strip().startswith('encoding=')
+               and l.strip() != ENCODING_LINE]
+        if not hit:
+            continue
+        for i in hit:
+            lines[i] = ENCODING_LINE
+        backup_once(p, changed)
+        with io.open(p, 'w', encoding='utf-8', newline='\n') as f:
+            f.write('\n'.join(lines) + '\n')
+        changed.append('виправлено encoding у %s' % p)
+    return changed
+
+
+# --- мова меню рушія ---------------------------------------------------------
+
+LOCALE_KEY = 'preferred locales'
+LOCALE_LINE = '%s = uk, en' % LOCALE_KEY
+
+
+def settings_files(cfg_path):
+    """Де лежать settings.cfg цієї установки.
+
+    Поруч із кожним openmw.cfg ланцюжка. Якщо немає жодного (гру ще жодного
+    разу не запускали), створимо у теці гравця - рушій читає саме звідти.
+    """
+    found = [os.path.join(os.path.dirname(p), 'settings.cfg')
+             for p in chain_cfgs(cfg_path)]
+    have = [p for p in found if os.path.isfile(p)]
+    if have:
+        return have
+    for d in user_cfg_dirs():
+        if os.path.isdir(d):
+            return [os.path.join(d, 'settings.cfg')]
+    return []
+
+
+def set_locale(path, remove=False):
+    """Вписати мову меню в один settings.cfg. Повертає, що змінилось.
+
+    Підписи самого рушія (вкладки налаштувань, написи на кнопках) беруться не
+    з гри, а з `l10n/`, і мову для них задає саме цей рядок. Без нього гравець
+    із англійською Windows бачить гру українською, а меню рушія - англійською.
+    """
+    changed = []
+    lines = read_cfg(path) if os.path.isfile(path) else []
+    at = [i for i, l in enumerate(lines)
+          if l.strip().lower().startswith(LOCALE_KEY)]
+
+    if remove:
+        keep = [l for i, l in enumerate(lines)
+                if i not in at or l.strip() != LOCALE_LINE]
+        if len(keep) == len(lines):
+            return changed
+        lines = keep
+        note = 'прибрано мову меню з %s' % path
+    elif at:
+        if lines[at[0]].strip() == LOCALE_LINE:
+            return changed
+        for i in at:
+            lines[i] = LOCALE_LINE
+        note = 'виправлено мову меню у %s' % path
+    else:
+        head = [i for i, l in enumerate(lines) if l.strip() == '[General]']
+        if head:
+            lines.insert(head[0] + 1, LOCALE_LINE)
+        else:
+            lines += ['', '[General]', LOCALE_LINE]
+        note = 'додано мову меню у %s' % path
+
+    backup_once(path, changed)
+    changed.append(note)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with io.open(path, 'w', encoding='utf-8', newline='\n') as f:
+        f.write('\n'.join(lines) + '\n')
+    return changed
+
+
+def set_locale_everywhere(cfg_path, remove=False):
+    changed = []
+    for p in settings_files(cfg_path):
+        changed += set_locale(p, remove=remove)
     return changed
 
 
@@ -739,6 +882,8 @@ def uninstall_from(cfg):
     lines, dirs, master, mod_dir = describe(cfg)
     for note in rewrite_cfg(cfg, mod_dir, remove=True):
         out('  ' + note)
+    for note in set_locale_everywhere(cfg, remove=True):
+        out('  ' + note)
     if os.path.isfile(os.path.join(mod_dir, MARKER)):
         shutil.rmtree(mod_dir, ignore_errors=True)
         out('  вилучено теку перекладу')
@@ -843,6 +988,10 @@ def install_to(cfg):
     out()
     out('Прописую в openmw.cfg:')
     for note in rewrite_cfg(cfg, mod_dir):
+        out('  ' + note)
+    for note in sync_chain_encoding(cfg):
+        out('  ' + note)
+    for note in set_locale_everywhere(cfg):
         out('  ' + note)
 
     short, total = modlist_drift(lines)
