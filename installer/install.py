@@ -10,7 +10,10 @@
 
 Що робимо
 ---------
-1. шукаємо `openmw.cfg` — це і є опис того, яка гра і які моди стоять;
+1. шукаємо `openmw.cfg` — це і є опис того, яка гра і які моди стоять. Поруч
+   лежить `openmw.log`, і він знає більше за саму конфігурацію: весь ланцюжок
+   файлів, теку ресурсів та які шрифти рушій справді вантажить. Де журнал є,
+   віримо йому;
 2. розпаковуємо переклад у теку модів поруч із ним;
 3. запускаємо звичайну збірку (`build.py`) — вона читає **чисті** плагіни
    гравця й пише поруч наші копії з українським текстом;
@@ -278,24 +281,49 @@ def morrowind_exes():
     return out_
 
 
-def engine_font_dirs(cfg_path, lines):
+def engine_font_dirs(cfg_path):
     """Де лежать шрифти самого рушія.
 
-    Іти вгору від конфігурації не можна: типово вона в «Documents\My Games»,
-    а рушій — у Program Files. Тому беремо `resources=` з конфігурації, а як
-    його немає — теки, де знайшовся openmw.exe.
+    Іти вгору від конфігурації не можна: типово вона в «Documents\\My Games»,
+    а рушій деінде. Питаємо три джерела, від найнадійнішого.
+
+    Найслабше джерело - теки, де знайшовся openmw.exe: там ми лише вгадуємо
+    літеру диска, і гравець, що тримає рушій десь у себе, повз те вгадування
+    проходив, а шрифти лишалися без кирилиці. Далі `resources=` з будь-якого
+    файла ланцюжка: цей рядок лежить біля exe, і з теки гравця його не
+    видно. Найнадійніший - журнал, де рушій сам написав, звідки брав
+    ресурси.
+
+    Порядок саме такий, бо далі `font_steps` для однойменних шрифтів лишає
+    той, що з останньої теки. Хай це буде та, якій ми віримо найбільше: на
+    машині з двома рушіями інакше пропатчиться не той.
     """
     dirs = []
-    for ln in lines:
-        t = ln.strip()
-        if t.startswith('resources='):
-            d = t[len('resources='):].strip().strip('"')
-            if not os.path.isabs(d):
-                d = os.path.join(os.path.dirname(cfg_path), d)
-            dirs.append(os.path.join(d, 'vfs', 'fonts'))
     for exe in openmw_exes():
         dirs.append(os.path.join(os.path.dirname(exe), 'resources', 'vfs', 'fonts'))
-    return [d for d in dirs if os.path.isdir(d)]
+    for p in chain_cfgs(cfg_path):
+        for ln in read_cfg(p):
+            t = ln.strip()
+            if not t.startswith('resources='):
+                continue
+            d = t[len('resources='):].strip().strip('"')
+            if not os.path.isabs(d):
+                d = os.path.join(os.path.dirname(p), d)
+            dirs.append(os.path.join(d, 'vfs', 'fonts'))
+    log = engine_log(cfg_path)
+    if log:
+        for d in log_values(log, 'Adding data directory'):
+            if os.path.basename(d).lower() == 'vfs':
+                dirs.append(os.path.join(d, 'fonts'))
+
+    seen, uniq = set(), []
+    for d in dirs:
+        d = os.path.normpath(d)
+        key = os.path.normcase(os.path.abspath(d))
+        if key not in seen and os.path.isdir(d):
+            seen.add(key)
+            uniq.append(d)
+    return uniq
 
 
 def font_steps(cfg_path, lines):
@@ -310,7 +338,7 @@ def font_steps(cfg_path, lines):
     Порядок той самий, що у VFS: пізніша тека перекриває ранішу, тож для
     однойменних шрифтів лишаємо останній.
     """
-    dirs = engine_font_dirs(cfg_path, lines)
+    dirs = engine_font_dirs(cfg_path)
     for d in data_dirs(lines, cfg_path):
         cand = os.path.join(d, 'fonts')
         if os.path.isdir(cand):
@@ -406,6 +434,38 @@ def rewrite_cfg(cfg_path, mod_dir, remove=False):
     return changed
 
 
+def engine_log(cfg_path):
+    """Журнал останнього запуску гри.
+
+    Найцінніше джерело, яке в нас є: рушій пише туди те, чого з конфігурації
+    гравця не видно. Весь ланцюжок файлів, теку ресурсів, які шрифти він
+    насправді вантажив і яким кодуванням читав текст.
+    """
+    for d in [os.path.dirname(cfg_path)] + user_cfg_dirs():
+        p = os.path.join(d, 'openmw.log')
+        if os.path.isfile(p):
+            return p
+    return None
+
+
+def log_values(log_path, mark):
+    """Хвости рядків журналу після напису `mark`.
+
+    Рядок має вигляд `[10:42:40.752 *] Loading config file: E:\\...`, тож
+    спершу відрізаємо час. Шляхи рушій пише з перемішаними скісними.
+    """
+    found = []
+    for ln in read_cfg(log_path):
+        i = ln.find('] ')
+        if i < 0:
+            continue
+        s = ln[i + 2:].strip()
+        if s.startswith(mark):
+            found.append(os.path.normpath(
+                s[len(mark):].strip().replace('/', os.sep)))
+    return found
+
+
 def chain_cfgs(cfg_path):
     """Усі openmw.cfg, які рушій складає в одну конфігурацію.
 
@@ -413,8 +473,16 @@ def chain_cfgs(cfg_path):
     решта - у теках гравця; momw-configurator додає ще по файлу на профіль.
     Ідемо за рядками `config=` і повертаємо шляхи без повторів, починаючи з
     нашого.
+
+    Самих `config=` не досить. Посилання в них однобічне: від файла біля exe
+    до теки гравця. Якщо ми почали з теки гравця, нагору дороги немає, і
+    файла біля exe ми просто не побачимо. Тому питаємо ще й журнал: там
+    виписано всі файли, які рушій справді прочитав.
     """
     seen, queue, found = set(), [cfg_path], []
+    log = engine_log(cfg_path)
+    if log:
+        queue += log_values(log, 'Loading config file:')
     while queue:
         p = queue.pop(0)
         key = os.path.normcase(os.path.abspath(p))
@@ -473,12 +541,24 @@ LOCALE_LINE = '%s = uk, en' % LOCALE_KEY
 def settings_files(cfg_path):
     """Де лежать settings.cfg цієї установки.
 
-    Поруч із кожним openmw.cfg ланцюжка. Якщо немає жодного (гру ще жодного
-    разу не запускали), створимо у теці гравця - рушій читає саме звідти.
+    Спершу ті, що виписав журнал: це рівно ті файли, які рушій прочитав.
+    Решту добираємо поруч із кожним openmw.cfg ланцюжка. Якщо немає жодного
+    (гру ще жодного разу не запускали), створимо у теці гравця.
     """
-    found = [os.path.join(os.path.dirname(p), 'settings.cfg')
-             for p in chain_cfgs(cfg_path)]
-    have = [p for p in found if os.path.isfile(p)]
+    found = []
+    log = engine_log(cfg_path)
+    if log:
+        found += [p for p in log_values(log, 'Loading settings file:')
+                  if os.path.basename(p).lower() == 'settings.cfg']
+    found += [os.path.join(os.path.dirname(p), 'settings.cfg')
+              for p in chain_cfgs(cfg_path)]
+
+    seen, have = set(), []
+    for p in found:
+        key = os.path.normcase(os.path.abspath(p))
+        if key not in seen and os.path.isfile(p):
+            seen.add(key)
+            have.append(p)
     if have:
         return have
     for d in user_cfg_dirs():
@@ -983,6 +1063,12 @@ def install_to(cfg):
         out()
         out('! УВАГА: не вдалося пропатчити жодного шрифту.')
         out('! Замість українських літер будуть порожні місця.')
+        if not fonts:
+            # Найчастіше так буває, коли рушій стоїть у незвичному місці, а
+            # гру ще жодного разу не запускали. Один запуск лишає openmw.log,
+            # і з нього ми вже дізнаємось, де рушій, без усяких здогадів.
+            out('! Теки зі шрифтами рушія не видно. Запусти гру один раз,')
+            out('! а тоді постав переклад ще раз: буде з чого її знайти.')
         out('! Напиши про це автору перекладу разом із цим виводом.')
 
     out()
