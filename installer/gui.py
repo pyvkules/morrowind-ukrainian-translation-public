@@ -383,8 +383,9 @@ class App:
         self.refresh()
 
     def refresh(self):
-        game = install.game_data_dir()
+        game = install.game_data_dir(self.cfg())
         have = bool(self.cfgs)
+        engine = install.engine_here(self.cfg())
 
         if have and not self.path.cget('text'):
             self.path.configure(text=self.cfgs[0])
@@ -396,7 +397,7 @@ class App:
 
         has_tr = have and self.installed(self.cfg())
         self.cards[TR].set(have, 'потрібен OpenMW')
-        self.cards[ENGINE].set(bool(game) and not have, 'уже є')
+        self.cards[ENGINE].set(bool(game) and not engine, 'уже є')
         self.cards[MODS].set(bool(game), 'гру не знайдено')
         if has_tr:
             self.cards[TR].state_word('стоїть')

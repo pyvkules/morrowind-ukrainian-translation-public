@@ -39,6 +39,7 @@
 import io
 import json
 import os
+import re
 import runpy
 import shutil
 import sys
@@ -212,14 +213,59 @@ def visible(path):
     return os.path.normcase(os.path.abspath(path)).startswith(root + os.sep)
 
 
+def uniq_paths(paths, want_dir=False):
+    """Без повторів, зі збереженням порядку. Порівнюємо як Windows."""
+    seen, out_ = set(), []
+    for p in paths:
+        if not p:
+            continue
+        p = os.path.normpath(os.path.expandvars(p))
+        key = os.path.normcase(os.path.abspath(p))
+        if key in seen or (want_dir and not os.path.isdir(p)):
+            continue
+        seen.add(key)
+        out_.append(p)
+    return out_
+
+
+def documents_dirs():
+    """Куди Windows насправді показує «Документи».
+
+    Із увімкненим OneDrive тека переїжджає в нього, і `~/Documents` на
+    машині просто немає. Такий гравець для нас зникав цілком: ні
+    конфігурації, ні журналу, ні гри, самі здогади повз. Правильну відповідь
+    тримає реєстр, решта - запасні ходи.
+    """
+    home = os.path.expanduser('~')
+    found = []
+    try:
+        import winreg
+        with winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER,
+                r'Software\Microsoft\Windows\CurrentVersion\Explorer'
+                r'\Shell Folders') as k:
+            found.append(winreg.QueryValueEx(k, 'Personal')[0])
+    except (ImportError, OSError):
+        pass
+    found.append(os.path.join(home, 'Documents'))
+    for var in ('OneDrive', 'OneDriveConsumer', 'OneDriveCommercial'):
+        v = os.environ.get(var)
+        if v:
+            found.append(os.path.join(v, 'Documents'))
+    for name in safe_listdir(home):
+        if name.lower().startswith('onedrive'):
+            found.append(os.path.join(home, name, 'Documents'))
+    return uniq_paths(found, want_dir=True)
+
+
 def user_cfg_dirs():
     """Теки, де OpenMW тримає конфігурацію самого гравця."""
-    home = os.path.expanduser('~')
-    return [
-        os.path.join(home, 'Documents', 'My Games', 'OpenMW'),
-        os.path.join(os.environ.get('LOCALAPPDATA', ''), 'openmw'),
-        os.path.join(os.environ.get('APPDATA', ''), 'openmw'),
-    ]
+    dirs = [os.path.join(d, 'My Games', 'OpenMW') for d in documents_dirs()]
+    for var in ('LOCALAPPDATA', 'APPDATA'):
+        v = os.environ.get(var)
+        if v:
+            dirs.append(os.path.join(v, 'openmw'))
+    return uniq_paths(dirs)
 
 
 def cfg_candidates():
@@ -251,34 +297,91 @@ def safe_listdir(path):
 
 
 def openmw_exes():
-    """Де може стояти сам рушій."""
-    out_ = []
-    roots = []
+    """Де може стояти сам рушій.
+
+    Теку звуть то `OpenMW`, то `OpenMW 0.51.0`, тож перебираємо все, що
+    починається на openmw, замість двох точних імен. Це однаково здогади:
+    коли є журнал, слухаємо його.
+    """
+    parents = []
     for var in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA'):
         v = os.environ.get(var)
         if v:
-            roots += [os.path.join(v, 'OpenMW'), os.path.join(v, 'openmw')]
+            parents += [v, os.path.join(v, 'Programs')]
     for drive in 'CDEFGH':
-        roots += [r'%s:\Morrowind\OpenMW' % drive, r'%s:\OpenMW' % drive,
-                  r'%s:\Games\OpenMW' % drive]
-    for r in roots:
-        p = os.path.join(r, 'openmw.exe')
-        if os.path.isfile(p) and visible(p):
-            out_.append(p)
+        parents += ['%s:\\' % drive, r'%s:\Morrowind' % drive,
+                    r'%s:\Games' % drive]
+
+    out_ = []
+    for parent in uniq_paths(parents, want_dir=True):
+        for name in safe_listdir(parent):
+            if not name.lower().startswith('openmw'):
+                continue
+            p = os.path.join(parent, name, 'openmw.exe')
+            if os.path.isfile(p) and visible(p):
+                out_.append(p)
     return out_
+
+
+def steam_libraries():
+    """Теки бібліотек Steam.
+
+    Гравець ставить гру на будь-який диск і називає теку як заманеться:
+    трапився `D:\\GameS\\Steam`, і жоден наш здогад туди не влучив. Тому
+    питаємо сам Steam: шлях до нього лежить у реєстрі, а список бібліотек -
+    у `steamapps/libraryfolders.vdf`.
+    """
+    roots = []
+    try:
+        import winreg
+        for hive, path in (
+                (winreg.HKEY_CURRENT_USER, r'Software\Valve\Steam'),
+                (winreg.HKEY_LOCAL_MACHINE, r'SOFTWARE\Valve\Steam'),
+                (winreg.HKEY_LOCAL_MACHINE,
+                 r'SOFTWARE\WOW6432Node\Valve\Steam')):
+            try:
+                with winreg.OpenKey(hive, path) as k:
+                    for name in ('SteamPath', 'InstallPath'):
+                        try:
+                            roots.append(winreg.QueryValueEx(k, name)[0])
+                        except OSError:
+                            pass
+            except OSError:
+                pass
+    except ImportError:
+        pass
+
+    libs = []
+    for r in uniq_paths([p.replace('/', os.sep) for p in roots], want_dir=True):
+        libs.append(r)
+        vdf = os.path.join(r, 'steamapps', 'libraryfolders.vdf')
+        try:
+            with io.open(vdf, encoding='utf-8', errors='replace') as f:
+                text = f.read()
+        except OSError:
+            continue
+        # у vdf шляхи записані з подвоєними зворотними скісними
+        libs += [m.group(1).replace('\\\\', '\\')
+                 for m in re.finditer(r'"path"\s+"([^"]+)"', text)]
+    return uniq_paths(libs, want_dir=True)
 
 
 def morrowind_exes():
     """Оригінальний рушій — шукаємо, щоб пояснити, чому не підтримуємо."""
-    out_ = []
+    cand = []
+    for lib in steam_libraries():
+        cand.append(os.path.join(lib, 'steamapps', 'common', 'Morrowind',
+                                 'Morrowind.exe'))
     for drive in 'CDEFGH':
-        for p in (r'%s:\SteamLibrary\steamapps\common\Morrowind\Morrowind.exe' % drive,
-                  r'%s:\Program Files (x86)\Steam\steamapps\common\Morrowind\Morrowind.exe' % drive,
-                  r'%s:\Games\Morrowind\Morrowind.exe' % drive,
-                  r'%s:\Morrowind\Morrowind.exe' % drive):
-            if os.path.isfile(p):
-                out_.append(p)
-    return out_
+        cand += [
+            r'%s:\SteamLibrary\steamapps\common\Morrowind\Morrowind.exe' % drive,
+            r'%s:\Program Files (x86)\Steam\steamapps\common\Morrowind'
+            r'\Morrowind.exe' % drive,
+            r'%s:\GOG Games\Morrowind\Morrowind.exe' % drive,
+            r'%s:\Games\Morrowind\Morrowind.exe' % drive,
+            r'%s:\Morrowind\Morrowind.exe' % drive,
+        ]
+    return [p for p in uniq_paths(cand) if os.path.isfile(p)]
 
 
 def engine_font_dirs(cfg_path):
@@ -326,7 +429,7 @@ def engine_font_dirs(cfg_path):
     return uniq
 
 
-def font_steps(cfg_path, lines):
+def font_steps(cfg_path):
     """По кроку на кожен шрифт, який гра може малювати.
 
     Двох імен не досить: модпаки вживають і Pelagiad, і OMWAyembedt, а чиста
@@ -339,7 +442,7 @@ def font_steps(cfg_path, lines):
     однойменних шрифтів лишаємо останній.
     """
     dirs = engine_font_dirs(cfg_path)
-    for d in data_dirs(lines, cfg_path):
+    for d in all_data_dirs(cfg_path):
         cand = os.path.join(d, 'fonts')
         if os.path.isdir(cand):
             dirs.append(cand)
@@ -377,6 +480,22 @@ def data_dirs(lines, cfg_path):
                 d = os.path.join(os.path.dirname(cfg_path), d)
             dirs.append(d)
     return dirs
+
+
+def all_data_dirs(cfg_path):
+    """Усі теки даних, які бачить рушій: з кожного файла ланцюжка і з журналу.
+
+    Читати `data=` з одного файла мало. Гру зазвичай прописано в теці
+    гравця, а біля exe лежить сама лише `./resources/vfs-mw`. Хто відкривав
+    не той файл, діставав «Тут немає Morrowind.esm» при цілій грі.
+    """
+    dirs = []
+    for p in chain_cfgs(cfg_path):
+        dirs += data_dirs(read_cfg(p), p)
+    log = engine_log(cfg_path)
+    if log:
+        dirs += log_values(log, 'Adding data directory')
+    return uniq_paths(dirs, want_dir=True)
 
 
 def find_master(dirs):
@@ -788,7 +907,7 @@ def copy_payload(src, dst, allow=None):
 def describe(cfg):
     """Що ми знайшли за цією конфігурацією: гру, теки, куди ставитимемо."""
     lines = read_cfg(cfg)
-    dirs = data_dirs(lines, cfg)
+    dirs = all_data_dirs(cfg)
     master = find_master(dirs)
     mod_dir = os.path.join(os.path.dirname(cfg), 'mods', MOD_DIR_NAME)
     return lines, dirs, master, mod_dir
@@ -815,13 +934,31 @@ def why_no_openmw():
         'вручну.',
     ])
 
-def game_data_dir():
-    """Тека Data Files знайденої гри — те, що потрібно новому OpenMW."""
+def game_data_dir(cfg=None):
+    """Тека Data Files знайденої гри — те, що потрібно новому OpenMW.
+
+    Коли конфігурація вже є, гру краще питати в неї: там записано ту саму
+    теку, яку відкриває рушій, хай вона лежить де завгодно. Здогади по
+    дисках лишаються на випадок, коли OpenMW у людини ще немає.
+    """
+    if cfg and os.path.isfile(cfg):
+        master = find_master(all_data_dirs(cfg))
+        if master:
+            return os.path.dirname(master)
     for exe in morrowind_exes():
         d = os.path.join(os.path.dirname(exe), 'Data Files')
         if os.path.isfile(os.path.join(d, 'Morrowind.esm')):
             return d
     return None
+
+
+def engine_here(cfg=None):
+    """Чи видно сам рушій, а не лише покинуту після нього конфігурацію.
+
+    Гравець прибрав теку OpenMW, а ми далі казали «уже є»: конфігурація в
+    «My Games» нікуди не зникає, і ми вважали її за доказ.
+    """
+    return bool((cfg and engine_font_dirs(cfg)) or openmw_exes())
 
 
 def install_engine():
@@ -1042,7 +1179,7 @@ def install_to(cfg):
 
     out()
     out('Збираю. Це кілька хвилин.')
-    fonts = font_steps(cfg, lines)
+    fonts = font_steps(cfg)
     built, results = run_steps(mod_dir, fonts + STEPS)
     if not built:
         out()
