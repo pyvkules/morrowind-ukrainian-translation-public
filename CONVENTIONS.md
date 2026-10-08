@@ -771,6 +771,52 @@ py tools\books\propagate.py --apply    # перенести переклад н�
 
 ---
 
+
+## Звання фракцій
+
+Зведено в жовтні 2026, коли перекладалися озвучені привітання: там НПЦ
+гукає гравця саме званням, тож усі вони трапилися за один захід. Більшість
+уже стояла в корпусі, і бралося звідти, а не вигадувалося.
+
+| Дім і Легіон | | Храм і культ | | Гільдії |
+|---|---|---|---|---|
+| Hireling | **Найманець** | Layman | **мирянин** | Associate **Спільник** |
+| Retainer | **Слуга** | Novice | **новачок** | Apprentice **Учень** |
+| Oathman | **Присяжник** | Initiate | **послушник** | Journeyman **Підмайстер** |
+| Lawman | **Законник** | Acolyte | **аколіт** | Evoker **Чаклун** |
+| Kinsman | **Родич** | Adept | **адепт** | Conjurer **Заклинач** |
+| House Cousin | **Кузен Дому** | Curate | **курат** | Magician **Маг** |
+| House Brother | **Брат Дому** | Disciple | **учень** | Warlock **Чорнокнижник** |
+| House Father | **Отець Дому** | Diviner | **провісник** | Wizard **Чарівник** |
+| Councilman | **Радник** | Oracle | **оракул** | Master Wizard **Майстер-чарівник** |
+| Grandmaster | **Грандмайстер** | Invoker | **закликач** | Arch-Mage **Архімаг** |
+| Archmaster | **Архімайстер** | Theurgist | **теург** | Toad **Жабеня** |
+| Mouth | **Вуста** | Primate | **примат** | Wet Ear **Молокосос** |
+| Spellwright | **Заклинач** | Patriarch | **патріарх** | Footpad **Злодюжка** |
+| Magister | **Магістр** | | | Blackcap **Чорний Каптур** |
+| Archmagister | **Архімагістр** | | | Operative **Оперативник** |
+| Recruit | **Рекрут** | | | Bandit **Розбійник** |
+| Spearman | **Списник** | | | Captain **Отаман** |
+| Trooper | **Вояк** | | | Ringleader **Ватажок** |
+| Agent | **Агент** | | | Mastermind **Натхненник** |
+| Champion | **Поборник** | | | Master Thief **Майстер-злодій** |
+| Knight Errant | **мандрівний лицар** | | | Swordsman **Мечник** |
+| Knight Bachelor | **лицар-бакалавр** | | | Protector **Захисник** |
+| Knight Protector | **Лицар-Захисник** | | | Defender **Оборонець** |
+| Knight of the Garland | **Лицар Гірлянди** | | | Warder **Вартівник** |
+| Knight of the Imperial Dragon | **Лицар Імперського Дракона** | | | Guardian **Охоронець** |
+
+Мораг Тонг: Associate **Спільник**, Blind Thrall **Сліпий Тралл**, Thrall
+**Тралл**, White Thrall **Білий Тралл**, Thinker **Мислитель**, Brother
+**Брат**, Knower **Знавець**, Master **Майстер**, Exalted Master
+**Піднесений Майстер**, Grandmaster **Грандмайстер**.
+
+Два слова збіглися: Spellwright у Телванні й Conjurer у Гільдії магів
+обидва **Заклинач**, Disciple у Храмі й Apprentice у Гільдії обидва
+близькі до **учня**. Так уже стояло в корпусі, фракції різні, і зводити
+їх силоміць сенсу немає.
+
+
 ## 12. Що заблоковано і чому
 
 **Назви місць (1 647).** `CELL NAME` — це водночас видима назва **й**
