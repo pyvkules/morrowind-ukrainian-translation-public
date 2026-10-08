@@ -189,11 +189,16 @@ def pairs():
         for i, en in enumerate(src):
             if isinstance(en, str) and uk.get(str(i)):
                 out.append(('%s:%d' % (name, i), en, uk[str(i)]))
-    src = load(os.path.join(HERE, 'books', '_source.json'))
-    uk = load(os.path.join(HERE, 'books', 'uk_books.json'))
-    for k, en in src.items():
-        if uk.get(k):
-            out.append(('книга %s' % k[:8], en, uk[k]))
+    # Проза книг - дані Bethesda, тож `_source.json` навмисно поза гітом.
+    # На чистій копії репозиторію його немає, і це не привід падати: без
+    # нього перевірка просто не дивиться в книги, а решту корпусу бачить.
+    books = os.path.join(HERE, 'books', '_source.json')
+    if os.path.isfile(books):
+        src = load(books)
+        uk = load(os.path.join(HERE, 'books', 'uk_books.json'))
+        for k, en in src.items():
+            if uk.get(k):
+                out.append(('книга %s' % k[:8], en, uk[k]))
     return out
 
 

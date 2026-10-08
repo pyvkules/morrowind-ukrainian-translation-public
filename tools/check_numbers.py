@@ -78,15 +78,20 @@ def main():
                 print('   EN %s' % en[:150].replace('\r\n', ' '))
                 print('   UK %s' % v[:150].replace('\r\n', ' '))
 
+    # Проза книг - дані Bethesda, тож `_source.json` навмисно поза гітом.
+    # На чистій копії репозиторію його немає: тоді книги просто минаємо,
+    # а решту корпусу перевіряємо як звичайно.
     books = os.path.join(HERE, 'books')
-    src = load(os.path.join(books, '_source.json'))
-    uk = load(os.path.join(books, 'uk_books.json'))
-    for k, en in sorted(src.items()):
-        v = uk.get(k)
-        if v and swapped(en, v):
-            bad += 1
-            print('книга %s  %s -> %s'
-                  % (k[:10], sorted(nums(en))[:12], sorted(nums(v))[:12]))
+    source = os.path.join(books, '_source.json')
+    if os.path.isfile(source):
+        src = load(source)
+        uk = load(os.path.join(books, 'uk_books.json'))
+        for k, en in sorted(src.items()):
+            v = uk.get(k)
+            if v and swapped(en, v):
+                bad += 1
+                print('книга %s  %s -> %s'
+                      % (k[:10], sorted(nums(en))[:12], sorted(nums(v))[:12]))
 
     print('розбіжностей у числах: %d' % bad)
     return 1 if bad else 0
