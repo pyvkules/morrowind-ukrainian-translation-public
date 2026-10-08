@@ -7,9 +7,9 @@ name: check translation
 
 on:
   push:
-    paths: ['uk/**', 'tools/**', 'src/**']
+    paths: ['tools/**']
   pull_request:
-    paths: ['uk/**', 'tools/**', 'src/**']
+    paths: ['tools/**']
   workflow_dispatch:
 
 # Партії перекладу пушаться одна за одною, і кожна ставила в чергу власний запуск.
@@ -29,5 +29,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Перевірка цілісності текстів
+      - name: Цілісність текстів
         run: python tools/topics/check_sources.py
+
+      # Решта перевірок зі списку в CONVENTIONS. Тут лише ті, що читають самі
+      # тексти: items/check_gender.py і dialogue/voiced.py потребують зібраних
+      # плагінів, а гри на раннері немає й бути не може.
+      #
+      # Доти в CI ганялася сама лише перевірка вище, і то не тому, що інші
+      # зайві, а тому, що вони не повертали коду помилки й завжди «успішні».
+      - name: Одна назва - два написання
+        run: python tools/q.py dup
+
+      - name: Імена, що розійшлися
+        run: python tools/name_drift.py
+
+      - name: Числа в перекладі збігаються з першотвором
+        run: python tools/check_numbers.py

@@ -166,7 +166,9 @@ def dup(limit):
     for k in sorted(bad)[:limit]:
         print('   %-40s %s' % (k, ' | '.join(sorted(bad[k]))))
         print('   %-40s   у: %s' % ('', ', '.join(sorted(where[k]))))
-    return 0
+    # Ненульовий код, щоб перевірку можна було ставити в CI: доти вона
+    # завжди казала «успіх», хоч би скільки різнобою знайшла.
+    return 1 if bad else 0
 
 
 def main(argv):
