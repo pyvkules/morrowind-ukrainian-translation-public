@@ -53,6 +53,29 @@ BOOKS = book_texts.load()
 print('translation memory entries:', len(memory))
 print('перекладених текстів книг:', len(BOOKS))
 
+
+def remembered(text):
+    """Переклад цієї репліки, з поблажкою до країв.
+
+    Декотрі плагіни тримають репліку з пробілом на початку: та сама фраза,
+    просто зайвий знак, лишений у Construction Set. Дослівне зіставлення їх
+    не впізнавало, і дев'ять озвучених реплік лишалися англійськими попри
+    готовий переклад - причому помітні, бо озвучені видно субтитром.
+
+    Пробіли з країв повертаємо на місце, щоб запис виглядав так само, як
+    його зробив автор мода.
+    """
+    uk = memory.get(text)
+    if uk is not None:
+        return uk
+    core = text.strip()
+    if core == text:
+        return None
+    uk = memory.get(core)
+    if uk is None:
+        return None
+    return text[:len(text) - len(text.lstrip())] + uk + text[len(text.rstrip()):]
+
 # --- resolve modlist: data dirs (later wins) + content order ---
 dirs, contents = paths.read_modlist()
 resolved = paths.resolve_plugins(dirs)   # our own output is skipped, so re-runs are idempotent
@@ -80,7 +103,7 @@ def patch(data):
                 if st == want:
                     had_null = sdata.endswith(b'\0')
                     text = (sdata[:-1] if had_null else sdata).decode('cp1251', 'replace')
-                    uk = memory.get(text) if rtype == b'INFO' \
+                    uk = remembered(text) if rtype == b'INFO' \
                         else BOOKS.get(book_texts.key(text))
                     if uk:
                         try:
