@@ -658,6 +658,66 @@ def sync_chain_encoding(cfg_path):
     return changed
 
 
+def patched_fonts(mod_dir):
+    """Шрифти, у які ми дописали українські літери, за іменами файлів."""
+    fdir = os.path.join(mod_dir, 'Fonts')
+    return [f[:-4] for f in sorted(safe_listdir_files(fdir))
+            if f.lower().endswith('.ttf')]
+
+
+def safe_listdir_files(path):
+    try:
+        return [f for f in os.listdir(path)
+                if os.path.isfile(os.path.join(path, f))]
+    except OSError:
+        return []
+
+
+def font_fallbacks(cfg_path, mod_dir):
+    """Показати грі наш шрифт замість растрового.
+
+    Яким шрифтом малювати, гра бере з рядків `fallback=Fonts_Font_0` та
+    `Fonts_Font_1`. Майстер налаштування OpenMW переносить їх із
+    `Morrowind.ini` як є, а там стоять растрові `magic_cards_regular` і
+    `century_gothic_font_regular`. Растровий шрифт - це готова картинка на
+    256 знаків західної абетки; дописати в неї кирилицю неможливо.
+
+    Через це гравець діставав порожні місця замість літер, хоч встановлювач
+    чесно звітував «Шрифти з українськими літерами: MysticCards»: шрифт ми
+    пропатчили, а гра його навіть не відкривала.
+
+    Рядок, що вже вказує на пропатчений нами шрифт, лишаємо як є - саме так
+    влаштовані профілі momw-configurator з Pelagiad. Даедричний (`Font_2`)
+    не чіпаємо ніколи: у грі це руни, і кирилиці там не місце.
+    """
+    ours = patched_fonts(mod_dir)
+    if not ours:
+        return []
+    low = {f.lower() for f in ours}
+    pick = next((f for f in ours if f.lower() == 'mysticcards'),
+                next((f for f in ours if f.lower() == 'pelagiad'), ours[0]))
+
+    changed = []
+    for p in chain_cfgs(cfg_path):
+        lines = read_cfg(p)
+        hit = False
+        for i, ln in enumerate(lines):
+            s = ln.strip()
+            for key in ('fallback=Fonts_Font_0,', 'fallback=Fonts_Font_1,'):
+                if not s.lower().startswith(key.lower()):
+                    continue
+                if s[len(key):].strip().lower() in low:
+                    continue                      # уже наш, не чіпаємо
+                lines[i] = key + pick
+                hit = True
+        if hit:
+            backup_once(p, changed)
+            with io.open(p, 'w', encoding='utf-8', newline='\n') as f:
+                f.write('\n'.join(lines) + '\n')
+            changed.append('шрифт меню переведено на %s у %s' % (pick, p))
+    return changed
+
+
 # --- мова меню рушія ---------------------------------------------------------
 
 LOCALE_KEY = 'preferred locales'
@@ -1220,6 +1280,8 @@ def install_to(cfg):
     for note in rewrite_cfg(cfg, mod_dir):
         out('  ' + note)
     for note in sync_chain_encoding(cfg):
+        out('  ' + note)
+    for note in font_fallbacks(cfg, mod_dir):
         out('  ' + note)
     for note in set_locale_everywhere(cfg):
         out('  ' + note)
