@@ -30,6 +30,10 @@ STEPS = [
     ('names', ['tools/patch_names.py', '--apply'], 'translate item, NPC and creature names'),
     ('topics', ['tools/topics/rename_topics.py', '--apply'], 'rename dialogue topics and fix AddTopic'),
     ('gmst', ['tools/gmst/patch_gmst.py', '--apply'], 'translated interface strings'),
+    # Субтитри з команди Say живуть у джерелі скриптів, а не в INFO, тож їх не
+    # бачить ні rebuild_esm, ні patch_plugins. Має йти після них: читає вже
+    # наші копії.
+    ('say', ['tools/patch_say.py', '--apply'], 'subtitles spoken from scripts'),
     # ОСТАННІЙ із кроків, що переписують текст реплік: обгортає відмінкові згадки тем
     # у @…# і пише Morrowind.top, щоб рушій робив їх клікабельними (як vanilla).
     # Замінює давній обхід link_topics (той примусово додавав теми в список).
