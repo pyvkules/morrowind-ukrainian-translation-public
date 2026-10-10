@@ -94,8 +94,13 @@ STEPS = [
     ('назви',   'tools/patch_names.py',           ['--apply']),
     ('теми',    'tools/topics/rename_topics.py',  ['--apply']),
     ('інтерфейс', 'tools/gmst/patch_gmst.py',     ['--apply']),
+    ('написи',  'tools/patch_scripts.py',         ['--apply']),
     ('посилання', 'tools/topics/mark_topics.py',  ['--apply']),
 ]
+# Цей список мусить збігатися з тим, що в build.py, бо збирає те саме.
+# Одного разу вони розійшлися: крок `say` додали туди і забули тут, і
+# гравці місяць діставали гру без субтитрів зі скриптів, хоч переклад
+# лежав поруч. Тепер за збігом стежить tools/check_steps.py у CI.
 
 
 # Куди йде вивід. У консолі - у stdout; у віконному режимі gui.py підмінює
@@ -718,6 +723,84 @@ def font_fallbacks(cfg_path, mod_dir):
     return changed
 
 
+TES3MP_XML = u"""<?xml version="1.0" encoding="UTF-8"?>
+<!-- Для TES3MP, зробленого на OpenMW 0.47: той рушій не знає формату
+     .omwfont і шукає шрифти саме тут, поруч із openmw.cfg. Сучасний
+     OpenMW цього файлу не читає взагалі, тож він нікому не заважає.
+     Набір знаків узято з нашого ж %s.omwfont, щоб не просити літер,
+     яких у шрифті немає. -->
+<MyGUI type="Resource" version="1.1">
+%s</MyGUI>
+"""
+TES3MP_RES = u"""    <Resource type="ResourceTrueTypeFont" name="%s">
+        <Property key="Source" value="%s.ttf"/>
+        <Property key="Antialias" value="false"/>
+        <Property key="TabWidth" value="8"/>
+        <Property key="OffsetHeight" value="0"/>
+%s    </Resource>
+"""
+
+
+def tes3mp_font(cfg_path, mod_dir, remove=False):
+    """Покласти шрифт там, де його шукає TES3MP.
+
+    TES3MP 0.8 зроблено на OpenMW 0.47. Той рушій не знає `.omwfont`, і
+    гравець бачив порожні місця замість літер, хоча шрифт ми пропатчили.
+    У 0.47 TrueType береться з теки `Fonts` поруч із `openmw.cfg`, де
+    лежать `openmw_font.xml` і самі `.ttf`.
+
+    Кладемо завжди, бо перевірити наявність TES3MP надійно важко, а шкоди
+    немає: рядка `openmw_font.xml` немає навіть у теперішньому openmw.exe.
+    """
+    ours = patched_fonts(mod_dir)
+    pick = next((f for f in ours if f.lower() == 'mysticcards'),
+                next((f for f in ours if f.lower() == 'pelagiad'),
+                     ours[0] if ours else None))
+    changed = []
+    for cfg in chain_cfgs(cfg_path):
+        fdir = os.path.join(os.path.dirname(cfg), 'Fonts')
+        xml = os.path.join(fdir, 'openmw_font.xml')
+        if remove:
+            for p in [xml] + glob_ttf(fdir):
+                if os.path.isfile(p):
+                    os.remove(p)
+                    changed.append('прибрано ' + os.path.basename(p))
+            if os.path.isdir(fdir) and not os.listdir(fdir):
+                os.rmdir(fdir)
+            continue
+        if not pick:
+            continue
+        codes = font_codes(mod_dir, pick)
+        if codes is None:
+            continue
+        os.makedirs(fdir, exist_ok=True)
+        shutil.copy2(os.path.join(mod_dir, 'Fonts', pick + '.ttf'),
+                     os.path.join(fdir, pick + '.ttf'))
+        body = ''.join(TES3MP_RES % (name, pick, codes)
+                       for name in ('Magic Cards', 'Century Gothic'))
+        with io.open(xml, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(TES3MP_XML % (pick, body))
+        changed.append('шрифт для TES3MP покладено у %s' % fdir)
+    return changed
+
+
+def glob_ttf(fdir):
+    return [os.path.join(fdir, f) for f in safe_listdir_files(fdir)
+            if f.lower().endswith('.ttf')]
+
+
+def font_codes(mod_dir, name):
+    """Блок <Codes> з нашого .omwfont, щоб набір знаків був той самий."""
+    p = os.path.join(mod_dir, 'Fonts', name + '.omwfont')
+    if not os.path.isfile(p):
+        return None
+    text = io.open(p, encoding='utf-8', errors='replace').read()
+    i, j = text.find('<Codes>'), text.find('</Codes>')
+    if i < 0 or j < 0:
+        return None
+    return '        ' + text[i:j + len('</Codes>')].strip() + '\n'
+
+
 # --- мова меню рушія ---------------------------------------------------------
 
 LOCALE_KEY = 'preferred locales'
@@ -1168,6 +1251,8 @@ def uninstall_from(cfg):
         out('  ' + note)
     for note in set_locale_everywhere(cfg, remove=True):
         out('  ' + note)
+    for note in tes3mp_font(cfg, mod_dir, remove=True):
+        out('  ' + note)
     if os.path.isfile(os.path.join(mod_dir, MARKER)):
         shutil.rmtree(mod_dir, ignore_errors=True)
         out('  вилучено теку перекладу')
@@ -1282,6 +1367,8 @@ def install_to(cfg):
     for note in sync_chain_encoding(cfg):
         out('  ' + note)
     for note in font_fallbacks(cfg, mod_dir):
+        out('  ' + note)
+    for note in tes3mp_font(cfg, mod_dir):
         out('  ' + note)
     for note in set_locale_everywhere(cfg):
         out('  ' + note)

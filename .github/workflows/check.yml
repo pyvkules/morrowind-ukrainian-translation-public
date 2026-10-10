@@ -7,9 +7,9 @@ name: check translation
 
 on:
   push:
-    paths: ['tools/**']
+    paths: ['tools/**', 'installer/**', 'build.py']
   pull_request:
-    paths: ['tools/**']
+    paths: ['tools/**', 'installer/**', 'build.py']
   workflow_dispatch:
 
 # Партії перекладу пушаться одна за одною, і кожна ставила в чергу власний запуск.
@@ -46,3 +46,9 @@ jobs:
 
       - name: Числа в перекладі збігаються з першотвором
         run: python tools/check_numbers.py
+
+      # Точок входу дві, build.py і installer/install.py, і кожна тримає
+      # власний список кроків. Одного разу вони розійшлися, і гравці
+      # місяць діставали гру без субтитрів зі скриптів.
+      - name: Збірка і встановлювач роблять те саме
+        run: python tools/check_steps.py
