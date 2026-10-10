@@ -51,9 +51,12 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',
                               errors='replace', write_through=True)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 TOOLS = os.path.abspath(os.path.join(HERE, '..'))
 SRC = os.path.join(TOOLS, 'src')
 UK = os.path.join(TOOLS, 'uk')
+
+import skip
 
 PH = re.compile(r'%[A-Za-z]+')
 CYR = 'А-яЄІЇєіїҐґ'
@@ -97,8 +100,10 @@ def left_of(name):
     if not isinstance(src, list):
         return None, None
     uk = uk_of(name)
+    table = skip.explicit()
     return src, [(i, s) for i, s in enumerate(src)
-                 if isinstance(s, str) and s.strip() and not uk.get(str(i))]
+                 if isinstance(s, str) and s.strip() and not uk.get(str(i))
+                 and not skip.skipped(name, s, i, table)]
 
 
 def cmd_next(argv):
