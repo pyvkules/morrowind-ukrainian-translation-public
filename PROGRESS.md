@@ -170,10 +170,23 @@ NPC** («Джентльмен Джим Стейсі» вертався в «Ге
 
 ## Звідки продовжувати
 
-Наступна неперекладена репліка: **`mod_tribunal`, рядок 1819** (Шунарі
-прощається після смерті Гедни Релвел).
+`mod_tribunal` **закінчено, 3312 з 3312** (11 жовтня 2026). Наступний
+зріз беремо за списком:
 
-    py tools\dialogue\batch.py next mod_tribunal 70
+    py tools\dialogue\batch.py left
+
+| Зріз | Лишилось |
+|---|---:|
+| `mod_patch_for_purists` | 1026 з 2606 |
+| `mod_djangos_dialogue` | 878 з 892 |
+| `mod_misc` | 676 з 720 |
+| `mod_oaab_grazelands` | 579 з 600 |
+| `mod_tamriel_data` | 427 з 988 |
+| `mod_memento_mori` | 368 з 376 |
+| `mod_oaab_tel_mora` | 346 з 359 |
+| `mod_great_seawall_of_vivec` | 271 з 278 |
+| `mod_fmi_servicerefusal_contraband` | 105 з 319 |
+| **Разом** | **4676** |
 
 Хід партії описано в CONVENTIONS §10, формат файла партії - у шапці
 `tools\dialogue\batch.py`. Партію пишемо простим текстом
