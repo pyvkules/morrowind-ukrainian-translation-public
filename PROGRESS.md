@@ -170,8 +170,10 @@ NPC** («Джентльмен Джим Стейсі» вертався в «Ге
 
 ## Звідки продовжувати
 
-`mod_tribunal` **закінчено, 3312 з 3312** (11 жовтня 2026). Наступний
-зріз беремо за списком:
+Закінчено шість зрізів: `mod_tribunal`, `mod_fmi_servicerefusal_contraband`,
+`mod_great_seawall_of_vivec`, `mod_oaab_tel_mora`, `mod_memento_mori`
+і `mod_oaab_grazelands` (17 жовтня 2026). Наступний зріз беремо за
+списком:
 
     py tools\dialogue\batch.py left
 
@@ -180,13 +182,11 @@ NPC** («Джентльмен Джим Стейсі» вертався в «Ге
 | `mod_patch_for_purists` | 1026 з 2606 |
 | `mod_djangos_dialogue` | 878 з 892 |
 | `mod_misc` | 676 з 720 |
-| `mod_oaab_grazelands` | 579 з 600 |
 | `mod_tamriel_data` | 427 з 988 |
-| `mod_memento_mori` | 368 з 376 |
-| `mod_oaab_tel_mora` | 346 з 359 |
-| `mod_great_seawall_of_vivec` | 271 з 278 |
-| `mod_fmi_servicerefusal_contraband` | 105 з 319 |
-| **Разом** | **4676** |
+| **Разом** | **3007** |
+
+Службові записи дерева реплік (розділювачі, уламки умов, двемерська
+мова) у підрахунок уже не входять: їх відбирає `tools\dialogue\skip.py`.
 
 Хід партії описано в CONVENTIONS §10, формат файла партії - у шапці
 `tools\dialogue\batch.py`. Партію пишемо простим текстом
