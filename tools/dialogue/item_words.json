@@ -22,5 +22,17 @@
   "rx": "\\blimeware\\b",
   "bad": "лаймвер",
   "want": "фаянс"
+ },
+ {
+  "en": "common disease",
+  "rx": "\\bcommon disease",
+  "bad": "поширен[а-яіїєґ]* хворо",
+  "want": "звичайна хвороба"
+ },
+ {
+  "en": "blighted",
+  "rx": "\\bblighted\\b",
+  "bad": "морен",
+  "want": "моровий"
  }
 ]
