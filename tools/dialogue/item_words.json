@@ -1,0 +1,26 @@
+[
+ {
+  "en": "bowl",
+  "rx": "\\bbowls?\\b",
+  "bad": "чаш|піал",
+  "want": "миска"
+ },
+ {
+  "en": "cup",
+  "rx": "\\bcups?\\b",
+  "bad": "чаш|чарк",
+  "want": "кухоль"
+ },
+ {
+  "en": "goblet",
+  "rx": "\\bgoblets?\\b",
+  "bad": "чаш|чарк",
+  "want": "келих"
+ },
+ {
+  "en": "limeware",
+  "rx": "\\blimeware\\b",
+  "bad": "лаймвер",
+  "want": "фаянс"
+ }
+]
