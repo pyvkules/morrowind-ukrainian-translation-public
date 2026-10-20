@@ -34,5 +34,35 @@
   "rx": "\\bblighted\\b",
   "bad": "морен",
   "want": "моровий"
+ },
+ {
+  "en": "scrib",
+  "rx": "\\bscrib",
+  "bad": "скріб",
+  "want": "скриб"
+ },
+ {
+  "en": "scrib jelly",
+  "rx": "\\bscrib jell",
+  "bad": "скрибов[а-яіїєґ]* желе",
+  "want": "скрибне желе"
+ },
+ {
+  "en": "kwama cuttle",
+  "rx": "\\bkwama cuttle",
+  "bad": "квама-каракатиц|квамов[а-яіїєґ]* каракатиц",
+  "want": "каракатиця квами"
+ },
+ {
+  "en": "kwama egg",
+  "rx": "\\bkwama egg",
+  "bad": "квама-яйц",
+  "want": "яйце квами"
+ },
+ {
+  "en": "kwama queen",
+  "rx": "\\bkwama queen",
+  "bad": "квама-королев",
+  "want": "квама-матка"
  }
 ]
