@@ -170,20 +170,24 @@ NPC** («Джентльмен Джим Стейсі» вертався в «Ге
 
 ## Звідки продовжувати
 
-Закінчено шість зрізів: `mod_tribunal`, `mod_fmi_servicerefusal_contraband`,
-`mod_great_seawall_of_vivec`, `mod_oaab_tel_mora`, `mod_memento_mori`
-і `mod_oaab_grazelands` (17 жовтня 2026). Наступний зріз беремо за
-списком:
+Закінчено сім зрізів: `mod_tribunal`, `mod_fmi_servicerefusal_contraband`,
+`mod_great_seawall_of_vivec`, `mod_oaab_tel_mora`, `mod_memento_mori`,
+`mod_oaab_grazelands` і `mod_misc` (21 жовтня 2026). Наступний зріз
+беремо за списком:
 
     py tools\dialogue\batch.py left
 
 | Зріз | Лишилось |
 |---|---:|
 | `mod_patch_for_purists` | 1026 з 2606 |
-| `mod_djangos_dialogue` | 878 з 892 |
-| `mod_misc` | 676 з 720 |
 | `mod_tamriel_data` | 427 з 988 |
-| **Разом** | **3007** |
+| `mod_djangos_dialogue` | 248 з 892 |
+| **Разом** | **1701** |
+
+`mod_djangos_dialogue` - це переважно підказки з умінь і представлення
+НПЦ, тож там багато формульних рядків («я такий-то, служу тому-то»).
+Для таких місць пишемо **безрідні** звороти («під присягою», «на платі»),
+бо гра не знає статі того, хто говорить.
 
 Службові записи дерева реплік (розділювачі, уламки умов, двемерська
 мова) у підрахунок уже не входять: їх відбирає `tools\dialogue\skip.py`.
