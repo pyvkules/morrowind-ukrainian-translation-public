@@ -1,5 +1,17 @@
 [
  {
+  "en": "soul gem",
+  "rx": "\\bsoul ?gems?\\b",
+  "bad": "самоцвіт\\w* душ",
+  "want": "камінь душ"
+ },
+ {
+  "en": "Black Marsh",
+  "rx": "\\bBlack Marsh\\b",
+  "bad": "Драговин",
+  "want": "Чорнотоп"
+ },
+ {
   "en": "bowl",
   "rx": "\\bbowls?\\b",
   "bad": "чаш|піал",
