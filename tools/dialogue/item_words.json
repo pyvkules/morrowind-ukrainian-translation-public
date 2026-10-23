@@ -42,6 +42,12 @@
   "want": "скриб"
  },
  {
+  "en": "scrib jerky",
+  "rx": "\\bscrib jerky\\b",
+  "bad": "скрибн\\w* в'ялен|в'ялен\\w* скрибн",
+  "want": "в'ялений скриб"
+ },
+ {
   "en": "scrib jelly",
   "rx": "\\bscrib jell",
   "bad": "скрибов[а-яіїєґ]* желе",
