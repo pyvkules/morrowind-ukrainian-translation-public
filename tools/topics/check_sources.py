@@ -258,6 +258,10 @@ def check_books():
             sig = hashlib.sha1('|'.join(seq).encode('utf-8')).hexdigest()[:12]
             if sig != m['tagsig']:
                 err('%s: теги ті самі числом, але змінені або переставлені' % where)
+        if 'nl' in m and v.count('\n') != m['nl']:
+            err('%s: переносів рядка %d, а в оригіналі %d - розкладку '
+                'сторінки тримають не лише теги: списки й загадки '
+                'розділено самим переносом' % (where, v.count('\n'), m['nl']))
         for span in m.get('daedric', []):
             if span not in v:
                 err('%s: втрачено даедричний фрагмент %r - цей шрифт малює '

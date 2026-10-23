@@ -142,7 +142,12 @@ def main():
             source[k] = text
             ntags, sig = tagsig(text)
             meta[k] = {'title': title, 'chars': len(text),
-                       'ntags': ntags, 'tagsig': sig}
+                       'ntags': ntags, 'tagsig': sig,
+                       'nl': text.count('\n')}
+            # Розкладку сторінки тримають не лише теги: списки в «Імперській
+            # кухні» і всі загадки в «Кендголській книзі» розділено самим
+            # переносом рядка. Підпис тегів такої втрати не бачить, бо тегів
+            # лишається стільки ж, тож переноси рахуємо окремо.
             runes = daedric_spans(text)
             if runes:
                 meta[k]['daedric'] = runes
