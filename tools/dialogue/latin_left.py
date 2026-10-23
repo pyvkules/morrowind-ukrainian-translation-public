@@ -27,10 +27,12 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOOLS = os.path.dirname(HERE)
 
-TOKEN = re.compile(r'%[A-Za-z][A-Za-z0-9_]*')
+TOKEN = re.compile(r'[%&][A-Za-z][A-Za-z0-9_]*')
 # %PCName, %Name - це не латиниця. Підкреслення й цифри теж частина
 # підстановки: Tamriel_Data тримає свої глобальні як %T_Glob_StockPayout001,
-# і без них у рядку «лишалася англійська», якої там немає.
+# і без них у рядку «лишалася англійська», якої там немає. Амперсанд тут
+# через описку мода: у Джанго стоїть «&PCName», і ми лишаємо її як є, бо
+# зайва підстановка проти першотвору - це вже попередження в check_sources.
 LATIN = re.compile(r'[A-Za-z]{2,}')
 ROMAN = re.compile(r'[IVXLCDM]+$')
 
