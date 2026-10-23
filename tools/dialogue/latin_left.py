@@ -27,7 +27,10 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 TOOLS = os.path.dirname(HERE)
 
-TOKEN = re.compile(r'%[A-Za-z]+')          # %PCName, %Name — це не латиниця
+TOKEN = re.compile(r'%[A-Za-z][A-Za-z0-9_]*')
+# %PCName, %Name - це не латиниця. Підкреслення й цифри теж частина
+# підстановки: Tamriel_Data тримає свої глобальні як %T_Glob_StockPayout001,
+# і без них у рядку «лишалася англійська», якої там немає.
 LATIN = re.compile(r'[A-Za-z]{2,}')
 ROMAN = re.compile(r'[IVXLCDM]+$')
 
