@@ -471,8 +471,46 @@ def font_steps(cfg_path):
 
 
 def read_cfg(path):
-    with io.open(path, encoding='utf-8', errors='replace') as f:
+    """Прочитати конфіг, не зіпсувавши чужих байтів.
+
+    Тут стояло `errors='replace'`, і кожен байт, який не складався в UTF-8,
+    ставав U+FFFD - а далі ми писали той самий файл назад. Для гравця з
+    кириличним іменем користувача (`C:\\Users\\Іван\\Documents\\My Games\\...`)
+    або з мод-текою, названою не латиницею, це означало, що шляхи в його
+    `openmw.cfg` гинули назовсім: рушій переставав бачити власні моди, профіль
+    і теку сейвів. `surrogateescape` переносить такі байти незмінними, а
+    `write_cfg` вертає їх на місце байт у байт.
+    """
+    with io.open(path, encoding='utf-8', errors='surrogateescape') as f:
         return f.read().splitlines()
+
+
+def write_cfg(path, lines):
+    """Записати конфіг тим самим кодуванням, яким його прочитали."""
+    os.makedirs(os.path.dirname(path) or '.', exist_ok=True)
+    with io.open(path, 'w', encoding='utf-8', errors='surrogateescape',
+                 newline='\n') as f:
+        f.write('\n'.join(lines) + '\n')
+
+
+def heal_cfg(path, changed):
+    """Відкотити конфіг, який зіпсувала давніша версія встановлювача.
+
+    Слід поломки видно за U+FFFD: саме стільком байтам `errors='replace'`
+    стер значення. Самі байти вже не відновити, зате поруч лежить копія, яку
+    ми зняли перед першою своєю правкою. Якщо файл несе цей слід і копія є -
+    вертаємо копію, бо правити зіпсовані шляхи немає сенсу.
+    """
+    backup = path + '.ukr-backup'
+    if not (os.path.isfile(path) and os.path.isfile(backup)):
+        return False
+    with io.open(path, encoding='utf-8', errors='surrogateescape') as f:
+        if u'\ufffd' not in f.read():
+            return False
+    shutil.copy2(backup, path)
+    changed.append('відкочено %s з копії: давніша версія зіпсувала в ньому шляхи'
+                   % os.path.basename(path))
+    return True
 
 
 def data_dirs(lines, cfg_path):
@@ -523,9 +561,11 @@ def backup_once(path, changed):
 
 def rewrite_cfg(cfg_path, mod_dir, remove=False):
     """Прописати (або прибрати) нашу теку і кодування. Повертає, що змінилось."""
+    healed = []
+    heal_cfg(cfg_path, healed)
     lines = read_cfg(cfg_path)
     target = os.path.normcase(os.path.abspath(mod_dir))
-    kept, changed = [], []
+    kept, changed = [], list(healed)
     for ln in lines:
         s = ln.strip()
         if s.startswith('data='):
@@ -553,8 +593,7 @@ def rewrite_cfg(cfg_path, mod_dir, remove=False):
         changed.append('дописано data= останнім рядком')
 
     backup_once(cfg_path, changed)
-    with io.open(cfg_path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write('\n'.join(kept) + '\n')
+    write_cfg(cfg_path, kept)
     return changed
 
 
@@ -648,6 +687,7 @@ def sync_chain_encoding(cfg_path):
     """
     changed = []
     for p in chain_cfgs(cfg_path)[1:]:
+        heal_cfg(p, changed)
         lines = read_cfg(p)
         hit = [i for i, l in enumerate(lines)
                if l.strip().startswith('encoding=')
@@ -657,8 +697,7 @@ def sync_chain_encoding(cfg_path):
         for i in hit:
             lines[i] = ENCODING_LINE
         backup_once(p, changed)
-        with io.open(p, 'w', encoding='utf-8', newline='\n') as f:
-            f.write('\n'.join(lines) + '\n')
+        write_cfg(p, lines)
         changed.append('виправлено encoding у %s' % p)
     return changed
 
@@ -717,8 +756,7 @@ def font_fallbacks(cfg_path, mod_dir):
                 hit = True
         if hit:
             backup_once(p, changed)
-            with io.open(p, 'w', encoding='utf-8', newline='\n') as f:
-                f.write('\n'.join(lines) + '\n')
+            write_cfg(p, lines)
             changed.append('шрифт меню переведено на %s у %s' % (pick, p))
     return changed
 
@@ -761,10 +799,9 @@ def tes3mp_font(cfg_path, mod_dir, remove=False):
         fdir = os.path.join(os.path.dirname(cfg), 'Fonts')
         xml = os.path.join(fdir, 'openmw_font.xml')
         if remove:
-            for p in [xml] + glob_ttf(fdir):
-                if os.path.isfile(p):
-                    os.remove(p)
-                    changed.append('прибрано ' + os.path.basename(p))
+            for p in ours_here(fdir, mod_dir, xml):
+                os.remove(p)
+                changed.append('прибрано ' + os.path.basename(p))
             if os.path.isdir(fdir) and not os.listdir(fdir):
                 os.rmdir(fdir)
             continue
@@ -787,6 +824,34 @@ def tes3mp_font(cfg_path, mod_dir, remove=False):
 def glob_ttf(fdir):
     return [os.path.join(fdir, f) for f in safe_listdir_files(fdir)
             if f.lower().endswith('.ttf')]
+
+
+XML_MARK = u'Для TES3MP'
+
+
+def ours_here(fdir, mod_dir, xml):
+    """Лише ті файли в теці Fonts, які поклали туди ми.
+
+    Тут було `[xml] + glob_ttf(fdir)`, тобто видалення зносило **кожен** .ttf
+    із теки шрифтів поруч із openmw.cfg. А саме там гравці тримають власні
+    шрифти: `Documents\\My Games\\OpenMW\\Fonts` - звичайне місце для них.
+    Людина прибирала переклад і разом із ним губила свої шрифти, яких ми ніколи
+    не чіпали.
+
+    Тепер беремо `.ttf` тільки з тими іменами, які є серед наших пропатчених, а
+    `openmw_font.xml` - лише коли в ньому стоїть наша помітка.
+    """
+    names = {n.lower() + '.ttf' for n in patched_fonts(mod_dir)}
+    out = [os.path.join(fdir, f) for f in safe_listdir_files(fdir)
+           if f.lower() in names]
+    if os.path.isfile(xml):
+        try:
+            text = io.open(xml, encoding='utf-8', errors='replace').read()
+        except OSError:
+            text = ''
+        if XML_MARK in text:
+            out.insert(0, xml)
+    return out
 
 
 def font_codes(mod_dir, name):
@@ -844,6 +909,7 @@ def set_locale(path, remove=False):
     із англійською Windows бачить гру українською, а меню рушія - англійською.
     """
     changed = []
+    heal_cfg(path, changed)
     lines = read_cfg(path) if os.path.isfile(path) else []
     at = [i for i, l in enumerate(lines)
           if l.strip().lower().startswith(LOCALE_KEY)]
@@ -871,9 +937,7 @@ def set_locale(path, remove=False):
 
     backup_once(path, changed)
     changed.append(note)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with io.open(path, 'w', encoding='utf-8', newline='\n') as f:
-        f.write('\n'.join(lines) + '\n')
+    write_cfg(path, lines)
     return changed
 
 
@@ -1373,12 +1437,52 @@ def install_to(cfg):
     for note in set_locale_everywhere(cfg):
         out('  ' + note)
 
+    for note in verify_cfg(cfg, mod_dir):
+        out(note)
+
     short, total = modlist_drift(lines)
     if short:
         out()
         out('У цій версії набір модів інший: бракує %d із %d.' % (short, total))
         out('Щоб дібрати їх, запусти ще раз і вибери варіант із модами.')
     return 0
+
+
+def verify_cfg(cfg_path, mod_dir):
+    """Перечитати написане й сказати, якщо воно не в силі.
+
+    Найчастіша скарга - «шрифт крякозябли». Це не шрифт: це `encoding=` не
+    win1251, і рушій читає нашу cp1251 як win1252. Таке буває не з нашої
+    вини: майстер налаштування OpenMW перезаписує `openmw.cfg` і може
+    посунути або згубити наші рядки. Тому після всіх правок читаємо файли
+    наново й кажемо прямо, що саме не так і що з цим робити.
+    """
+    notes = []
+    enc = [l.strip() for p in chain_cfgs(cfg_path) for l in read_cfg(p)
+           if l.strip().startswith('encoding=')]
+    if not enc:
+        notes.append('! УВАГА: рядка encoding= немає ні в одному файлі.')
+    elif any(e != ENCODING_LINE for e in enc):
+        notes.append('! УВАГА: десь у ланцюжку лишилося %s.'
+                     % ', '.join(sorted(set(e for e in enc
+                                            if e != ENCODING_LINE))))
+    if notes:
+        notes.append('! Без encoding=win1251 замість кирилиці буде мотлох')
+        notes.append('! на кшталт «Íàëàøò». Впиши рядок у openmw.cfg рукою.')
+
+    target = os.path.normcase(os.path.abspath(mod_dir))
+    ours = [i for i, d in enumerate(all_data_dirs(cfg_path))
+            if os.path.normcase(os.path.abspath(d)) == target]
+    if not ours:
+        notes.append('! УВАГА: нашої теки немає серед data=. Переклад не')
+        notes.append('! завантажиться. Напиши про це автору з цим виводом.')
+
+    if notes:
+        notes.insert(0, '')
+    else:
+        notes.append('')
+        notes.append('Перевірено: encoding=win1251 у силі, теку видно.')
+    return notes
 
 
 def main():
