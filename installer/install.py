@@ -787,8 +787,16 @@ def tes3mp_font(cfg_path, mod_dir, remove=False):
     У 0.47 TrueType береться з теки `Fonts` поруч із `openmw.cfg`, де
     лежать `openmw_font.xml` і самі `.ttf`.
 
-    Кладемо завжди, бо перевірити наявність TES3MP надійно важко, а шкоди
-    немає: рядка `openmw_font.xml` немає навіть у теперішньому openmw.exe.
+    Кладемо завжди, бо перевірити наявність TES3MP надійно важко. Але «шкоди
+    немає» тут було неправдою: `Documents\\My Games\\OpenMW\\Fonts` - звичайне
+    місце, де гравці тримають власні шрифти й власний `openmw_font.xml`.
+    Pelagiad там лежить у багатьох, бо це один із найпопулярніших шрифтів для
+    OpenMW. Ми писали поверх без копії, а прибирання потім зносило файл як
+    свій, і гравець лишався без нічого.
+
+    Тепер перед кожним записом знімаємо копію (`backup_once`), а чужого
+    `openmw_font.xml` не чіпаємо взагалі: підпирати рушій, якого в гравця,
+    може, й немає, ціною його налаштувань не варто.
     """
     ours = patched_fonts(mod_dir)
     pick = next((f for f in ours if f.lower() == 'mysticcards'),
@@ -802,6 +810,7 @@ def tes3mp_font(cfg_path, mod_dir, remove=False):
             for p in ours_here(fdir, mod_dir, xml):
                 os.remove(p)
                 changed.append('прибрано ' + os.path.basename(p))
+                restore_once(p, changed)
             if os.path.isdir(fdir) and not os.listdir(fdir):
                 os.rmdir(fdir)
             continue
@@ -811,10 +820,15 @@ def tes3mp_font(cfg_path, mod_dir, remove=False):
         if codes is None:
             continue
         os.makedirs(fdir, exist_ok=True)
-        shutil.copy2(os.path.join(mod_dir, 'Fonts', pick + '.ttf'),
-                     os.path.join(fdir, pick + '.ttf'))
+        ttf = os.path.join(fdir, pick + '.ttf')
+        backup_once(ttf, changed)
+        shutil.copy2(os.path.join(mod_dir, 'Fonts', pick + '.ttf'), ttf)
+        if foreign_xml(xml):
+            changed.append('чужий openmw_font.xml у %s лишено як є' % fdir)
+            continue
         body = ''.join(TES3MP_RES % (name, pick, codes)
                        for name in ('Magic Cards', 'Century Gothic'))
+        backup_once(xml, changed)
         with io.open(xml, 'w', encoding='utf-8', newline='\n') as f:
             f.write(TES3MP_XML % (pick, body))
         changed.append('шрифт для TES3MP покладено у %s' % fdir)
@@ -827,6 +841,31 @@ def glob_ttf(fdir):
 
 
 XML_MARK = u'Для TES3MP'
+
+
+def foreign_xml(xml):
+    """Чи лежить там `openmw_font.xml`, якого писали не ми."""
+    if not os.path.isfile(xml):
+        return False
+    try:
+        return XML_MARK not in io.open(xml, encoding='utf-8',
+                                       errors='replace').read()
+    except OSError:
+        return True              # не прочитали - вважаємо чужим, не чіпаємо
+
+
+def restore_once(path, changed):
+    """Вернути файл гравця, якого ми переписали своїм.
+
+    Пару до `backup_once`: та знімає копію перед першим записом, ця кладе її
+    назад, коли свій файл ми вже прибрали. Без цього гравець, у якого в теці
+    шрифтів лежав власний Pelagiad.ttf, по видаленні лишався без нього.
+    """
+    backup = path + '.ukr-backup'
+    if not os.path.isfile(backup):
+        return
+    shutil.move(backup, path)
+    changed.append('вернено ваш ' + os.path.basename(path))
 
 
 def ours_here(fdir, mod_dir, xml):

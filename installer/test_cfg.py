@@ -141,10 +141,64 @@ def test_uninstall_spares_foreign_fonts():
         shutil.rmtree(root, ignore_errors=True)
 
 
+def fontbed(root):
+    """Тека перекладу з пропатченим шрифтом і Fonts гравця поруч із cfg."""
+    mod = os.path.join(root, 'ukr')
+    os.makedirs(os.path.join(mod, 'Fonts'))
+    io.open(os.path.join(mod, 'Fonts', 'Pelagiad.ttf'), 'w',
+            encoding='utf-8').write(u'наш шрифт')
+    io.open(os.path.join(mod, 'Fonts', 'Pelagiad.omwfont'), 'w',
+            encoding='utf-8').write(u'<Codes></Codes>')
+    fdir = os.path.join(root, 'Fonts')
+    os.makedirs(fdir)
+    mkcfg(root, b'data="' + mod.encode() + b'"\n')
+    return mod, fdir, os.path.join(root, 'openmw.cfg')
+
+
+def test_keeps_own_font_file():
+    """Власний Pelagiad.ttf гравця вертається після видалення.
+
+    Pelagiad - один із найпопулярніших шрифтів для OpenMW, і в теці гравця
+    він лежить часто. Ми писали поверх без копії, а прибирання зносило файл
+    як свій: гравець лишався без нього.
+    """
+    root = tempfile.mkdtemp()
+    try:
+        mod, fdir, cfg = fontbed(root)
+        mine = os.path.join(fdir, 'Pelagiad.ttf')
+        io.open(mine, 'w', encoding='utf-8').write(u'шрифт гравця')
+        install.tes3mp_font(cfg, mod)
+        check('на час встановлення лежить наш шрифт',
+              io.open(mine, encoding='utf-8').read() == u'наш шрифт')
+        install.tes3mp_font(cfg, mod, remove=True)
+        check('після видалення вернувся шрифт гравця',
+              os.path.isfile(mine)
+              and io.open(mine, encoding='utf-8').read() == u'шрифт гравця',
+              'файл гравця втрачено')
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def test_spares_foreign_font_xml():
+    """Чужий openmw_font.xml не переписуємо взагалі."""
+    root = tempfile.mkdtemp()
+    try:
+        mod, fdir, cfg = fontbed(root)
+        xml = os.path.join(fdir, 'openmw_font.xml')
+        io.open(xml, 'w', encoding='utf-8').write(u'<MyGUI>моє власне</MyGUI>')
+        install.tes3mp_font(cfg, mod)
+        check('чужий openmw_font.xml лишився недоторканий',
+              u'моє власне' in io.open(xml, encoding='utf-8').read(),
+              'ми його переписали')
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def main():
     for fn in (test_keeps_foreign_bytes, test_heals_damaged_cfg,
                test_locale_keeps_foreign_bytes,
-               test_uninstall_spares_foreign_fonts):
+               test_uninstall_spares_foreign_fonts,
+               test_keeps_own_font_file, test_spares_foreign_font_xml):
         print()
         print('-- %s' % fn.__doc__.splitlines()[0])
         fn()
