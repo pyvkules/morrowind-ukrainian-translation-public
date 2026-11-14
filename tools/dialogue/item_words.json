@@ -1,5 +1,11 @@
 [
  {
+  "en": "wildlife/animals/fauna",
+  "rx": "\\b(wildlife|animals|fauna|creatures of (the|this))\\b",
+  "bad": "звірств",
+  "want": "звірина"
+ },
+ {
   "en": "soul gem",
   "rx": "\\bsoul ?gems?\\b",
   "bad": "самоцвіт\\w* душ",
