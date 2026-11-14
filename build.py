@@ -63,8 +63,12 @@ def run(script_args, cfg):
     cmd += script_args[1:]
     if cfg:
         cmd += ['--cfg', cfg]
+    # Вивід читаємо як utf-8, тож і писати його крок мусить у utf-8. Без цього
+    # дочірній python бере кодування консолі (cp1251), і повідомлення про збій
+    # доходить сюди кракозябрами - саме так і загубилася причина збою mark.
+    env = dict(os.environ, PYTHONIOENCODING='utf-8')
     return subprocess.run(cmd, cwd=HERE, capture_output=True, text=True,
-                          encoding='utf-8', errors='replace')
+                          encoding='utf-8', errors='replace', env=env)
 
 
 def main():

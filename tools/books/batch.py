@@ -137,7 +137,7 @@ def cmd_apply(args):
     ukp = os.path.join(HERE, 'uk_books.json')
     uk = json.loads(io.open(ukp, encoding='utf-8-sig').read())
 
-    batch, key, fixed = {}, None, 0
+    batch, key, fixed, ratios = {}, None, 0, []
     for ln in io.open(path, encoding='utf-8'):
         ln = ln.rstrip('\n')
         if ln.startswith('###'):
@@ -198,12 +198,24 @@ def cmd_apply(args):
             assert ch not in text, '%s: знака %r шрифт не малює' % (m['title'], ch)
         uk[k] = text
         done += 1
+        # Пропущене речення не ламає ні тегів, ні переносів - воно просто
+        # зникає. Єдине, що його видає, - довжина: українська проза виходить
+        # приблизно як англійська, тож різке просідання варто побачити.
+        a = sum(len(c) for _i, _j, c in cores(src[k]))
+        b = sum(len(c) for _i, _j, c in cores(text))
+        # Межі не вгадані: по всіх 469 уже перекладених книгах понад 400 знаків
+        # відношення лежить у 0.75-1.13, бо українська виходить трохи стисліша.
+        if a > 400 and not 0.70 <= float(b) / a <= 1.35:
+            ratios.append((float(b) / a, m['title'], a, b))
 
     with io.open(ukp, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(uk, f, ensure_ascii=False, indent=1, sort_keys=True)
         f.write('\n')
     if fixed:
         print('ялинок виправлено на “ ”: %d' % fixed)
+    for r, title, a, b in sorted(ratios):
+        print('УВАГА довжина %.2f: %s (%d -> %d знаків) - чи все перекладено?'
+              % (r, title, a, b))
     print('додано книг: %d' % done)
     return 0
 
