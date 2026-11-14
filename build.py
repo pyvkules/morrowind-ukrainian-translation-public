@@ -23,6 +23,20 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, 'tools'))
 import paths
 
+# Консоль Windows віддає cp1251, а кроки друкують українською. Без цього
+# `print` чужого виводу валить збірку на UnicodeEncodeError і ховає справжню
+# причину збою - саме так і сталося з кроком font.
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except AttributeError:                     # Python < 3.7
+    pass
+
+# Ті самі коди, що в installer/install.py: крок може чесно нічого не зробити.
+# 3 - уже все гаразд, 4 - нема з чого зібрати, 5 - нема файлу. Це не збій:
+# patch_font повертає 3 на вже пропатченому шрифті, тож без цього списку
+# повторна збірка завжди падала на першому ж кроці.
+SKIPS = {3: 'уже є', 4: 'нема з чого', 5: 'нема файлу'}
+
 STEPS = [
     ('font', ['tools/patch_font.py'], 'Ukrainian glyphs into the UI font'),
     ('esm', ['tools/rebuild_esm.py'], 'Morrowind.esm with translated dialogue'),
@@ -78,8 +92,9 @@ def main():
         sys.stdout.write('%-9s %-52s' % (name, what))
         sys.stdout.flush()
         r = run(script_args, cfg)
-        ok = r.returncode == 0
-        print('%s  %4.1fs' % ('ok  ' if ok else 'FAIL', time.time() - t0))
+        ok = r.returncode == 0 or r.returncode in SKIPS
+        tag = 'ok  ' if r.returncode == 0 else SKIPS.get(r.returncode, 'FAIL')
+        print('%-12s  %4.1fs' % (tag, time.time() - t0))
         if not ok:
             failed.append(name)
             print((r.stdout or '') + (r.stderr or ''))

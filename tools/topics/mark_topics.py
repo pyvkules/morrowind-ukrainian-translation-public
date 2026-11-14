@@ -173,16 +173,20 @@ for c in contents:
                         # обгортаємо решту згадок повз них. Доти текст
                         # із бодай одним `@…#` оминався цілком.
                         taken = [(m.start(), m.end()) for m in AT.finditer(text)]
+                        # Обхід по відсортованому, а не по самому набору: порядок
+                        # набору рядків залежить від PYTHONHASHSEED, тож на тому
+                        # самому вході збірка давала то 3625, то 3633 рядки.
+                        order = sorted(referenced)
                         for m in AT.finditer(text):
                             surf = m.group(1)
-                            for topic in referenced:
+                            for topic in order:
                                 if known_form(surf, topic):
                                     top_used[surf] = topic
                                     linked.add(topic)
                                     break
                         if True:
                             spans = []
-                            for topic in referenced:
+                            for topic in order:
                                 if topic in linked:
                                     continue
                                 hit = find_form(text, topic, taken)
@@ -255,15 +259,25 @@ for phrase, topic in glossary.items():
     top_entries.setdefault(phrase, topic)
 
 TOP_PATH = os.path.join(MODROOT, 'Morrowind.top')
-was = 0
+was, had = 0, {}
 if os.path.isfile(TOP_PATH):
-    was = sum(1 for line in open(TOP_PATH, 'rb').read()
-              .decode('cp1251', 'replace').splitlines() if '\t' in line)
+    for line in open(TOP_PATH, 'rb').read().decode('cp1251', 'replace').splitlines():
+        if '\t' in line:
+            was += 1
+            phrase, topic = line.split('\t', 1)
+            had[phrase] = topic
 if was and len(top_entries) < was * 0.9 and '--force' not in sys.argv:
+    # Саме «чого саме не стало» - найважливіше: без цього переліку видно лише
+    # два числа, і причину просідання годиться хіба вгадувати.
+    lost = sorted(p for p in had if p not in top_entries)
+    for phrase in lost[:20]:
+        print('  втрачено: %s -> %s' % (phrase, had[phrase]))
+    if len(lost) > 20:
+        print('  ... ще %d' % (len(lost) - 20))
     raise SystemExit(
-        'Morrowind.top мав %d рядків, а вийшло %d. Це вимкнуло б наявні'
-        ' посилання, тож не пишу. Якщо так і треба, додай --force.'
-        % (was, len(top_entries)))
+        'Morrowind.top мав %d рядків, а вийшло %d (не стало %d). Це вимкнуло б'
+        ' наявні посилання, тож не пишу. Якщо так і треба, додай --force.'
+        % (was, len(top_entries), len(lost)))
 
 if APPLY:
     buf = bytearray()
