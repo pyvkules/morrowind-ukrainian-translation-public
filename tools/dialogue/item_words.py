@@ -48,6 +48,14 @@ def slices():
                            + glob.glob(os.path.join(UK, name + '_p*.json'))):
             uk.update(load(part))
         yield name, src, uk
+    # Книги - така сама пара «англійське -> українське», лише ключ не номер,
+    # а хеш. Та сама перевірка ловить у них те саме: "обладунок" у назві книги
+    # і "броня" в її ж тексті гравець читає як дві різні речі.
+    books = os.path.join(TOOLS, 'books')
+    sp = os.path.join(books, '_source.json')
+    up = os.path.join(books, 'uk_books.json')
+    if os.path.isfile(sp) and os.path.isfile(up):
+        yield 'books', load(sp), load(up)
 
 
 def main():
@@ -65,17 +73,21 @@ def main():
     found = 0
     for name, src, uk in slices():
         ok = allow.get(name, {})
-        for i, s in enumerate(src):
-            t = uk.get(str(i))
+        if isinstance(src, dict):          # книги: ключ - хеш, а не номер
+            pairs = sorted(src.items())
+        else:
+            pairs = [(str(i), s) for i, s in enumerate(src)]
+        for i, s in pairs:
+            t = uk.get(i)
             if not isinstance(s, str) or not isinstance(t, str):
                 continue
             for en, rx, bad, want in rules:
                 if not rx.search(s) or not bad.search(t):
                     continue
-                if str(i) in ok:
+                if i in ok:
                     continue
                 found += 1
-                print(u'%s %d: %s -> чекали «%s»' % (name, i, en, want))
+                print(u'%s %s: %s -> чекали «%s»' % (name, i, en, want))
                 print(u'  en %s' % ' '.join(s.split())[:200])
                 print(u'  uk %s' % ' '.join(t.split())[:200])
     print(u'речей, названих у репліці не так, як у торбі: %d' % found)

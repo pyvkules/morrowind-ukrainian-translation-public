@@ -1,5 +1,29 @@
 [
  {
+  "en": "armor",
+  "rx": "\\barmors?\\b",
+  "bad": "брон[яюею](?![а-яіїєґ])|броні(?![а-яіїєґ])",
+  "want": "обладунок"
+ },
+ {
+  "en": "guar",
+  "rx": "\\bguars?\\b",
+  "bad": "ґуар",
+  "want": "гуар"
+ },
+ {
+  "en": "Altmer",
+  "rx": "\\bAltmeri?\\b",
+  "bad": "(?<![а-яіїєґА-ЯІЇЄҐ])[Аа]лтмер",
+  "want": "альтмер"
+ },
+ {
+  "en": "Tong",
+  "rx": "\\bTong\\b",
+  "bad": "[Тт]онґ",
+  "want": "Тонг"
+ },
+ {
   "en": "wildlife/animals/fauna",
   "rx": "\\b(wildlife|animals|fauna|creatures of (the|this))\\b",
   "bad": "звірств",
