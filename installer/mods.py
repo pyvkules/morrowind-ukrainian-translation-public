@@ -317,14 +317,16 @@ class Counter(object):
     просто дивимося, скільки їх уже є. Раз на кілька секунд, окремою ниткою.
     """
 
-    def __init__(self, items, probe, on_count, every=4.0):
+    def __init__(self, items, probe, on_count, every=4.0, on_error=None):
         self.items = list(items)
         self.probe = probe
         self.on_count = on_count
         self.every = every
+        self.on_error = on_error
         self.stop = threading.Event()
         self.thread = None
         self.have = 0
+        self.said_error = False
 
     def count(self):
         return sum(1 for it in self.items if self.probe(it))
@@ -334,11 +336,21 @@ class Counter(object):
         self.on_count(self.have, len(self.items))
 
     def run(self):
+        # Нитка daemon: виняток у ній нікуди не доходить, вона просто тихо
+        # кінчається. Саме так лічильник і замовкав назавжди на першій же
+        # зміні кількості модів. Тож ловимо все, кажемо один раз у журнал
+        # і рахуємо далі: збій одного заміру не привід покинути поступ.
         while not self.stop.wait(self.every):
-            was = self.have
-            self.have = self.count()
-            if self.have != was:
-                self.on_count(self.have, len(self.dirs))
+            try:
+                was = self.have
+                self.have = self.count()
+                if self.have != was:
+                    self.on_count(self.have, len(self.items))
+            except Exception as e:                  # noqa: BLE001
+                if self.on_error and not self.said_error:
+                    self.said_error = True
+                    self.on_error('лічильник модів спіткнувся: %s: %s'
+                                  % (type(e).__name__, e))
 
     def __enter__(self):
         if self.items:
@@ -422,7 +434,7 @@ def install_lists(tools, need, skips, on_line, payload_root='',
                 % (have, total, share, hhmm(time.time() - began)))
 
     with Counter(items, lambda it: find_mod(base, it[0], it[1]) is not None,
-                 report):
+                 report, on_error=on_line):
         extra = os.path.join(recipe_dir(payload_root), EXTRAS_FILE)
         if os.path.isfile(extra):
             on_line('')
