@@ -6,6 +6,24 @@
   "want": "обладунок"
  },
  {
+  "en": "violet coprinus",
+  "rx": "\\bviolet coprinus\\b",
+  "bad": "[Кк]опринус",
+  "want": "фіолетовий гнойовик"
+ },
+ {
+  "en": "luminous russula",
+  "rx": "\\bluminous russula\\b",
+  "bad": "[Рр]усул|світн\\w* сироїж",
+  "want": "сяйлива сироїжка"
+ },
+ {
+  "en": "bungler's bane",
+  "rx": "\\bbungler'?s bane\\b",
+  "bad": "погибел\\w* незграб",
+  "want": "погибель невдахи"
+ },
+ {
   "en": "dreugh",
   "rx": "\\bdreughs?\\b",
   "bad": "(?<![а-яіїєґА-ЯІЇЄҐ])[Дд]ре[гж]",
