@@ -62,6 +62,18 @@ FIR = {u'«': u'“', u'»': u'”'}
 MIX = re.compile(u'[^\\s]*(?:[Ѐ-ӿ][^\\s]*[A-Za-zÀ-ſ]'
                  u'|[A-Za-zÀ-ſ][^\\s]*[Ѐ-ӿ])[^\\s]*')
 
+# Латинські літери, що мають кириличного двійника тієї самої форми. Усередині
+# кириличного слова вибір однозначний, тож такі чинимо самі. Решту латиниці
+# (`á`, `ü`, `w`…) лишаємо падати: там двійника немає й треба питати автора.
+LOOKALIKE = {u'a': u'а', u'c': u'с', u'e': u'е', u'i': u'і', u'o': u'о',
+             u'p': u'р', u'x': u'х', u'y': u'у', u'A': u'А', u'B': u'В',
+             u'C': u'С', u'E': u'Е', u'H': u'Н', u'I': u'І', u'K': u'К',
+             u'M': u'М', u'O': u'О', u'P': u'Р', u'T': u'Т', u'X': u'Х'}
+# Двійник правиться тільки там, де поруч у тому самому слові стоїть кирилиця.
+LOOKALIKE_RE = re.compile(
+    u'(?<=[Ѐ-ӿ])[%s]|[%s](?=[Ѐ-ӿ])'
+    % (u''.join(LOOKALIKE), u''.join(LOOKALIKE)))
+
 
 def load(name):
     path = os.path.join(HERE, name)
@@ -137,7 +149,7 @@ def cmd_apply(args):
     ukp = os.path.join(HERE, 'uk_books.json')
     uk = json.loads(io.open(ukp, encoding='utf-8-sig').read())
 
-    batch, key, fixed, ratios = {}, None, 0, []
+    batch, key, fixed, ratios, twins = {}, None, 0, [], 0
     for ln in io.open(path, encoding='utf-8'):
         ln = ln.rstrip('\n')
         if ln.startswith('###'):
@@ -151,6 +163,15 @@ def cmd_apply(args):
             if a in text:
                 text = text.replace(a, b)
                 fixed += 1
+        # Латиниця в кириличному слові - найчастіша описка в цих партіях
+        # (за одну сесію шість разів, і щоразу це «i» замість «і»). Для
+        # літер-двійників заміна однозначна, тож чинимо самі, як loc.py чинить
+        # із ялинками, і лишаємо падати тільки те, де двійника немає: `á`, `ü`
+        # і такі - там треба знати, що автор мав на думці.
+        latin = LOOKALIKE_RE.sub(lambda m: LOOKALIKE[m.group(0)], text)
+        if latin != text:
+            twins += sum(1 for a, b in zip(text, latin) if a != b)
+            text = latin
         mixed = MIX.findall(text)
         assert not mixed, ('%s %s: латиниця всередині кириличного слова: %s'
                            % (key, num, ', '.join(sorted(set(mixed)))))
@@ -213,6 +234,8 @@ def cmd_apply(args):
         f.write('\n')
     if fixed:
         print('ялинок виправлено на “ ”: %d' % fixed)
+    if twins:
+        print('латинських двійників у кириличних словах виправлено: %d' % twins)
     for r, title, a, b in sorted(ratios):
         print('УВАГА довжина %.2f: %s (%d -> %d знаків) - чи все перекладено?'
               % (r, title, a, b))
