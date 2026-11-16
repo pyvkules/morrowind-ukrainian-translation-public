@@ -31,6 +31,7 @@
 | `py tools\name_drift.py` | та сама особа під двома іменами в репліках і книгах |
 | `py tools\dialogue\item_words.py` | річ у репліці зветься не так, як у торбі |
 | `py tools\items\quest_names.py` | те саме, але само, без написаних рукою правил (ще з шумом, див. PROGRESS) |
+| `py tools\gh_drift.py` | одне слово, написане і через «г», і через «ґ» (дає й хибні пари, див. PROGRESS) |
 | `py tools\dialogue\placeholders.py` | підстановок у перекладі менше або більше, ніж у першотворі |
 | `py tools\dialogue\same_text_fill.py` | мод повторив ванільний рядок слово в слово: взяти готовий переклад |
 | `py tools\dialogue
