@@ -138,12 +138,20 @@ def main():
         for title, text in books(open(path, 'rb').read()):
             k = key(text)
             if k in source:
+                # той самий текст у ще одному плагіні: що більше копій, то
+                # більше гравців цю книгу зустрінуть, і то раніше її черга
+                if os.path.basename(path).lower() != meta[k]['plugin']:
+                    meta[k]['copies'] = meta[k].get('copies', 1) + 1
                 continue
             source[k] = text
             ntags, sig = tagsig(text)
             meta[k] = {'title': title, 'chars': len(text),
                        'ntags': ntags, 'tagsig': sig,
-                       'nl': text.count('\n')}
+                       'nl': text.count('\n'),
+                       # перший плагін у порядку завантаження: ванільні
+                       # мастери йдуть першими, тож так видно книги, які
+                       # читає кожен гравець, а не лише з одним модом
+                       'plugin': os.path.basename(path).lower()}
             # Розкладку сторінки тримають не лише теги: списки в «Імперській
             # кухні» і всі загадки в «Кендголській книзі» розділено самим
             # переносом рядка. Підпис тегів такої втрати не бачить, бо тегів

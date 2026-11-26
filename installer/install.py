@@ -328,6 +328,61 @@ def openmw_exes():
     return out_
 
 
+def engine_exes(cfg_path=None):
+    """Де рушій стоїть насправді: від найнадійнішого джерела до здогадів.
+
+    `openmw_exes` лише вгадує теки, і гравець, який тримає OpenMW у
+    Steam-бібліотеці, на робочому столі чи просто в себе, повз ті здогади
+    проходив: кнопці «Запустити» не було чого запускати, і вікно просто
+    зникало. Та ми ж тільки що правили його конфігурацію, тож знаємо більше.
+    Журнал останнього запуску пише теку ресурсів, у ланцюжку cfg лежить
+    рядок `resources=`, а від обох до exe один крок угору.
+
+    Порядок той самий, що в `engine_font_dirs`, лише навпаки: тут першим має
+    стояти той, якому віримо найбільше, бо беремо з цього списку перший.
+    """
+    out_ = []
+    if cfg_path and os.path.isfile(cfg_path):
+        log = engine_log(cfg_path)
+        if log:
+            for d in log_values(log, 'Adding data directory'):
+                if os.path.basename(d).lower() == 'vfs':
+                    out_.append(os.path.join(
+                        os.path.dirname(os.path.dirname(d)), 'openmw.exe'))
+        for p in chain_cfgs(cfg_path):
+            for ln in read_cfg(p):
+                t = ln.strip()
+                if not t.startswith('resources='):
+                    continue
+                d = t[len('resources='):].strip().strip('"')
+                if not os.path.isabs(d):
+                    d = os.path.join(os.path.dirname(p), d)
+                out_.append(os.path.join(os.path.dirname(d), 'openmw.exe'))
+    out_ += openmw_exes()
+
+    seen, uniq = set(), []
+    for p in out_:
+        p = os.path.normpath(p)
+        key = os.path.normcase(os.path.abspath(p))
+        if key in seen or not os.path.isfile(p):
+            continue
+        seen.add(key)
+        uniq.append(p)
+    return uniq
+
+
+def start_engine(exe):
+    """Запустити рушій так, як його запускає сам гравець: з його ж теки.
+
+    `openmw.cfg` біля exe часто має відносний `resources=./resources`, а він
+    рахується від робочої теки. Запусти рушій із «Завантажень» - він не
+    знайде своїх ресурсів і згасне, не сказавши нічого. Саме так виглядає
+    скарга «натиснув запустити, і нічого не відбувається».
+    """
+    import subprocess                           # лише тут, щоб не тягти завжди
+    subprocess.Popen([exe], cwd=os.path.dirname(exe) or None, close_fds=True)
+
+
 def steam_libraries():
     """Теки бібліотек Steam.
 

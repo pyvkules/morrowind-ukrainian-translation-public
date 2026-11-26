@@ -94,10 +94,21 @@ def resolve_plugins(dirs):
     """Map lowercased plugin filename -> full path, later data dirs winning.
 
     Our own MOD_ROOT is skipped so re-runs read the pristine originals.
+
+    The comparison goes through normcase: on Windows the drive letter comes out
+    lowercase when the script was started by a relative path ("e:\\Morrowind")
+    and uppercase otherwise, while openmw.cfg always writes it as the player
+    typed it. A plain == missed our own directory, MOD_ROOT is the last data=
+    line and so won every filename, and the tools read our already translated
+    plugins as if they were the originals: extract_books.py then saw 2490
+    "unique" books instead of 2327 and matched 277 translations instead of
+    1157. With --apply that would have overwritten _source.json with Ukrainian
+    text and orphaned nine hundred translated books.
     """
     resolved = {}
+    mine = os.path.normcase(MOD_ROOT)
     for d in dirs:
-        if os.path.abspath(d) == MOD_ROOT:
+        if os.path.normcase(os.path.abspath(d)) == mine:
             continue
         try:
             entries = os.listdir(d)

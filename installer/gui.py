@@ -562,7 +562,7 @@ class App:
 
     def show_steam(self):
         """Готовий рядок запуску: людині лишається вставити його в Steam."""
-        exes = install.openmw_exes()
+        exes = install.engine_exes(self.cfg())
         if not exes:
             return
         self.steam_path.configure(text='"%s"' % exes[0])
@@ -573,12 +573,34 @@ class App:
         self.root.clipboard_append(self.steam_path.cget('text'))
         self.steam_copy.configure(text='Скопійовано', fg=GOOD)
 
+    def say(self, msg):
+        """Сказати людині рядок у вікні: консолі, куди писати, тут немає."""
+        if not self.details:
+            self.toggle()
+        self.write(msg)
+
     def launch(self):
-        """Після успіху найкорисніша дія — запустити гру, а не закрити вікно."""
-        exes = install.openmw_exes()
+        """Після успіху найкорисніша дія — запустити гру, а не закрити вікно.
+
+        Вікно закриваємо лише тоді, коли рушій таки пішов. Раніше воно
+        зникало завжди, і коли рушія не знайшлося, виглядало так, ніби
+        кнопка не робить нічого.
+        """
+        exes = install.engine_exes(self.cfg())
         exe = exes[0] if exes else None
-        if exe and os.path.isfile(exe):
-            os.startfile(exe)                   # noqa: S606 - свій же рушій
+        if not exe:
+            self.say('Не знайшов openmw.exe, тож запустити звідси не можу.')
+            self.say('Переклад уже стоїть: запусти гру так, як запускаєш'
+                     ' її завжди.')
+            return
+        try:
+            install.start_engine(exe)
+        except OSError as e:
+            self.say('Не вийшло запустити %s' % exe)
+            self.say('  %s: %s' % (type(e).__name__, e))
+            self.say('Переклад уже стоїть: запусти гру так, як запускаєш'
+                     ' її завжди.')
+            return
         self.root.destroy()
 
 
