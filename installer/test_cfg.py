@@ -221,14 +221,20 @@ def test_new_cfg_goes_where_the_engine_looks():
     check('AppData для Windows-рушія не беремо',
           'appdata' not in got.lower(), got)
 
+    # Ці два замiри йдуть по справжній машині, а CI - це Linux: там немає ні
+    # реєстру, ні теки ~/Documents, тож user_cfg_dirs() порожній і правильна
+    # відповідь - запасний шлях. І posix-ний normcase регістру не опускає.
     live = install.new_cfg_path()
-    check('без аргументів шлях із user_cfg_dirs',
-          any(os.path.normcase(os.path.join(d, 'openmw.cfg'))
-              == os.path.normcase(live) for d in install.user_cfg_dirs()),
+    dirs = install.user_cfg_dirs()
+    expect = [os.path.join(d, 'openmw.cfg') for d in dirs] or [
+        os.path.join(os.path.expanduser('~'), 'Documents', 'My Games',
+                     'OpenMW', 'openmw.cfg')]
+    check('без аргументів шлях із user_cfg_dirs або запасний',
+          any(os.path.normcase(e) == os.path.normcase(live) for e in expect),
           live)
     check('і це тека My Games',
-          os.path.normcase(os.path.dirname(os.path.dirname(live)))
-          .endswith('my games'), live)
+          os.path.dirname(os.path.dirname(live)).lower().endswith('my games'),
+          live)
 
 
 def test_stale_cfg_is_bypassed():
