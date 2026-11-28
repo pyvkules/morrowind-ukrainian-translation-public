@@ -273,6 +273,54 @@ def user_cfg_dirs():
     return uniq_paths(dirs)
 
 
+def new_cfg_path(dirs=None):
+    """Куди класти свіжу конфігурацію, коли в гравця її ще немає.
+
+    Тут стояло `~/Documents/My Games/OpenMW`, і з увімкненим OneDrive (а він
+    увімкнений на більшості нових машин) справжні «Документи» лежать у ньому:
+    `C:\\Users\\Ім'я\\OneDrive\\Documents`. Ми ж створювали теку поруч,
+    `C:\\Users\\Ім'я\\Documents`, і писали профіль у файл, якого рушій ніколи
+    не читає. Гравець діставав свіжопоставлений OpenMW без жодного
+    налаштування, моди на диску й порожній лаунчер - і то щоразу, бо
+    наступний запуск знаходив наш же файл не на місці (тека ж тепер є!) і
+    писав туди знову.
+
+    Тому беремо ту саму теку, що й решта інструментів: першою в
+    `user_cfg_dirs()` стоїть відповідь реєстру, тобто те саме значення
+    `Personal`, яке Windows віддає й самому рушієві. `My Games` шукаємо
+    явно, бо в кінці того списку лежать ще теки AppData - вони для Linux і
+    macOS, і свіжий файл там Windows-рушієві не поможе.
+    """
+    for d in (dirs if dirs is not None else user_cfg_dirs()):
+        if os.path.basename(os.path.dirname(d)).lower() == 'my games':
+            return os.path.join(d, 'openmw.cfg')
+    return os.path.join(os.path.expanduser('~'), 'Documents', 'My Games',
+                        'OpenMW', 'openmw.cfg')
+
+
+def engine_cfg_or(cfg):
+    """Той самий `cfg`, якщо рушій справді його читає, інакше шлях із реєстру.
+
+    Потрібне для тих, хто вже ставив нас до виправлення вище: ми створили
+    `~/Documents/My Games/OpenMW/openmw.cfg`, рушій його не читає, а
+    наступний запуск знаходив той самий файл (тека ж є!) і писав туди знову.
+    Міняємо лише цей випадок: коли вибраний файл лежить у «My Games» не тих
+    Документів. Профілі momw біля exe та інші свої шляхи не чіпаємо.
+    """
+    want = new_cfg_path()
+    if not cfg:
+        return want
+    if os.path.normcase(cfg) == os.path.normcase(want):
+        return cfg
+    if os.path.basename(os.path.dirname(os.path.dirname(cfg))).lower() \
+            != 'my games':
+        return cfg
+    out('Вибрана конфігурація лежить не в тих «Документах», які читає рушій.')
+    out('  було: %s' % cfg)
+    out('  беру: %s' % want)
+    return want
+
+
 def cfg_candidates():
     """Де зазвичай лежить openmw.cfg, від найімовірнішого."""
     seen, found = set(), []
@@ -1323,10 +1371,17 @@ def install_engine():
         return None
     out('Рушій: %s' % exe)
 
-    cfg = os.path.join(os.path.expanduser('~'), 'Documents', 'My Games',
-                       'OpenMW', 'openmw.cfg')
+    cfg = new_cfg_path()
     engine.bootstrap_config(exe, data, cfg, on_line=lambda m: out('  ' + m))
     out('Налаштування: %s' % cfg)
+    # Коли «Документів» на машині кілька (OneDrive і тека поруч), показуємо
+    # решту: якщо рушій усе одно читає не наш файл, це видно одразу зі звіту.
+    others = [d for d in user_cfg_dirs()
+              if os.path.normcase(os.path.join(d, 'openmw.cfg'))
+              != os.path.normcase(cfg)
+              and os.path.basename(os.path.dirname(d)).lower() == 'my games']
+    for d in others:
+        out('  є й інша тека налаштувань: %s' % d)
     step('рушій', 'ok')
     return cfg
 

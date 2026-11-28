@@ -194,11 +194,82 @@ def test_spares_foreign_font_xml():
         shutil.rmtree(root, ignore_errors=True)
 
 
+def test_new_cfg_goes_where_the_engine_looks():
+    """Свіжа конфігурація мусить лягти в ті «Документи», які бачить рушій.
+
+    Звернення: «Відкриваю OpenMW, він не настроєний, без конфігу; моди в
+    папці морровінд, OpenMW на диск С поставився сам. Кілька разів ставлю -
+    той самий результат». Причина: шлях для свіжого openmw.cfg був зшитий як
+    `~/Documents/My Games/OpenMW`, а з OneDrive справжні «Документи» лежать
+    у ньому. Ми створювали теку поруч і писали профіль у файл, якого рушій
+    не читає, - і наступний запуск знаходив той самий файл і писав туди знову.
+    """
+    one = os.path.join(r'C:\Users\X\OneDrive\Documents',
+                       'My Games', 'OpenMW')
+    plain = os.path.join(r'C:\Users\X\Documents', 'My Games', 'OpenMW')
+    appdata = os.path.join(r'C:\Users\X\AppData\Local', 'openmw')
+
+    got = install.new_cfg_path([one, appdata])
+    check('бере теку з реєстру, а не ~/Documents',
+          got == os.path.join(one, 'openmw.cfg'), got)
+
+    got = install.new_cfg_path([plain, one, appdata])
+    check('перша тека списку виграє',
+          got == os.path.join(plain, 'openmw.cfg'), got)
+
+    got = install.new_cfg_path([appdata])
+    check('AppData для Windows-рушія не беремо',
+          'appdata' not in got.lower(), got)
+
+    live = install.new_cfg_path()
+    check('без аргументів шлях із user_cfg_dirs',
+          any(os.path.normcase(os.path.join(d, 'openmw.cfg'))
+              == os.path.normcase(live) for d in install.user_cfg_dirs()),
+          live)
+    check('і це тека My Games',
+          os.path.normcase(os.path.dirname(os.path.dirname(live)))
+          .endswith('my games'), live)
+
+
+def test_stale_cfg_is_bypassed():
+    """Файл, залишений у «чужих» Документах, більше не тягне профіль за собою.
+
+    Той самий гравець ставив кілька разів і щоразу діставав те саме: перший
+    запуск створював `~/Documents/My Games/OpenMW/openmw.cfg`, а наступні
+    знаходили його (тека ж тепер є) і писали профіль туди знову.
+    """
+    one = os.path.join(r'C:\Users\X\OneDrive\Documents',
+                       'My Games', 'OpenMW', 'openmw.cfg')
+    stale = os.path.join(r'C:\Users\X\Documents',
+                         'My Games', 'OpenMW', 'openmw.cfg')
+    momw = os.path.join(r'C:\Program Files\OpenMW',
+                        'just-good-morrowind-plus', 'openmw.cfg')
+    real = install.new_cfg_path
+    install.new_cfg_path = lambda dirs=None: one
+    try:
+        check('замість залишеного файла беремо той, що читає рушій',
+              install.engine_cfg_or(stale) == one,
+              install.engine_cfg_or(stale))
+        check('правильний шлях лишаємо як є',
+              install.engine_cfg_or(one) == one,
+              install.engine_cfg_or(one))
+        check('профіль momw біля exe не чіпаємо',
+              install.engine_cfg_or(momw) == momw,
+              install.engine_cfg_or(momw))
+        check('без шляху беремо свій',
+              install.engine_cfg_or('') == one,
+              install.engine_cfg_or(''))
+    finally:
+        install.new_cfg_path = real
+
+
 def main():
     for fn in (test_keeps_foreign_bytes, test_heals_damaged_cfg,
                test_locale_keeps_foreign_bytes,
                test_uninstall_spares_foreign_fonts,
-               test_keeps_own_font_file, test_spares_foreign_font_xml):
+               test_keeps_own_font_file, test_spares_foreign_font_xml,
+               test_new_cfg_goes_where_the_engine_looks,
+               test_stale_cfg_is_bypassed):
         print()
         print('-- %s' % fn.__doc__.splitlines()[0])
         fn()

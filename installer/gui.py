@@ -497,6 +497,13 @@ class App:
                 return 1
             self.cfgs = install.cfg_candidates() or [cfg]
             self.root.after(0, lambda: self.path.configure(text=cfg))
+        if plan in (ENGINE, MODS):
+            # Файл із минулого разу міг лягти в «Документи», яких рушій не
+            # читає (OneDrive). Тоді профіль піде туди, куди він дивиться.
+            fixed = install.engine_cfg_or(cfg)
+            if fixed != cfg:
+                cfg = fixed
+                self.root.after(0, lambda c=cfg: self.path.configure(text=c))
         if plan == MODS and install.install_modlist(cfg):
             return 1
         return install.install_to(cfg)
